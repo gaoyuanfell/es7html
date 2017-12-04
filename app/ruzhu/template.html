@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="Description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <script type="text/javascript">
+        (function (_window) {
+            var docEl = _window.document.documentElement,
+                resizeEvt = 'orientationchange' in _window ? 'orientationchange' : 'resize';
+
+            function s() {
+                var clientWidth = docEl.clientWidth > 800 ? 800 : docEl.clientWidth;
+                docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+            }
+
+            _window.addEventListener(resizeEvt, s, false);
+            s();
+        })(window);
+    </script>
+</head>
+<body>
+<div class="scroll-content ldy_content">
+    <div class="ldy_top"></div>
+    <div class="fill">
+        <img src="static/images/ldy111.png" alt="" class="fill_tit" width="100%">
+        <div class="form-group">
+            <input type="text" placeholder="请输入公司名称" id="company_name">
+            <input type="text" placeholder="请输入公司规模" id="scope">
+            <input type="text" placeholder="请输入您的姓名" id="name">
+            <input type="text" placeholder="请输入您的电话" id="phone_number">
+            <p class="sub_btn"><a href="#" class="butn" id="submit"></a></p>
+        </div>
+        <div class="Point">
+            <img src="static/images/ldy222.png" alt="" width="100%">
+            <img src="static/images/ldy_lqtop.png" alt="" width="100%">
+            <div class="List">
+                <ul id="pointList" style="position: relative;width: 100%;top: 0;"></ul>
+            </div>
+        </div>
+        <img src="static/images/ldy333.png" alt="" width="100%">
+
+        <p class="footer"><small>Copyright &copy; 2017~ 乐橙互联科技有限公司 All Rights Reserved.沪ICP备15032233号-3</small></p>
+    </div>
+</div>
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1269995748'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D1269995748%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>
