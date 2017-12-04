@@ -18,7 +18,7 @@ async function buildAsync() {
 function build(config) {
     return new Promise((resolve, reject) => {
         let wc = merge({}, webpackConfig(config));
-        rm(path.join(path.resolve(__dirname, 'dist'),config.output),err => {
+        rm(path.join(path.resolve(__dirname, '../dist'),config.output),err => {
             if (err) throw err
             webpack(wc, function (err, stats) {
                 if (err) throw err;
