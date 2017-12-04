@@ -43,7 +43,7 @@ module.exports = function (config) {
                         {
                             loader: 'file-loader',
                             options: {
-                                name: 'static/img/[name].[ext]',
+                                name: 'static/img/[name].[ext]?[hash]',
                             }
                         }
                     ],
