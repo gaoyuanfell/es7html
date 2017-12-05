@@ -1,0 +1,295 @@
+#home{
+    .title {
+        padding-top: 0.3rem;
+        padding-bottom: 0.14rem;
+        img {
+            width: 2.92rem;
+            height: auto;
+            margin: auto;
+        }
+    }
+    .orange_index{
+        padding-bottom: 0.4rem;
+        .advant_img{
+            width: 2.92rem;
+            height: auto;
+            margin: auto;
+        }
+        .left_qrcode{
+            margin-top: 0.08rem;
+            padding-left: 0.28rem;
+            float: left;
+            margin-right: 0.03rem;
+            img{
+                width: 0.65rem;
+            }
+        }
+        .right_ab{
+            margin-top: 0.12rem;
+            float: left;
+            text-align: left;
+            line-height: 1.5;
+            color: #534f4d;
+        }
+    }
+    .introduce_box{
+        padding: 0 0.25rem 0.4rem 0.25rem;
+        .introduce{
+            text-indent: 2em;
+            color: #534f4d;
+            text-align: justify;
+            line-height: 1.5;
+        }
+        .introduce_img{
+            margin-top: 0.12rem;
+            img{
+                display: inline-block;
+                width: 1.05rem;
+                height: auto;
+                margin-right: 0.05rem;
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    .bgcorl{
+        background: #fff;
+    }
+    .footer {
+        font-size: 0.14rem;
+        color: #666;
+        padding:0.06rem 0;
+        background: #000;
+    }
+}
+
+#goods{
+    .title {
+        padding-top: 0.3rem;
+        padding-bottom: 0.18rem;
+        img {
+            width: 2.9rem;
+            height: auto;
+            margin: auto;
+        }
+    }
+    .nav {
+        margin: auto;
+        margin-bottom: 0.25rem;
+        width: 3rem;
+
+        li {
+            width: 25%;
+            float: left;
+
+            .all {
+                background-image: url("../static/images/chanp1.png");
+            }
+            .auto {
+                background-image: url("../static/images/chanp2.png");
+            }
+            .grab {
+                background-image: url("../static/images/chanp3.png");
+            }
+            .song {
+                background-image: url("../static/images/chanp4.png");
+            }
+            .product_icon {
+                width: 0.36rem;
+                height: 0.36rem;
+                margin: auto;
+                background-size: 100%;
+            }
+
+            .text {
+                margin-top: 0.06rem;
+                font-size: 0.12rem;
+                color: #333333;
+            }
+        }
+        .active {
+            .all {
+                background-image: url("../static/images/chanp1_active.png");
+            }
+            .auto {
+                background-image: url("../static/images/chanp2_active.png");
+            }
+            .grab {
+                background-image: url("../static/images/chanp3_active.png");
+            }
+            .song {
+                background-image: url("../static/images/chanp4_active.png");
+            }
+        }
+    }
+    .product_list {
+        min-height: 68.4%;
+    }
+    .footer {
+        font-size: 0.14rem;
+        padding: 2px 0;
+        background: #eaeaea;
+    }
+}
+
+#goods-detail{
+    .title {
+        padding-top: 0.3rem;
+        padding-bottom: 0.18rem;
+        img {
+            width: 2.9rem;
+            height: auto;
+            margin: auto;
+        }
+    }
+    .profile {
+        padding-bottom: 0.1rem;
+        margin: auto;
+        width: 2.9rem;
+        min-height: 82%;
+        .details {
+            width: 100%;
+        }
+    }
+    .footer {
+        font-size: 0.14rem;
+        padding: 2px 0;
+        background: #eaeaea;
+    }
+}
+
+.product_list {
+    width: 3rem;
+    margin: auto;
+    li {
+        width: 50%;
+        float: left;
+        background: #f4f4f4;
+        .box {
+            margin: 0.05rem;
+            background: #fff;
+            border: 1px #dadada solid;
+            padding-top: 0.2rem;
+            .tit {
+                font-size: 0.12rem;
+                color: #221815;
+            }
+            .tit:after {
+                content: "";
+                height: 2px;
+                width: 0.53rem;
+                background: #ff6600;
+                display: block;
+                margin: 0.06rem auto auto;
+            }
+            .img {
+                width: 1.11rem;
+                height: 1.25rem;
+                margin: 0.1rem auto 0.2rem auto;
+                img {
+                    width: 100%;
+                    margin: auto;
+                }
+            }
+        }
+
+    }
+}
+
+img{
+    display: block;
+}
+
+.top {
+    height: 0.45rem;
+    background: #fff;
+    border-bottom: 1px #dadada solid;
+    padding: 0 0.15rem;
+    .logo {
+        width: 0.91rem;
+        float: left;
+        -webkit-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+        margin-top: -0.015rem;
+        margin-left: 0.05rem;
+    }
+    .navbar-toggle {
+        position: relative;
+        float: right;
+        padding: 0.05rem;
+        -webkit-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+        margin-top: -0.02rem;
+        .icon-bar {
+            background-color: #434343;
+            display: block;
+            width: 0.16rem;
+            height: 2px;
+        }
+        .icon-bar + .icon-bar {
+            margin-top: 0.04rem;
+        }
+    }
+
+}
+
+.description_box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    top:0.45rem;
+    left: 0;
+    bottom: 0;
+    display: none;
+}
+.bomb_box{
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top:0.45rem;
+    z-index: 10000;
+    width: 100%;
+    display: none;
+}
+
+.blocks{
+    display: block;
+}
+
+.item_box{
+    text-align: left;
+    margin:0 0.19rem;
+    .item{
+        height: 0.4rem;
+        line-height: 0.4rem;
+        border-bottom: 1px #cccccc dashed;
+        a{
+            color: #666666;
+            display: block;
+            i{
+                float: right;
+            }
+        }
+        &:last-child{
+            border-bottom:none;
+        }
+    }
+}
+
+/*图片预加载*/
+#loadedImages {
+    width: 0;
+    height: 0;
+    display: inline;
+    background-image: url("../static/images/chanp1.png"),
+    url("../static/images/chanp2.png"),
+    url("../static/images/chanp3.png"),
+    url("../static/images/chanp4.png"),
+    url("../static/images/chanp1_active.png"),
+    url("../static/images/chanp2_active.png"),
+    url("../static/images/chanp3_active.png"),
+    url("../static/images/chanp4_active.png");
+}

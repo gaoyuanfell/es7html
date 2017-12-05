@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="Description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <script type="text/javascript">
+        (function (_window) {
+            var docEl = _window.document.documentElement,
+                resizeEvt = 'orientationchange' in _window ? 'orientationchange' : 'resize';
+
+            function s() {
+                var clientWidth = docEl.clientWidth > 800 ? 800 : docEl.clientWidth;
+                docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+            }
+
+            _window.addEventListener(resizeEvt, s, false);
+            s();
+        })(window);
+    </script>
+</head>
+<body>
+<div class="content-modal">
+    <div class="top clear">
+        <a href="https://us.lcinc.cn/"><img src="static/images/logo.png" alt="" class="logo"></a>
+        <span class="navbar-toggle" id="navbar-toggle">
+                <i class="icon-bar"> </i>
+                <i class="icon-bar"> </i>
+                <i class="icon-bar"> </i>
+            </span>
+    </div>
+    <!--首页-->
+    <div class="content" id="home" style="display: none;" margin-header>
+        <div class="scroll-content">
+            <div class="banner">
+                <img src="./static/images/hl_img1.jpg" alt="" width="100%">
+            </div>
+            <div class="orange_index bgcorl introduce_box">
+                <div class="title"><img src="static/images/tou_top1.png" alt=""></div>
+                <p class="introduce">乐橙互联科技有限公司成立于2016年，借助母公司上海银橙文化传媒股份有限公司（证券简称：银橙传媒；证券代码：830999）多年互联网、大数据、新媒体经验和资本实力，通过自主开发的智能系统技术，在电子商务、本地生活服务、O2O、新媒体（新型场景化媒体+移动媒体）等领域积极拓展，致力于整合互联网行业、新零售行业资源，使个人消费者、合作伙伴都能从中获益。努力成长为中国领先的新零售、新媒体领军企业。</p>
+                <p class="introduce">公司目前已经与新华社安徽分社、中华慈善总会、深圳软件产业基地等机构深度合作，积极拓展“乐橙互联”、“爱心驿站”等自动售卖机（饮料机+食品机），“乐唱”迷你歌咏亭业务。“整合资源、积极改变、拥抱未来”，乐橙互联将在新零售、新媒体行业深耕、潜行。</p>
+                <p class="introduce_img"><img src="./static/images/jies1.jpg" alt=""><img src="./static/images/jies2.jpg" alt=""><img src="./static/images/jies3.jpg" alt=""></p>
+            </div>
+            <div class="orange_index">
+                <div class="title"><img src="static/images/tou_top2.png" alt=""></div>
+                <ul class="product_list clear">
+                    <li class="list">
+                        <a href="#1">
+                            <div class="box">
+                                <p class="tit">饮料自动售卖机</p>
+                                <p class="img"><img src="static/images/tu1.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#2">
+                            <div class="box">
+                                <p class="tit">多功能商品售货柜</p>
+                                <p class="img"><img src="static/images/tu2.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#3">
+                            <div class="box">
+                                <p class="tit">小型食品机</p>
+                                <p class="img"><img src="static/images/tu3.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#4">
+                            <div class="box">
+                                <p class="tit">英伦风娃娃机</p>
+                                <p class="img"><img src="static/images/tu4.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#5">
+                            <div class="box">
+                                <p class="tit">迷你K歌机(单机)</p>
+                                <p class="img"><img src="static/images/tu5.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#6">
+                            <div class="box">
+                                <p class="tit">迷你K歌机(连机)</p>
+                                <p class="img"><img src="static/images/tu6.png" alt=""></p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="orange_index bgcorl">
+                <div class="title"><img src="static/images/tou_top3.png" alt=""></div>
+                <img src="./static/images/advant.png" alt="" class="advant_img">
+            </div>
+            <div class="orange_index">
+                <div class="title"><img src="static/images/tou_top4.png" alt=""></div>
+                <img src="./static/images/ditu.png" alt="" class="advant_img">
+                <div class="clear">
+                    <div class="left_qrcode">
+                        <img src="./static/images/erwm.jpg" alt="">
+                    </div>
+                    <div class="right_ab">
+                        <p>邮编：200233</p>
+                        <p>电话：400-626-9606</p>
+                        <p>地址：上海市徐汇区桂平路481号桂中园18栋6层</p>
+                    </div>
+                </div>
+            </div>
+            <p class="footer"><small>Copyright (C) 2016~2017 乐橙互联科技有限公司 All Rights Reserved.<br> 沪ICP备15032233号</small></p>
+        </div>
+    </div>
+
+    <!--商品-->
+    <div class="content" id="goods" style="display: none;" margin-header>
+        <div class="scroll-content">
+            <div class="title"><img src="static/images/tou_top.png" alt=""></div>
+            <ul class="nav clear" id="filters">
+                <li class="filter active" data-type="0">
+                    <p class="product_icon all"></p>
+                    <p class="text">全部产品</p>
+                </li>
+                <li class="filter" data-type="1">
+                    <p class="product_icon auto"></p>
+                    <p class="text">自动售卖机</p>
+                </li>
+                <li class="filter" data-type="2">
+                    <p class="product_icon grab"></p>
+                    <p class="text">互联网抓物机</p>
+                </li>
+                <li class="filter" data-type="3">
+                    <p class="product_icon song"></p>
+                    <p class="text">迷你歌咏亭</p>
+                </li>
+            </ul>
+
+            <ul class="product_list clear" id="product-list">
+                <li class="list" data-type="1">
+                    <a href="#1" class="label">
+                        <div class="box">
+                            <p class="tit">饮料自动售卖机</p>
+                            <p class="img"><img src="static/images/tu1.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list" data-type="1">
+                    <a href="#2" class="label">
+                        <div class="box">
+                            <p class="tit">多功能商品售货柜</p>
+                            <p class="img"><img src="static/images/tu2.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list" data-type="1">
+                    <a href="#3" class="label">
+                        <div class="box">
+                            <p class="tit">小型食品机</p>
+                            <p class="img"><img src="static/images/tu3.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list" data-type="2">
+                    <a href="#4" class="label">
+                        <div class="box">
+                            <p class="tit">英伦风娃娃机</p>
+                            <p class="img"><img src="static/images/tu4.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list" data-type="3">
+                    <a href="#5" class="label">
+                        <div class="box">
+                            <p class="tit">迷你K歌机(单机)</p>
+                            <p class="img"><img src="static/images/tu5.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="list" data-type="3">
+                    <a href="#6" class="label">
+                        <div class="box">
+                            <p class="tit">迷你K歌机(连机)</p>
+                            <p class="img"><img src="static/images/tu6.png" alt=""></p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <p class="footer">
+                <small>Copyright &copy; 2017~ 乐橙互联科技有限公司 All Rights Reserved.沪ICP备15032233号-3</small>
+            </p>
+
+        </div>
+    </div>
+
+    <!--商品详情-->
+    <div class="content" id="goods-detail" style="display: none;" margin-header>
+        <div class="scroll-content">
+            <div class="title">
+                <img src="static/images/tou_top2.png" alt="">
+            </div>
+            <div class="profile">
+                <img src="#" alt="" class="details" id="details">
+            </div>
+
+            <p class="footer">
+                <small>Copyright &copy; 2017~ 乐橙互联科技有限公司 All Rights Reserved.沪ICP备15032233号-3</small>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div id="loadedImages"></div>
+
+<div class="description_box" id="description_box"></div>
+<div class="bomb_box" id="bomb_box">
+    <ul class="item_box">
+        <li class="item"><a href="https://us.lcinc.cn/">公司首页 <i>&gt;</i></a></li>
+        <li class="item"><a href="https://us.lcinc.cn/#0">产品中心 <i>&gt;</i></a></li>
+        <li class="item"><a href="https://us.lcinc.cn/index2.html">活动推荐 <i>&gt;</i></a></li>
+        <li class="item"><a href="https://mall.lcinc.cn/backJoin?payment_id=1&secret_key=8f19e698e0f2c31b90eeebdf303ce6a3&timestamp=1511752530">入驻加盟 <i>&gt;</i></a></li>
+        <li class="item"><a href="https://hd.lcinc.cn/back_point/index.html">推荐点位 <i>&gt;</i></a></li>
+    </ul>
+</div>
+
+</body>
+</html>

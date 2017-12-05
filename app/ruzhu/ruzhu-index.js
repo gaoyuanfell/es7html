@@ -1,5 +1,5 @@
-import './css/index1.less'
-import './css/base.less'
+import './css/index.less'
+import '../../common/css/base.less'
 import '../../common/js/vendor'
 import {Ajax, jsonp, sleep} from "../../common/js/util";
 
