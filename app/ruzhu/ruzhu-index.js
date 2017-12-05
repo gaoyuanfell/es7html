@@ -56,14 +56,14 @@ function submit() {
     let phone_number = document.querySelector("#phone_number").value
 
 
-    if (!company_name) {
-        alert('请输入公司名称');
-        return;
-    }
-    if (!scope) {
-        alert('请输入公司规模');
-        return;
-    }
+    // if (!company_name) {
+    //     alert('请输入公司名称');
+    //     return;
+    // }
+    // if (!scope) {
+    //     alert('请输入公司规模');
+    //     return;
+    // }
     if (!name) {
         alert('请输入您的姓名');
         return;
