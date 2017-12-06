@@ -23,6 +23,7 @@ module.exports = function (config) {
                 filename: config.filename || 'index.html',
                 template: `./app/${config.path}/template.html`,
                 // chunks: ['vendor','manifest'],
+                // chunks: ['vendor','manifest',config.name],
                 title: config.title,
                 inject: true,
                 hash: true,
