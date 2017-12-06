@@ -11,7 +11,7 @@ module.exports = function (config) {
         output: {
             path: __dirname + `/dist/${config.output}`, //打包后的文件存放的地方
             filename: "[name].js", //打包后输出文件的文件名
-            publicPath:`${config.publicPath}`,
+            publicPath: `${config.publicPath}`,
         },
         plugins: [
             new ExtractTextPlugin({
@@ -20,9 +20,10 @@ module.exports = function (config) {
                 allChunks: true,
             }),
             new HtmlWebpackPlugin({
+                filename: config.filename || 'index.html',
                 template: `./app/${config.path}/template.html`,
                 // chunks: ['vendor','manifest'],
-                title:config.title,
+                title: config.title,
                 inject: true,
                 hash: true,
                 minify: {
@@ -36,8 +37,11 @@ module.exports = function (config) {
             }),
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
-                    warnings: false
+                    warnings: false,
+                    drop_console: true,
                 },
+                beautify: false,
+                comments: false,
                 sourceMap: false
             }),
             new webpack.optimize.CommonsChunkPlugin({

@@ -32,7 +32,7 @@ module.exports = function (config) {
                 {
                     test: /\.(less|css)$/,
                     use: ExtractTextPlugin.extract({
-                        use: ['css-loader', 'less-loader', 'postcss-loader'],
+                        use: ['css-loader?minimize', 'less-loader', 'postcss-loader'],
                         fallback: 'style-loader',
                     }),
                 },

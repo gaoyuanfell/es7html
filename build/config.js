@@ -4,27 +4,29 @@
  * publicPath：静态资源目录
  * name：入口函数文件名称，service页面对应的名称，开发环境不能重复
  * title：页面标题
+ * filename：页面名称
  */
 module.exports = [
     {
         path:'ruzhu',
         output:'ruzhu',
-        publicPath: '/',
+        publicPath: '',
         name:'ruzhu-index',
         title:'乐橙互联科技有限公司'
     },
     {
         path:'lcinc',
         output:'lcinc',
-        publicPath:'/',
+        publicPath:'',
         name:'lcinc-index',
         title:'乐橙互联科技有限公司'
     },
     {
         path:'lcinc-activity',
         output:'lcinc-activity',
-        publicPath:'/',
+        publicPath:'',
         name:'activity-index',
-        title:'乐橙互联科技有限公司'
+        title:'乐橙互联科技有限公司',
+        filename:'index2.html',
     }
 ];
