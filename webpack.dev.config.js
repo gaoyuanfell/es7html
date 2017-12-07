@@ -19,9 +19,10 @@ module.exports = merge(baseWebpackConfig(config), {
         contentBase:'static',
         historyApiFallback: false, //不跳转
         inline: true, //实时刷新
-        hot:true,
+        hot:false,
         compress: true,
         port:8082,
+        host: '0.0.0.0',
         disableHostCheck: true,
     },
     plugins: [
@@ -30,8 +31,8 @@ module.exports = merge(baseWebpackConfig(config), {
             disable: false,
             allChunks: true,
         }),
+        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
         ...config.map( a => {
             return new HtmlWebpackPlugin({
                 filename: `${a.name}.html`,

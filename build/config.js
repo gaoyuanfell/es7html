@@ -28,5 +28,12 @@ module.exports = [
         name:'activity-index',
         title:'乐橙互联科技有限公司',
         filename:'index2.html',
-    }
+    },
+    /*{
+        path:'pwa',
+        output:'pwa',
+        publicPath:'',
+        name:'pwa-index',
+        title:'gaoyuanfell'
+    }*/
 ];
