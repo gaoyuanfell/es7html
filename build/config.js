@@ -7,7 +7,7 @@
  * filename：页面名称
  */
 module.exports = [
-    {
+    /*{
         path:'ruzhu',
         output:'ruzhu',
         publicPath: '',
@@ -35,7 +35,7 @@ module.exports = [
         publicPath:'',
         name:'pwa-index',
         title:'gaoyuanfell'
-    },
+    },*/
     {
         path:'lcinc-pc',
         output:'pc',
