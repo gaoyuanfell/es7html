@@ -35,5 +35,13 @@ module.exports = [
         publicPath:'',
         name:'pwa-index',
         title:'gaoyuanfell'
+    },
+    {
+        path:'lcinc-pc',
+        output:'pc',
+        base:'/pc/',
+        publicPath:'',
+        name:'lcincpc-index',
+        title:'乐橙互联科技有限公司'
     }
 ];

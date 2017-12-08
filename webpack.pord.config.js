@@ -34,7 +34,8 @@ module.exports = function (config) {
                     minifyJS: true,
                     minifyCSS: true,
                 },
-                chunksSortMode: 'dependency'
+                chunksSortMode: 'dependency',
+                base:config.base || '/'
             }),
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
