@@ -7,7 +7,7 @@
  * filename：页面名称
  */
 module.exports = [
-    /*{
+    {
         path:'ruzhu',
         output:'ruzhu',
         publicPath: '',
@@ -29,7 +29,7 @@ module.exports = [
         title:'乐橙互联科技有限公司',
         filename:'index2.html',
     },
-    {
+    /*{
         path:'pwa',
         output:'pwa',
         publicPath:'',
