@@ -1,13 +1,44 @@
+var dataCacheName = 'pwa-data';
+var cacheName = 'pwa-name';
+
+var filesToCache = [
+    '/',
+    '/index.html',
+    '/pwa-index.js',
+];
+
 self.addEventListener('install', function (e) {
     console.log('[ServiceWorker] Install');
-
+    e.waitUntil(
+        caches.open(cacheName).then(function (cache) {
+            console.log('[ServiceWorker] Caching app shell');
+            return cache.addAll(filesToCache);
+        })
+    );
 });
 
 self.addEventListener('activate', function (e) {
     console.log('[ServiceWorker] Activate');
-    return null;
+    e.waitUntil(
+        caches.keys().then(function (keyList) {
+            return Promise.all(keyList.map(function (key) {
+                if (key !== cacheName && key !== dataCacheName) {
+                    console.log('[ServiceWorker] Removing old cache', key);
+                    return caches.delete(key);
+                }
+            }));
+        }))
+    return self.clients.claim();
 });
 
 self.addEventListener('fetch', function (e) {
     console.log('[Service Worker] Fetch', e.request.url);
+    e.respondWith(
+        caches.open(dataCacheName).then(function(cache) {
+            return fetch(e.request).then(function(response){
+                cache.put(e.request.url, response.clone());
+                return response;
+            });
+        })
+    );
 });
