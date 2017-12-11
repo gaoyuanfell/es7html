@@ -38,7 +38,7 @@ module.exports = [
     },*/
     {
         path:'lcinc-pc',
-        output:'pc',
+        output:'lcinc-pc',
         base:'/pc/',
         publicPath:'',
         name:'lcincpc-index',
