@@ -2,56 +2,9 @@ import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
 
-import {sleep} from "../../common/js/util";
+import {jsonp, sleep} from "../../common/js/util";
 
 let zIndex = 1000
-    const filtersRef = document.querySelector("#filters");
-
-    filtersRef.addEventListener('click', (e) => {
-        let fRef=null;
-        Array.from(filtersRef.children).forEach(f => {
-            f.classList.remove('active')
-            if (f.contains(e.target)) {
-                f.classList.add('active')
-                fRef=f;
-                // console.info(fRef);
-            }
-        })
-        const homepage=document.querySelector("#home_page");
-        const pointpage=document.querySelector("#point_page");
-
-        const type=fRef.dataset.type;
-        // console.info(type)
-        if(pointpage.dataset.type == type){
-            pointpage.style.display="block";
-            homepage.style.display='none';
-            pointpage.style.zIndex = ++zIndex;
-            pointpage.animate([
-                { opacity:0},
-                { opacity:1}
-            ], {
-                duration:500
-            })
-        }else if(homepage.dataset.type == type){
-            homepage.style.display="block";
-            pointpage.style.display='none';
-            homepage.style.zIndex = ++zIndex;
-            homepage.animate([
-                { opacity:0},
-                { opacity:1}
-            ], {
-                duration:500
-            })
-        }
-
-
-
-
-})
-
-
-
-
 
 //-----------------------------------------------------
 const oBtnLeft = document.getElementById("prev");
@@ -72,7 +25,7 @@ oBtnRight.onclick = function () {
     }
 }
 oBtnLeft.onclick = function () {
-    const now1 = -Math.floor((aLi.length-4)) * (aLi[0].offsetWidth);
+    const now1 = -Math.floor((aLi.length - 4)) * (aLi[0].offsetWidth);
     console.info(now1);
     if (oUl.offsetLeft >= 0) {
         move(oUl, 'left', now1);
@@ -174,6 +127,8 @@ function submit() {
 
 //---------------------------------
 
+export const baseUrl = 'https://mall.lcinc.cn/api/v1/';
+
 async function inserted(el) {
     let top = 0;
     let bo = true;
@@ -190,56 +145,77 @@ async function inserted(el) {
         await sleep(80);
     }
 }
-let pointList = document.querySelector('#pointList')
-inserted(pointList);
 
 
+function a(i) {
+    return `
+    <li class="flex" >
+        <p class="left"><span>${i.user_name}</span>已成功领取</p>
+        <p class="right">${i.phone_number}</p>
+    </li>
+`
+}
+
+jsonp(`${baseUrl}get/back_point_receive_list`).then(res => {
+    if (res.status_code == 200) {
+        let html = ''
+        res.list.push(...res.list)
+        res.list.forEach(d => {
+            html += a(d);
+        });
+        let pointList = document.querySelector('#pointList')
+        pointList.innerHTML = html;
+        inserted(pointList);
+    }
+})
 
 //---------------------------
-
 
 window.addEventListener('hashchange', () => {
     hashChange()
 });
 
-function hashChange(){
+const filtersRef = document.querySelector("#filters");
+const homepage = document.querySelector("#home_page");
+const pointpage = document.querySelector("#point_page");
+const detail = document.getElementById("goods-detail");
+const n = document.getElementById("details");
+
+function hashChange() {
     let hash = location.hash;
     let reg = hash.match(/(\d+)/);
-    let home = document.getElementById("home");
+    let ref;
     if (!reg) {
-        home.style.display = 'block';
-        home.style.zIndex = ++zIndex;
-        home.animate([
-            { opacity:0},
-            { opacity:1}
-        ], {
-            duration:200
-        })
-        return;
-    }
-    let detail = document.getElementById("goods-detail");
-    let n = document.getElementById("details");
-    /*const productlist = document.querySelector("#product_list");*/
-
-    let index = reg[0];
-    if (+index) {
-        detail.style.display = 'block';
-        detail.style.zIndex = ++zIndex;
-        detail.animate([
-            { opacity:0},
-            { opacity:1}
-        ], {
-            duration:200
-        })
-        n.src = '../static/images/img' + index + '.jpg'
+        switch (hash){
+            case '#point_page':
+                ref = pointpage;
+                break;
+            default:
+                ref = homepage;
+        }
+        ref.style.display = 'block';
+        ref.style.zIndex = ++zIndex;
     }else{
-        goods.style.display = 'block';
-        goods.style.zIndex = ++zIndex;
-        detail.animate([
-            { opacity:1},
-            { opacity:0}
-        ], {
-            duration:200
-        })
+        hash = '#product';
+        let index = reg[0];
+        if (+index) {
+            detail.style.display = 'block';
+            detail.style.zIndex = ++zIndex;
+            detail.animate([
+                {opacity: 0},
+                {opacity: 1}
+            ], {
+                duration: 200
+            });
+            n.src = '../static/images/xiangqing' + index + '.png'
+        }
     }
+
+    Array.from(filtersRef.children).forEach(f => {
+        f.classList.remove('active')
+        if(f.dataset.href == hash){
+            f.classList.add('active')
+        }
+    })
 }
+hashChange();
