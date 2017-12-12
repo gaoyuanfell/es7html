@@ -90,7 +90,7 @@ function move(obj, attr, iTarget) {
 
 //-----------------------------------------------------
 
-document.querySelector("#submit").addEventListener("click", (e) => {
+document.querySelector("#submit").addEventListener("click", () => {
     submit()
 })
 
@@ -181,41 +181,73 @@ const pointpage = document.querySelector("#point_page");
 const detail = document.getElementById("goods-detail");
 const n = document.getElementById("details");
 
+const oBtnpre = document.getElementById("pre_btn");
+const oBtnnext = document.getElementById("next_btn");
+
+oBtnpre.addEventListener('click', () => {
+    switchPhoto('-')
+})
+oBtnnext.addEventListener('click', () => {
+    switchPhoto('+')
+})
+
+function switchPhoto(type) {
+    let hash = location.hash;
+    let reg = hash.match(/(\d+)/);
+    let num = reg[0];
+    switch (type) {
+        case '+':
+            if (++num > 6) {
+                num = 1
+            }
+            location.hash = `#${num}`;
+            break;
+        case '-':
+            if (--num < 1) {
+                num = 6
+            }
+            location.hash = `#${--num}`;
+            break;
+    }
+}
+
 function hashChange() {
     let hash = location.hash;
     let reg = hash.match(/(\d+)/);
     let ref;
     if (!reg) {
-        switch (hash){
+        switch (hash) {
             case '#point_page':
                 ref = pointpage;
                 break;
             default:
                 ref = homepage;
         }
-        ref.style.display = 'block';
+        // ref.style.display = 'block';
         ref.style.zIndex = ++zIndex;
-    }else{
+    } else {
         hash = '#product';
         let index = reg[0];
         if (+index) {
-            detail.style.display = 'block';
+            // detail.style.display = 'block';
             detail.style.zIndex = ++zIndex;
-            detail.animate([
-                {opacity: 0},
-                {opacity: 1}
-            ], {
-                duration: 200
-            });
+            // detail.animate([
+            //     {opacity: 0},
+            //     {opacity: 1}
+            // ], {
+            //     duration: 200
+            // });
             n.src = '../static/images/xiangqing' + index + '.png'
         }
     }
 
     Array.from(filtersRef.children).forEach(f => {
         f.classList.remove('active')
-        if(f.dataset.href == hash){
+        if (!hash) hash = '#home'
+        if (f.dataset.href == hash) {
             f.classList.add('active')
         }
     })
 }
+
 hashChange();
