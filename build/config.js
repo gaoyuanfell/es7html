@@ -35,6 +35,13 @@ module.exports = [
         publicPath:'',
         name:'pwa-index',
         title:'gaoyuanfell'
+    },
+    {
+        path:'injector',
+        output:'injector',
+        publicPath:'',
+        name:'injector',
+        title:'injector'
     },*/
     {
         path:'lcinc-pc',
