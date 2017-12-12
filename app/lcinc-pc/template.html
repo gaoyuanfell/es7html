@@ -34,17 +34,17 @@
     <div class="top flex">
         <div class="logo"><a href="javascript:;"><img src="static/images/logo.png" alt=""></a></div>
         <ul class="nav boxflex flex" id="filters">
-            <li class="active"><a href="#home">首页</a></li>
-            <li><a href="#introduction">公司简介</a></li>
-            <li><a href="#product">产品中心</a></li>
-            <li><a href="#advantage">产品优势</a></li>
-            <li><a href="#us">联系我们</a></li>
-            <li><a href="#">入住加盟</a></li>
+            <li class="active" data-type="0"><a href="#home">首页</a></li>
+            <li data-type="0"><a href="#introduction">公司简介</a></li>
+            <li data-type="0"><a href="#product">产品中心</a></li>
+            <li data-type="0"><a href="#advantage">产品优势</a></li>
+            <li data-type="0"><a href="#us">联系我们</a></li>
+            <li data-type="1"><a href="#point_page">入驻加盟</a></li>
         </ul>
 
     </div>
-
-    <div class="content" margin-header>
+    <!--首页-->
+    <div class="content" id="home_page" data-type="0" margin-header>
         <div class="scroll-content">
             <div class="banner" id="home">
                 <img src="./static/images/lc_top.jpg" alt="" width="100%">
@@ -58,7 +58,6 @@
                 </div>
             </div>
 
-
             <div class="modular" id="product">
                 <div class="title"><img src="static/images/tou_top2.png" alt=""></div>
                 <div class="main">
@@ -68,40 +67,52 @@
                     <div class="list_cont" id="indexmaindiv">
                         <ul class="product_list clear" id="product_list">
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">饮料自动售卖机</p>
-                                    <p class="img"><img src="static/images/tu1.png" alt=""></p>
-                                </div>
+                                <a href="#1">
+                                    <div class="box">
+                                        <p class="tit">饮料自动售卖机</p>
+                                        <p class="img"><img src="static/images/tu1.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">多功能商品售货柜</p>
-                                    <p class="img"><img src="static/images/tu2.png" alt=""></p>
-                                </div>
+                                <a href="#2">
+                                    <div class="box">
+                                        <p class="tit">多功能商品售货柜</p>
+                                        <p class="img"><img src="static/images/tu2.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">小型食品机</p>
-                                    <p class="img"><img src="static/images/tu3.png" alt=""></p>
-                                </div>
+                                <a href="#3">
+                                    <div class="box">
+                                        <p class="tit">小型食品机</p>
+                                        <p class="img"><img src="static/images/tu3.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">英伦风娃娃机</p>
-                                    <p class="img"><img src="static/images/tu4.png" alt=""></p>
-                                </div>
+                                <a href="#4">
+                                    <div class="box">
+                                        <p class="tit">英伦风娃娃机</p>
+                                        <p class="img"><img src="static/images/tu4.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">迷你K歌机(单机)</p>
-                                    <p class="img"><img src="static/images/tu5.png" alt=""></p>
-                                </div>
+                                <a href="#5">
+                                    <div class="box">
+                                        <p class="tit">迷你K歌机(单机)</p>
+                                        <p class="img"><img src="static/images/tu5.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                             <li class="list">
-                                <div class="box">
-                                    <p class="tit">迷你K歌机(连机)</p>
-                                    <p class="img"><img src="static/images/tu6.png" alt=""></p>
-                                </div>
+                                <a href="#6">
+                                    <div class="box">
+                                        <p class="tit">迷你K歌机(连机)</p>
+                                        <p class="img"><img src="static/images/tu6.png" alt=""></p>
+                                    </div>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -138,6 +149,89 @@
 
         </div>
     </div>
+    <!--入驻推荐-->
+    <div class="content" margin-header id="point_page" data-type="1">
+        <div class="scroll-content">
+            <div class="banner">
+                <img src="./static/images/point_banner.jpg" alt="" width="100%">
+            </div>
+
+            <div class="fill">
+                <img src="static/images/ldy111.png" alt="" class="fill_tit" width="100%">
+                <div class="form-group">
+                    <input type="text" placeholder="请输入公司名称" id="company_name">
+                    <input type="text" placeholder="请输入公司规模" id="scope">
+                    <input type="text" placeholder="请输入您的姓名" id="name">
+                    <input type="text" placeholder="请输入您的电话" id="phone_number">
+                    <p class="sub_btn"><a href="#" class="butn" id="submit"></a></p>
+                </div>
+                <div class="Point">
+                    <img src="static/images/ldy222.png" alt="" width="100%" class="fill_tit">
+                    <img src="static/images/lingqu_top.png" alt="" width="100%" class="fill_tit">
+                    <div class="List">
+                        <ul id="pointList" style="position: relative;width: 100%;top: 0;">
+                            <li class="flex">
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                            <li class="flex" >
+                                <p class="left"><span>王五1</span>已成功领取</p>
+                                <p class="right">136****5411</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <img src="static/images/ldy3.png" alt="" width="100%" class="fill_tit">
+
+            </div>
+
+            <p class="footer">
+                <small>Copyright (C) 2016~2017 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号</small>
+            </p>
+
+
+        </div>
+    </div>
+<!--商品详情-->
+    <div class="content" margin-header id="goods-detail">
+        <div class="scroll-content">
+            <ul>
+                <li>
+                    <img src="#" alt="" class="img" id="details">
+                </li>
+            </ul>
+            <p class="footer">
+                <small>Copyright (C) 2016~2017 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号</small>
+            </p>
+        </div>
+    </div>
+
+
+
 
 
 </div>

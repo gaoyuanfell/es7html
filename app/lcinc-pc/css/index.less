@@ -12,8 +12,8 @@ body{
     position: relative;
     z-index:9;
     height:97px;
-    -webkit-box-shadow:1px 2px 3px #f1f1f1;
-    box-shadow:1px 2px 3px #f1f1f1;
+    /*-webkit-box-shadow:1px 2px 3px #f1f1f1;
+    box-shadow:1px 2px 3px #f1f1f1;*/
     background: #fff;
     min-width: 1200px;
     .logo{
@@ -122,6 +122,7 @@ body{
                     width:295px;
                     float: left;
                     position: relative;
+                    cursor: pointer;
                     .box {
                         margin:8px;
                         background: #fff;
@@ -204,10 +205,88 @@ body{
     margin-top: 160px;
 }
 
+#point_page{background: #fd3c3c;display: none;}
+
+    .fill {
+        width: 1006px;
+        margin: auto;
+        .fill_tit{
+            margin-top: 105px;
+        }
+        .form-group {
+            margin-top:37px;
+            input {
+                width: 922px;
+                margin:auto;
+                display: block;
+                height:80px;
+                line-height:78px;
+                border: 1px #9d0909 solid;
+                border-radius:40px;
+                margin-bottom:30px;
+                font-size:28px;
+                padding-left: 74px;
+            }
+            .sub_btn {
+                margin-top:50px;
+                padding-bottom:20px;
+                text-align: center;
+                .butn {
+                    display: inline-block;
+                    width:340px;
+                    height:80px;
+                    margin: auto;
+                    background: url("../static/images/ldy_ti.png") no-repeat;
+                    background-size: 100%;
+                }
+            }
+        }
+        .Point {
+            .List {
+                background: rgba(121, 0, 1, 0.5);
+                width: 922px;
+                margin: auto;
+                margin-top: 40px;
+                height:282px;
+                color: #fff;
+                font-size: 24px;
+                padding:0 98px;
+                border-radius:28px;
+                overflow: hidden;
+                li {
+                    height:50px;
+                    line-height:50px;
+                    span {
+                        color: #ffde00;
+                        margin-right:18px;
+                        font-size: 28px;
+                    }
+                    p {
+                        width: 50%;
+                    }
+                    .left {
+                        text-align: left;
+                    }
+                    .rigt {
+                        text-align: right;
+                    }
+                }
+
+            }
+        }
+    }
 
 
-
-
+#goods-detail{
+    background: #f1f1f1;
+    display: none;
+    .img{
+        margin: auto;
+        margin-top: 80px;
+        width: 1200px;
+        height:600px;
+    }
+}
 
 
 
