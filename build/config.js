@@ -14,13 +14,13 @@ module.exports = [
     //     name:'ruzhu-index',
     //     title:'乐橙互联科技有限公司'
     // },
-    // {
-    //     path:'lcinc',
-    //     output:'lcinc',
-    //     publicPath:'',
-    //     name:'lcinc-index',
-    //     title:'乐橙互联科技有限公司'
-    // },
+    {
+        path:'lcinc',
+        output:'lcinc',
+        publicPath:'',
+        name:'lcinc-index',
+        title:'乐橙互联科技有限公司'
+    },
     // {
     //     path:'lcinc-activity',
     //     output:'lcinc-activity',
@@ -36,13 +36,13 @@ module.exports = [
     //     name:'pwa-index',
     //     title:'gaoyuanfell'
     // },
-    {
-        path:'injector',
-        output:'injector',
-        publicPath:'',
-        name:'injector',
-        title:'injector'
-    },
+    // {
+    //     path:'injector',
+    //     output:'injector',
+    //     publicPath:'',
+    //     name:'injector',
+    //     title:'injector'
+    // },
     // {
     //     path:'lcinc-pc',
     //     output:'lcinc-pc',
