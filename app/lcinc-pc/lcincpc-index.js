@@ -223,13 +223,13 @@ function hashChange() {
             default:
                 ref = homepage;
         }
-        // ref.style.display = 'block';
+        ref.style.display = 'block';
         ref.style.zIndex = ++zIndex;
     } else {
         hash = '#product';
         let index = reg[0];
         if (+index) {
-            // detail.style.display = 'block';
+            detail.style.display = 'block';
             detail.style.zIndex = ++zIndex;
             // detail.animate([
             //     {opacity: 0},
@@ -237,7 +237,7 @@ function hashChange() {
             // ], {
             //     duration: 200
             // });
-            n.src = '../static/images/xiangqing' + index + '.png'
+            n.src = 'static/images/xiangqing' + index + '.png'
         }
     }
 
