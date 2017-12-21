@@ -7,13 +7,13 @@
  * filename：页面名称
  */
 module.exports = [
-    // {
-    //     path:'ruzhu',
-    //     output:'ruzhu',
-    //     publicPath: '',
-    //     name:'ruzhu-index',
-    //     title:'乐橙互联科技有限公司'
-    // },
+    {
+        path:'ruzhu',
+        output:'ruzhu',
+        publicPath: '',
+        name:'ruzhu-index',
+        title:'乐橙互联科技有限公司'
+    },
     // {
     //     path:'lcinc',
     //     output:'lcinc',
@@ -30,25 +30,40 @@ module.exports = [
     //     filename:'index2.html',
     // },
     // {
-    //     path:'pwa',
-    //     output:'pwa',
-    //     publicPath:'',
-    //     name:'pwa-index',
-    //     title:'gaoyuanfell'
-    // },
-    {
-        path:'injector',
-        output:'injector',
-        publicPath:'',
-        name:'injector',
-        title:'injector'
-    },
-    // {
     //     path:'lcinc-pc',
     //     output:'lcinc-pc',
     //     base:'/pc/',
     //     publicPath:'',
     //     name:'lcincpc-index',
     //     title:'乐橙互联科技有限公司'
-    // }
+    // },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // {
+    //     path:'pwa',
+    //     output:'pwa',
+    //     publicPath:'',
+    //     name:'index',
+    //     title:'gaoyuanfell'
+    // },
+    // {
+    //     path:'injector',
+    //     output:'injector',
+    //     publicPath:'',
+    //     name:'injector',
+    //     title:'injector'
+    // },
 ];

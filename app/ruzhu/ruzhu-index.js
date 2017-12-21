@@ -50,10 +50,10 @@ document.querySelector("#submit").addEventListener("click", (e) => {
 })
 
 function submit() {
-    let company_name = document.querySelector("#company_name").value
-    let scope = document.querySelector("#scope").value
-    let name = document.querySelector("#name").value
-    let phone_number = document.querySelector("#phone_number").value
+    // let company_name = document.querySelector("#company_name").value
+    // let scope = document.querySelector("#scope").value
+    let name = document.querySelector("#name").value;
+    let phone_number = document.querySelector("#phone_number").value;
 
 
     // if (!company_name) {
@@ -79,8 +79,8 @@ function submit() {
     }
 
     Ajax('post', `${baseUrl}add/message`, {
-        company_name: company_name,
-        scope: scope,
+        // company_name: '',
+        // scope: '',
         name: name,
         phone_number: phone_number,
     }, {
@@ -89,10 +89,10 @@ function submit() {
         }
     }).then(res => {
         if(res.status_code == 200){
-            alert("提交成功，工作人员稍后会与您取得联系")
-            document.querySelector("#company_name").value = ""
-            document.querySelector("#scope").value = ""
-            document.querySelector("#name").value = ""
+            alert("您距离500块奖金只有一步之遥，我们工作人员会与您电话回访！");
+            // document.querySelector("#company_name").value = "";
+            // document.querySelector("#scope").value = "";
+            document.querySelector("#name").value = "";
             document.querySelector("#phone_number").value = ""
         }
     });
