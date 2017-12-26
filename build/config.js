@@ -7,13 +7,13 @@
  * filename：页面名称
  */
 module.exports = [
-    {
-        path:'ruzhu',
-        output:'ruzhu',
-        publicPath: '',
-        name:'ruzhu-index',
-        title:'乐橙互联科技有限公司'
-    },
+    // {
+    //     path:'ruzhu',
+    //     output:'ruzhu',
+    //     publicPath: '',
+    //     name:'ruzhu-index',
+    //     title:'乐橙互联科技有限公司'
+    // },
     // {
     //     path:'lcinc',
     //     output:'lcinc',
@@ -66,4 +66,13 @@ module.exports = [
     //     name:'injector',
     //     title:'injector'
     // },
+
+    {
+        path:'typescript',
+        output:'typescript',
+        publicPath:'',
+        name:'typescript',
+        type:'.ts',
+        title:'typescript'
+    },
 ];
