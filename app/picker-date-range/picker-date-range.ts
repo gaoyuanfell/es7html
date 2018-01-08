@@ -1,3 +1,6 @@
+import './css/style.less'
+// import '../../common/css/base.less'
+
 Date.prototype.calendar = function (dateType, num) {
     switch (dateType) {
         case 1:
@@ -42,6 +45,10 @@ Date.prototype.formatDate = function (format) {
         if (new RegExp("(" + k + ")").test(format)) format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return format;
 };
+
+function insertAfter(newElement, targetElement) {
+    targetElement.parentNode.insertBefore(newElement, targetElement.nextSibling)
+}
 
 interface PickerDateRangeOption {
     aToday? //今天
@@ -111,11 +118,11 @@ interface PickerDateRangeOption {
 }
 
 interface PickerValue {
-    startCompareDate
-    endCompareDate
-    needCompare
-    startDate
-    endDate
+    startCompareDate?
+    endCompareDate?
+    needCompare?
+    startDate?: Date | string
+    endDate?: Date | string
 }
 
 interface PickerDate {
@@ -130,11 +137,43 @@ interface PickerDate {
     selected?: boolean
 }
 
+class Renderer {
+    constructor() {
+    }
+
+    static listen(target: 'window' | 'document' | 'body' | any, eventName: string, callback: (event: any) => boolean | void) {
+        let ref = null;
+        switch (target) {
+            case 'window':
+                ref = self;
+                break;
+            case 'document':
+                ref = self.document;
+                break;
+            case 'body':
+                ref = self.document.body;
+                break;
+        }
+        ref.addEventListener(eventName, callback)
+        return function () {
+            ref.removeEventListener(eventName, callback);
+        }
+    }
+
+    static addClass(el: any, ...name: string[]) {
+        el.classList && el.classList.add(name);
+    };
+
+    static removeClass(el: any, ...name: string[]) {
+        el.classList && el.classList.remove(name);
+    };
+}
+
 export class PickerDateRange {
     constructor(id: string, option: PickerDateRangeOption = {}) {
         Object.assign(this.option, option)
         this.defaultOption();
-        this.ref = <HTMLInputElement> document.querySelector(`#${id}`);
+        this.ref = <HTMLInputElement> self.document.querySelector(`#${id}`);
         this.init();
         this.initEvent();
     }
@@ -183,48 +222,69 @@ export class PickerDateRange {
                 ${(this.option.calendars == 2 || !this.option.isSingleDay) ? btnHTML : ''}
             </div>`;
 
-        this.boxRef = document.createElement('div');
+        this.ref.readOnly = true;
+        this.setValue({
+            startDate:this.option.startDate,
+            endDate:this.option.endDate,
+        })
+        this.boxRef = self.document.createElement('div');
         this.boxRef.innerHTML = pickerRef;
-        this.boxRef.style.display = 'none'
-        document.body.appendChild(this.boxRef);
+        this.boxRef.style.position = 'absolute';
 
+        insertAfter(this.boxRef, this.ref);
+        // self.document.body.appendChild(this.boxRef);
         this.navAddRef = this.boxRef.querySelector('.nav-add');
         this.navReduce = this.boxRef.querySelector('.nav-reduce');
         this.btnYesRef = this.boxRef.querySelector('.picker-btn-yes');
         this.btnNoRef = this.boxRef.querySelector('.picker-btn-no');
-
         //年
         this.selectYearRef = <HTMLSelectElement> this.boxRef.querySelector('.select-year');
         //月
         this.selectMonthRef = <HTMLSelectElement> this.boxRef.querySelector('.select-month');
         //天
-        this.pickerDayRef = this.boxRef.querySelector('.picker-day');
-
+        this.pickerDayRef = <HTMLDivElement> this.boxRef.querySelector('.picker-day');
         this.getFillDays();
+        this.boxRef.style.display = 'block';
+        this.boxPosition.boxHeight = this.boxRef.clientHeight;
+        this.boxPosition.boxWidth = this.boxRef.clientWidth;
+        this.boxRef.style.display = 'none';
+        this.setPosition();
     }
+
 
     defaultOption() {
         if (!this.option.startDate) this.option.startDate = new Date();
-        if (!this.option.endDate) this.option.endDate = new Date();
+        if (this.option.calendars == 2 || !this.option.isSingleDay) {
+            if (!this.option.endDate) this.option.endDate = new Date();
+        } else {
+            if (!this.option.endDate) this.option.endDate = this.option.startDate;
+        }
         if (typeof this.option.startDate === 'string') this.option.startDate = new Date(this.option.startDate);
         if (typeof this.option.endDate === 'string') this.option.endDate = new Date(this.option.endDate);
-
         this.option.date = new Date(this.option.endDate)
     }
 
     initEvent() {
-        window.addEventListener('click',(e:any)=> {
-            if(e.target === this.ref || !this.boxRef.contains(e.target)) return;
+        this.windowEvent = Renderer.listen('window', 'click', (e: any) => {
+            if (e.target === this.ref || this.pickerDayRef.contains(e.target) || this.boxRef.contains(e.target)) return;
             this.close();
         })
+
+        window.onresize = () => {
+            this.setPosition();
+        }
 
         if (this.ref) this.ref.addEventListener('click', () => {
             this.show();
         });
         if (this.pickerDayRef) this.pickerDayRef.addEventListener('click', (e: any) => {
+            e.preventDefault();
+            e.stopPropagation();
             if (e.target.parentNode != this.pickerDayRef) return;
             let index = e.target.dataset.index;
-            this.selected(this.days[index], e.target);
+            let day = this.days[index];
+            if (day.disabled) return;
+            this.selected(day);
         });
 
         if (this.selectYearRef) this.selectYearRef.addEventListener('change', (e: any) => {
@@ -233,29 +293,37 @@ export class PickerDateRange {
         if (this.selectMonthRef) this.selectMonthRef.addEventListener('change', (e: any) => {
             this.monthSelect(e.target.value, e.target);
         });
-        if (this.navAddRef) this.navAddRef.addEventListener('click', () => {
+        if (this.navAddRef) this.navAddRef.addEventListener('click', (e:any) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.option.date.calendar(2, 1);
             this.getFillDays();
         });
-        if (this.navReduce) this.navReduce.addEventListener('click', () => {
+        if (this.navReduce) this.navReduce.addEventListener('click', (e:any) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.option.date.calendar(2, -1);
             this.getFillDays();
         });
-        if (this.btnYesRef) this.btnYesRef.addEventListener('click', () => {
+        if (this.btnYesRef) this.btnYesRef.addEventListener('click', (e:any) => {
+            e.preventDefault();
+            e.stopPropagation();
             if (!this.firstDate || !this.secondDate) return;
             this.ref.value = `${this.firstDate.format}${this.option.defaultText}${this.secondDate.format}`;
             this.option.success({
-                startCompareDate:null,
-                endCompareDate:null,
-                needCompare:null,
-                startDate:this.firstDate.format,
-                endDate:this.secondDate.format,
+                startCompareDate: null,
+                endCompareDate: null,
+                needCompare: null,
+                startDate: this.firstDate.format,
+                endDate: this.secondDate.format,
             });
             this.option.startDate = this.firstDate.date;
             this.option.endDate = this.secondDate.date;
             this.close();
         });
-        if (this.btnNoRef) this.btnNoRef.addEventListener('click', () => {
+        if (this.btnNoRef) this.btnNoRef.addEventListener('click', (e:any) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.close();
         })
     }
@@ -327,7 +395,7 @@ export class PickerDateRange {
     };
     ref: HTMLInputElement;
     boxRef: HTMLDivElement;
-    pickerDayRef: Element;
+    pickerDayRef: HTMLDivElement;
     selectYearRef: HTMLSelectElement;
     selectMonthRef: HTMLSelectElement;
     navAddRef: Element;
@@ -340,7 +408,44 @@ export class PickerDateRange {
     firstDate: PickerDate;
     secondDate: PickerDate;
 
-    selected(data: PickerDate, ref) {
+    windowEvent
+
+    boxPosition = {
+        inputPosition: {
+            left: 0,
+            top: 0
+        },
+        bodyHeight: 0,
+        bodyWidth: 0,
+        inputHeight: 0,
+        inputWidth: 0,
+        boxHeight: 0,
+        boxWidth: 0,
+    }
+
+    setPosition() {
+        let inputPo = PickerDateRange.getPosition(this.ref);
+        let bodyH = self.document.body.clientHeight;
+        let bodyW = self.document.body.clientWidth;
+        let inputH = this.ref.clientHeight;
+        let inputW = this.ref.clientWidth;
+        let boxH = this.boxPosition.boxHeight;
+        let boxW = this.boxPosition.boxWidth;
+
+        this.boxPosition.inputPosition = inputPo;
+        this.boxPosition.bodyHeight = bodyH;
+        this.boxPosition.bodyWidth = bodyW;
+        this.boxPosition.inputHeight = inputH;
+        this.boxPosition.inputWidth = inputW;
+        this.boxRef.style.left = '-1px';
+        this.boxRef.style.zIndex = '999';
+
+        if(inputPo.left + boxW > bodyW){
+            this.boxRef.style.left = -Math.abs(boxW - inputW) + 1 + 'px';
+        }
+    }
+
+    selected(data: PickerDate) {
         switch (this.option.calendars) {
             case 1:
                 this.firstDate = data;
@@ -348,11 +453,11 @@ export class PickerDateRange {
                 this.ref.value = data.format;
 
                 this.option.success({
-                    startCompareDate:null,
-                    endCompareDate:null,
-                    needCompare:null,
-                    startDate:this.firstDate.format,
-                    endDate:this.secondDate.format,
+                    startCompareDate: null,
+                    endCompareDate: null,
+                    needCompare: null,
+                    startDate: this.firstDate.format,
+                    endDate: this.secondDate.format,
                 })
 
                 this.option.startDate = this.firstDate.date;
@@ -374,13 +479,13 @@ export class PickerDateRange {
                         this.firstDate = this.secondDate;
                         this.secondDate = a;
                     }
-                    this.getFillDays();
+                    this.changeFillDays();
                 } else {
                     this.firstDate = data;
                     data.type = 'first';
-                    data.selected = true
+                    data.selected = true;
                     this.calendaState = 2;
-                    this.getFillDays();
+                    this.changeFillDays();
                 }
                 break;
         }
@@ -404,6 +509,38 @@ export class PickerDateRange {
         return array;
     }
 
+    changeFillDays() {
+        if (this.pickerDayRef) {
+            Array.from(this.pickerDayRef.childNodes).forEach((c: any, i) => {
+                c.classList.remove('first', 'second', 'range', 'selected');
+                let firstDayOfMonth = this.days[i].date;
+                if (this.firstDate && this.secondDate) {
+                    if (this.firstDate.date.getTime() == firstDayOfMonth.getTime()) {
+                        c.classList.add('first');
+                        c.classList.remove('selected')
+                    }
+                    if (this.secondDate.date.getTime() == firstDayOfMonth.getTime()) {
+                        c.classList.add('second');
+                        c.classList.remove('selected')
+                    }
+                    if (this.firstDate.date.getTime() < firstDayOfMonth.getTime() && this.secondDate.date.getTime() > firstDayOfMonth.getTime()) {
+                        c.classList.add('range');
+                        c.classList.remove('selected')
+                    }
+                    if (this.firstDate.date.getTime() == this.secondDate.date.getTime() && this.secondDate.date.getTime() == firstDayOfMonth.getTime()) {
+                        c.classList.remove('first', 'second', 'range');
+                        c.classList.add('selected')
+                    }
+                }
+                if (this.firstDate && !this.secondDate) {
+                    if (this.firstDate.date.getTime() == firstDayOfMonth.getTime()) {
+                        c.classList.add('selected')
+                    }
+                }
+            })
+        }
+    }
+
     /**
      * 当月的日期 渲染日期
      */
@@ -419,8 +556,8 @@ export class PickerDateRange {
                 week: firstDayOfMonth.getDay(),
                 date: new Date(firstDayOfMonth),
                 format: firstDayOfMonth.formatDate('yyyy-MM-dd'),
-            }
-            if(this.firstDate && this.secondDate){
+            };
+            if (this.firstDate && this.secondDate) {
                 if (this.firstDate.date.getTime() == firstDayOfMonth.getTime()) {
                     day.type = 'first'
                 }
@@ -435,19 +572,11 @@ export class PickerDateRange {
                     day.type = null;
                 }
             }
-            if(this.firstDate && !this.secondDate){
+            if (this.firstDate && !this.secondDate) {
                 if (this.firstDate.date.getTime() == firstDayOfMonth.getTime()) {
                     day.selected = true
                 }
             }
-            // if (this.calendaState == 3) {
-            //
-            // }
-            // if (this.calendaState == 2) {
-            //     if (this.firstDate.date.getTime() == firstDayOfMonth.getTime()) {
-            //         day.selected = true
-            //     }
-            // }
             this.days.push(day);
             firstDayOfMonth.calendar(1, 1);
         }
@@ -502,9 +631,8 @@ export class PickerDateRange {
     show() {
         if (this.calendaState == 1) return;
         this.option.date = new Date(this.option.endDate);
-        console.info('ok')
-        this.firstDate = this.getPickerDate(this.option.startDate)
-        this.secondDate = this.getPickerDate(this.option.endDate)
+        this.firstDate = PickerDateRange.getPickerDate(this.option.startDate);
+        this.secondDate = PickerDateRange.getPickerDate(this.option.endDate);
 
         this.getFillDays();
         this.calendaState = 1
@@ -518,30 +646,74 @@ export class PickerDateRange {
         this.boxRef.style.display = 'none';
     }
 
-    getPickerDate(date = new Date()){
-        /**
-         * format: string
-         month: number
-         date: Date
-         year: number
-         week: number
-         day: number
-         */
+    static getPickerDate(date = new Date()) {
         return {
-            format:date.formatDate('yyyy-MM-dd'),
-            month:date.getMonth(),
-            date:date,
-            year:date.getFullYear(),
-            week:date.getDay(),
-            day:date.getDate(),
+            format: date.formatDate('yyyy-MM-dd'),
+            month: date.getMonth(),
+            date: date,
+            year: date.getFullYear(),
+            week: date.getDay(),
+            day: date.getDate(),
+        }
+    }
+
+    static getPosition(element) {
+        let actualTop = element.offsetTop;
+        let actualLeft = element.offsetLeft;
+        let current = element.offsetParent;
+
+        while (current !== null) {
+            actualLeft += current.offsetLeft;
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        return {
+            top: actualTop,
+            left: actualLeft
         }
     }
 
     destroy() {
-        document.body.removeChild(this.boxRef);
+        this.ref.parentNode.removeChild(this.boxRef);
+        // self.document.body.removeChild(this.boxRef);
+        this.windowEvent && this.windowEvent();
     }
 
-    setValue() {
-
+    setValue(data: PickerValue) {
+        this.option.startDate = data.startDate;
+        this.option.endDate = data.endDate;
+        this.defaultOption();
+        this.firstDate = PickerDateRange.getPickerDate(this.option.startDate);
+        this.secondDate = PickerDateRange.getPickerDate(this.option.endDate);
+        this.getFillDays();
+        if (this.option.calendars == 2 || !this.option.isSingleDay) {
+            this.ref.value = `${this.firstDate.format}${this.option.defaultText}${this.secondDate.format}`;
+        } else {
+            this.ref.value = this.secondDate.format;
+        }
     }
 }
+
+window['pickerDateRange'] = PickerDateRange;
+/*let p = new window['pickerDateRange']('pickerDateRange', {
+    // stopToday: false,	//今天之后不可选
+    // stopTodayBefore: false,//今天之前不可选
+    // isTodayValid: true,	//点击今天是否可选
+    // shortOpr: true, //结合单天日期选择的短操作，不需要确定和取消的操作按钮。
+    // autoSubmit: true,
+    isSingleDay: true,  //是否单选日历
+    calendars: 2, //日历数量
+    // startDate: '', //默认开始时间
+    inputTrigger: 'pickerDateRange',	 //触发日历的input id
+    magicSelect: false,
+    success:function (data) {
+        console.info(data)
+    }
+})
+
+setTimeout(()=> {
+    p.setValue({
+        startDate:'2015-5-12',
+        endDate:'2016-5-12',
+    })
+},2000)*/

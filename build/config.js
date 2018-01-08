@@ -42,16 +42,6 @@ module.exports = [
 
 
 
-
-
-
-
-
-
-
-
-
-
     // {
     //     path:'pwa',
     //     output:'pwa',
@@ -66,13 +56,20 @@ module.exports = [
     //     name:'injector',
     //     title:'injector'
     // },
-
     {
-        path:'typescript',
-        output:'typescript',
+        path:'picker-date-range',
+        output:'pickerDateRange',
         publicPath:'',
-        name:'typescript',
+        name:'picker-date-range',
         type:'.ts',
         title:'typescript'
     },
+    // {
+    //     path:'file-upload',
+    //     output:'fileUpload',
+    //     publicPath:'',
+    //     name:'file-upload',
+    //     type:'.ts',
+    //     title:'fileUpload'
+    // },
 ];
