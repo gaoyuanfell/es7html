@@ -165,3 +165,12 @@ export function sleep(time) {
         }, time);
     })
 }
+
+export function getHash(){
+    let hash = location.hash;
+    let index = hash.indexOf("?");
+    if(~index){
+        return hash.substr(1,index - 1)
+    }
+    return hash.substr(1)
+}

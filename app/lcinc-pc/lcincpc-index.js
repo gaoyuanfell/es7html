@@ -2,7 +2,7 @@ import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
 
-import {jsonp, sleep} from "../../common/js/util";
+import {getHash, jsonp, sleep} from "../../common/js/util";
 
 let zIndex = 1000
 
@@ -212,12 +212,12 @@ function switchPhoto(type) {
 }
 
 function hashChange() {
-    let hash = location.hash;
+    let hash = getHash();
     let reg = hash.match(/(\d+)/);
     let ref;
     if (!reg) {
         switch (hash) {
-            case '#point_page':
+            case 'point_page':
                 ref = pointpage;
                 break;
             default:
@@ -226,7 +226,7 @@ function hashChange() {
         ref.style.display = 'block';
         ref.style.zIndex = ++zIndex;
     } else {
-        hash = '#product';
+        hash = 'product';
         let index = reg[0];
         if (+index) {
             detail.style.display = 'block';

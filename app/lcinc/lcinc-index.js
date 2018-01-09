@@ -1,6 +1,7 @@
 import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
+import {getHash} from "../../common/js/util";
 
 let zIndex = 1000
 
@@ -43,7 +44,7 @@ window.addEventListener('hashchange', () => {
 });
 
 function hashChange(){
-    let hash = location.hash;
+    let hash = getHash();
     let reg = hash.match(/(\d+)/);
     let home = document.getElementById("home");
     if (!reg) {

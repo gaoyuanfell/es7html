@@ -29,15 +29,14 @@ module.exports = [
     //     title:'乐橙互联科技有限公司',
     //     filename:'index2.html',
     // },
-    // {
-    //     path:'lcinc-pc',
-    //     output:'lcinc-pc',
-    //     base:'/pc/',
-    //     publicPath:'',
-    //     name:'lcincpc-index',
-    //     title:'乐橙互联科技有限公司'
-    // },
-
+    {
+        path:'lcinc-pc',
+        output:'lcinc-pc',
+        base:'/pc/',
+        publicPath:'',
+        name:'lcincpc-index',
+        title:'乐橙互联科技有限公司'
+    },
 
 
 
@@ -56,14 +55,14 @@ module.exports = [
     //     name:'injector',
     //     title:'injector'
     // },
-    {
-        path:'picker-date-range',
-        output:'pickerDateRange',
-        publicPath:'',
-        name:'picker-date-range',
-        type:'.ts',
-        title:'typescript'
-    },
+    // {
+    //     path:'picker-date-range',
+    //     output:'pickerDateRange',
+    //     publicPath:'',
+    //     name:'picker-date-range',
+    //     type:'.ts',
+    //     title:'typescript'
+    // },
     // {
     //     path:'file-upload',
     //     output:'fileUpload',
