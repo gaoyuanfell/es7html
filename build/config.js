@@ -29,14 +29,14 @@ module.exports = [
     //     title:'乐橙互联科技有限公司',
     //     filename:'index2.html',
     // },
-    {
-        path:'lcinc-pc',
-        output:'lcinc-pc',
-        base:'/pc/',
-        publicPath:'',
-        name:'lcincpc-index',
-        title:'乐橙互联科技有限公司'
-    },
+    // {
+    //     path:'lcinc-pc',
+    //     output:'lcinc-pc',
+    //     base:'/pc/',
+    //     publicPath:'',
+    //     name:'lcincpc-index',
+    //     title:'乐橙互联科技有限公司'
+    // },
 
 
 
@@ -71,4 +71,12 @@ module.exports = [
     //     type:'.ts',
     //     title:'fileUpload'
     // },
+
+    {
+        path:'dati',
+        output:'dati',
+        publicPath:'',
+        name:'dati-index',
+        title:'答题'
+    },
 ];

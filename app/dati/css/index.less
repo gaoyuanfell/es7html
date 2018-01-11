@@ -1,0 +1,338 @@
+body{
+    font-family: "Microsoft YaHei UI";
+}
+.content{
+    background: #1e1443;}
+.bonus{
+    line-height: 1.5;
+    li{
+        width: 50%;
+        color: #2f3d48;
+        font-size: 0.14rem;
+        .small{
+            color: #ccc;
+        }
+        .large{
+            font-size: 0.16rem;
+            span{
+                font-size: 0.3rem;
+            }
+        }
+    }
+}
+.nologin{
+    margin: 0 0.2rem;
+    background: #fff;
+    padding: 0.24rem 0;
+    border-radius: 0.1rem;
+    margin-top:2rem;
+    .login_btn{
+        margin: 0.23rem 0.4rem;
+        color: #fff;
+        background: #734df2;
+        border-radius: 0.24rem;
+    }
+}
+.invite_btn{
+    background: #fff;
+    color: #734df2;
+    border-radius: 0.24rem;
+    border:1px #734df2 solid;
+    margin: 0.23rem 0.4rem;
+}
+.revive{
+    margin: 0 0.2rem;
+    background: #fff;
+    padding: 0.2rem 0.15rem;
+    border-radius: 0.1rem;
+    margin-top: 0.12rem;
+    .left{
+        width: 50%;
+        text-align: left;
+        color: #2f3d48;
+        font-size: 0.14rem;
+        line-height: 0.36rem;
+        span{
+            font-size: 0.2rem;
+        }
+    }
+    .right{
+        width: 50%;
+        .revive_btn{
+            width: 1.4rem;
+            height: 0.36rem;
+            line-height: 0.36rem;
+            font-size: 0.14rem;
+            color: #fff;
+            border-radius: 0.2rem;
+            background: #fc2653;
+        }
+    }
+}
+.foot{
+    position: fixed;
+    bottom: 0.19rem;
+    width:100%;
+    a{
+        font-size: 0.15rem;
+        color: #fff;
+        padding: 0 0.1rem;
+        display: inline-block;
+        height: 0.1rem;
+        line-height: 0.1rem;
+    }
+    .border{
+        border-right: 1px #fff solid;
+    }
+}
+.description_box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    top:0;
+    left: 0;
+    bottom: 0;
+    display: none;
+}
+.bomb_box{
+    background: #fff;
+    position: absolute;
+    left:0.42rem;
+    right:0.42rem;
+    top:50%;
+    transform: translate(0,-50%);
+    z-index: 10000;
+    padding:0.23rem 0.2rem;
+    display: none;
+    .title{
+        font-size: 0.18rem;
+        .close{
+            position: absolute;
+            right: 0.17rem;
+            top: 0.16rem;
+            font-size: 0.22rem;
+        }
+    }
+}
+.bomb{
+    position: absolute;
+    left:0.2rem;
+    right:0.2rem;
+    top:50%;
+    transform: translate(0,-50%);
+    z-index: 10000;
+    display: none;
+}
+.blocks{
+    display: block;
+}
+.formGroup{
+    margin-top: 0.2rem;
+    .userInput{
+        position: relative;
+        .user_input{
+            width: 100%;
+            border-bottom: 1px #ccc solid;
+            height: 0.4rem;
+            font-size: 0.14rem;
+            padding-left: 2px;
+        }
+        .verification{
+            padding-right: 80px;
+        }
+        .verification_btn{
+            background: none;
+            position: absolute;
+            right: 0;
+            top:0.1rem;
+            border-left: 1px #ccc solid;
+        }
+    }
+}
+.get_into{
+    background: #734df2;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    width: 100%;
+    margin: auto;
+    margin-top: 0.46rem;
+}
+#invite_input{
+    .invite_input{
+        width: 100%;
+        height: 0.45rem;
+        line-height: 0.15rem;
+        border-radius: 0.24rem;
+        padding-left: 0.1rem;
+    }
+}
+.invite_yes{
+    position: absolute;
+    right: 0;
+    height: 0.45rem;
+}
+.mark{
+    color: #ff1919;
+    text-align: left;
+    height:28px;
+    text-indent: 2px;
+    span{
+        font-size: 20px;
+    }
+}
+
+
+
+.subject_box{
+    background: #fff;
+    margin: 0 0.2rem;
+    margin-top: 0.54rem;
+    border-radius: 0.2rem;
+    padding: 0.7rem 0.16rem 0.15rem 0.16rem;
+    position: relative;
+    .time{
+        font-size: 0.3rem;
+        width: 0.6rem;
+        height:0.6rem;
+        line-height: 0.6rem;
+        position: absolute;
+        top:-0.25rem;
+        left:50%;
+        background: #fff;
+        border-radius: 50%;
+        transform: translate(-50%,0);
+    }
+    .title{
+        color: #11161a;
+        margin-bottom: 0.49rem;
+        max-width: 3.03rem;
+    }
+    .option{
+        li{
+            height: 0.53rem;
+            line-height: 0.53rem;
+            width: 100%;
+            background: #e6ebf0;
+            color: #8b949c;
+            border-radius: 0.24rem;
+            margin-bottom: 0.1rem;
+            font-size: 0.2rem;
+            text-align: left;
+            text-indent: 1em;
+            cursor: pointer;
+        }
+    }
+}
+
+
+.account_top{
+    position: relative;
+    .account_menu{
+        width: 2.4rem;
+        margin: auto;
+        margin-top:0.2rem;
+        li{
+            width: 1.2rem;
+            height: 0.28rem;
+            line-height: 0.28rem;
+            background: #343351;
+            border:1px #727189 solid;
+            color: #fff;
+            &.active{
+                background: #fff;
+                border:1px #fff solid;
+                color: #888;
+            }
+            &:first-child{
+                border-top-left-radius: 0.05rem;
+                border-bottom-left-radius: 0.05rem;
+            }
+            &:last-child{
+                border-top-right-radius: 0.05rem;
+                border-bottom-right-radius: 0.05rem;
+            }
+        }
+    }
+    .share_btn{
+        position: absolute;
+        right: 0.2rem;
+        top:30%;
+        color: #fff;
+    }
+}
+.bonus_num{
+    line-height: 1.5;
+    li{
+        width: 50%;
+        color: #2f3d48;
+        font-size: 0.14rem;
+        .small{
+            color: #8993a1;
+        }
+        .large{
+            font-size: 0.16rem;
+            color: #fff;
+            span{
+                font-size: 0.3rem;
+            }
+        }
+    }
+}
+.account_list{
+    margin-top: 0.48rem;
+    li{
+        padding: 0 0.2rem;
+        .list{
+            position: relative;
+            color: #fff;
+            height: 0.6rem;
+            .indexs{
+                font-size: 0.16rem;
+                margin-right: 0.1rem;
+                color: #bbbafe;
+            }
+            .user_img{
+                width: 0.36rem;
+                height:0.36rem;
+                border:1px #ccc solid;
+                border-radius: 50%;
+            }
+            .name{
+                text-align: left;
+                margin-top: 0.08rem;
+                margin-left: 0.1rem;
+                font-size: 0.16rem;
+            }
+            .num{
+                position: absolute;
+                right: 0;
+                top: 0;
+                //transform: translate(0,-50%);
+                font-size: 0.16rem;
+            }
+        }
+    }
+}
+.top_three{
+    color: #fff;
+    line-height: 1.5;
+    li{
+        width:33.33%;
+      .user_img{
+          width: 0.36rem;
+          height:0.36rem;
+          border:1px #ccc solid;
+          border-radius: 50%;
+          margin: auto;
+      }
+        .win_num{
+            background: #3c374f;
+            width: .54rem;
+            margin: auto;
+            border-radius: .09rem;
+            padding: .02rem 0;
+        }
+    }
+}
