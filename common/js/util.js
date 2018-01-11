@@ -3,7 +3,8 @@ import * as qs from 'querystring';
 let count = 0;
 
 export function jsonp(url, body = {}, config = {}, fn) {
-    function noop() {}
+    function noop() {
+    }
 
     let target = document.getElementsByTagName('script')[0] || document.head;
 
@@ -28,8 +29,9 @@ export function jsonp(url, body = {}, config = {}, fn) {
         window[id] = noop;
         if (timer) clearTimeout(timer);
     }
+
     return new Promise((resolve, reject) => {
-        window[id] = function(data) {
+        window[id] = function (data) {
             if (data.status_code == 200 || data.status_code == 204) {
                 resolve(data);
             } else if (data.status_code == 201) {
@@ -44,7 +46,7 @@ export function jsonp(url, body = {}, config = {}, fn) {
         };
 
         if (timeout) {
-            timer = setTimeout(function() {
+            timer = setTimeout(function () {
                 reject(new Error('Timeout'));
                 timer = 0;
                 cleanup();
@@ -56,10 +58,10 @@ export function jsonp(url, body = {}, config = {}, fn) {
 export function Ajax(method, url, body = {}, config = {}) {
     return new Promise((resolve, reject) => {
         let xhr = new window.XMLHttpRequest();
-        xhr.onerror = function(error) {
+        xhr.onerror = function (error) {
 
         }
-        xhr.onreadystatechange = function(data) {
+        xhr.onreadystatechange = function (data) {
             let readyState = xhr.readyState;
             if (readyState === 4) {
 
@@ -140,7 +142,7 @@ function toQueryPair(key, value, bo) {
     return key + '=' + (bo ? encodeURIComponent(value === null ? '' : String(value)) : value === null ? '' : String(value));
 }
 
-export const toBodyString = function(obj, bo = true) {
+export const toBodyString = function (obj, bo = true) {
     let ret = [];
     for (let key in obj) {
         let values = obj[key];
@@ -159,18 +161,64 @@ export const toBodyString = function(obj, bo = true) {
 }
 
 export function sleep(time) {
-    return new Promise(function(resolve, reject) {
-        setTimeout(function() {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
             resolve();
         }, time);
     })
 }
 
-export function getHash(){
+export function getHash() {
     let hash = location.hash;
     let index = hash.indexOf("?");
-    if(~index){
-        return hash.substr(1,index - 1)
+    if (~index) {
+        return hash.substr(1, index - 1)
     }
     return hash.substr(1)
+}
+
+/**
+ * routes:{
+ *      path:'',
+ *      component:''//当前dom或者ID选择器
+ * }
+ */
+export class Router {
+
+    config = {
+        useHash: true
+    };
+    routes;
+
+    constructor(routes = [], config = {}) {
+        Object.assign(this.config, config);
+        this.routes = routes.map(r => {
+            if (!(r.component instanceof Element)) {
+                r.component = window.document.querySelector(`#${r.component}`);
+                r.component.style.display = 'block';
+            }
+            return r;
+        });
+        window.addEventListener('hashchange', () => {
+            this.hashChange()
+        });
+        this.hashChange();
+    }
+
+    hashChange() {
+        let hash = Router.getHash();
+        this.routes.forEach(r => {
+            r.component.style.display = 'none';
+            if (r.path === hash) r.component.style.display = 'block';
+        })
+    }
+
+    static getHash() {
+        let hash = self.location.hash;
+        let index = hash.indexOf("?");
+        if (~index) {
+            return hash.substr(1, index - 1)
+        }
+        return hash.substr(1)
+    }
 }

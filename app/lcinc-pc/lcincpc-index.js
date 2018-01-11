@@ -243,7 +243,7 @@ function hashChange() {
 
     Array.from(filtersRef.children).forEach(f => {
         f.classList.remove('active')
-        if (!hash) hash = '#home'
+        if (!hash) hash = 'home'
         if (f.dataset.href == hash) {
             f.classList.add('active')
         }
