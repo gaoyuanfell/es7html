@@ -25,6 +25,12 @@ let router = new Router([
     }, {
         path: 'dati',
         component: 'dati'
+    }, {
+        path: 'list',
+        component: 'list'
+    }, {
+        path: 'rule',
+        component: 'rule'
     }
 ]);
 

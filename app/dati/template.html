@@ -55,7 +55,8 @@
             <div class="right"><a href="javascript:;" class="btn revive_btn">获得更多复活卡</a></div>
         </div>
         <div class="foot">
-            <a href="javascript:;" class="border">获奖榜单</a><a href="javascript:;">活动规格</a>
+            <a href="#list" class="border">获奖榜单</a>
+            <a href="#rule">活动规格</a>
         </div>
     </div>
     <div class="description_box" id="loginInput">
@@ -67,7 +68,8 @@
                     <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
                 </div>
                 <div class="userInput">
-                    <input type="text" class="user_input verification" placeholder="请输入验证码"><button type="button" class="verification_btn">发送验证码</button>
+                    <input type="text" class="user_input verification" placeholder="请输入验证码">
+                    <button type="button" class="verification_btn">发送验证码</button>
                     <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
                 </div>
             </div>
@@ -95,16 +97,16 @@
             </div>
             <h2 class="title">1.“垂死病中惊坐起”是谁写给谁的？</h2>
             <ul class="option">
-               <li>元稹写给白居易的</li>
-               <li class="active">杜甫写给李白的</li>
-               <li>王维写给孟浩然</li>
+                <li>元稹写给白居易的</li>
+                <li class="active">杜甫写给李白的</li>
+                <li>王维写给孟浩然</li>
             </ul>
         </div>
     </div>
 </div>
 
 <!--榜单-->
-<div class="content" style="display: none;">
+<div class="content" id="list" style="display: none;">
     <div class="account_top">
         <ul class="account_menu flex">
             <li class="active">上期榜单</li>
@@ -192,10 +194,13 @@
                 </li>
             </ul>
         </div>
-
     </div>
-    <div class="bomb_box" id="share_box">
-        <div class="title">复活卡规则<i class="close">&times;</i></div>
+</div>
+
+<!--规则-->
+<div class="content" id="rule" style="display: none">
+    <div class="scroll-content">
+
     </div>
 </div>
 </body>
