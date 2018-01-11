@@ -190,7 +190,7 @@ export class Router {
     };
     routes;
 
-    showComponent
+    route;
 
     constructor(routes = [], config = {}) {
         Object.assign(this.config, config);
@@ -198,7 +198,7 @@ export class Router {
             if (!(r.component instanceof Element)) {
                 let s = r.component;
                 r.component = window.document.querySelector(`#${s}`);
-                if(!r.component) throw `ID：${s}不存在`;
+                if (!r.component) throw `ID：${s}不存在`;
                 r.component.style.display = 'none';
             }
             return r;
@@ -211,24 +211,19 @@ export class Router {
 
     hashChange() {
         let hash = Router.getHash();
-        if(this.showComponent){
-            this.showComponent.style.display = 'none';
+        if (this.route && this.route.component) {
+            this.route.component.style.display = 'none';
         }
         this.routes.every(r => {
             if (r.path === hash) {
-                this.showComponent = r.component;
+                this.route = r;
                 return false;
             }
             return true;
         });
-        if(this.showComponent){
-            this.showComponent.style.display = 'block';
+        if (this.route && this.route.component) {
+            this.route.component.style.display = 'block';
         }
-        // console.info(hash)
-        // this.routes.forEach(r => {
-        //     r.component.style.display = 'none';
-        //     if (r.path === hash) r.component.style.display = 'block';
-        // })
     }
 
     static getHash() {
@@ -246,17 +241,17 @@ export class Router {
  * @param selector 选择器 弹框的选择器
  * @param target:Array<string> 控制的选择器
  */
-export function triggerClose(selector,target) {
+export function triggerClose(selector, target) {
     let selectorRef = window.document.querySelector(selector);
-    if(!selectorRef) return;
-    if(target instanceof Array){
+    if (!selectorRef) return;
+    if (target instanceof Array) {
         target.forEach(s => {
             let sRef = window.document.querySelector(s);
-            if(sRef){
-                sRef.addEventListener('click',()=> {
-                    if(selectorRef.style.display === '' || selectorRef.style.display === 'none'){
+            if (sRef) {
+                sRef.addEventListener('click', () => {
+                    if (selectorRef.style.display === '' || selectorRef.style.display === 'none') {
                         selectorRef.style.display = 'block';
-                    }else{
+                    } else {
                         selectorRef.style.display = 'none';
                     }
                 })

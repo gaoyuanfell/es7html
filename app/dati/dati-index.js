@@ -38,3 +38,22 @@ let router = new Router([
 triggerClose('#loginInput', ['#loginInput .close', '#login_btn']);
 //获取复活卡
 triggerClose('#revive_rule', ['#revive_rule .close', '.revive_btn']);
+
+/**
+ * 答题逻辑
+ * 1. 初始化答题界面
+ * 2. 选择答案
+ * 3. 公布答案
+ */
+
+function subjectInit() {
+
+}
+
+function subjectSelect() {
+
+}
+
+function subjectEnd() {
+
+}

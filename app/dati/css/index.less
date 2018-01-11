@@ -210,11 +210,12 @@ body{
         max-width: 3.03rem;
     }
     .option{
-        li{
+        li.item{
             height: 0.53rem;
             line-height: 0.53rem;
             width: 100%;
-            background: #e6ebf0;
+            background: #fff;
+
             color: #8b949c;
             border-radius: 0.24rem;
             margin-bottom: 0.1rem;
@@ -236,6 +237,9 @@ body{
                 .full{
                     display: block;
                 }
+            }
+            &.disabled{
+                background: #e6ebf0;
             }
             .text{
                 width: 100%;
