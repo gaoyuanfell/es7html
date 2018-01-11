@@ -222,3 +222,27 @@ export class Router {
         return hash.substr(1)
     }
 }
+
+/**
+ *
+ * @param selector 选择器 弹框的选择器
+ * @param target:Array<string> 控制的选择器
+ */
+export function triggerClose(selector,target) {
+    let selectorRef = window.document.querySelector(selector);
+    if(!selectorRef) return;
+    if(target instanceof Array){
+        target.forEach(s => {
+            let sRef = window.document.querySelector(s);
+            if(sRef){
+                sRef.addEventListener('click',()=> {
+                    if(selectorRef.style.display === '' || selectorRef.style.display === 'none'){
+                        selectorRef.style.display = 'block';
+                    }else{
+                        selectorRef.style.display = 'none';
+                    }
+                })
+            }
+        })
+    }
+}

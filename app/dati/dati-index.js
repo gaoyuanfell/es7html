@@ -1,7 +1,7 @@
 import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
-import {getHash} from "../../common/js/util";
+import {getHash, triggerClose} from "../../common/js/util";
 let zIndex = 1000
 
 let time=10;
@@ -74,3 +74,31 @@ function a() {
     }
 }
 var dsp=setInterval(a,1000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------//
+
+// triggerClose()
