@@ -190,12 +190,16 @@ export class Router {
     };
     routes;
 
+    showComponent
+
     constructor(routes = [], config = {}) {
         Object.assign(this.config, config);
         this.routes = routes.map(r => {
             if (!(r.component instanceof Element)) {
-                r.component = window.document.querySelector(`#${r.component}`);
-                r.component.style.display = 'block';
+                let s = r.component;
+                r.component = window.document.querySelector(`#${s}`);
+                if(!r.component) throw `ID：${s}不存在`;
+                r.component.style.display = 'none';
             }
             return r;
         });
@@ -207,10 +211,24 @@ export class Router {
 
     hashChange() {
         let hash = Router.getHash();
-        this.routes.forEach(r => {
-            r.component.style.display = 'none';
-            if (r.path === hash) r.component.style.display = 'block';
-        })
+        if(this.showComponent){
+            this.showComponent.style.display = 'none';
+        }
+        this.routes.every(r => {
+            if (r.path === hash) {
+                this.showComponent = r.component;
+                return false;
+            }
+            return true;
+        });
+        if(this.showComponent){
+            this.showComponent.style.display = 'block';
+        }
+        // console.info(hash)
+        // this.routes.forEach(r => {
+        //     r.component.style.display = 'none';
+        //     if (r.path === hash) r.component.style.display = 'block';
+        // })
     }
 
     static getHash() {
@@ -220,5 +238,29 @@ export class Router {
             return hash.substr(1, index - 1)
         }
         return hash.substr(1)
+    }
+}
+
+/**
+ *
+ * @param selector 选择器 弹框的选择器
+ * @param target:Array<string> 控制的选择器
+ */
+export function triggerClose(selector,target) {
+    let selectorRef = window.document.querySelector(selector);
+    if(!selectorRef) return;
+    if(target instanceof Array){
+        target.forEach(s => {
+            let sRef = window.document.querySelector(s);
+            if(sRef){
+                sRef.addEventListener('click',()=> {
+                    if(selectorRef.style.display === '' || selectorRef.style.display === 'none'){
+                        selectorRef.style.display = 'block';
+                    }else{
+                        selectorRef.style.display = 'none';
+                    }
+                })
+            }
+        })
     }
 }

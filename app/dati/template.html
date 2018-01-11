@@ -26,7 +26,7 @@
 </head>
 <body>
 <!--首页-->
-<div class="content" style="display: none;">
+<div class="content" id="home" style="display: none;">
     <div class="scroll-content">
         <div class="nologin">
             <ul class="bonus flex">
@@ -41,6 +41,7 @@
             </ul>
             <p>
                 <a href="javascript:;" class="btn login_btn" id="login_btn">登录才能赢钱</a>
+                <!--<a href="javascript:;" class="default_btn invite_btn" id="invite_btn">填写邀请码</a>-->
             </p>
             <!--<ul class="other_way flex">
                 <li><a href="javascript:;" class="friends">朋友圈</a></li>
@@ -57,61 +58,36 @@
             <a href="javascript:;" class="border">获奖榜单</a><a href="javascript:;">活动规格</a>
         </div>
     </div>
-    <div class="description_box" id="description_box"></div>
-    <div class="bomb_box" id="loginInput">
-        <div class="title">登录注册<i class="close">&times;</i></div>
-        <div class="formGroup">
-            <div class="userInput">
-                <input type="text" class="user_input" placeholder="手机号">
-                <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
+    <div class="description_box" id="loginInput">
+        <div class="bomb_box">
+            <div class="title">登录注册<i class="close">&times;</i></div>
+            <div class="formGroup">
+                <div class="userInput">
+                    <input type="text" class="user_input" placeholder="手机号">
+                    <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
+                </div>
+                <div class="userInput">
+                    <input type="text" class="user_input verification" placeholder="请输入验证码"><button type="button" class="verification_btn">发送验证码</button>
+                    <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
+                </div>
             </div>
-            <div class="userInput">
-                <input type="text" class="user_input verification" placeholder="情书验证码"><button type="button" class="verification_btn">发送验证码</button>
-                <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
-            </div>
-        </div>
-        <button type="button" class="btn get_into disabled">进入西瓜视频</button>
-        <a href="javascript:;">账户密码登录</a>
-    </div>
-    <div class="bomb_box" id="revive_rule">
-        <div class="title">复活卡规则<i class="close">&times;</i></div>
-        <p>新用户填写你的邀请码参与活动，你和对方均获得一张复活卡。</p>
-        <p>复活卡在你回答错误后会自动使用，你将可以继续答题。</p>
-        <p>每场游戏仅限使用一张复活卡。</p>
-    </div>
-</div>
-<!--填写邀请码-->
-<div class="content" style="display: none">
-    <div class="scroll-content">
-        <div class="nologin">
-            <ul class="bonus flex">
-                <li>
-                    <p class="small">奖金</p>
-                    <p class="large"><span>50</span>万</p>
-                </li>
-                <li>
-                    <p class="small">今天</p>
-                    <p class="large"><span>11:00</span></p>
-                </li>
-            </ul>
-            <p>
-                <a href="javascript:;" class="default_btn invite_btn" id="invite_btn">填写邀请码</a>
-            </p>
-        </div>
-        <div class="revive flex">
-            <div class="left">复活卡<span>0</span></div>
-            <div class="right"><a href="javascript:;" class="btn revive_btn">获得更多复活卡</a></div>
-        </div>
-        <div class="foot">
-            <a href="javascript:;" class="border">获奖榜单</a><a href="javascript:;">活动规格</a>
+            <button type="button" class="btn get_into disabled">进入西瓜视频</button>
+            <a href="javascript:;">账户密码登录</a>
         </div>
     </div>
-    <div class="bomb" id="invite_input">
-        <input type="text" placeholder="填写邀请码" class="invite_input"><button type="button" class="invite_yes">确定</button>
+
+    <div class="description_box" id="revive_rule">
+        <div class="bomb_box">
+            <div class="title">复活卡规则<i class="close">&times;</i></div>
+            <p>新用户填写你的邀请码参与活动，你和对方均获得一张复活卡。</p>
+            <p>复活卡在你回答错误后会自动使用，你将可以继续答题。</p>
+            <p>每场游戏仅限使用一张复活卡。</p>
+        </div>
     </div>
+
 </div>
 <!--答题界面-->
-<div class="content">
+<div class="content" id="dati" style="display: none">
     <div class="scroll-content">
         <div class="subject_box">
             <div class="time" id="time">
@@ -128,7 +104,7 @@
 </div>
 
 <!--榜单-->
-<div class="content" style="display: none">
+<div class="content" style="display: none;">
     <div class="account_top">
         <ul class="account_menu flex">
             <li class="active">上期榜单</li>
@@ -157,7 +133,7 @@
 
                         </div>
                         <p class="name">南农高涛</p>
-                        <span href="javascript:;" class="num">￥75</span>
+                        <span class="num">￥75</span>
                     </a>
                 </li>
                 <li>
@@ -166,7 +142,7 @@
 
                         </div>
                         <p class="name">南农高涛</p>
-                        <span href="javascript:;" class="num">￥75</span>
+                        <span class="num">￥75</span>
                     </a>
                 </li>
             </ul>
@@ -199,7 +175,7 @@
 
                         </div>
                         <p class="name">南农高涛</p>
-                        <span href="javascript:;" class="num">￥75</span>
+                        <span class="num">￥75</span>
                     </a>
                 </li>
                 <li>
@@ -211,7 +187,7 @@
 
                         </div>
                         <p class="name">南农高涛</p>
-                        <span href="javascript:;" class="num">￥7万</span>
+                        <span class="num">￥7万</span>
                     </a>
                 </li>
             </ul>
