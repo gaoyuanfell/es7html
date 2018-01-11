@@ -214,7 +214,7 @@ body{
             height: 0.53rem;
             line-height: 0.53rem;
             width: 100%;
-            background: #fff;
+            background: #e6ebf0;
             color: #8b949c;
             border-radius: 0.24rem;
             margin-bottom: 0.1rem;
@@ -226,8 +226,15 @@ body{
             overflow: hidden;
             position: relative;
             &.active{
+                background: #fff;
                 .text{
                     color: #11161a !important;
+                    span{
+                        display: block;
+                    }
+                }
+                .full{
+                    display: block;
                 }
             }
             .text{
@@ -239,18 +246,20 @@ body{
                     right:1em;
                     top:0;
                     color: #ccc;
+                    display: none;
                 }
+            }
+            .full{
+                width: 50%;
+                height: 100%;
+                position: absolute;
+                z-index: 0;
+                display: none;
             }
         }
     }
 }
 
-.full{
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    z-index: 0;
-}
 .fulllan{
     background: #2bbee7 !important;
 }
