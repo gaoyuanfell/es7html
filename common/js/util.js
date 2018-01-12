@@ -209,6 +209,8 @@ export class Router {
         this.hashChange();
     }
 
+    changeEvent = new Subject();
+
     hashChange() {
         let hash = Router.getHash();
         if (this.route && this.route.component) {
@@ -223,6 +225,7 @@ export class Router {
         });
         if (this.route && this.route.component) {
             this.route.component.style.display = 'block';
+            this.changeEvent.next(this.route);
         }
     }
 
@@ -257,5 +260,36 @@ export function triggerClose(selector, target) {
                 })
             }
         })
+    }
+}
+
+export class Subject{
+    constructor(){
+
+    }
+
+    cacheList = [];
+
+    next(data){
+        if(this.cacheList.length === 0){
+            this._cacheList.push(data);
+            return;
+        }
+        this.cacheList.every(ca => {
+            ca && ca(data);
+        })
+    }
+
+    _cacheList = [];
+
+    subscribe(fn){
+        if(this._cacheList.length > 0){
+            this._cacheList.every(da => {
+                fn && fn(da);
+            })
+        }
+        if(fn instanceof Function){
+            this.cacheList.push(fn);
+        }
     }
 }

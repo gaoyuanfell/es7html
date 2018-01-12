@@ -32,7 +32,7 @@ let router = new Router([
         path: 'rule',
         component: 'rule'
     }
-]);
+])
 
 //登陆弹窗
 triggerClose('#loginInput', ['#loginInput .close', '#login_btn']);
@@ -44,16 +44,47 @@ triggerClose('#revive_rule', ['#revive_rule .close', '.revive_btn']);
  * 1. 初始化答题界面
  * 2. 选择答案
  * 3. 公布答案
+ *
+ * active 当前选中的
+ * disabled 不可选
+ * publish 答案公布
  */
+export class Questioning {
+    constructor() {
+        this.subjectInit();
+        this.subjectSelect();
+        this.subjectEnd();
+    }
 
-function subjectInit() {
+    subjectInit() {
+        //通过接口获取题目
+        console.info('subjectInit')
+    }
 
+    subjectSelect() {
+        //将选择的题目答案发送给接口
+        console.info('subjectSelect')
+    }
+
+    subjectEnd() {
+        //获取答案
+        console.info('subjectEnd')
+    }
 }
 
-function subjectSelect() {
-
-}
-
-function subjectEnd() {
-
-}
+router.changeEvent.subscribe((data) => {
+    switch (data.path) {
+        case 'home':
+            console.info('home');
+            break;
+        case 'list':
+            console.info('list');
+            break;
+        case 'rule':
+            console.info('rule');
+            break;
+        case 'dati':
+            new Questioning();
+            break;
+    }
+});
