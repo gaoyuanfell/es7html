@@ -55,18 +55,24 @@ export function jsonp(url, body = {}, config = {}, fn) {
     })
 }
 
-export function Ajax(method, url, body = {}, config = {}) {
+export function Ajax(method, url, body = {}, config = {headers: new Headers()}) {
+    if (!(config.headers instanceof Headers)) {
+        config.headers = new Headers(config.headers);
+    }
+    Object.assign(Ajax.config, config);
+
+    let headers = Ajax.config.headers;
+    headers.set('Content-Type', 'application/json;charset=UTF-8');
     return new Promise((resolve, reject) => {
         let xhr = new window.XMLHttpRequest();
+        xhr.withCredentials = true;
         xhr.onerror = function (error) {
-
+            reject(error);
         }
         xhr.onreadystatechange = function (data) {
             let readyState = xhr.readyState;
-            if (readyState === 4) {
-
+            if (readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    let headers = xhr.getAllResponseHeaders();
                     let json;
                     let text = xhr.responseText;
                     try {
@@ -79,6 +85,9 @@ export function Ajax(method, url, body = {}, config = {}) {
                     }
                     timeout && clearTimeout(timeout);
                     resolve(json);
+                } else if (xhr.status === 404) {
+                    timeout && clearTimeout(timeout);
+                    reject(xhr.status);
                 } else {
                     timeout && clearTimeout(timeout);
                     reject();
@@ -101,44 +110,42 @@ export function Ajax(method, url, body = {}, config = {}) {
             }
         }
 
-        xhr.open(method, url, true);
-        //表头
-        let headers = config.headers;
-        let _headers;
-        if (headers) {
-            _headers = {};
-            for (let h in headers) {
-                _headers[h.toLocaleLowerCase()] = headers[h];
-                xhr.setRequestHeader(h, headers[h]);
-            }
+        if (Ajax.config.baseUrl) {
+            url = Ajax.config.baseUrl + url;
         }
+
+        xhr.open(method, url, true);
+
+        Ajax.config.beforeSend && Ajax.config.beforeSend(xhr, body, Ajax.config);
+
         //提交数据body
         let data = '';
-        if (_headers) {
-            let hs = Object.keys(_headers);
-            let bo = !!~hs.map(d => d.toLocaleLowerCase()).indexOf('content-type');
-            if (bo) {
-                let value = _headers['content-type'];
-                if (!!~value.indexOf("application/json")) {
-                    data = JSON.stringify(body);
-                } else if (!!~value.indexOf("application/x-www-form-urlencoded")) {
-                    data = toBodyString(body);
-                }
+        let ct = headers.get('Content-Type');
+        if (ct) {
+            if (!!~ct.indexOf("application/json")) {
+                data = JSON.stringify(body);
+            } else if (!!~ct.indexOf("application/x-www-form-urlencoded")) {
+                data = toBodyString(body);
             }
         }
-        if(Ajax.config){
-            Ajax.config.beforeSend && Ajax.config.beforeSend(xhr,data);
+
+        for (let h of headers.keys()) {
+            xhr.setRequestHeader(h, headers.get(h));
         }
+
         xhr.send(data);
         let timeout = setTimeout(() => {
-            reject()
+            reject();
             xhr.abort();
         }, 5000)
     })
 }
 
+Ajax.__proto__.config = {};
 Ajax.configSetup = function (data) {
-    Ajax.prototype.config = data;
+    if (data) {
+        Ajax.__proto__.config = data;
+    }
 };
 
 function toQueryPair(key, value, bo) {
@@ -201,7 +208,7 @@ export class Router {
     constructor(routes = [], config = {}) {
         Object.assign(this.config, config);
         this.routes = routes.map(r => {
-            if (!(r.component instanceof Element)) {
+            if (!(r.component instanceof Element) && !r.redirectTo) {
                 let s = r.component;
                 r.component = window.document.querySelector(`#${s}`);
                 if (!r.component) throw `ID：${s}不存在`;
@@ -215,7 +222,7 @@ export class Router {
         this.hashChange();
     }
 
-    changeEvent = new Subject();
+    changeEvent = new $subject();
 
     hashChange() {
         let hash = Router.getHash();
@@ -223,6 +230,9 @@ export class Router {
             this.route.component.style.display = 'none';
         }
         this.routes.every(r => {
+            if (r.redirectTo && r.path === hash) {
+                hash = r.redirectTo;
+            }
             if (r.path === hash) {
                 this.route = r;
                 return false;
@@ -246,38 +256,53 @@ export class Router {
 }
 
 /**
- *
+ * 弹窗的开关
  * @param selector 选择器 弹框的选择器
  * @param target:Array<string> 控制的选择器
  */
 export function triggerClose(selector, target) {
+    let closeBtn = [];
     let selectorRef = window.document.querySelector(selector);
     if (!selectorRef) return;
     if (target instanceof Array) {
         target.forEach(s => {
             let sRef = window.document.querySelector(s);
+            closeBtn.push(sRef);
             if (sRef) {
                 sRef.addEventListener('click', () => {
-                    if (selectorRef.style.display === '' || selectorRef.style.display === 'none') {
-                        selectorRef.style.display = 'block';
-                    } else {
-                        selectorRef.style.display = 'none';
-                    }
+                    trigger();
                 })
             }
         })
     }
+
+    function trigger() {
+        if (selectorRef.style.display === '' || selectorRef.style.display === 'none') {
+            selectorRef.style.display = 'block';
+        } else {
+            selectorRef.style.display = 'none';
+        }
+    }
+
+    return {
+        layer: selectorRef,
+        close: closeBtn,
+        trigger: trigger
+    }
 }
 
-export class Subject{
-    constructor(){
+/**
+ * 订阅
+ */
+export class $subject {
+    constructor() {
 
     }
 
     cacheList = [];
 
-    next(data){
-        if(this.cacheList.length === 0){
+    next(data) {
+        if (this.cacheList.length === 0) {
             this._cacheList.push(data);
             return;
         }
@@ -288,13 +313,13 @@ export class Subject{
 
     _cacheList = [];
 
-    subscribe(fn){
-        if(this._cacheList.length > 0){
+    subscribe(fn) {
+        if (this._cacheList.length > 0) {
             this._cacheList.every(da => {
                 fn && fn(da);
             })
         }
-        if(fn instanceof Function){
+        if (fn instanceof Function) {
             this.cacheList.push(fn);
         }
     }

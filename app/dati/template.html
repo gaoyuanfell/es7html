@@ -26,7 +26,7 @@
 </head>
 <body>
 <!--首页-->
-<div class="content" id="home" style="display: none;">
+<div hidden class="content" id="home">
     <div class="scroll-content">
         <ul class="time_slot clear">
             <li>
@@ -79,8 +79,8 @@
                 </li>
             </ul>
             <p>
-                <a href="javascript:;" class="btn login_btn" id="login_btn">登录才能赢钱</a>
-                <!--<a href="javascript:;" class="default_btn invite_btn" id="invite_btn">填写邀请码</a>-->
+                <a hidden href="javascript:;" class="btn login_btn" id="login_btn">登录才能赢钱</a>
+                <a hidden href="javascript:;" class="btn invite_btn" id="invite_btn">分享给好友</a>
             </p>
             <!--<ul class="other_way flex">
                 <li><a href="javascript:;" class="friends">朋友圈</a></li>
@@ -103,17 +103,18 @@
             <div class="title">登录注册<i class="close">&times;</i></div>
             <div class="formGroup">
                 <div class="userInput">
-                    <input type="text" class="user_input" placeholder="手机号">
+                    <input type="text" id="phoneNum" class="user_input" placeholder="手机号">
                     <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
                 </div>
                 <div class="userInput">
-                    <input type="text" class="user_input verification" placeholder="请输入验证码">
+                    <input type="text" id="verification" class="user_input verification" placeholder="请输入验证码">
                     <button type="button" class="verification_btn">发送验证码</button>
                     <!--<div class="mark"><span>&times;</span>1111111111111111111</div>-->
                 </div>
             </div>
-            <button type="button" class="btn get_into disabled">进入西瓜视频</button>
-            <a href="javascript:;">账户密码登录</a>
+            <!--disabled-->
+            <button type="button" class="btn get_into" id="login">登 陆</button>
+            <!--<a href="javascript:;">账户密码登录</a>-->
         </div>
     </div>
 
@@ -128,7 +129,7 @@
 
 </div>
 <!--答题界面-->
-<div class="content" id="dati">
+<div hidden class="content" id="dati">
     <div class="scroll-content">
         <div class="subject_box">
             <div class="time" id="time">
@@ -159,7 +160,7 @@
 </div>
 
 <!--榜单-->
-<div class="content" id="list" style="display: none;">
+<div hidden class="content" id="list">
     <div class="account_top">
         <ul class="account_menu flex">
             <li class="active">上期榜单</li>
@@ -251,7 +252,7 @@
 </div>
 
 <!--规则-->
-<div class="content" id="rule" style="display: none">
+<div hidden class="content" id="rule">
     <div class="scroll-content">
 
     </div>
