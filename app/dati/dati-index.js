@@ -1,7 +1,17 @@
 import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
-import {Router, triggerClose} from "../../common/js/util";
+import {Ajax, Router, triggerClose} from "../../common/js/util";
+
+let config = {
+    baseUrl:'//192.168.100.12:9060',
+}
+
+Ajax.configSetup({
+    beforeSend:function (xhr, data) {
+        xhr.setRequestHeader('access-token',window.localStorage.getItem('access-token'))
+    }
+});
 
 // function a() {
 //     document.getElementById("time").innerHTML=time;
@@ -72,10 +82,22 @@ export class Questioning {
     }
 }
 
+/**
+ * 首页
+ */
+export class HomeInit{
+    constructor(){
+
+    }
+
+
+
+}
+
 router.changeEvent.subscribe((data) => {
     switch (data.path) {
         case 'home':
-            console.info('home');
+            new HomeInit();
             break;
         case 'list':
             console.info('list');

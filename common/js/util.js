@@ -126,7 +126,9 @@ export function Ajax(method, url, body = {}, config = {}) {
                 }
             }
         }
-
+        if(Ajax.config){
+            Ajax.config.beforeSend && Ajax.config.beforeSend(xhr,data);
+        }
         xhr.send(data);
         let timeout = setTimeout(() => {
             reject()
@@ -134,6 +136,10 @@ export function Ajax(method, url, body = {}, config = {}) {
         }, 5000)
     })
 }
+
+Ajax.configSetup = function (data) {
+    Ajax.prototype.config = data;
+};
 
 function toQueryPair(key, value, bo) {
     if (typeof value === 'undefined') {
