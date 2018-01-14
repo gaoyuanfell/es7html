@@ -62,6 +62,9 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
     Object.assign(Ajax.config, config);
 
     let headers = Ajax.config.headers;
+    /**
+     * 默认传输格式
+     */
     headers.set('Content-Type', 'application/json;charset=UTF-8');
     return new Promise((resolve, reject) => {
         let xhr = new window.XMLHttpRequest();
@@ -94,24 +97,26 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
                 }
             }
         };
-        //GET请求参数
-        if (method.toLocaleLowerCase() === 'get') {
-            let bo = -1 === url.indexOf('?');
-            if (bo) {
-                url += `?_=${+new Date()}`;
-            } else {
-                url += `&_=${+new Date()}`;
-            }
-
-            let d = toBodyString(body);
-
-            if (d) {
-                url += '&' + d;
-            }
-        }
 
         if (Ajax.config.baseUrl) {
             url = Ajax.config.baseUrl + url;
+        }
+
+        //GET请求参数
+        if (method.toLocaleLowerCase() === 'get') {
+            let Url;
+            try {
+                Url = new URL(url);
+            } catch (err) {
+                url = location.protocol + url;
+                Url = new URL(url);
+            }
+            let searchParams = Url.searchParams;
+            for (let [k, v] of Object.entries(body)) {
+                searchParams.set(k, v);
+            }
+            searchParams.set('_', String(+new Date()));
+            url = Url.toString();
         }
 
         xhr.open(method, url, true);
@@ -120,12 +125,12 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 
         //提交数据body
         let data = '';
-        let ct = headers.get('Content-Type');
-        if (ct) {
+        if (headers.has('Content-Type')) {
+            let ct = headers.get('Content-Type');
             if (!!~ct.indexOf("application/json")) {
                 data = JSON.stringify(body);
             } else if (!!~ct.indexOf("application/x-www-form-urlencoded")) {
-                data = toBodyString(body);
+                data = new URLSearchParams(body).toString();
             }
         }
 
@@ -252,6 +257,17 @@ export class Router {
             return hash.substr(1, index - 1)
         }
         return hash.substr(1)
+    }
+
+    navigate(path) {
+        if (!path) throw 'path not find';
+        let route = this.routes.find((r) => {
+            if (r.path === path) {
+                return r;
+            }
+        });
+        if (!route) return;
+        window.location.hash = `#${path}`
     }
 }
 

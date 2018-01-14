@@ -37,10 +37,6 @@ module.exports = [
     //     name:'lcincpc-index',
     //     title:'乐橙互联科技有限公司'
     // },
-
-
-
-
     // {
     //     path:'pwa',
     //     output:'pwa',
@@ -71,7 +67,6 @@ module.exports = [
     //     type:'.ts',
     //     title:'fileUpload'
     // },
-
     {
         path:'dati',
         output:'dati',

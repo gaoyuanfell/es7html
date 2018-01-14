@@ -8,18 +8,9 @@ Ajax.configSetup({
         config.headers.set('access-token', window.localStorage.getItem('access-token'));
         config.headers.set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
     },
-    baseUrl: '//192.168.100.12:9060'
+    // baseUrl: 'http://192.168.100.12:9060',
+    baseUrl: 'http://192.168.100.100:38080',
 });
-
-// function a() {
-//     document.getElementById("time").innerHTML=time;
-//     time--;
-//     if(time<0){
-//         clearInterval(dsp)
-//     }
-// }
-// var dsp=setInterval(a,1000)
-
 
 //------------------------------------------------------------------------------------------------------//
 //路由配置
@@ -74,36 +65,99 @@ export class Questioning {
     selectSubjectId;//用户选中的ID
     subjecStart = false;//是否开始答题
 
+    //-------------------------------------API-----------------------------------------//
+    /**
+     * 初始化答题接口
+     * @returns {Promise<void>}
+     */
+    async qmmBegin() {
+        let beginData = await Ajax('get', '/qmm/begin');
+        if (beginData.status) {
+            return beginData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     * 当所有的题目答完请求接口
+     * @param body
+     * @returns {Promise<boolean>}
+     */
+    async qmmFinish(body) {
+        let finishData = await Ajax('get', '/qmm/finish', body);
+        return finishData.status === true;
+    }
+
+    /**
+     * {code,current}
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async getSubject(body) {
+        let subjectData = await Ajax('get', '/qmm/getqq', body);
+        if (subjectData.status) {
+            return subjectData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     *
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async pushSubject(body) {
+        let getaqqData = await Ajax('get', '/qmm/getaqq', body);
+        if (getaqqData.status) {
+            return getaqqData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+
+    //------------------------------------------------------------------------------//
+
     async subjectInit() {
         //通过接口获取数据
-
         let data = JSON.parse(window.localStorage.getItem(Questioning.subject_data));
+        // data = {
+        //     id: 33,
+        //     answerTime: 10,
+        //     answerInterval: 3,
+        //     total: 10,
+        // };
         if (!data) {
-            data = {
-                id: 1,
-                answerTime: 5,
-                answerInterval: 2,
-                total: 3,
-            };
-        }
+            data = await this.qmmBegin()
+        } /*else {
+            if (confirm('是否开始新一轮答题？')) {
+                data = await this.qmmBegin()
+            }
+        }*/
 
         this.subjectId = data.id;
 
         while (data.total > 0) {
             //通过接口获取题目 {code:data.id,current:this.subjectNum}
+            this.subjectData = await this.getSubject({code: this.subjectId, current: this.subjectNum});
 
+            this.subjectBoxRef.style.display = 'block';
             //显示题目
             this.itemList();
             this.subjecStart = true;//开始答题
-            console.info(`开始答题：${this.subjectNum}`)
+            console.info(`开始答题：${this.subjectNum}`);
 
             //答题倒计时
-            let state = await this.countDown(data.answerTime, data.answerInterval);
-            if (!state) return;
+            await this.countDown(data.answerTime, data.answerInterval);
+            console.info(`获取用户选择的答案是：${this.selectSubjectId}`);
 
-            console.info(`获取用户选择的答案：${this.selectSubjectId}`);
-
-            //提交答案
+            //提交答案 获取答案
+            this.publishData = await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
 
             //答案提交成功后改变这个数据
             ++this.subjectNum;
@@ -113,14 +167,22 @@ export class Questioning {
 
             await sleep(1000);
             //获取用户选择的答案 答题结束
+
             console.info(`获取答案顺序：${this.subjectNum}`);
             this.publishList();
             await sleep(2000);
             this.selectSubjectId = null;
+            this.subjectBoxRef.style.display = 'none';
+            if (data.total > 0) {
+                await sleep(2000);
+            }
         }
-        //答题完成移除数据
+
         window.localStorage.removeItem(Questioning.subject_data);
         window.localStorage.removeItem(Questioning.subject_data_num);
+
+        //答题完成移除数据 当所有的题目答完请求接口
+        await this.qmmFinish({id: this.subjectId});
         return true;
     }
 
@@ -163,10 +225,12 @@ export class Questioning {
         return true;
     }
 
+    subjectBoxRef = window.document.querySelector('#subject_box');
     subjectRef = window.document.querySelector('#subject_body');
 
     //题目数据
-    subjectData = {
+    subjectData/* = {
+        titleId: 1,
         title: '“垂死病中惊坐起”是谁写给谁的？',
         list: [
             {
@@ -185,10 +249,11 @@ export class Questioning {
                 title: '王维写给孟浩然'
             },
         ]
-    };
+    };*/
 
     //答案公布数据
-    publishData = {
+    publishData/* = {
+        titleId: 1,
         answer: true,
         title: '“垂死病中惊坐起”是谁写给谁的？',
         list: [
@@ -212,20 +277,20 @@ export class Questioning {
                 total: 1.2
             },
         ]
-    };
+    };*/
 
     itemList() {
         let li = ``;
         this.subjectData.list.every(l => {
             li += `
                 <li class="item" data-id="${l.id}">
-                    <div class="text">${l.title}</div>
+                    <div class="text">${(l.code || '') + '、' + l.title}</div>
                 </li>
             `;
             return true;
         });
 
-        this.subjectRef.innerHTML = `<h2 class="title">${this.subjectNum + '.' + this.subjectData.title}</h2><ul class="option">${li}</ul>`;
+        this.subjectRef.innerHTML = `<h2 class="title">${this.subjectNum + '、' + this.subjectData.title}</h2><ul class="option">${li}</ul>`;
 
         let children = this.subjectRef.querySelector('.option').children;
         Array.from(children).every(ch => {
@@ -242,16 +307,17 @@ export class Questioning {
 
     publishList() {
         let li = ``;
+        let total = this.publishData.list.map(l => l.total).reduce((r, i) => r += i);
         this.publishData.list.every(l => {
             li += `
                 <li class="item publish" data-id="${l.id}">
-                    <div class="text">${l.title}<span>${l.total}万</span></div>
-                    <div class="full${l.isAnswer ? ' fulllan' : ' fullhui'}"></div>
+                    <div class="text">${(l.code || '') + '、' + l.title}<span>${l.total}万</span></div>
+                    <div style="width: ${Math.floor(l.total / total * 100)}%" class="full${l.answer ? ' fulllan' : ' fullhui'}"></div>
                 </li>
             `;
             return true;
         });
-        this.subjectRef.innerHTML = `<h2 class="title">${(this.subjectNum - 1) + '.' + this.publishData.title}</h2><ul class="option">${li}</ul>`;
+        this.subjectRef.innerHTML = `<h2 class="title">${(this.subjectNum - 1) + '、' + this.publishData.title}</h2><ul class="option">${li}</ul>`;
     }
 }
 
@@ -261,7 +327,7 @@ export class Questioning {
 export class HomeInit {
     constructor() {
         let token = this.token = window.localStorage.getItem('access-token');
-        if (!token) {
+        if (token) {
             this.loginBtnRef.style.display = 'none';
             this.inviteBtnRef.style.display = 'block';
         } else {
@@ -276,11 +342,20 @@ export class HomeInit {
     initEvent() {
         this.sendRef.onclick = () => {
             this.sendPhone();
-        }
+        };
         this.loginRef.onclick = () => {
             this.login();
+        };
+        this.datiBtnRef.onclick = () => {
+            if (!this.token) {
+                layerLogin.trigger();
+                return;
+            }
+            router.navigate('dati');
         }
     }
+
+    datiBtnRef = window.document.querySelector('#home #dati_btn');
 
     loginBtnRef = window.document.querySelector('#home #login_btn');
     inviteBtnRef = window.document.querySelector('#home #invite_btn');
@@ -290,15 +365,41 @@ export class HomeInit {
     phoneNumRef = window.document.querySelector('#phoneNum');
     verificationRef = window.document.querySelector('#verification');
 
+    /**
+     * 验证码倒计时
+     * @param time
+     */
+    codeCountDown(time = 60) {
+        this.sendRef.setAttribute('disabled', 'disabled');
+        let text = this.sendRef.innerText;
+        this.sendRef.innerText = `${text} ${time}`;
+        let setIntervalNum = setInterval(() => {
+            if (time <= 0) {
+                clearInterval(setIntervalNum);
+                this.sendRef.removeAttribute('disabled');
+                this.sendRef.innerText = text;
+                return;
+            }
+            --time;
+            this.sendRef.innerText = `${text} ${time}`;
+        }, 1000);
+    }
+
+    /**
+     * 发送验证码
+     */
     sendPhone() {
+        this.codeCountDown();
+
         let phone = this.phoneNumRef.value;
         let reg = /^1[3-9]\d{9}$/;
         if (!reg.test(phone)) {
             alert("请填写正确的手机号！");
             return;
         }
-        Ajax('post', '/api/jwt/message', {phoneNum: phone}, {baseUrl: ''}).then(res => {
+        Ajax('post', '/api/jwt/message', {phoneNum: phone}).then(res => {
             if (res.status) {
+                this.codeCountDown();
                 alert('发送成功！');
             } else {
                 alert(res.msg);
@@ -306,6 +407,9 @@ export class HomeInit {
         }).catch(err => console.info(err));
     }
 
+    /**
+     * 登陆
+     */
     login() {
         let phoneNum = this.phoneNumRef.value;
         let messageCode = this.verificationRef.value;
@@ -314,6 +418,8 @@ export class HomeInit {
             if (res.status) {
                 layerLogin.trigger();
                 window.localStorage.setItem('access-token', res.data.token);
+                this.loginBtnRef.style.display = 'none';
+                this.inviteBtnRef.style.display = 'block';
             } else {
                 alert(res.msg);
             }
@@ -321,8 +427,10 @@ export class HomeInit {
     }
 }
 
+/**
+ * 路由监听
+ */
 router.changeEvent.subscribe((data) => {
-    console.info(data);
     switch (data.path) {
         case 'home':
             new HomeInit();
