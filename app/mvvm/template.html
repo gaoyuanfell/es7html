@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-<p>{{a}}</p>
-<p>{{b}}</p>
-<p>{{c}}</p>
-<p>{{d}}</p>
+<body id="body" style="display: none">
+<p (click)="test($event,a,b)" data-id="1" [value]="d" (mouseover)="test($event,a)" (mouseleave)="test(a,b)">
+    {{a}} 不能消失 {{b}}
+    <span (click)="test($event)">
+        {{c}} 不能消失
+    </span>
+</p>
+<p (click)="asd($event)">{{b}} 不能消失</p>
 </body>
 </html>
