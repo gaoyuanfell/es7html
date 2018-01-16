@@ -136,30 +136,20 @@
             <div class="time" id="time">
                 10
             </div>
+            <div class="time" id="time_loading" style="display: none">
+                <img src="static/img/loading.gif" alt="">
+            </div>
+            <div class="time" id="dadui" style="display: none">
+                <img src="static/img/dui.png" alt="">
+            </div>
+            <div class="time" id="dacuo" style="display: none">
+                <img src="static/img/cuo.png" alt="">
+            </div>
             <div id="subject_body">
-                <h2 class="title">1.“垂死病中惊坐起”是谁写给谁的？</h2>
-                <ul class="option">
-                    <li class="item publish">
-                        <div class="text">元稹写给白居易的<span>4.56万</span></div>
-                        <div class="full fulllan"></div>
-                    </li>
-                    <li class="item">
-                        <div class="text">杜甫写给李白的<span>4.56万</span></div>
-                        <div class="full fullhui"></div>
-                    </li>
-                    <li class="item active">
-                        <div class="text">杜甫写给李白的</div>
-
-                    </li>
-                    <li class="item disabled">
-                        <div class="text">王维写给孟浩然</div>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </div>
-
 <!--榜单-->
 <div hidden class="content" id="list">
     <div class="account_top">
@@ -251,11 +241,43 @@
         </div>
     </div>
 </div>
-
 <!--规则-->
 <div hidden class="content" id="rule">
     <div class="scroll-content">
 
+    </div>
+</div>
+<!--统计-->
+<div hidden class="content" id="count">
+    <div class="scroll-content">
+        <ul class="count_slot clear flex">
+            <li class="item">
+                <a href="javascript:;">
+                    <h2>总题数</h2>
+                    <p id="count_all"></p>
+                </a>
+            </li>
+            <li class="item">
+                <a href="javascript:;">
+                    <h2>答 对</h2>
+                    <p id="count_correctNum"></p>
+                </a>
+            </li>
+            <li class="item">
+                <a href="javascript:;">
+                    <h2>答 错</h2>
+                    <p id="count_errorNum"></p>
+                </a>
+            </li>
+        </ul>
+        <!--<ul class="count_slot clear flex">-->
+            <!--<li class="item">-->
+                <!--<a href="javascript:;">-->
+                    <!--<h2>获得的金钱</h2>-->
+                    <!--<p>90元</p>-->
+                <!--</a>-->
+            <!--</li>-->
+        <!--</ul>-->
     </div>
 </div>
 </body>

@@ -74,4 +74,11 @@ module.exports = [
         name:'dati-index',
         title:'答题'
     },
+    {
+        path:'mvvm',
+        output:'mvvm',
+        publicPath:'',
+        name:'mvvm-index',
+        title:'mvvm'
+    },
 ];

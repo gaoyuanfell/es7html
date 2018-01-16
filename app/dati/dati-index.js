@@ -30,6 +30,9 @@ let router = new Router([
     }, {
         path: 'rule',
         component: 'rule'
+    }, {
+        path: 'count',
+        component: 'count'
     }
 ])
 
@@ -52,15 +55,16 @@ export class Questioning {
 
     static subject_data_num = 'subject-data-num';
     static subject_data = 'subject-data';
+    static subject_id = 'subject-id';
 
     constructor() {
-        this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 1;
+        this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 0;
         this.subjectInit().then(() => {
             this.subjectEnd();
         });
     }
 
-    subjectNum = 1;//当前答题的顺序
+    subjectNum = 0;//当前答题的顺序
     subjectId;//当前答题的编号
     selectSubjectId;//用户选中的ID
     subjecStart = false;//是否开始答题
@@ -91,6 +95,7 @@ export class Questioning {
     }
 
     /**
+     * 获取题目
      * {code,current}
      * @param body
      * @returns {Promise<void>}
@@ -106,7 +111,7 @@ export class Questioning {
     }
 
     /**
-     *
+     * 提交答案
      * @param body
      * @returns {Promise<void>}
      */
@@ -134,17 +139,32 @@ export class Questioning {
         // };
         if (!data) {
             data = await this.qmmBegin()
-        } /*else {
-            if (confirm('是否开始新一轮答题？')) {
-                data = await this.qmmBegin()
-            }
-        }*/
+        }
+        /* else {
+                    if (confirm('是否开始新一轮答题？')) {
+                        data = await this.qmmBegin()
+                    }
+                }*/
 
         this.subjectId = data.id;
+        window.localStorage.setItem(Questioning.subject_id,this.subjectId);
 
         while (data.total > 0) {
             //通过接口获取题目 {code:data.id,current:this.subjectNum}
             this.subjectData = await this.getSubject({code: this.subjectId, current: this.subjectNum});
+
+            //答案提交成功后改变这个数据 逻辑变更 拿到题目后就需要统计
+            ++this.subjectNum;
+            --data.total;
+            window.localStorage.setItem(Questioning.subject_data, JSON.stringify(data));
+            window.localStorage.setItem(Questioning.subject_data_num, String(this.subjectNum));
+
+            /**
+             * 处理adx答题逻辑
+             */
+            if (+this.subjectData.type === 2) {
+
+            }
 
             this.subjectBoxRef.style.display = 'block';
             //显示题目
@@ -153,19 +173,37 @@ export class Questioning {
             console.info(`开始答题：${this.subjectNum}`);
 
             //答题倒计时
-            await this.countDown(data.answerTime, data.answerInterval);
+            await this.countDown(data.answerTime, data.answerInterval, (type) => {
+                if (type === 1) {
+                    //答题倒计时
+                    console.info(type)
+                    //没选择就不再让用户选择
+                    if (!this.selectSubjectId) {
+                        let children = this.subjectRef.querySelector('.option').children;
+                        Array.from(children).every(ch => {
+                            ch.dataset.disabled = 'disabled';
+                            ch.classList.add('disabled');
+                            return true
+                        });
+                    }
+                    window.document.body.querySelector('#time_loading').style.display = 'block';
+                }
+            });
+
+
             console.info(`获取用户选择的答案是：${this.selectSubjectId}`);
 
             //提交答案 获取答案
             this.publishData = await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
 
-            //答案提交成功后改变这个数据
-            ++this.subjectNum;
-            --data.total;
-            window.localStorage.setItem(Questioning.subject_data, JSON.stringify(data));
-            window.localStorage.setItem(Questioning.subject_data_num, String(this.subjectNum));
+            //用户是否答对
+            let answer = this.publishData.answer;
+            if (answer) {
+                window.document.body.querySelector('#dadui').style.display = 'block';
+            } else {
+                window.document.body.querySelector('#dacuo').style.display = 'block';
+            }
 
-            await sleep(1000);
             //获取用户选择的答案 答题结束
 
             console.info(`获取答案顺序：${this.subjectNum}`);
@@ -174,7 +212,7 @@ export class Questioning {
             this.selectSubjectId = null;
             this.subjectBoxRef.style.display = 'none';
             if (data.total > 0) {
-                await sleep(2000);
+                await sleep(1000);
             }
         }
 
@@ -187,7 +225,8 @@ export class Questioning {
     }
 
     subjectEnd() {
-
+        console.info('subjectEnd');
+        router.navigate('count')
     }
 
     destroy() {
@@ -200,7 +239,10 @@ export class Questioning {
      * @param num2
      * @returns {Promise<boolean>}
      */
-    async countDown(num = 0, num2 = 0) {
+    async countDown(num = 0, num2 = 0, fn) {
+        window.document.body.querySelector('#time_loading').style.display = 'none';
+        window.document.body.querySelector('#dadui').style.display = 'none';
+        window.document.body.querySelector('#dacuo').style.display = 'none';
         let timeRef = window.document.querySelector('#dati #time');
         while (this.subjecStart) {
             timeRef.innerText = num;
@@ -211,7 +253,7 @@ export class Questioning {
                 --num;
             }
         }
-
+        fn && fn(1);
         let stop = true;
         while (stop) {
             if (num2 <= 0) {
@@ -221,7 +263,7 @@ export class Questioning {
                 --num2;
             }
         }
-
+        fn && fn(2);
         return true;
     }
 
@@ -229,55 +271,60 @@ export class Questioning {
     subjectRef = window.document.querySelector('#subject_body');
 
     //题目数据
-    subjectData/* = {
-        titleId: 1,
-        title: '“垂死病中惊坐起”是谁写给谁的？',
-        list: [
-            {
-                id: 1,
-                code: 'A',
-                title: '元稹写给白居易的'
-            },
-            {
-                id: 2,
-                code: 'B',
-                title: '杜甫写给李白的'
-            },
-            {
-                id: 3,
-                code: 'C',
-                title: '王维写给孟浩然'
-            },
-        ]
-    };*/
+    subjectData
+    /* = {
+            titleId: 1,
+            title: '“垂死病中惊坐起”是谁写给谁的？',
+            list: [
+                {
+                    id: 1,
+                    code: 'A',
+                    title: '元稹写给白居易的'
+                },
+                {
+                    id: 2,
+                    code: 'B',
+                    title: '杜甫写给李白的'
+                },
+                {
+                    id: 3,
+                    code: 'C',
+                    title: '王维写给孟浩然'
+                },
+            ],
+            type:1,
+            url:''
+        };*/
 
     //答案公布数据
-    publishData/* = {
-        titleId: 1,
-        answer: true,
-        title: '“垂死病中惊坐起”是谁写给谁的？',
-        list: [
-            {
-                id: 1,
-                code: 'A',
-                title: '元稹写给白居易的',
-                total: 4.2
-            },
-            {
-                id: 2,
-                code: 'B',
-                title: '杜甫写给李白的',
-                isAnswer: true,
-                total: 2.2
-            },
-            {
-                id: 3,
-                code: 'C',
-                title: '王维写给孟浩然',
-                total: 1.2
-            },
-        ]
-    };*/
+    publishData
+
+    /* = {
+            titleId: 1,
+            answer: true,
+            title: '“垂死病中惊坐起”是谁写给谁的？',
+            list: [
+                {
+                    id: 1,
+                    code: 'A',
+                    title: '元稹写给白居易的',
+                    total: 4.2
+                },
+                {
+                    id: 2,
+                    code: 'B',
+                    title: '杜甫写给李白的',
+                    isAnswer: true,
+                    total: 2.2
+                },
+                {
+                    id: 3,
+                    code: 'C',
+                    title: '王维写给孟浩然',
+                    total: 1.2
+                },
+            ]
+        };*/
 
     itemList() {
         let li = ``;
@@ -295,7 +342,7 @@ export class Questioning {
         let children = this.subjectRef.querySelector('.option').children;
         Array.from(children).every(ch => {
             ch.onclick = () => {
-                if (this.selectSubjectId) return;
+                if (this.selectSubjectId || ch.dataset.disabled) return;
                 ch.classList.add('active');
                 this.selectSubjectId = ch.dataset.id;
                 console.info(`用户选择了：${this.selectSubjectId}`);
@@ -317,7 +364,7 @@ export class Questioning {
             `;
             return true;
         });
-        this.subjectRef.innerHTML = `<h2 class="title">${(this.subjectNum - 1) + '、' + this.publishData.title}</h2><ul class="option">${li}</ul>`;
+        this.subjectRef.innerHTML = `<h2 class="title">${(this.subjectNum) + '、' + this.publishData.title}</h2><ul class="option">${li}</ul>`;
     }
 }
 
@@ -390,7 +437,6 @@ export class HomeInit {
      */
     sendPhone() {
         this.codeCountDown();
-
         let phone = this.phoneNumRef.value;
         let reg = /^1[3-9]\d{9}$/;
         if (!reg.test(phone)) {
@@ -412,12 +458,21 @@ export class HomeInit {
      */
     login() {
         let phoneNum = this.phoneNumRef.value;
+        let reg = /^1[3-9]\d{9}$/;
+        if (!reg.test(phoneNum)) {
+            alert("请填写正确的手机号！");
+            return;
+        }
         let messageCode = this.verificationRef.value;
-        if (!messageCode) alert("请填写正确的验证码！");
+        if (!messageCode) {
+            alert("请填写正确的验证码！");
+            return;
+        }
         Ajax('post', '/api/jwt/user/login', {phoneNum: phoneNum, messageCode: messageCode}).then(res => {
             if (res.status) {
                 layerLogin.trigger();
                 window.localStorage.setItem('access-token', res.data.token);
+                this.token = res.data.token;
                 this.loginBtnRef.style.display = 'none';
                 this.inviteBtnRef.style.display = 'block';
             } else {
@@ -425,6 +480,41 @@ export class HomeInit {
             }
         }).catch(err => console.info(err));
     }
+}
+
+/**
+ * 统计
+ */
+export class CountInit {
+    constructor() {
+        let subjectId = window.localStorage.getItem(Questioning.subject_id);
+        this.getGold({code:subjectId || 0}).then(res => {
+            let correctNum = res.correctNum;
+            let errorNum = res.errorNum;
+            window.document.querySelector("#count_all").innerText = correctNum + errorNum;
+            window.document.querySelector("#count_correctNum").innerText = correctNum;
+            window.document.querySelector("#count_errorNum").innerText = errorNum;
+        }).catch(()=>{
+            router.navigate('home');
+        })
+    }
+
+    /**
+     * 统计题目对错
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async getGold(body) {
+        let qmmGoldData = await Ajax('get', '/qmm/gold', body);
+        if (qmmGoldData.status) {
+            return qmmGoldData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+
 }
 
 /**
@@ -440,6 +530,9 @@ router.changeEvent.subscribe((data) => {
             break;
         case 'rule':
             console.info('rule');
+            break;
+        case 'count':
+            new CountInit();
             break;
         case 'dati':
             new Questioning();
