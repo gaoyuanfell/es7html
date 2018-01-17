@@ -153,14 +153,18 @@
 <!--榜单-->
 <div hidden class="content" id="list">
     <div class="account_top">
-        <ul class="account_menu flex">
-            <li class="active">当日排行</li>
-            <li>历史排行</li>
+        <ul class="account_menu flex" id="account_menu">
+            <li data-type="1" class="active">当日排行</li>
+            <li data-type="2">历史排行</li>
         </ul>
         <!--<a href="javascript:;" class="share_btn">分享</a>-->
     </div>
-    <div class="scroll-content" margin-head>
-        <div class="front" style="display:none;">
+    <div class="scroll-content" margin-bar>
+        <div class="total" id="account_list">
+
+        </div>
+
+        <!--<div class="front" style="display:none;">
             <ul class="bonus_num flex">
                 <li>
                     <p class="small">上期奖金</p>
@@ -238,7 +242,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div>-->
     </div>
 </div>
 <!--规则-->

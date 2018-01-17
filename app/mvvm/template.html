@@ -13,6 +13,10 @@
         {{c}} 不能消失
     </span>
 </p>
-<p (click)="asd($event)">{{b}} 不能消失</p>
+<p (click)='asd($event.target ,   f, "   aaaa  ")'>{{b}} 不能消失</p>
+
+<input type="text" (change)="change($event)" (input)="input($event , a)">
+<span>{{f.a}}</span>
+<span>{{f.b}}</span>
 </body>
 </html>

@@ -536,7 +536,43 @@ export class CountInit {
  */
 export class ListInit {
     constructor() {
+        this.init();
+    }
 
+    init() {
+        this.menu('#account_menu', 'active', async (res) => {
+            switch (res.dataset.type) {
+                case '1':
+                    this.list = await this.topDay();
+                    break;
+                case '2':
+                    this.list = await this.topHistory();
+                    break
+            }
+            this.getList();
+        })
+    }
+
+    list
+
+    menu(ref, c, fn) {
+        let accountMenuRef = window.document.querySelector(ref)
+        Array.from(accountMenuRef.children).every(ac => {
+            if (ac.classList.contains(c)) {
+                fn && fn(ac)
+            }
+            return true;
+        });
+        accountMenuRef.onclick = (event) => {
+            Array.from(accountMenuRef.children).every(ac => {
+                ac.classList.remove(c);
+                if (ac.contains(event.target)) {
+                    ac.classList.add(c);
+                    fn && fn(ac)
+                }
+                return true;
+            })
+        }
     }
 
     /**
@@ -567,6 +603,34 @@ export class ListInit {
             alert('请稍后重试！');
             throw 'server error';
         }
+    }
+
+    getList() {
+        let accountListRef = window.document.querySelector("#account_list");
+        if (this.list instanceof Array && this.list.length) {
+            let li = ``;
+            this.list.every(l => {
+                li += `
+                    <li>
+                        <a href="javascript:;" class="list flex">
+                            <div class="indexs">
+                                ${l.rownum}
+                            </div>
+                            <div class="user_img">
+                                <img src="static/img/touxiang.png" alt="">
+                            </div>
+                            <p class="name">${l.nickname}</p>
+                            <span class="num">￥${l.money}</span>
+                        </a>
+                    </li>
+                `
+
+
+                return true;
+            })
+            accountListRef.innerHTML = `<ul class="account_list">${li}</ul>`
+        }
+
     }
 }
 
