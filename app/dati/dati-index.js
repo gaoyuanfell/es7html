@@ -116,6 +116,21 @@ export class Questioning {
      * @returns {Promise<void>}
      */
     async pushSubject(body) {
+        let getaqqData = await Ajax('get', '/qmm/adda', body);
+        if (getaqqData.status) {
+            return getaqqData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     * 获取答案
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async getTrueSubject(body) {
         let getaqqData = await Ajax('get', '/qmm/getaqq', body);
         if (getaqqData.status) {
             return getaqqData.data;
@@ -147,7 +162,7 @@ export class Questioning {
                 }*/
 
         this.subjectId = data.id;
-        window.localStorage.setItem(Questioning.subject_id,this.subjectId);
+        window.localStorage.setItem(Questioning.subject_id, this.subjectId);
 
         while (data.total > 0) {
             //通过接口获取题目 {code:data.id,current:this.subjectNum}
@@ -173,28 +188,25 @@ export class Questioning {
             console.info(`开始答题：${this.subjectNum}`);
 
             //答题倒计时
-            await this.countDown(data.answerTime, data.answerInterval, (type) => {
-                if (type === 1) {
-                    //答题倒计时
-                    console.info(type)
-                    //没选择就不再让用户选择
-                    if (!this.selectSubjectId) {
-                        let children = this.subjectRef.querySelector('.option').children;
-                        Array.from(children).every(ch => {
-                            ch.dataset.disabled = 'disabled';
-                            ch.classList.add('disabled');
-                            return true
-                        });
-                    }
-                    window.document.body.querySelector('#time_loading').style.display = 'block';
-                }
-            });
-
-
+            await this.countDown(data.answerTime);
+            //没选择就不再让用户选择
+            if (!this.selectSubjectId) {
+                let children = this.subjectRef.querySelector('.option').children;
+                Array.from(children).every(ch => {
+                    ch.dataset.disabled = 'disabled';
+                    ch.classList.add('disabled');
+                    return true
+                });
+            }
             console.info(`获取用户选择的答案是：${this.selectSubjectId}`);
+            //提交答案
+            await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
 
-            //提交答案 获取答案
-            this.publishData = await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
+            window.document.body.querySelector('#time_loading').style.display = 'block';
+            await this.countDown2(data.answerInterval);
+
+            //获取统计结果
+            this.publishData = await this.getTrueSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
 
             //用户是否答对
             let answer = this.publishData.answer;
@@ -206,7 +218,6 @@ export class Questioning {
 
             //获取用户选择的答案 答题结束
 
-            console.info(`获取答案顺序：${this.subjectNum}`);
             this.publishList();
             await sleep(2000);
             this.selectSubjectId = null;
@@ -239,7 +250,7 @@ export class Questioning {
      * @param num2
      * @returns {Promise<boolean>}
      */
-    async countDown(num = 0, num2 = 0, fn) {
+    async countDown(num = 0) {
         window.document.body.querySelector('#time_loading').style.display = 'none';
         window.document.body.querySelector('#dadui').style.display = 'none';
         window.document.body.querySelector('#dacuo').style.display = 'none';
@@ -253,17 +264,23 @@ export class Questioning {
                 --num;
             }
         }
-        fn && fn(1);
+        return true;
+    }
+
+    //等待答案
+    async countDown2(num = 0) {
+        window.document.body.querySelector('#time_loading').style.display = 'none';
+        window.document.body.querySelector('#dadui').style.display = 'none';
+        window.document.body.querySelector('#dacuo').style.display = 'none';
         let stop = true;
         while (stop) {
-            if (num2 <= 0) {
+            if (num <= 0) {
                 stop = false;
             } else {
                 await sleep(1000);
-                --num2;
+                --num;
             }
         }
-        fn && fn(2);
         return true;
     }
 
@@ -436,7 +453,6 @@ export class HomeInit {
      * 发送验证码
      */
     sendPhone() {
-        this.codeCountDown();
         let phone = this.phoneNumRef.value;
         let reg = /^1[3-9]\d{9}$/;
         if (!reg.test(phone)) {
@@ -488,13 +504,13 @@ export class HomeInit {
 export class CountInit {
     constructor() {
         let subjectId = window.localStorage.getItem(Questioning.subject_id);
-        this.getGold({code:subjectId || 0}).then(res => {
+        this.getGold({code: subjectId || 0}).then(res => {
             let correctNum = res.correctNum;
             let errorNum = res.errorNum;
             window.document.querySelector("#count_all").innerText = correctNum + errorNum;
             window.document.querySelector("#count_correctNum").innerText = correctNum;
             window.document.querySelector("#count_errorNum").innerText = errorNum;
-        }).catch(()=>{
+        }).catch(() => {
             router.navigate('home');
         })
     }
@@ -513,8 +529,45 @@ export class CountInit {
             throw 'server error';
         }
     }
+}
 
+/**
+ * 排行榜
+ */
+export class ListInit {
+    constructor() {
 
+    }
+
+    /**
+     * 当天排行
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async topDay(body = {}) {
+        let res = await Ajax('get', '/qmm/topa', body);
+        if (res.status) {
+            return res.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     * 历史排行
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async topHistory(body = {}) {
+        let res = await Ajax('get', '/qmm/topah', body);
+        if (res.status) {
+            return res.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
 }
 
 /**
@@ -526,6 +579,7 @@ router.changeEvent.subscribe((data) => {
             new HomeInit();
             break;
         case 'list':
+            new ListInit();
             console.info('list');
             break;
         case 'rule':
