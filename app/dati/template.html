@@ -95,8 +95,8 @@
             <div class="right"><a href="javascript:;" class="btn revive_btn">获得更多复活卡</a></div>
         </div>
         <div class="foot">
-            <a href="#list" class="border">获奖榜单</a>
-            <a href="#rule">活动规格</a>
+            <a href="#list">获奖榜单</a>
+            <!--<a href="#rule">活动规格</a>-->
         </div>
     </div>
     <div class="description_box" id="loginInput">
@@ -151,98 +151,109 @@
     </div>
 </div>
 <!--榜单-->
-<div hidden class="content" id="list">
-    <div class="account_top">
-        <ul class="account_menu flex" id="account_menu">
-            <li data-type="1" class="active">当日排行</li>
-            <li data-type="2">历史排行</li>
-        </ul>
-        <!--<a href="javascript:;" class="share_btn">分享</a>-->
+<div class="content-modal" id="list" hidden>
+    <div class="header">
+        <div class="toolbar">
+            <div class="bar-button">
+                <span class="button-inner">
+                    <i class="icon">&lt;</i>
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="scroll-content" margin-bar>
-        <div class="total" id="account_list">
-
+    <div class="content">
+        <div class="account_top" margin-header>
+            <ul class="account_menu flex" id="account_menu">
+                <li data-type="1" class="active">当日排行</li>
+                <li data-type="2">历史排行</li>
+            </ul>
+            <!--<a href="javascript:;" class="share_btn">分享</a>-->
         </div>
+        <div class="scroll-content" margin-head>
+            <div class="total" id="account_list">
 
-        <!--<div class="front" style="display:none;">
-            <ul class="bonus_num flex">
-                <li>
-                    <p class="small">上期奖金</p>
-                    <p class="large"><span>50</span>万</p>
-                </li>
-                <li>
-                    <p class="small">获得者</p>
-                    <p class="large"><span>1.5</span>万人</p>
-                </li>
-            </ul>
+            </div>
+
+            <!--<div class="front" style="display:none;">
+                <ul class="bonus_num flex">
+                    <li>
+                        <p class="small">上期奖金</p>
+                        <p class="large"><span>50</span>万</p>
+                    </li>
+                    <li>
+                        <p class="small">获得者</p>
+                        <p class="large"><span>1.5</span>万人</p>
+                    </li>
+                </ul>
 
 
-            <ul class="account_list">
-                <li>
-                    <a href="javascript:;" class="list flex">
-                        <div class="user_img">
+                <ul class="account_list">
+                    <li>
+                        <a href="javascript:;" class="list flex">
+                            <div class="user_img">
 
-                        </div>
-                        <p class="name">南农高涛</p>
-                        <span class="num">￥75</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;" class="list flex">
-                        <div class="user_img">
+                            </div>
+                            <p class="name">南农高涛</p>
+                            <span class="num">￥75</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="list flex">
+                            <div class="user_img">
 
-                        </div>
-                        <p class="name">南农高涛</p>
-                        <span class="num">￥75</span>
-                    </a>
-                </li>
-            </ul>
+                            </div>
+                            <p class="name">南农高涛</p>
+                            <span class="num">￥75</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="total">
+                <ul class="top_three flex">
+                    <li>
+                        <div class="user_img">2</div>
+                        <p>上期奖金</p>
+                        <p class="win_num">￥4万</p>
+                    </li>
+                    <li>
+                        <div class="user_img">1</div>
+                        <p>上期奖金</p>
+                        <p class="win_num">￥4万</p>
+                    </li>
+                    <li>
+                        <div class="user_img">3</div>
+                        <p>上期奖金</p>
+                        <p class="win_num">￥4万</p>
+                    </li>
+                </ul>
+                <ul class="account_list">
+                    <li>
+                        <a href="javascript:;" class="list flex">
+                            <div class="indexs">
+                                4
+                            </div>
+                            <div class="user_img">
+
+                            </div>
+                            <p class="name">南农高涛</p>
+                            <span class="num">￥75</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="list flex">
+                            <div class="indexs">
+                                5
+                            </div>
+                            <div class="user_img">
+
+                            </div>
+                            <p class="name">南农高涛</p>
+                            <span class="num">￥7万</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>-->
         </div>
-        <div class="total">
-            <ul class="top_three flex">
-                <li>
-                    <div class="user_img">2</div>
-                    <p>上期奖金</p>
-                    <p class="win_num">￥4万</p>
-                </li>
-                <li>
-                    <div class="user_img">1</div>
-                    <p>上期奖金</p>
-                    <p class="win_num">￥4万</p>
-                </li>
-                <li>
-                    <div class="user_img">3</div>
-                    <p>上期奖金</p>
-                    <p class="win_num">￥4万</p>
-                </li>
-            </ul>
-            <ul class="account_list">
-                <li>
-                    <a href="javascript:;" class="list flex">
-                        <div class="indexs">
-                            4
-                        </div>
-                        <div class="user_img">
-
-                        </div>
-                        <p class="name">南农高涛</p>
-                        <span class="num">￥75</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;" class="list flex">
-                        <div class="indexs">
-                            5
-                        </div>
-                        <div class="user_img">
-
-                        </div>
-                        <p class="name">南农高涛</p>
-                        <span class="num">￥7万</span>
-                    </a>
-                </li>
-            </ul>
-        </div>-->
     </div>
 </div>
 <!--规则-->
