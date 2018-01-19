@@ -264,6 +264,8 @@ export class Questioning {
             }else if(this.subjectData.type == 2){
                 let adxData = await this.pushAdxSubject({
                     ...adxBody,
+                    ti:adxBody.ti,
+                    dsc:adxBody.dsc,
                     checked_option:this.selectSubjectId
 
                 });

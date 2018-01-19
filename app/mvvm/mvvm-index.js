@@ -34,11 +34,15 @@ export class Compile {
                     }
                 }
             }
-            //绑值表达式 {{}}
+            //绑值表达式 {{}} /\s*(\.)\s*/
             if (node.nodeType === 3 && this.valueReg.test(text)) {
                 let ts = node.textContent.match(new RegExp(this.valueReg, 'ig')).map(t => t.match(this.valueReg)[1]);
-                node.$textContent = node.textContent;
-                this.compileText(node)
+                node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
+                ts.every(t => {
+                    console.info(t)
+                    this.compileText(node, this.vm, t);
+                    return true
+                });
             }
             if (node.childNodes && node.childNodes.length) {
                 this.compileElement(node);
@@ -47,7 +51,13 @@ export class Compile {
         })
     }
 
-    compileText(node) {
+    compileText(node, vm, exp) {
+        let textContent = node.textContent;
+        textContent = textContent.replace(new RegExp(`{{\s*(${exp})\s*}}`), this.spot(vm, exp) || String())
+        node.textContent = textContent;
+    }
+
+    compileText(node, vm, exp) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
         values.every(va => {
@@ -183,23 +193,15 @@ export class MVVM {
         Object.keys(this.vm).forEach(key => {
             this.vm[`_${key}`] = this.vm[key];
             Object.defineProperty(this.vm, key, {
-                get: function(){
+                get: function () {
                     return this[`_${key}`]
                 },
-                set: function(val){
+                set: function (val) {
                     this[`_${key}`] = val;
                 }
             })
         })
-
         console.info(this.vm.a)
-
-        // this.vm.f.b = 777;
-        //
-        //
-        // setTimeout(()=> {
-        //     this.vm.f.b = 777
-        // },2000)
     }
 
     vm;

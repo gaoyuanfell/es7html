@@ -9,8 +9,9 @@
 <body id="body" style="display: none">
 <p (click)="test($event,a,b)" data-id="1" [value]="d" (mouseover)="test($event,a)" (mouseleave)="test(a,b)">
     {{a}} 不能消失 {{b}}
+    <br>
     <span (click)="test($event)">
-        {{c}} 不能消失
+        {{c}} 不能消失 {{a}}
     </span>
 </p>
 <p (click)='asd($event.target ,   f, "   aaaa  ")'>{{b}} 不能消失</p>
