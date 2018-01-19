@@ -1,15 +1,15 @@
 import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
-import {Ajax, Router, sleep, triggerClose} from "../../common/js/util";
+import {Ajax, Base64, Router, sleep, triggerClose} from "../../common/js/util";
 
 Ajax.configSetup({
     beforeSend: function (xhr, data, config) {
         config.headers.set('access-token', window.localStorage.getItem('access-token'));
         config.headers.set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
     },
-    // baseUrl: 'http://192.168.100.12:9060',
-    baseUrl: 'http://192.168.100.100:38080',
+    baseUrl: 'http://192.168.100.12:9060',
+    // baseUrl: 'http://192.168.100.100:38080',
 });
 
 //------------------------------------------------------------------------------------------------------//
@@ -59,8 +59,8 @@ export class Questioning {
 
     constructor() {
         this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 0;
-        this.subjectInit().then(() => {
-            this.subjectEnd();
+        this.subjectInit().then((bo) => {
+            bo && this.subjectEnd();
         });
     }
 
@@ -68,6 +68,7 @@ export class Questioning {
     subjectId;//当前答题的编号
     selectSubjectId;//用户选中的ID
     subjecStart = false;//是否开始答题
+    start = true;
 
     //-------------------------------------API-----------------------------------------//
     /**
@@ -75,7 +76,7 @@ export class Questioning {
      * @returns {Promise<void>}
      */
     async qmmBegin() {
-        let beginData = await Ajax('get', '/qmm/begin');
+        let beginData = await Ajax('get', '/question/qmm/begin');
         if (beginData.status) {
             return beginData.data;
         } else {
@@ -90,7 +91,7 @@ export class Questioning {
      * @returns {Promise<boolean>}
      */
     async qmmFinish(body) {
-        let finishData = await Ajax('get', '/qmm/finish', body);
+        let finishData = await Ajax('get', '/question/qmm/finish', body);
         return finishData.status === true;
     }
 
@@ -101,7 +102,7 @@ export class Questioning {
      * @returns {Promise<void>}
      */
     async getSubject(body) {
-        let subjectData = await Ajax('get', '/qmm/getqq', body);
+        let subjectData = await Ajax('get', '/question/qmm/getqq', body);
         if (subjectData.status) {
             return subjectData.data;
         } else {
@@ -116,7 +117,26 @@ export class Questioning {
      * @returns {Promise<void>}
      */
     async pushSubject(body) {
-        let getaqqData = await Ajax('get', '/qmm/adda', body);
+        let getaqqData = await Ajax('get', '/question/qmm/adda', body);
+        if (getaqqData.status) {
+            return getaqqData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     * 提交答案 adx
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async pushAdxSubject(body) {
+        let getaqqData = await Ajax('post', '/question/saveAdxQuestion', body, {
+            headers:{
+                'Content-Type':'application/json;charset=UTF-8'
+            }
+        });
         if (getaqqData.status) {
             return getaqqData.data;
         } else {
@@ -131,9 +151,43 @@ export class Questioning {
      * @returns {Promise<void>}
      */
     async getTrueSubject(body) {
-        let getaqqData = await Ajax('get', '/qmm/getaqq', body);
+        let getaqqData = await Ajax('get', '/question/qmm/getaqq', body);
         if (getaqqData.status) {
             return getaqqData.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
+    /**
+     * 获取adx接口数据
+     * @param body
+     * @returns {Promise<{ti: *, dsc: string}>}
+     */
+    async getAdxSubject(body = {}) {
+        let res = await Ajax('get', this.subjectData.url, body, {
+            baseUrl: '', beforeSend: () => {
+            }
+        });
+        if (res && res.code == 0) {
+            this.subjectData.title = res.ti;
+            let list = [];
+            this.subjectData.list = res.dsc.split(/\r\n/).every(m => {
+                let ms = m.match(/(.*)\:(.*)/);
+                if (ms) {
+                    list.push({
+                        code: ms[1],
+                        title: ms[2]
+                    })
+                }
+                return true;
+            });
+            this.subjectData.list = list;
+            return {
+                ti:res.ti,
+                dsc: window.btoa?(window.btoa(res.dsc)):new Base64().encode(res.dsc)
+            }
         } else {
             alert('请稍后重试！');
             throw 'server error';
@@ -146,25 +200,14 @@ export class Questioning {
     async subjectInit() {
         //通过接口获取数据
         let data = JSON.parse(window.localStorage.getItem(Questioning.subject_data));
-        // data = {
-        //     id: 33,
-        //     answerTime: 10,
-        //     answerInterval: 3,
-        //     total: 10,
-        // };
         if (!data) {
             data = await this.qmmBegin()
         }
-        /* else {
-                    if (confirm('是否开始新一轮答题？')) {
-                        data = await this.qmmBegin()
-                    }
-                }*/
 
         this.subjectId = data.id;
         window.localStorage.setItem(Questioning.subject_id, this.subjectId);
 
-        while (data.total > 0) {
+        while (data.total > 0 && this.start) {
             //通过接口获取题目 {code:data.id,current:this.subjectNum}
             this.subjectData = await this.getSubject({code: this.subjectId, current: this.subjectNum});
 
@@ -177,11 +220,20 @@ export class Questioning {
             /**
              * 处理adx答题逻辑
              */
-            if (+this.subjectData.type === 2) {
-
+            let adxBody;
+            if (+this.subjectData.type === 2 && this.start) {
+                console.info('adx题库');
+                this.subjectData.$list = this.subjectData.list;
+                this.subjectData.$title = this.subjectData.title;
+                adxBody = await this.getAdxSubject().catch((e) => {
+                    this.subjectData.list = this.subjectData.$list;
+                    this.subjectData.title = this.subjectData.$title;
+                    this.subjectData.type = 1;//adx题库错误 采用普通题库
+                })
             }
 
             this.subjectBoxRef.style.display = 'block';
+            if (!this.start) return false;
             //显示题目
             this.itemList();
             this.subjecStart = true;//开始答题
@@ -189,6 +241,8 @@ export class Questioning {
 
             //答题倒计时
             await this.countDown(data.answerTime);
+            if (!this.start) return false;
+
             //没选择就不再让用户选择
             if (!this.selectSubjectId) {
                 let children = this.subjectRef.querySelector('.option').children;
@@ -200,13 +254,35 @@ export class Questioning {
             }
             console.info(`获取用户选择的答案是：${this.selectSubjectId}`);
             //提交答案
-            await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
+            let publishBody = {
+                titleId: this.subjectData.titleId,
+                id: this.selectSubjectId || 0,
+                code: this.subjectId
+            }
+            if(this.subjectData.type == 1){
+                await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
+            }else if(this.subjectData.type == 2){
+                let adxData = await this.pushAdxSubject({
+                    ...adxBody,
+                    checked_option:this.selectSubjectId
+
+                });
+                publishBody = {
+                    titleId: adxData.question_id,
+                    id: adxData.checked_option_id || 0,
+                    code: this.subjectId
+                }
+            }
+            if (!this.start) return false;
 
             window.document.body.querySelector('#time_loading').style.display = 'block';
+            //等待答案
             await this.countDown2(data.answerInterval);
+            if (!this.start) return false;
 
             //获取统计结果
-            this.publishData = await this.getTrueSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
+            this.publishData = await this.getTrueSubject(publishBody);
+            if (!this.start) return false;
 
             //用户是否答对
             let answer = this.publishData.answer;
@@ -220,28 +296,33 @@ export class Questioning {
 
             this.publishList();
             await sleep(2000);
+            if (!this.start) return false;
             this.selectSubjectId = null;
             this.subjectBoxRef.style.display = 'none';
             if (data.total > 0) {
                 await sleep(1000);
             }
         }
-
+        if (!this.start) return false;
         window.localStorage.removeItem(Questioning.subject_data);
         window.localStorage.removeItem(Questioning.subject_data_num);
-
         //答题完成移除数据 当所有的题目答完请求接口
         await this.qmmFinish({id: this.subjectId});
         return true;
     }
 
     subjectEnd() {
-        console.info('subjectEnd');
         router.navigate('count')
     }
 
     destroy() {
-
+        this.subjectNum = 0;
+        this.subjectId = null;
+        this.start = false;
+        this.selectSubjectId = null;
+        this.subjecStart = false;
+        window.localStorage.removeItem(Questioning.subject_data);
+        window.localStorage.removeItem(Questioning.subject_data_num);
     }
 
     /**
@@ -255,7 +336,7 @@ export class Questioning {
         window.document.body.querySelector('#dadui').style.display = 'none';
         window.document.body.querySelector('#dacuo').style.display = 'none';
         let timeRef = window.document.querySelector('#dati #time');
-        while (this.subjecStart) {
+        while (this.subjecStart && this.start) {
             timeRef.innerText = num;
             if (num <= 0) {
                 this.subjecStart = false;
@@ -273,7 +354,7 @@ export class Questioning {
         window.document.body.querySelector('#dadui').style.display = 'none';
         window.document.body.querySelector('#dacuo').style.display = 'none';
         let stop = true;
-        while (stop) {
+        while (stop && this.start) {
             if (num <= 0) {
                 stop = false;
             } else {
@@ -345,9 +426,9 @@ export class Questioning {
 
     itemList() {
         let li = ``;
-        this.subjectData.list.every(l => {
+        this.subjectData.list.every((l,i) => {
             li += `
-                <li class="item" data-id="${l.id}">
+                <li class="item" data-id="${l.id || i+1}">
                     <div class="text">${(l.code || '') + '、' + l.title}</div>
                 </li>
             `;
@@ -624,8 +705,6 @@ export class ListInit {
                         </a>
                     </li>
                 `
-
-
                 return true;
             })
             accountListRef.innerHTML = `<ul class="account_list">${li}</ul>`
@@ -637,10 +716,12 @@ export class ListInit {
 /**
  * 路由监听
  */
+let questioning
+let homeInit
 router.changeEvent.subscribe((data) => {
     switch (data.path) {
         case 'home':
-            new HomeInit();
+            homeInit = new HomeInit();
             break;
         case 'list':
             new ListInit();
@@ -653,7 +734,29 @@ router.changeEvent.subscribe((data) => {
             new CountInit();
             break;
         case 'dati':
-            new Questioning();
+            questioning = new Questioning();
+            break;
+    }
+});
+
+router.destroyEvent.subscribe(data => {
+    if (!data) return;
+    switch (data.path) {
+        case 'home':
+            console.info('home');
+            break;
+        case 'list':
+            console.info('list');
+            break;
+        case 'rule':
+            console.info('rule');
+            break;
+        case 'count':
+            console.info('count');
+            break;
+        case 'dati':
+            questioning && questioning.destroy();
+            questioning = null;
             break;
     }
 });

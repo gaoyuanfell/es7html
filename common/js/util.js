@@ -59,20 +59,17 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
     if (!(config.headers instanceof Headers)) {
         config.headers = new Headers(config.headers);
     }
-    Object.assign(Ajax.config, config);
-
-    let headers = Ajax.config.headers;
     /**
      * 默认传输格式
      */
-    headers.set('Content-Type', 'application/json;charset=UTF-8');
     return new Promise((resolve, reject) => {
         let xhr = new window.XMLHttpRequest();
-        xhr.withCredentials = true;
+        xhr.withCredentials = false;
         xhr.onerror = function (error) {
             reject(error);
         }
         xhr.onreadystatechange = function (data) {
+            console.info(xhr)
             let readyState = xhr.readyState;
             if (readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -98,8 +95,10 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
             }
         };
 
-        if (Ajax.config.baseUrl) {
-            url = Ajax.config.baseUrl + url;
+        if ('baseUrl' in config) {
+            url = (config.baseUrl || '') + url;
+        } else {
+            url = (Ajax.config.baseUrl || '') + url;
         }
 
         //GET请求参数
@@ -121,12 +120,32 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 
         xhr.open(method, url, true);
 
-        Ajax.config.beforeSend && Ajax.config.beforeSend(xhr, body, Ajax.config);
+        if (method.toLocaleLowerCase() === 'post') {
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        }
+
+        for (let h of Ajax.config.headers.keys()) {
+            if (config.headers.has(h)) {
+                xhr.setRequestHeader(h, config.headers.get(h));
+            } else {
+                xhr.setRequestHeader(h, Ajax.config.headers.get(h));
+                config.headers.set(h, Ajax.config.headers.get(h))
+            }
+        }
+
+        let beforeSend = () => {
+        };
+        if (config.beforeSend) {
+            beforeSend = config.beforeSend
+        } else if (Ajax.config.beforeSend) {
+            beforeSend = Ajax.config.beforeSend
+        }
+        beforeSend(xhr, body, config);
 
         //提交数据body
         let data = '';
-        if (headers.has('Content-Type')) {
-            let ct = headers.get('Content-Type');
+        if (config.headers.has('Content-Type')) {
+            let ct = config.headers.get('Content-Type');
             if (!!~ct.indexOf("application/json")) {
                 data = JSON.stringify(body);
             } else if (!!~ct.indexOf("application/x-www-form-urlencoded")) {
@@ -134,8 +153,8 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
             }
         }
 
-        for (let h of headers.keys()) {
-            xhr.setRequestHeader(h, headers.get(h));
+        for (let h of config.headers.keys()) {
+            xhr.setRequestHeader(h, config.headers.get(h));
         }
 
         xhr.send(data);
@@ -149,6 +168,9 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 Ajax.__proto__.config = {};
 Ajax.configSetup = function (data) {
     if (data) {
+        if (!(data.headers instanceof Headers)) {
+            data.headers = new Headers(data.headers);
+        }
         Ajax.__proto__.config = data;
     }
 };
@@ -180,8 +202,8 @@ export const toBodyString = function (obj, bo = true) {
 
 export function sleep(time) {
     return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-            resolve();
+        let time = setTimeout(function () {
+            resolve(time);
         }, time);
     })
 }
@@ -209,6 +231,7 @@ export class Router {
     routes;
 
     route;
+    oldRoute;
 
     constructor(routes = [], config = {}) {
         Object.assign(this.config, config);
@@ -228,6 +251,7 @@ export class Router {
     }
 
     changeEvent = new $subject();
+    destroyEvent = new $subject();
 
     hashChange() {
         let hash = Router.getHash();
@@ -239,6 +263,7 @@ export class Router {
                 hash = r.redirectTo;
             }
             if (r.path === hash) {
+                this.oldRoute = this.route
                 this.route = r;
                 return false;
             }
@@ -247,6 +272,7 @@ export class Router {
         if (this.route && this.route.component) {
             this.route.component.style.display = 'block';
             this.changeEvent.next(this.route);
+            this.destroyEvent.next(this.oldRoute)
         }
     }
 
@@ -338,5 +364,109 @@ export class $subject {
         if (fn instanceof Function) {
             this.cacheList.push(fn);
         }
+    }
+}
+
+export function Base64() {
+
+    // private property
+    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+    // public method for encoding
+    this.encode = function (input) {
+        let output = "";
+        let chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        let i = 0;
+        input = _utf8_encode(input);
+        while (i < input.length) {
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+            output = output +
+                _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+                _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+        }
+        return output;
+    }
+
+    // public method for decoding
+    this.decode = function (input) {
+        let output = "";
+        let chr1, chr2, chr3;
+        let enc1, enc2, enc3, enc4;
+        let i = 0;
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+        while (i < input.length) {
+            enc1 = _keyStr.indexOf(input.charAt(i++));
+            enc2 = _keyStr.indexOf(input.charAt(i++));
+            enc3 = _keyStr.indexOf(input.charAt(i++));
+            enc4 = _keyStr.indexOf(input.charAt(i++));
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+            output = output + String.fromCharCode(chr1);
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+        }
+        output = _utf8_decode(output);
+        return output;
+    }
+
+    // private method for UTF-8 encoding
+    _utf8_encode = function (string) {
+        string = string.replace(/\r\n/g,"\n");
+        let utftext = "";
+        for (let n = 0; n < string.length; n++) {
+            let c = string.charCodeAt(n);
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            } else if((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            } else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+
+        }
+        return utftext;
+    }
+
+    // private method for UTF-8 decoding
+    _utf8_decode = function (utftext) {
+        let string = "";
+        let i = 0;
+        let c = c1 = c2 = 0;
+        while ( i < utftext.length ) {
+            c = utftext.charCodeAt(i);
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            } else if((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i+1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            } else {
+                c2 = utftext.charCodeAt(i+1);
+                c3 = utftext.charCodeAt(i+2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+        }
+        return string;
     }
 }

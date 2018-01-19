@@ -1,7 +1,8 @@
 export class Compile {
-    constructor(ref, value) {
+    constructor(ref, value, dep) {
         this.vm = value;
         this.ref = ref;
+        this.dep = dep;
         this.ref.style.display = 'none';
         this.compileElement(this.ref);
         this.ref.style.display = 'block';
@@ -9,6 +10,7 @@ export class Compile {
 
     ref;
     vm;
+    dep;
 
     eventReg = /\((.*)\)/;
     attrReg = /\[(.*)\]/;
@@ -34,6 +36,8 @@ export class Compile {
             }
             //绑值表达式 {{}}
             if (node.nodeType === 3 && this.valueReg.test(text)) {
+                let ts = node.textContent.match(new RegExp(this.valueReg, 'ig')).map(t => t.match(this.valueReg)[1]);
+                node.$textContent = node.textContent;
                 this.compileText(node)
             }
             if (node.childNodes && node.childNodes.length) {
@@ -44,14 +48,16 @@ export class Compile {
     }
 
     compileText(node) {
-        let values = node.textContent.match(new RegExp(this.valueReg, 'ig'));
+        let textContent = node.$textContent;
+        let values = textContent.match(new RegExp(this.valueReg, 'ig'));
         values.every(va => {
-            node.textContent.replace(va, value => {
+            textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                node.textContent = node.textContent.replace(t[0], this.spot(this.vm,t[1]) || String())
+                textContent = textContent.replace(t[0], this.spot(this.vm, t[1]) || String())
             });
             return true;
-        })
+        });
+        node.textContent = textContent;
     }
 
     compileEvent(node, attr) {
@@ -100,6 +106,34 @@ export class Compile {
     }
 }
 
+class Dep {
+    constructor() {
+        this.id = Dep.uid++;
+    }
+
+    static uid = 0;
+    id;
+    subs = [];
+
+
+    add(sub) {
+        this.subs.push(sub);
+    }
+
+    remove(sub) {
+        let index = this.subs.indexOf(sub);
+        if (index !== -1) {
+            this.subs.splice(index, 1);
+        }
+    }
+
+    notify() {
+        this.subs.forEach(sub => {
+            sub.update();
+        });
+    }
+}
+
 class Test {
     a = 1;
     b = 2;
@@ -112,11 +146,11 @@ class Test {
         console.info(event)
     }
 
-    change(event){
+    change(event) {
         console.info(event)
     }
 
-    input(event){
+    input(event) {
         console.info(event)
     }
 
@@ -133,42 +167,44 @@ export class MVVM {
         if (!value) throw `值不能为空`;
         this.vm = value;
         this.ref = id;
+        this.dep = new Dep();
         if (!(this.ref instanceof Element)) {
             this.ref = window.document.querySelector(`${this.ref}`)
         }
 
+        /**
+         * 解析
+         */
+        new Compile(this.ref, this.vm, this.dep);
+
+        /**
+         * 值变更检测
+         */
         Object.keys(this.vm).forEach(key => {
             this.vm[`_${key}`] = this.vm[key];
             Object.defineProperty(this.vm, key, {
-                get: () => {
-                    return this.vm[`_${key}`]
+                get: function(){
+                    return this[`_${key}`]
                 },
-                set: (val) => {
-                    this.vm[`_${key}`] = val;
+                set: function(val){
+                    this[`_${key}`] = val;
                 }
             })
         })
-        // Object.keys(this.vm.f).forEach(key => {
-        //     this.vm.f[`_${key}`] = this.vm.f[key];
-        //     Object.defineProperty(this.vm.f, key, {
-        //         get: () => {
-        //             return this.vm.f[`_${key}`]
-        //         },
-        //         set: (val) => {
-        //             this.vm.f[`_${key}`] = val;
-        //         }
-        //     })
-        // })
-        this.vm.f.b = 777
-        new Compile(this.ref, this.vm);
 
-        setTimeout(()=> {
-            this.vm.f.b = 777
-        },2000)
+        console.info(this.vm.a)
+
+        // this.vm.f.b = 777;
+        //
+        //
+        // setTimeout(()=> {
+        //     this.vm.f.b = 777
+        // },2000)
     }
 
     vm;
     ref
+    dep;
 }
 
 
