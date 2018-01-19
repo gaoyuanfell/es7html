@@ -81,9 +81,10 @@ body{
         display: inline-block;
         height: 0.1rem;
         line-height: 0.1rem;
-    }
-    .border{
         border-right: 1px #fff solid;
+        &:last-child{
+            border-right: none;
+        }
     }
 }
 .description_box{
@@ -451,3 +452,94 @@ body{
     margin-top: 0.2rem;
     text-align: center;
 }
+
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: block;
+    width: 100%;
+}
+
+.toolbar {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    contain: content;
+    padding: 4px;
+    height: 0.45rem;
+}
+
+.bar-button {
+    padding: 0 4px;
+    height: 0.32rem;
+    border: 0;
+    border-radius: 4px;
+    font-size: 0.14rem;
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    pointer-events: auto;
+    font-family: inherit;
+    font-style: inherit;
+    font-variant: inherit;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: none;
+    white-space: nowrap;
+    cursor: pointer;
+    vertical-align: top;
+    vertical-align: -webkit-baseline-middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.button-inner {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #fff !important;
+}
+
+.button-inner i.icon {
+    font-size: 20px;
+    color: #fff;
+}
+
