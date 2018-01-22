@@ -30,19 +30,23 @@ export class Compile {
                     }
                     //属性
                     if (this.attrReg.test(attr.nodeName)) {
-                        this.compileAttr(node, attr)
+                        this.compileAttr(node, attr);
+
+                        this.dep.add(() => {
+                            this.compileAttr(node, attr)
+                        })
                     }
                 }
             }
             //绑值表达式 {{}} /\s*(\.)\s*/
             if (node.nodeType === 3 && this.valueReg.test(text)) {
-                let ts = node.textContent.match(new RegExp(this.valueReg, 'ig')).map(t => t.match(this.valueReg)[1]);
                 node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
-                ts.every(t => {
-                    console.info(t)
-                    this.compileText(node, this.vm, t);
-                    return true
-                });
+                this.compileText(node);
+
+                this.dep.add(() => {
+                    this.compileText(node)
+                })
+
             }
             if (node.childNodes && node.childNodes.length) {
                 this.compileElement(node);
@@ -51,13 +55,7 @@ export class Compile {
         })
     }
 
-    compileText(node, vm, exp) {
-        let textContent = node.textContent;
-        textContent = textContent.replace(new RegExp(`{{\s*(${exp})\s*}}`), this.spot(vm, exp) || String())
-        node.textContent = textContent;
-    }
-
-    compileText(node, vm, exp) {
+    compileText(node) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
         values.every(va => {
@@ -72,37 +70,99 @@ export class Compile {
 
     compileEvent(node, attr) {
         let event = attr.nodeName.match(this.eventReg)[1];
-        node[`on${event}`] = (event) => {
-            let reg = /(.*)\(([^)]*)\)/;
-            let t = attr.nodeValue.match(reg);
-            let f = t[1];
-            let args = t[2].split(/\,/).map(m => {
-                m = m.trim()
-                let ms = m.split(/\./);
-                if (ms[0] === '$event') {
-                    ms.shift();
-                    if (ms.length) {
-                        return this.spot(event, ms.join(/\./));
+        switch (event) {
+            case 'model':
+                node.oninput = (event) => {
+                    let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+                    this.setSpotValue(this.vm, egx, event.target.value);
+                };
+                break;
+            default:
+                node[`on${event}`] = (event) => {
+                    let reg = /(.*)\(([^)]*)\)/;
+                    let t = attr.nodeValue.match(reg);
+                    let f = t[1];
+                    let args = t[2].split(/\,/).map(m => {
+                        m = m.trim()
+                        let ms = m.split(/\./);
+                        if (ms[0] === '$event') {
+                            ms.shift();
+                            if (ms.length) {
+                                return this.spot(event, ms.join(/\./));
+                            } else {
+                                return event
+                            }
+                        }
+                        return this.attrValue(m);
+                    });
+                    if (this.vm[f]) {
+                        this.vm[f](...args)
                     } else {
-                        return event
+                        throw `${this.vm.constructor.name} class not find ${f}`
                     }
-                }
-                if (/^(\'|\")(.*)(\"|\')$/.test(m)) {
-                    return m;
-                }
-                return this.spot(this.vm, m);
-            });
-            if (this.vm[f]) {
-                this.vm[f](...args)
-            } else {
-                throw `${this.vm.constructor.name} class not find ${f}`
-            }
-        };
+                };
+        }
     }
 
     compileAttr(node, attr) {
         let event = attr.nodeName.match(this.attrReg)[1];
-        console.info(event)
+        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        switch (event) {
+            case '(model)':
+                node.value = this.spot(this.vm, egx);
+                break;
+            case 'model':
+                node.value = this.spot(this.vm, egx);
+                break;
+            case 'value':
+                if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
+                    break;
+                }
+            default:
+                let attrs = event.split(/\./);
+                let attrValue = this.attrValue(egx);
+                if (attrs[0] in node && attrs.length === 1) {
+                    node[attrs[0]] = attrValue;
+                    break;
+                }
+                if (attrs.length >= 2) {
+                    switch (attrs[0]) {
+                        case 'attr':
+                            node.setAttribute(attrs[1], attrValue);
+                            break;
+                        case 'class':
+                            console.info(attrValue);
+                            if (!!attrValue) {
+                                node.classList.add(attrs[1]);
+                            } else {
+                                node.classList.remove(attrs[1]);
+                            }
+                            break;
+                        case 'style':
+                            console.info(attrValue)
+                            node.style[this.cssStyle2DomStyle(attrs[1])] = attrs[2] ? ((attrValue || '') + attrs[2]) : (attrValue || '');
+                            break;
+                    }
+                }
+        }
+    }
+
+    attrValue(str) {
+        if (str === 'true') {
+            return true;
+        }
+
+        if (str === 'false') {
+            return false
+        }
+
+        if (/^(\'|\")(.*)(\"|\')$/.test(str)) {
+            return str;
+        }
+        if (!isNaN(Number(str))) {
+            return str;
+        }
+        return this.spot(this.vm, str);
     }
 
     spot(target, spotStr) {
@@ -114,6 +174,25 @@ export class Compile {
         });
         return data;
     }
+
+    setSpotValue(target, spotStr, value) {
+        let sp = spotStr.split(/\./);
+        let data = target;
+        sp.forEach((s, i) => {
+            if (i + 1 === sp.length) {
+                data[s] = value;
+            } else {
+                data = data[s];
+            }
+        })
+    }
+
+    cssStyle2DomStyle(sName) {
+        return sName.replace(/^\-/, '').replace(/\-(\w)(\w+)/g, function (a, b, c) {
+            return b.toUpperCase() + c.toLowerCase();
+        });
+    }
+
 }
 
 class Dep {
@@ -139,7 +218,7 @@ class Dep {
 
     notify() {
         this.subs.forEach(sub => {
-            sub.update();
+            if (sub instanceof Function) sub();
         });
     }
 }
@@ -160,13 +239,13 @@ class Test {
         console.info(event)
     }
 
-    input(event) {
-        console.info(event)
+    input(event, a) {
+        console.info(a)
+        this.a = event.target.value
     }
 
-    asd(event, b, s) {
-        console.info(this);
-        this.a = 5
+    asd(event, b, s, num) {
+        console.info(num);
     }
 }
 
@@ -193,15 +272,15 @@ export class MVVM {
         Object.keys(this.vm).forEach(key => {
             this.vm[`_${key}`] = this.vm[key];
             Object.defineProperty(this.vm, key, {
-                get: function () {
-                    return this[`_${key}`]
+                get: () => {
+                    return this.vm[`_${key}`]
                 },
-                set: function (val) {
-                    this[`_${key}`] = val;
+                set: (val) => {
+                    this.vm[`_${key}`] = val;
+                    this.dep.notify()
                 }
             })
         })
-        console.info(this.vm.a)
     }
 
     vm;

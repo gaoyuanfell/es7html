@@ -7,16 +7,17 @@
     <title>Document</title>
 </head>
 <body id="body" style="display: none">
-<p (click)="test($event,a,b)" data-id="1" [value]="d" (mouseover)="test($event,a)" (mouseleave)="test(a,b)">
+<!-- -->
+<input [(model)]="a" type="text" [value]="666">
+<textarea [(model)]="b" [value]="666"></textarea>
+<p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="a" [style.width.px]="a">
     {{a}} 不能消失 {{b}}
     <br>
     <span (click)="test($event)">
         {{c}} 不能消失 {{a}}
     </span>
 </p>
-<p (click)='asd($event.target ,   f, "   aaaa  ")'>{{b}} 不能消失</p>
-
-<input type="text" (change)="change($event)" (input)="input($event , a)">
+<p (click)='asd($event.target ,   f, "   aaaa  ",2)'>{{b}} 不能消失</p>
 <span>{{f.a}} {{f.b}}</span>
 </body>
 </html>

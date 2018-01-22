@@ -6,7 +6,7 @@ import {Ajax, Base64, Router, sleep, triggerClose} from "../../common/js/util";
 Ajax.configSetup({
     beforeSend: function (xhr, data, config) {
         config.headers.set('access-token', window.localStorage.getItem('access-token'));
-        config.headers.set('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        config.headers.set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     },
     baseUrl: 'http://192.168.100.12:9060',
     // baseUrl: 'http://192.168.100.100:38080',
@@ -186,14 +186,14 @@ export class Questioning {
             this.subjectData.list = list;
             return {
                 ti:res.ti,
-                dsc: window.btoa?(window.btoa(res.dsc)):new Base64().encode(res.dsc)
+                dsc: window.btoa?(window.btoa(res.dsc)):new Base64().encode(res.dsc),
+                price:res.price
             }
         } else {
             alert('请稍后重试！');
             throw 'server error';
         }
     }
-
 
     //------------------------------------------------------------------------------//
 
@@ -210,12 +210,6 @@ export class Questioning {
         while (data.total > 0 && this.start) {
             //通过接口获取题目 {code:data.id,current:this.subjectNum}
             this.subjectData = await this.getSubject({code: this.subjectId, current: this.subjectNum});
-
-            //答案提交成功后改变这个数据 逻辑变更 拿到题目后就需要统计
-            ++this.subjectNum;
-            --data.total;
-            window.localStorage.setItem(Questioning.subject_data, JSON.stringify(data));
-            window.localStorage.setItem(Questioning.subject_data_num, String(this.subjectNum));
 
             /**
              * 处理adx答题逻辑
@@ -253,28 +247,35 @@ export class Questioning {
                 });
             }
             console.info(`获取用户选择的答案是：${this.selectSubjectId}`);
+
             //提交答案
             let publishBody = {
                 titleId: this.subjectData.titleId,
                 id: this.selectSubjectId || 0,
                 code: this.subjectId
             }
+
             if(this.subjectData.type == 1){
                 await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
             }else if(this.subjectData.type == 2){
                 let adxData = await this.pushAdxSubject({
-                    ...adxBody,
                     ti:adxBody.ti,
                     dsc:adxBody.dsc,
-                    checked_option:this.selectSubjectId
-
+                    checked_option:this.selectSubjectId || 0
                 });
                 publishBody = {
                     titleId: adxData.question_id,
                     id: adxData.checked_option_id || 0,
+                    price:adxBody.price,
                     code: this.subjectId
                 }
             }
+
+            //答案提交成功后改变这个数据 逻辑变更 拿到题目后就需要统计
+            ++this.subjectNum;
+            --data.total;
+            window.localStorage.setItem(Questioning.subject_data, JSON.stringify(data));
+            window.localStorage.setItem(Questioning.subject_data_num, String(this.subjectNum));
             if (!this.start) return false;
 
             window.document.body.querySelector('#time_loading').style.display = 'block';
@@ -352,7 +353,6 @@ export class Questioning {
 
     //等待答案
     async countDown2(num = 0) {
-        window.document.body.querySelector('#time_loading').style.display = 'none';
         window.document.body.querySelector('#dadui').style.display = 'none';
         window.document.body.querySelector('#dacuo').style.display = 'none';
         let stop = true;
@@ -372,59 +372,9 @@ export class Questioning {
 
     //题目数据
     subjectData
-    /* = {
-            titleId: 1,
-            title: '“垂死病中惊坐起”是谁写给谁的？',
-            list: [
-                {
-                    id: 1,
-                    code: 'A',
-                    title: '元稹写给白居易的'
-                },
-                {
-                    id: 2,
-                    code: 'B',
-                    title: '杜甫写给李白的'
-                },
-                {
-                    id: 3,
-                    code: 'C',
-                    title: '王维写给孟浩然'
-                },
-            ],
-            type:1,
-            url:''
-        };*/
 
     //答案公布数据
     publishData
-
-    /* = {
-            titleId: 1,
-            answer: true,
-            title: '“垂死病中惊坐起”是谁写给谁的？',
-            list: [
-                {
-                    id: 1,
-                    code: 'A',
-                    title: '元稹写给白居易的',
-                    total: 4.2
-                },
-                {
-                    id: 2,
-                    code: 'B',
-                    title: '杜甫写给李白的',
-                    isAnswer: true,
-                    total: 2.2
-                },
-                {
-                    id: 3,
-                    code: 'C',
-                    title: '王维写给孟浩然',
-                    total: 1.2
-                },
-            ]
-        };*/
 
     itemList() {
         let li = ``;
@@ -437,7 +387,7 @@ export class Questioning {
             return true;
         });
 
-        this.subjectRef.innerHTML = `<h2 class="title">${this.subjectNum + '、' + this.subjectData.title}</h2><ul class="option">${li}</ul>`;
+        this.subjectRef.innerHTML = `<h2 class="title">${(this.subjectNum + 1) + '、' + this.subjectData.title}</h2><ul class="option">${li}</ul>`;
 
         let children = this.subjectRef.querySelector('.option').children;
         Array.from(children).every(ch => {
@@ -604,7 +554,7 @@ export class CountInit {
      * @returns {Promise<void>}
      */
     async getGold(body) {
-        let qmmGoldData = await Ajax('get', '/qmm/gold', body);
+        let qmmGoldData = await Ajax('get', '/question/qmm/gold', body);
         if (qmmGoldData.status) {
             return qmmGoldData.data;
         } else {
@@ -664,7 +614,7 @@ export class ListInit {
      * @returns {Promise<void>}
      */
     async topDay(body = {}) {
-        let res = await Ajax('get', '/qmm/topa', body);
+        let res = await Ajax('get', '/question/qmm/topa', body);
         if (res.status) {
             return res.data;
         } else {
@@ -679,7 +629,7 @@ export class ListInit {
      * @returns {Promise<void>}
      */
     async topHistory(body = {}) {
-        let res = await Ajax('get', '/qmm/topah', body);
+        let res = await Ajax('get', '/question/qmm/topah', body);
         if (res.status) {
             return res.data;
         } else {

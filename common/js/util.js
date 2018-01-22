@@ -69,7 +69,6 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
             reject(error);
         }
         xhr.onreadystatechange = function (data) {
-            console.info(xhr)
             let readyState = xhr.readyState;
             if (readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
@@ -120,18 +119,7 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 
         xhr.open(method, url, true);
 
-        if (method.toLocaleLowerCase() === 'post') {
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        }
 
-        for (let h of Ajax.config.headers.keys()) {
-            if (config.headers.has(h)) {
-                xhr.setRequestHeader(h, config.headers.get(h));
-            } else {
-                xhr.setRequestHeader(h, Ajax.config.headers.get(h));
-                config.headers.set(h, Ajax.config.headers.get(h))
-            }
-        }
 
         let beforeSend = () => {
         };
@@ -141,6 +129,12 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
             beforeSend = Ajax.config.beforeSend
         }
         beforeSend(xhr, body, config);
+
+        for (let h of Ajax.config.headers.keys()) {
+            if(!config.headers.has(h)){
+                config.headers.set(h, Ajax.config.headers.get(h))
+            }
+        }
 
         //提交数据body
         let data = '';
@@ -155,6 +149,10 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 
         for (let h of config.headers.keys()) {
             xhr.setRequestHeader(h, config.headers.get(h));
+        }
+
+        if (method.toLocaleLowerCase() === 'post' && !config.headers.has('Content-Type')) {
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         }
 
         xhr.send(data);
@@ -202,8 +200,8 @@ export const toBodyString = function (obj, bo = true) {
 
 export function sleep(time) {
     return new Promise(function (resolve, reject) {
-        let time = setTimeout(function () {
-            resolve(time);
+        setTimeout(function () {
+            resolve();
         }, time);
     })
 }
