@@ -195,6 +195,21 @@ export class Questioning {
         }
     }
 
+    /**
+     * adx500 统计普通pv
+     * @param body
+     * @returns {Promise<void>}
+     */
+    async adxCount(body = {}){
+        let res = await Ajax('post', '/question/noAdx/count', body);
+        if (res.status) {
+            return res.data;
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
+
     //------------------------------------------------------------------------------//
 
     async subjectInit() {
@@ -223,6 +238,10 @@ export class Questioning {
                     this.subjectData.list = this.subjectData.$list;
                     this.subjectData.title = this.subjectData.$title;
                     this.subjectData.type = 1;//adx题库错误 采用普通题库
+                    this.adxCount({
+                        titleId:this.subjectData.titleId,
+                        code:this.subjectId,
+                    }).catch(()=>{})
                 })
             }
 

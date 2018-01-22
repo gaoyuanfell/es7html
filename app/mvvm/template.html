@@ -10,7 +10,7 @@
 <!-- -->
 <input [(model)]="a" type="text" [value]="666">
 <textarea [(model)]="b" [value]="666"></textarea>
-<p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="a" [style.width.px]="a">
+<p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="a" [style.width.px]="a" [style.z-index]="a">
     {{a}} 不能消失 {{b}}
     <br>
     <span (click)="test($event)">

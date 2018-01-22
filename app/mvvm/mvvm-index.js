@@ -107,6 +107,7 @@ export class Compile {
     compileAttr(node, attr) {
         let event = attr.nodeName.match(this.attrReg)[1];
         let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        console.info(event)
         switch (event) {
             case '(model)':
                 node.value = this.spot(this.vm, egx);
@@ -131,7 +132,6 @@ export class Compile {
                             node.setAttribute(attrs[1], attrValue);
                             break;
                         case 'class':
-                            console.info(attrValue);
                             if (!!attrValue) {
                                 node.classList.add(attrs[1]);
                             } else {
@@ -139,8 +139,12 @@ export class Compile {
                             }
                             break;
                         case 'style':
-                            console.info(attrValue)
-                            node.style[this.cssStyle2DomStyle(attrs[1])] = attrs[2] ? ((attrValue || '') + attrs[2]) : (attrValue || '');
+                            let val = attrs[2] ? (attrValue ? (attrValue + attrs[2]) : '') : (attrValue || '');
+                            if(val){
+                                node.style[attrs[1]] = val;
+                            }else{
+                                node.style.removeProperty(attrs[1])
+                            }
                             break;
                     }
                 }
