@@ -25,9 +25,43 @@ body{
 .userInfo{
     margin: 0 0.2rem;
     background: #fff;
-    padding: 0.24rem 0;
+    padding: 0.24rem;
     border-radius: 0.1rem;
-    margin-top:0.12rem;
+    margin-top:0.8rem;
+    position: relative;
+}
+.userheader{
+    width: 0.6rem;
+    height:0.6rem;
+    line-height: 0.6rem;
+    border-radius:100%;
+    background: #fff;
+    border:1px #ccc solid;
+    position: absolute;
+    top:-0.3rem;
+    right: 0.3rem;
+    overflow: hidden;
+    img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+.grossed{
+    text-align: left;
+    .list{
+        margin-bottom: 0.1rem;
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    .tip{
+        font-size: 0.14rem;
+        color: #adbdcd;
+    }
+    h1{
+        font-size: 0.3rem;
+        color: #2f3d48;
+    }
 }
 
 .nologin{

@@ -14,13 +14,13 @@ module.exports = [
     //     name:'ruzhu-index',
     //     title:'乐橙互联科技有限公司'
     // },
-    {
-        path:'lcinc',
-        output:'lcinc',
-        publicPath:'',
-        name:'lcinc-index',
-        title:'乐橙互联科技有限公司'
-    },
+    // {
+    //     path:'lcinc',
+    //     output:'lcinc',
+    //     publicPath:'',
+    //     name:'lcinc-index',
+    //     title:'乐橙互联科技有限公司'
+    // },
     // {
     //     path:'lcinc-activity',
     //     output:'lcinc-activity',
@@ -29,14 +29,14 @@ module.exports = [
     //     title:'乐橙互联科技有限公司',
     //     filename:'index2.html',
     // },
-    {
-        path:'lcinc-pc',
-        output:'lcinc-pc',
-        base:'/pc/',
-        publicPath:'',
-        name:'lcincpc-index',
-        title:'乐橙互联科技有限公司'
-    },
+    // {
+    //     path:'lcinc-pc',
+    //     output:'lcinc-pc',
+    //     base:'/pc/',
+    //     publicPath:'',
+    //     name:'lcincpc-index',
+    //     title:'乐橙互联科技有限公司'
+    // },
     // {
     //     path:'pwa',
     //     output:'pwa',
@@ -74,11 +74,11 @@ module.exports = [
         name:'dati-index',
         title:'答题'
     },
-    {
-        path:'mvvm',
-        output:'mvvm',
-        publicPath:'',
-        name:'mvvm-index',
-        title:'mvvm'
-    },
+    // {
+    //     path:'mvvm',
+    //     output:'mvvm',
+    //     publicPath:'',
+    //     name:'mvvm-index',
+    //     title:'mvvm'
+    // },
 ];
