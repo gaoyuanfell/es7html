@@ -706,6 +706,8 @@ export class ListInit {
                 return true;
             })
             accountListRef.innerHTML = `<ul class="account_list">${li}</ul>`
+        }else{
+            accountListRef.innerHTML = '';
         }
     }
 }
