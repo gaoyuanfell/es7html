@@ -67,7 +67,7 @@ module.exports = [
     //     type:'.ts',
     //     title:'fileUpload'
     // },
-    /*{
+    {
         path:'dati',
         output:'dati',
         publicPath:'',
@@ -80,5 +80,5 @@ module.exports = [
         publicPath:'',
         name:'mvvm-index',
         title:'mvvm'
-    },*/
+    },
 ];

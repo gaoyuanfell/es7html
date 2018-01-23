@@ -36,6 +36,19 @@ export class Compile {
                             this.compileAttr(node, attr)
                         })
                     }
+
+                    //模板 *if
+                    if (attr.nodeName === '*if') {
+                        this.compileIf(node, attr)
+                        this.dep.add(()=> {
+                            this.compileIf(node, attr)
+                        })
+                    }
+
+                    //模板 *for
+                    if(attr.nodeName === '*for'){
+
+                    }
                 }
             }
             //绑值表达式 {{}} /\s*(\.)\s*/
@@ -55,36 +68,60 @@ export class Compile {
         })
     }
 
+    compileFor(node, attr){
+        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        console.info(egx);
+    }
+
+    compileIf(node, attr) {
+        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        let bo = !!this.spot(this.vm, egx);
+        node.style.display = bo ? 'block' : 'none';
+    }
+
     compileText(node) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
         values.every(va => {
             textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                textContent = textContent.replace(t[0], this.spot(this.vm, t[1]) || String())
+                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(this.vm, t[1])) || String())
             });
             return true;
         });
         node.textContent = textContent;
     }
 
+    isBooleanValue(val) {
+        switch (val) {
+            case true:
+                return String(true);
+            case false:
+                return String(false);
+            case null:
+                return String();
+            case void 0:
+                return String();
+            default:
+                return String(val)
+        }
+    }
+
     compileEvent(node, attr) {
         let event = attr.nodeName.match(this.eventReg)[1];
         switch (event) {
             case 'model':
-                if(node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement){
-                    switch (node.type){
+                if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
+                    switch (node.type) {
                         case 'text':
                             node.oninput = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                console.info(egx)
                                 this.setSpotValue(this.vm, egx, event.target.value);
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                console.info(egx)
                                 this.setSpotValue(this.vm, egx, event.target.value);
                             };
                             break;
@@ -97,14 +134,11 @@ export class Compile {
                         case 'radio':
                             node.onchange = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                console.info(egx)
+                                this.setSpotValue(this.vm, egx, event.target.value);
                             };
                             break;
-
                     }
                 }
-
-
                 break;
             default:
                 node[`on${event}`] = (event) => {
@@ -138,10 +172,23 @@ export class Compile {
         let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
         switch (event) {
             case '(model)':
-                node.value = this.spot(this.vm, egx);
-                break;
             case 'model':
-                node.value = this.spot(this.vm, egx);
+                if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
+                    switch (node.type) {
+                        case 'text':
+                        case 'textarea':
+                            node.value = this.spot(this.vm, egx);
+                            break;
+                        case 'checkbox':
+                            node.checked = !!this.spot(this.vm, egx);
+                            break;
+                        case 'radio':
+                            if (node.value == this.spot(this.vm, egx)) {
+                                node.checked = true;
+                            }
+                            break;
+                    }
+                }
                 break;
             case 'value':
                 if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
@@ -168,9 +215,9 @@ export class Compile {
                             break;
                         case 'style':
                             let val = attrs[2] ? (attrValue ? (attrValue + attrs[2]) : '') : (attrValue || '');
-                            if(val){
+                            if (val) {
                                 node.style[attrs[1]] = val;
-                            }else{
+                            } else {
                                 node.style.removeProperty(attrs[1])
                             }
                             break;
@@ -255,35 +302,6 @@ class Dep {
     }
 }
 
-class Test {
-    a = 1;
-    b = 2;
-    c = 3;
-    d = 4;
-    e = false;
-    g = 2;
-
-    f = {a: 666}
-
-    test(event) {
-        console.info(event)
-    }
-
-    change(event) {
-        console.info(event)
-    }
-
-    input(event, a) {
-        console.info(a)
-        this.a = event.target.value
-    }
-
-    asd(event, b, s, num) {
-        console.info(num);
-    }
-}
-
-
 export class MVVM {
     constructor(id, value) {
         if (!id) throw `dom节点不能为空`;
@@ -323,4 +341,43 @@ export class MVVM {
 }
 
 
-new MVVM("#body", new Test());
+class Test {
+    constructor() {
+        this.a = 500;
+        this.b = 2;
+        this.c = 3;
+        this.d = 4;
+        this.e = false;
+        this.g = void 0;
+        this.h = void 0;
+        this.list = [
+            {id:1,name:1},
+            {id:2,name:2},
+            {id:3,name:3},
+            {id:4,name:4},
+            {id:5,name:5},
+        ];
+        new MVVM("#body", this);
+    }
+
+    f = {a: 666}
+
+    test(event) {
+        console.info(event)
+    }
+
+    change(event) {
+        console.info(event)
+    }
+
+    input(event, a) {
+        console.info(a)
+        this.a = event.target.value
+    }
+
+    asd(event, b, s, num) {
+        console.info(num);
+    }
+}
+
+new Test();
