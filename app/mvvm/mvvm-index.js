@@ -116,10 +116,11 @@ export class Compile {
     compileText(node, vm = this.vm) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
+        console.info(values)
         values.every(va => {
             textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(vm, t[1])) || String())
+                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(vm, t[1].trim())) || String())
             });
             return true;
         });

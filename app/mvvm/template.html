@@ -8,6 +8,12 @@
 </head>
 <body id="body" style="display: none">
 
+<p>{{e?'1111':'2222'}}</p>
+
+<p>{{  a  }} {{  b  }}</p>
+
+<br>
+<!--
 <p *for="let i of list;let index = index;">
     {{i.name}}
     <span>{{index}}</span>
@@ -16,7 +22,7 @@
 
 <p *if="e">*if</p>
 
-<!-- -->
+&lt;!&ndash; &ndash;&gt;
 <input [(model)]="a" type="text" [value]="666">
 
 <br>
@@ -53,7 +59,7 @@
 <p (click)='asd($event.target ,   f, "   aaaa  ",2)'>{{b}} 不能消失</p>
 <span>{{f.a}} {{f.b}}</span>
 
-<input type="text" [(model)]="f.a">
+<input type="text" [(model)]="f.a">-->
 
 </body>
 </html>
