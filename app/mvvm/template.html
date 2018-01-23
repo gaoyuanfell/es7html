@@ -8,7 +8,10 @@
 </head>
 <body id="body" style="display: none">
 
-<p *for="let i of list">{{i}}</p>
+<p *for="let i of list;">
+    {{i.name}}
+    <a href="javascript:void 0" (click)="test(i)">{{i.id}}</a>
+</p>
 
 <p *if="e">*if</p>
 

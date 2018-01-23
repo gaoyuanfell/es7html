@@ -16,76 +16,101 @@ export class Compile {
     attrReg = /\[(.*)\]/;
     valueReg = /\{\{((?:.|\n)+?)\}\}/;
 
-    compileElement(ref) {
+    compileElement(ref, vm = this.vm) {
         let childNodes = ref.childNodes;
         if (!childNodes.length) return;
         Array.from(childNodes).every(node => {
-            let text = node.textContent;
-            if (node.nodeType === 1) {
-                for (let a = 0; a < node.attributes.length; a++) {
-                    let attr = node.attributes.item(a);
-                    //事件
-                    if (this.eventReg.test(attr.nodeName)) {
-                        this.compileEvent(node, attr)
-                    }
-                    //属性
-                    if (this.attrReg.test(attr.nodeName)) {
-                        this.compileAttr(node, attr);
-
-                        this.dep.add(() => {
-                            this.compileAttr(node, attr)
-                        })
-                    }
-
-                    //模板 *if
-                    if (attr.nodeName === '*if') {
-                        this.compileIf(node, attr)
-                        this.dep.add(()=> {
-                            this.compileIf(node, attr)
-                        })
-                    }
-
-                    //模板 *for
-                    if(attr.nodeName === '*for'){
-
-                    }
-                }
-            }
-            //绑值表达式 {{}} /\s*(\.)\s*/
-            if (node.nodeType === 3 && this.valueReg.test(text)) {
-                node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
-                this.compileText(node);
-
-                this.dep.add(() => {
-                    this.compileText(node)
-                })
-
-            }
-            if (node.childNodes && node.childNodes.length) {
-                this.compileElement(node);
-            }
-            return true;
+            return this.compileNode(node, vm);
         })
     }
 
-    compileFor(node, attr){
-        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-        console.info(egx);
+    compileNode(node, vm = this.vm) {
+        let text = node.textContent;
+        if (node.nodeType === 1) {
+            for (let a = 0; a < node.attributes.length; a++) {
+                let attr = node.attributes.item(a);
+                //事件
+                if (this.eventReg.test(attr.nodeName)) {
+                    this.compileEvent(node, attr, vm)
+                }
+                //属性
+                if (this.attrReg.test(attr.nodeName)) {
+                    this.compileAttr(node, attr, vm);
+
+                    this.dep.add(() => {
+                        this.compileAttr(node, attr, vm)
+                    })
+                }
+
+                //模板 *if
+                if (attr.nodeName === '*if') {
+                    this.compileIf(node, attr, vm);
+                    this.dep.add(() => {
+                        this.compileIf(node, attr, vm)
+                    })
+                }
+
+                //模板 *for
+                if (attr.nodeName === '*for') {
+                    node.style.display = 'none';
+                    this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d) => {
+                        let copy = node.cloneNode(true);
+                        copy.attributes.removeNamedItem('*for');
+                        copy.style.removeProperty('display');
+                        if(!copy.getAttribute('style')) copy.removeAttribute('style');
+                        node.parentNode.insertBefore(copy, node.nextSibling);
+                        this.compileNode(copy, {[d]:a});
+                    })
+                }
+            }
+        }
+
+        //绑值表达式 {{}} /\s*(\.)\s*/
+        if (node.nodeType === 3 && this.valueReg.test(text)) {
+            node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
+            this.compileText(node, vm);
+            this.dep.add(() => {
+                this.compileText(node, vm)
+            })
+        }
+        if (node.childNodes && node.childNodes.length && !~Array.from(node.attributes).map(attr => attr.nodeName).indexOf('*for')) {
+            this.compileElement(node, vm);
+        }
+        return true;
     }
 
-    compileIf(node, attr) {
+    getForFun(exg) {
+        let exgs = exg.split(/;/);
+        let vs;
+        if(exgs instanceof Array && exgs.length){
+            vs = exgs[0].match(/let\s+(.*)\s+of\s+(.*)/);
+        }
+        return new Function('vm', `
+            return function (fn) {
+                for (let ${vs[1]} of vm.${vs[2]}.reverse()){
+                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}')
+                }
+            }
+        `)
+    }
+
+    compileFor(node, attr) {
         let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-        let bo = !!this.spot(this.vm, egx);
+    }
+
+    compileIf(node, attr, vm = this.vm) {
+        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        let bo = !!this.spot(vm, egx);
         node.style.display = bo ? 'block' : 'none';
     }
 
-    compileText(node) {
+    compileText(node, vm = this.vm) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
         values.every(va => {
             textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(this.vm, t[1])) || String())
+                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(vm, t[1])) || String())
             });
             return true;
         });
@@ -107,7 +132,7 @@ export class Compile {
         }
     }
 
-    compileEvent(node, attr) {
+    compileEvent(node, attr, vm = this.vm) {
         let event = attr.nodeName.match(this.eventReg)[1];
         switch (event) {
             case 'model':
@@ -116,25 +141,25 @@ export class Compile {
                         case 'text':
                             node.oninput = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(this.vm, egx, event.target.value);
+                                this.setSpotValue(vm, egx, event.target.value);
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(this.vm, egx, event.target.value);
+                                this.setSpotValue(vm, egx, event.target.value);
                             };
                             break;
                         case 'checkbox':
                             node.onchange = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(this.vm, egx, event.target.checked);
+                                this.setSpotValue(vm, egx, event.target.checked);
                             };
                             break;
                         case 'radio':
                             node.onchange = (event) => {
                                 let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(this.vm, egx, event.target.value);
+                                this.setSpotValue(vm, egx, event.target.value);
                             };
                             break;
                     }
@@ -156,7 +181,7 @@ export class Compile {
                                 return event
                             }
                         }
-                        return this.attrValue(m);
+                        return this.attrValue(m, vm);
                     });
                     if (this.vm[f]) {
                         this.vm[f](...args)
@@ -167,7 +192,7 @@ export class Compile {
         }
     }
 
-    compileAttr(node, attr) {
+    compileAttr(node, attr, vm = this.vm) {
         let event = attr.nodeName.match(this.attrReg)[1];
         let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
         switch (event) {
@@ -177,13 +202,13 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                         case 'textarea':
-                            node.value = this.spot(this.vm, egx);
+                            node.value = this.spot(vm, egx);
                             break;
                         case 'checkbox':
-                            node.checked = !!this.spot(this.vm, egx);
+                            node.checked = !!this.spot(vm, egx);
                             break;
                         case 'radio':
-                            if (node.value == this.spot(this.vm, egx)) {
+                            if (node.value == this.spot(vm, egx)) {
                                 node.checked = true;
                             }
                             break;
@@ -196,7 +221,7 @@ export class Compile {
                 }
             default:
                 let attrs = event.split(/\./);
-                let attrValue = this.attrValue(egx);
+                let attrValue = this.attrValue(egx, vm);
                 if (attrs[0] in node && attrs.length === 1) {
                     node[attrs[0]] = attrValue;
                     break;
@@ -226,7 +251,7 @@ export class Compile {
         }
     }
 
-    attrValue(str) {
+    attrValue(str, vm) {
         if (str === 'true') {
             return true;
         }
@@ -241,7 +266,7 @@ export class Compile {
         if (!isNaN(Number(str))) {
             return str;
         }
-        return this.spot(this.vm, str);
+        return this.spot(vm, str);
     }
 
     spot(target, spotStr) {
@@ -351,11 +376,11 @@ class Test {
         this.g = void 0;
         this.h = void 0;
         this.list = [
-            {id:1,name:1},
-            {id:2,name:2},
-            {id:3,name:3},
-            {id:4,name:4},
-            {id:5,name:5},
+            {id: 1, name: '一'},
+            {id: 2, name: '二'},
+            {id: 3, name: '三'},
+            {id: 4, name: '四'},
+            {id: 5, name: '五'},
         ];
         new MVVM("#body", this);
     }

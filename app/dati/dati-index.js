@@ -133,8 +133,8 @@ export class Questioning {
      */
     async pushAdxSubject(body) {
         let getaqqData = await Ajax('post', '/question/saveAdxQuestion', body, {
-            headers:{
-                'Content-Type':'application/json;charset=UTF-8'
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
             }
         });
         if (getaqqData.status) {
@@ -185,9 +185,9 @@ export class Questioning {
             });
             this.subjectData.list = list;
             return {
-                ti:res.ti,
-                dsc: window.btoa?(window.btoa(res.dsc)):new Base64().encode(res.dsc),
-                price:res.price
+                ti: res.ti,
+                dsc: window.btoa ? (window.btoa(res.dsc)) : new Base64().encode(res.dsc),
+                price: res.price
             }
         } else {
             alert('请稍后重试！');
@@ -200,7 +200,7 @@ export class Questioning {
      * @param body
      * @returns {Promise<void>}
      */
-    async adxCount(body = {}){
+    async adxCount(body = {}) {
         let res = await Ajax('post', '/question/noAdx/count', body);
         if (res.status) {
             return res.data;
@@ -239,9 +239,10 @@ export class Questioning {
                     this.subjectData.title = this.subjectData.$title;
                     this.subjectData.type = 1;//adx题库错误 采用普通题库
                     this.adxCount({
-                        titleId:this.subjectData.titleId,
-                        code:this.subjectId,
-                    }).catch(()=>{})
+                        titleId: this.subjectData.titleId,
+                        code: this.subjectId,
+                    }).catch(() => {
+                    })
                 })
             }
 
@@ -274,18 +275,18 @@ export class Questioning {
                 code: this.subjectId
             }
 
-            if(this.subjectData.type == 1){
+            if (this.subjectData.type == 1) {
                 await this.pushSubject({titleId: this.subjectData.titleId, id: this.selectSubjectId || 0, code: this.subjectId});
-            }else if(this.subjectData.type == 2){
+            } else if (this.subjectData.type == 2) {
                 let adxData = await this.pushAdxSubject({
-                    ti:adxBody.ti,
-                    dsc:adxBody.dsc,
-                    checked_option:this.selectSubjectId || 0
+                    ti: adxBody.ti,
+                    dsc: adxBody.dsc,
+                    checked_option: this.selectSubjectId || 0
                 });
                 publishBody = {
                     titleId: adxData.question_id,
                     id: adxData.checked_option_id || 0,
-                    price:adxBody.price,
+                    price: adxBody.price,
                     code: this.subjectId
                 }
             }
@@ -397,9 +398,9 @@ export class Questioning {
 
     itemList() {
         let li = ``;
-        this.subjectData.list.every((l,i) => {
+        this.subjectData.list.every((l, i) => {
             li += `
-                <li class="item" data-id="${l.id || i+1}">
+                <li class="item" data-id="${l.id || i + 1}">
                     <div class="text">${(l.code || '') + '、' + l.title}</div>
                 </li>
             `;
@@ -451,9 +452,18 @@ export class HomeInit {
             this.loginBtnRef.style.display = 'block';
         }
         this.initEvent();
+        this.init();
     }
 
     token;//登陆标识
+
+    init() {
+        this.getUserInfo().then(res => {
+            document.querySelector('#integralAndProfit').style.display = 'block';
+            document.querySelector('#integral').innerHTML = res.integral || 0;
+            document.querySelector('#profit').innerHTML = res.money || 0;
+        })
+    }
 
     initEvent() {
         this.sendRef.onclick = () => {
@@ -474,12 +484,25 @@ export class HomeInit {
     datiBtnRef = window.document.querySelector('#home #dati_btn');
 
     loginBtnRef = window.document.querySelector('#home #login_btn');
-    inviteBtnRef = window.document.querySelector('#home #invite_btn');
+    inviteBtnRef = window.document.querySelector('#home #dati_btn');
+    // inviteBtnRef = window.document.querySelector('#home #invite_btn');
 
     sendRef = window.document.querySelector('#home .verification_btn');
     loginRef = window.document.querySelector('#login');
     phoneNumRef = window.document.querySelector('#phoneNum');
     verificationRef = window.document.querySelector('#verification');
+
+    async getUserInfo(body) {
+        let res = await Ajax('get', '/question/user/income', body);
+        if (res.status) {
+            return res.data;
+        } else if (res.code == 401) {
+
+        } else {
+            alert('请稍后重试！');
+            throw 'server error';
+        }
+    }
 
     /**
      * 验证码倒计时
@@ -538,11 +561,12 @@ export class HomeInit {
         }
         Ajax('post', '/api/jwt/user/login', {phoneNum: phoneNum, messageCode: messageCode}).then(res => {
             if (res.status) {
-                layerLogin.trigger();
-                window.localStorage.setItem('access-token', res.data.token);
-                this.token = res.data.token;
-                this.loginBtnRef.style.display = 'none';
-                this.inviteBtnRef.style.display = 'block';
+                window.location.reload();
+                // layerLogin.trigger();
+                // window.localStorage.setItem('access-token', res.data.token);
+                // this.token = res.data.token;
+                // this.loginBtnRef.style.display = 'none';
+                // this.inviteBtnRef.style.display = 'block';
             } else {
                 alert(res.msg);
             }
@@ -680,7 +704,6 @@ export class ListInit {
             })
             accountListRef.innerHTML = `<ul class="account_list">${li}</ul>`
         }
-
     }
 }
 

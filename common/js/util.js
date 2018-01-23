@@ -119,8 +119,6 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
 
         xhr.open(method, url, true);
 
-
-
         let beforeSend = () => {
         };
         if (config.beforeSend) {

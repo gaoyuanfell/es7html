@@ -28,8 +28,8 @@
 <!--首页-->
 <div hidden class="content" id="home">
     <div class="scroll-content">
-        <a href="javascript:void 0" class="btn dati_btn" id="dati_btn">开始答题</a>
-        <ul class="time_slot clear">
+        <!--<a href="javascript:void 0" class="btn dati_btn" id="dati_btn">开始答题</a>-->
+        <!--<ul class="time_slot clear">
             <li>
                 <a href="javascript:;">
                     <h2>11:00</h2>
@@ -66,10 +66,14 @@
                     <p>100万</p>
                 </a>
             </li>
-        </ul>
+        </ul>-->
+
+        <div class="userInfo">
+
+        </div>
 
         <div class="nologin">
-            <ul class="bonus flex">
+            <!--<ul class="bonus flex">
                 <li>
                     <p class="small">奖金</p>
                     <p class="large"><span>50</span>万</p>
@@ -78,10 +82,11 @@
                     <p class="small">今天</p>
                     <p class="large"><span>11:00</span></p>
                 </li>
-            </ul>
+            </ul>-->
             <p>
                 <a hidden href="javascript:;" class="btn login_btn" id="login_btn">登录才能赢钱</a>
-                <a hidden href="javascript:;" class="btn invite_btn" id="invite_btn">分享给好友</a>
+                <a hidden href="javascript:;" class="btn invite_btn" id="dati_btn">开始答题</a>
+                <!--<a hidden href="javascript:;" class="btn invite_btn" id="invite_btn">分享给好友</a>-->
             </p>
             <!--<ul class="other_way flex">
                 <li><a href="javascript:;" class="friends">朋友圈</a></li>
@@ -90,9 +95,11 @@
                 <li><a href="javascript:;" class="qqspace">QQ空间</a></li>
             </ul>-->
         </div>
-        <div class="revive flex">
-            <div class="left">复活卡<span>0</span></div>
-            <div class="right"><a href="javascript:;" class="btn revive_btn">获得更多复活卡</a></div>
+        <div class="revive" id="integralAndProfit" style="display: none">
+            <p>个人积分：<span id="integral">0</span></p>
+            <p>个人收益：<span id="profit">0</span></p>
+            <!--<div class="left">复活卡<span>0</span></div>-->
+            <!--<div class="right"><a href="javascript:;" class="btn revive_btn">获得更多复活卡</a></div>-->
         </div>
         <div class="foot">
             <a href="#list">获奖榜单</a>
