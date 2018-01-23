@@ -37,7 +37,7 @@ let router = new Router([
 ])
 
 //登陆弹窗
-let layerLogin = triggerClose('#loginInput', ['#loginInput .close', '#login_btn']);
+let layerLogin = triggerClose('#loginInput', ['#loginInput .close', '#login_btn', '#loginbtn']);
 //获取复活卡
 let layerRevive = triggerClose('#revive_rule', ['#revive_rule .close', '.revive_btn']);
 
@@ -447,9 +447,11 @@ export class HomeInit {
         if (token) {
             this.loginBtnRef.style.display = 'none';
             this.inviteBtnRef.style.display = 'block';
+            this.loginbtn.style.display='none';
         } else {
             this.inviteBtnRef.style.display = 'none';
             this.loginBtnRef.style.display = 'block';
+            this.loginbtn.style.display='block';
         }
         this.initEvent();
         this.init();
@@ -491,6 +493,7 @@ export class HomeInit {
     loginRef = window.document.querySelector('#login');
     phoneNumRef = window.document.querySelector('#phoneNum');
     verificationRef = window.document.querySelector('#verification');
+    loginbtn=window.document.querySelector('#loginbtn');
 
     async getUserInfo(body) {
         let res = await Ajax('get', '/question/user/income', body);
