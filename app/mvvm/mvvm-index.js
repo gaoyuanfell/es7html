@@ -72,10 +72,39 @@ export class Compile {
         let event = attr.nodeName.match(this.eventReg)[1];
         switch (event) {
             case 'model':
-                node.oninput = (event) => {
-                    let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                    this.setSpotValue(this.vm, egx, event.target.value);
-                };
+                if(node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement){
+                    switch (node.type){
+                        case 'text':
+                            node.oninput = (event) => {
+                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+                                console.info(egx)
+                                this.setSpotValue(this.vm, egx, event.target.value);
+                            };
+                            break;
+                        case 'textarea':
+                            node.oninput = (event) => {
+                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+                                console.info(egx)
+                                this.setSpotValue(this.vm, egx, event.target.value);
+                            };
+                            break;
+                        case 'checkbox':
+                            node.onchange = (event) => {
+                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+                                this.setSpotValue(this.vm, egx, event.target.checked);
+                            };
+                            break;
+                        case 'radio':
+                            node.onchange = (event) => {
+                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+                                console.info(egx)
+                            };
+                            break;
+
+                    }
+                }
+
+
                 break;
             default:
                 node[`on${event}`] = (event) => {
@@ -107,7 +136,6 @@ export class Compile {
     compileAttr(node, attr) {
         let event = attr.nodeName.match(this.attrReg)[1];
         let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-        console.info(event)
         switch (event) {
             case '(model)':
                 node.value = this.spot(this.vm, egx);
@@ -232,6 +260,8 @@ class Test {
     b = 2;
     c = 3;
     d = 4;
+    e = false;
+    g = 2;
 
     f = {a: 666}
 

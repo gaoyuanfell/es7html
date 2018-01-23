@@ -9,7 +9,24 @@
 <body id="body" style="display: none">
 <!-- -->
 <input [(model)]="a" type="text" [value]="666">
+
+<br>
+
+<input type="checkbox" [(model)]="e">
+<p>{{e}}</p>
+
+<br>
+
+<input type="radio" value="1" name="radio" [(model)]="g">
+<input type="radio" value="2" name="radio" [(model)]="g">
+<input type="radio" value="3" name="radio" [(model)]="g">
+<input type="radio" value="4" name="radio" [(model)]="g">
+<p>{{g}}</p>
+
+<br>
+
 <textarea [(model)]="b" [value]="666"></textarea>
+
 <p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="a" [style.width.px]="a" [style.z-index]="a">
     {{a}} 不能消失 {{b}}
     <br>
@@ -19,5 +36,6 @@
 </p>
 <p (click)='asd($event.target ,   f, "   aaaa  ",2)'>{{b}} 不能消失</p>
 <span>{{f.a}} {{f.b}}</span>
+<p>*if</p>
 </body>
 </html>
