@@ -52,15 +52,7 @@ export class Compile {
 
                 //模板 *for
                 if (attr.nodeName === '*for') {
-                    node.style.display = 'none';
-                    this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d) => {
-                        let copy = node.cloneNode(true);
-                        copy.attributes.removeNamedItem('*for');
-                        copy.style.removeProperty('display');
-                        if(!copy.getAttribute('style')) copy.removeAttribute('style');
-                        node.parentNode.insertBefore(copy, node.nextSibling);
-                        this.compileNode(copy, {[d]:a});
-                    })
+                    this.compileFor(node,attr);
                 }
             }
         }
@@ -83,22 +75,36 @@ export class Compile {
         let exgs = exg.split(/;/);
         console.info(exgs);
         let vs;
-        let is;
+        let is = undefined;
         if(exgs instanceof Array && exgs.length){
             vs = exgs[0].match(/let\s+(.*)\s+of\s+(.*)/);
-            is = exgs[1].match(/let\s+(.*)\s?=\s?index/);
+            let index = exgs[1].match(/let\s+(.*)\s?=\s?index/);
+            if(index instanceof Array && index.length){
+                is = index[1].trim();
+            }
         }
         return new Function('vm', `
             return function (fn) {
-                for (let ${vs[1]} of vm.${vs[2]}.reverse()){
-                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}')
+                for (let ${vs[1]} of vm.${vs[2]}){
+                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', '${is}')
                 }
             }
         `)
     }
 
     compileFor(node, attr) {
-        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
+        node.style.display = 'none';
+        this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d, e) => {
+            let copy = node.cloneNode(true);
+            copy.attributes.removeNamedItem('*for');
+            copy.style.removeProperty('display');
+            if(!copy.getAttribute('style')) copy.removeAttribute('style');
+            node.parentNode.insertBefore(copy,node);
+            let data = Object.create({[d]:a});
+            data.__proto__[e] = b;
+            this.compileNode(copy, data);
+        });
+        document.body.removeChild(node);
     }
 
     compileIf(node, attr, vm = this.vm) {
@@ -390,8 +396,9 @@ class Test {
 
     f = {a: 666}
 
-    test(event) {
+    test(event,index) {
         console.info(event)
+        console.info(index)
     }
 
     change(event) {

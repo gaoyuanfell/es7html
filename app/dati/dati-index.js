@@ -462,8 +462,8 @@ export class HomeInit {
     init() {
         this.getUserInfo().then(res => {
             document.querySelector('#integralAndProfit').style.display = 'block';
-            document.querySelector('#integral').innerHTML = res.integral || 0;
-            document.querySelector('#profit').innerHTML = res.money || 0;
+            document.querySelector('#integral').innerHTML = res.integral || '-';
+            document.querySelector('#profit').innerHTML = res.money || '0.00';
         })
     }
 

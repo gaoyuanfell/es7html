@@ -10,7 +10,8 @@
 
 <p *for="let i of list;let index = index;">
     {{i.name}}
-    <a href="javascript:void 0" (click)="test(i)">{{i.id}}</a>
+    <span>{{index}}</span>
+    <a href="javascript:void 0" (click)="test(i,index)">{{i.id}}</a>
 </p>
 
 <p *if="e">*if</p>
