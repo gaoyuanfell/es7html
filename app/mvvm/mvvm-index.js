@@ -81,9 +81,12 @@ export class Compile {
 
     getForFun(exg) {
         let exgs = exg.split(/;/);
+        console.info(exgs);
         let vs;
+        let is;
         if(exgs instanceof Array && exgs.length){
             vs = exgs[0].match(/let\s+(.*)\s+of\s+(.*)/);
+            is = exgs[1].match(/let\s+(.*)\s?=\s?index/);
         }
         return new Function('vm', `
             return function (fn) {

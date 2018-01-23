@@ -8,7 +8,7 @@
 </head>
 <body id="body" style="display: none">
 
-<p *for="let i of list;">
+<p *for="let i of list;let index = index;">
     {{i.name}}
     <a href="javascript:void 0" (click)="test(i)">{{i.id}}</a>
 </p>
