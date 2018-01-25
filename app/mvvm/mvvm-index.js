@@ -27,8 +27,7 @@ export class Compile {
     compileNode(node, vm = this.vm) {
         let text = node.textContent;
         if (node.nodeType === 1) {
-            for (let a = 0; a < node.attributes.length; a++) {
-                let attr = node.attributes.item(a);
+            Array.from(node.attributes).every(attr => {
                 //事件
                 if (this.eventReg.test(attr.nodeName)) {
                     this.compileEvent(node, attr, vm)
@@ -54,7 +53,8 @@ export class Compile {
                 if (attr.nodeName === '*for') {
                     this.compileFor(node,attr);
                 }
-            }
+                return true;
+            })
         }
 
         //绑值表达式 {{}} /\s*(\.)\s*/
@@ -104,7 +104,7 @@ export class Compile {
             data[e] = b;
             this.compileNode(copy, data);
         });
-        document.body.removeChild(node);
+        node.parentNode.removeChild(node);
     }
 
     compileIf(node, attr, vm = this.vm) {
@@ -184,6 +184,7 @@ export class Compile {
                     Reflect.deleteProperty(vm.__proto__,'$event');
                 };
         }
+        node.removeAttribute(attr.nodeName)
     }
 
     compileAttr(node, attr, vm = this.vm) {
@@ -242,6 +243,8 @@ export class Compile {
                     }
                 }
         }
+
+        node.removeAttribute(attr.nodeName)
     }
 
     cssStyle2DomStyle(sName) {
@@ -317,7 +320,6 @@ export class MVVM {
                         return data[`_${key}`]
                     },
                     set: (val) => {
-                        console.info(val);
                         this.def(val);
                         data[`_${key}`] = val;
                         this.dep.notify()
@@ -353,6 +355,8 @@ class Test {
         setTimeout(()=> {
             console.info(this.list2[0])
         },3000)
+
+        document.body.innerText
     }
 
     f = {a: 666}

@@ -60,9 +60,9 @@ export class Questioning {
 
     constructor() {
         this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 0;
-        this.subjectInit().then((bo) => {
-            bo && this.subjectEnd();
-        });
+        // this.subjectInit().then((bo) => {
+        //     bo && this.subjectEnd();
+        // });
     }
 
     subjectNum = 0;//当前答题的顺序

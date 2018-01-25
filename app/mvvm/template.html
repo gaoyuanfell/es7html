@@ -6,68 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body id="body" style="display: none">
+<body>
 
-<p>{{e?'1111':Math.random() + Math.abs(e) + 'e'}}</p>
+<div id="body" style="display: none">
+    <p [attr.data-id]="a" [style.width.px]="a" [class.test]="bo(false)" [style.z-index]="a" (click)="test($event,a,b)"></p>
+    <p>{{bo(Math.random())}}</p>
 
-<p>{{  a + b  }} {{  b * d  }}</p>
-
-<p>{{a + b - c + 111 + 'asd'}}</p>
-
-<a href="javascript:void 0" (click)="a = Math.random()">测试</a>
-
-<p *for="let i of list;let index = index;">
-    <span>{{index}}</span>
-    <a href="javascript:void 0" (click)="i = 1000">{{i}}</a>
-</p>
-
-<br>
-<p *for="let i of list2;let index = index;">
-    {{i.name}}
-    <span>{{index}}</span>
-    <a href="javascript:void 0" (click)='i.id = 500;test(i);console.info(";")'>{{i.id}}</a>
-</p>
-
-<p *if="e">*if</p>
-
-<!-- -->
-<input [(model)]="a" type="text" [value]="666">
-
-<br>
-
-<input type="checkbox" [(model)]="e">
-<p>{{e}}</p>
-
-<br>
-
-<input type="radio" value="1" name="radio1" [(model)]="g">
-<input type="radio" value="2" name="radio1" [(model)]="g">
-<input type="radio" value="3" name="radio1" [(model)]="g">
-<input type="radio" value="4" name="radio1" [(model)]="g">
-<p>{{g}}</p>
-
-<br>
-
-<input type="radio" value="aaa" name="radio2" [(model)]="h">
-<input type="radio" value="2" name="radio2" [(model)]="h">
-<input type="radio" value="3" name="radio2" [(model)]="h">
-<input type="radio" value="4" name="radio2" [(model)]="h">
-<p>{{h}}</p>
-<br>
-
-<textarea [(model)]="b" [value]="666"></textarea>
-
-<p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="bo(false)" [style.width.px]="a" [style.z-index]="a">
-    {{a}} 不能消失 {{b}}
     <br>
-    <span (click)="test($event)">
+
+    <p>{{e?'1111':Math.random() + Math.abs(e) + 'e'}}</p>
+
+    <p>{{ a + b }} {{ b * d }}</p>
+
+    <p>{{a + b - c + 111 + 'asd'}}</p>
+
+    <a href="javascript:void 0" (click)="a = Math.random()">测试</a>
+
+    <p *for="let i of list;let index = index;">
+        <span>{{index}}</span>
+        <a href="javascript:void 0" (click)="i = 1000">{{i}}</a>
+    </p>
+
+    <br>
+    <p *for="let i of list2;let index = index;">
+        {{i.name}}
+        <span>{{index}}</span>
+        <a href="javascript:void 0" (click)='i.id = 500;test(i);console.info(";")'>{{i.id}}</a>
+    </p>
+
+    <p *if="e">*if</p>
+
+    <!-- -->
+    <input [(model)]="a" type="text" [value]="666">
+
+    <br>
+
+    <input type="checkbox" [(model)]="e">
+    <p>{{e}}</p>
+
+    <br>
+
+    <input type="radio" value="1" name="radio1" [(model)]="g">
+    <input type="radio" value="2" name="radio1" [(model)]="g">
+    <input type="radio" value="3" name="radio1" [(model)]="g">
+    <input type="radio" value="4" name="radio1" [(model)]="g">
+    <p>{{g}}</p>
+
+    <br>
+
+    <input type="radio" value="aaa" name="radio2" [(model)]="h">
+    <input type="radio" value="2" name="radio2" [(model)]="h">
+    <input type="radio" value="3" name="radio2" [(model)]="h">
+    <input type="radio" value="4" name="radio2" [(model)]="h">
+    <p>{{h}}</p>
+    <br>
+
+    <textarea [(model)]="b" [value]="666"></textarea>
+
+    <p (click)="test($event,a,b)" [attr.data-id]="a" [class.test]="bo(false)" [style.width.px]="a" [style.z-index]="a">
+        {{a}} 不能消失 {{b}}
+        <br>
+        <span (click)="test($event)">
         {{c}} 不能消失 {{a}}
     </span>
-</p>
-<p (click)='asd($event.target ,   f, "   aaaa  ",2)'>{{b}} 不能消失</p>
-<span>{{f.a}} {{f.b}}</span>
+    </p>
+    <p (click)='asd($event.target ,   f, "   aaaa  ",2)'>{{b}} 不能消失</p>
+    <span>{{f.a}} {{f.b}}</span>
 
-<input type="text" [(model)]="f.a">
-
+    <input type="text" [(model)]="f.a">
+</div>
 </body>
 </html>
