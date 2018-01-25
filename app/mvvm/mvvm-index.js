@@ -73,7 +73,6 @@ export class Compile {
 
     getForFun(exg) {
         let exgs = exg.split(/;/);
-        console.info(exgs);
         let vs;
         let is = undefined;
         if(exgs instanceof Array && exgs.length){
@@ -100,31 +99,38 @@ export class Compile {
             copy.style.removeProperty('display');
             if(!copy.getAttribute('style')) copy.removeAttribute('style');
             node.parentNode.insertBefore(copy,node);
-            let data = Object.create({[d]:a});
-            data.__proto__[e] = b;
+            let data = Object.create(this.vm.__proto__);
+            data[d] = a;
+            data[e] = b;
             this.compileNode(copy, data);
         });
         document.body.removeChild(node);
     }
 
     compileIf(node, attr, vm = this.vm) {
-        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-        let bo = !!this.spot(vm, egx);
+        let bo = !!this.compileFun(attr.nodeValue, vm);
         node.style.display = bo ? 'block' : 'none';
     }
 
     compileText(node, vm = this.vm) {
         let textContent = node.$textContent;
         let values = textContent.match(new RegExp(this.valueReg, 'ig'));
-        console.info(values)
         values.every(va => {
             textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                textContent = textContent.replace(t[0], this.isBooleanValue(this.spot(vm, t[1].trim())) || String())
+                let val = this.isBooleanValue(this.compileFun(t[1],vm));
+                textContent = textContent.replace(t[0], val)
             });
             return true;
         });
         node.textContent = textContent;
+    }
+
+    compileFun(exg, vm){
+        let fun = new Function('vm',`
+            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g,'\\\"')}")}
+        `);
+        return fun(vm);
     }
 
     isBooleanValue(val) {
@@ -150,26 +156,22 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                             node.oninput = (event) => {
-                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(vm, egx, event.target.value);
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
-                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(vm, egx, event.target.value);
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
                             };
                             break;
                         case 'checkbox':
                             node.onchange = (event) => {
-                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(vm, egx, event.target.checked);
+                                this.compileFun(`${attr.nodeValue}=${event.target.checked}`,vm)
                             };
                             break;
                         case 'radio':
                             node.onchange = (event) => {
-                                let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
-                                this.setSpotValue(vm, egx, event.target.value);
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
                             };
                             break;
                     }
@@ -177,34 +179,15 @@ export class Compile {
                 break;
             default:
                 node[`on${event}`] = (event) => {
-                    let reg = /(.*)\(([^)]*)\)/;
-                    let t = attr.nodeValue.match(reg);
-                    let f = t[1];
-                    let args = t[2].split(/\,/).map(m => {
-                        m = m.trim()
-                        let ms = m.split(/\./);
-                        if (ms[0] === '$event') {
-                            ms.shift();
-                            if (ms.length) {
-                                return this.spot(event, ms.join(/\./));
-                            } else {
-                                return event
-                            }
-                        }
-                        return this.attrValue(m, vm);
-                    });
-                    if (this.vm[f]) {
-                        this.vm[f](...args)
-                    } else {
-                        throw `${this.vm.constructor.name} class not find ${f}`
-                    }
+                    vm.__proto__.$event = event;
+                    this.compileFun(attr.nodeValue,vm);
+                    Reflect.deleteProperty(vm.__proto__,'$event');
                 };
         }
     }
 
     compileAttr(node, attr, vm = this.vm) {
         let event = attr.nodeName.match(this.attrReg)[1];
-        let egx = attr.nodeValue.trim().replace(/\s*(\.)\s*/, '.');
         switch (event) {
             case '(model)':
             case 'model':
@@ -212,13 +195,13 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                         case 'textarea':
-                            node.value = this.spot(vm, egx);
+                            node.value = this.compileFun(attr.nodeValue, vm);
                             break;
                         case 'checkbox':
-                            node.checked = !!this.spot(vm, egx);
+                            node.checked = !!this.compileFun(attr.nodeValue, vm);
                             break;
                         case 'radio':
-                            if (node.value == this.spot(vm, egx)) {
+                            if (node.value === String(this.compileFun(attr.nodeValue, vm))) {
                                 node.checked = true;
                             }
                             break;
@@ -231,7 +214,7 @@ export class Compile {
                 }
             default:
                 let attrs = event.split(/\./);
-                let attrValue = this.attrValue(egx, vm);
+                let attrValue = this.compileFun(attr.nodeValue, vm);
                 if (attrs[0] in node && attrs.length === 1) {
                     node[attrs[0]] = attrValue;
                     break;
@@ -261,46 +244,6 @@ export class Compile {
         }
     }
 
-    attrValue(str, vm) {
-        if (str === 'true') {
-            return true;
-        }
-
-        if (str === 'false') {
-            return false
-        }
-
-        if (/^(\'|\")(.*)(\"|\')$/.test(str)) {
-            return str;
-        }
-        if (!isNaN(Number(str))) {
-            return str;
-        }
-        return this.spot(vm, str);
-    }
-
-    spot(target, spotStr) {
-        let sp = spotStr.split(/\./);
-        let data = target;
-        sp.every(a => {
-            data = data[a];
-            return data
-        });
-        return data;
-    }
-
-    setSpotValue(target, spotStr, value) {
-        let sp = spotStr.split(/\./);
-        let data = target;
-        sp.forEach((s, i) => {
-            if (i + 1 === sp.length) {
-                data[s] = value;
-            } else {
-                data = data[s];
-            }
-        })
-    }
-
     cssStyle2DomStyle(sName) {
         return sName.replace(/^\-/, '').replace(/\-(\w)(\w+)/g, function (a, b, c) {
             return b.toUpperCase() + c.toLowerCase();
@@ -311,16 +254,11 @@ export class Compile {
 
 class Dep {
     constructor() {
-        this.id = Dep.uid++;
     }
-
-    static uid = 0;
-    id;
     subs = [];
 
-
     add(sub) {
-        this.subs.push(sub);
+        this.subs.unshift(sub);
     }
 
     remove(sub) {
@@ -356,23 +294,38 @@ export class MVVM {
         /**
          * 值变更检测
          */
-        Object.keys(this.vm).forEach(key => {
-            this.vm[`_${key}`] = this.vm[key];
-            Object.defineProperty(this.vm, key, {
-                get: () => {
-                    return this.vm[`_${key}`]
-                },
-                set: (val) => {
-                    this.vm[`_${key}`] = val;
-                    this.dep.notify()
-                }
-            })
-        })
+        this.def(this.vm)
     }
 
     vm;
-    ref
+    ref;
     dep;
+
+    def(data){
+        if (!data || typeof data !== 'object') {
+            return;
+        }
+
+        if(data instanceof Array){
+
+        }else{
+            Object.keys(data).forEach(key => {
+                this.def(data[key]);
+                data[`_${key}`] = data[key];
+                Object.defineProperty(data, key, {
+                    get: () => {
+                        return data[`_${key}`]
+                    },
+                    set: (val) => {
+                        console.info(val);
+                        this.def(val);
+                        data[`_${key}`] = val;
+                        this.dep.notify()
+                    }
+                })
+            })
+        }
+    }
 }
 
 
@@ -384,8 +337,11 @@ class Test {
         this.d = 4;
         this.e = false;
         this.g = void 0;
-        this.h = void 0;
+        this.h = 'aaa';
         this.list = [
+            1,2,3,4,5,6,7,8,9,10
+        ];
+        this.list2 = [
             {id: 1, name: '一'},
             {id: 2, name: '二'},
             {id: 3, name: '三'},
@@ -393,6 +349,10 @@ class Test {
             {id: 5, name: '五'},
         ];
         new MVVM("#body", this);
+
+        setTimeout(()=> {
+            console.info(this.list2[0])
+        },3000)
     }
 
     f = {a: 666}
@@ -413,6 +373,15 @@ class Test {
 
     asd(event, b, s, num) {
         console.info(num);
+    }
+
+
+    str(){
+        return '11111'
+    }
+
+    bo(b){
+        return b;
     }
 }
 

@@ -29,3 +29,9 @@ pwd:YCdev@#$2017
 崔永利
 2018-01-22
 银橙官网设计改版
+
+#dati
+静态资源发布地址 192.168.100.12
+帐号            root
+密码            ycmedia_2015
+路径  /opt/cloud/client/tomcat/webapps/question

@@ -28,46 +28,6 @@
 <!--首页-->
 <div hidden class="content" id="home">
     <div class="scroll-content">
-        <!--<a href="javascript:void 0" class="btn dati_btn" id="dati_btn">开始答题</a>-->
-        <!--<ul class="time_slot clear">
-            <li>
-                <a href="javascript:;">
-                    <h2>11:00</h2>
-                    <p>50万</p>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <h2>13:00</h2>
-                    <p>50万</p>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <h2>19:00</h2>
-                    <p>50万</p>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <h2>20:00</h2>
-                    <p>100万</p>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <h2>21:00</h2>
-                    <p>200万</p>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <h2>22:00</h2>
-                    <p>100万</p>
-                </a>
-            </li>
-        </ul>-->
-
         <div class="userInfo">
             <div class="userheader">
                 <p id="loginbtn">登录</p>
@@ -90,27 +50,11 @@
         </div>
 
         <div class="nologin">
-            <!--<ul class="bonus flex">
-                <li>
-                    <p class="small">奖金</p>
-                    <p class="large"><span>50</span>万</p>
-                </li>
-                <li>
-                    <p class="small">今天</p>
-                    <p class="large"><span>11:00</span></p>
-                </li>
-            </ul>-->
             <p>
                 <a hidden href="javascript:;" class="btn login_btn" id="login_btn">登录才能赢钱</a>
                 <a hidden href="javascript:;" class="btn invite_btn" id="dati_btn">开始答题</a>
                 <!--<a hidden href="javascript:;" class="btn invite_btn" id="invite_btn">分享给好友</a>-->
             </p>
-            <!--<ul class="other_way flex">
-                <li><a href="javascript:;" class="friends">朋友圈</a></li>
-                <li><a href="javascript:;" class="weChat">微信</a></li>
-                <li><a href="javascript:;" class="qq">QQ</a></li>
-                <li><a href="javascript:;" class="qqspace">QQ空间</a></li>
-            </ul>-->
         </div>
 
         <div class="foot">
@@ -148,27 +92,40 @@
     </div>
 
 </div>
+
 <!--答题界面-->
-<div hidden class="content" id="dati">
-    <div class="scroll-content">
-        <div class="subject_box" id="subject_box" style="display: none">
-            <div class="time" id="time">
-                10
+<div class="content-modal" hidden id="dati">
+    <div class="header">
+        <div class="toolbar">
+            <div class="bar-button">
+                <span class="button-inner" onclick="location.hash = '#home'">
+                    <i class="icon">&lt;</i>
+                </span>
             </div>
-            <div class="time" id="time_loading" style="display: none">
-                <img src="static/img/loading.gif" alt="">
-            </div>
-            <div class="time" id="dadui" style="display: none">
-                <img src="static/img/dui.png" alt="">
-            </div>
-            <div class="time" id="dacuo" style="display: none">
-                <img src="static/img/cuo.png" alt="">
-            </div>
-            <div id="subject_body">
+        </div>
+    </div>
+    <div class="content">
+        <div class="scroll-content" margin-header>
+            <div class="subject_box" id="subject_box" style="display: none">
+                <div class="time" id="time">
+                    10
+                </div>
+                <div class="time" id="time_loading" style="display: none">
+                    <img src="static/img/loading.gif" alt="">
+                </div>
+                <div class="time" id="dadui" style="display: none">
+                    <img src="static/img/dui.png" alt="">
+                </div>
+                <div class="time" id="dacuo" style="display: none">
+                    <img src="static/img/cuo.png" alt="">
+                </div>
+                <div id="subject_body">
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!--榜单-->
 <div class="content-modal" id="list" hidden>
     <div class="header">
@@ -282,37 +239,45 @@
     </div>
 </div>
 <!--统计-->
-<div hidden class="content" id="count">
-    <div class="scroll-content">
-        <ul class="count_slot clear flex">
-            <li class="item">
-                <a href="javascript:;">
-                    <h2>总题数</h2>
-                    <p id="count_all"></p>
-                </a>
-            </li>
-            <li class="item">
-                <a href="javascript:;">
-                    <h2>答 对</h2>
-                    <p id="count_correctNum"></p>
-                </a>
-            </li>
-            <li class="item">
-                <a href="javascript:;">
-                    <h2>答 错</h2>
-                    <p id="count_errorNum"></p>
-                </a>
-            </li>
-        </ul>
-        <!--<ul class="count_slot clear flex">-->
-            <!--<li class="item">-->
-                <!--<a href="javascript:;">-->
-                    <!--<h2>获得的金钱</h2>-->
-                    <!--<p>90元</p>-->
-                <!--</a>-->
-            <!--</li>-->
-        <!--</ul>-->
+<div class="content-modal" id="count" hidden>
+    <div class="header">
+        <div class="toolbar">
+            <div class="bar-button">
+                <span class="button-inner" onclick="location.hash = '#home'">
+                    <i class="icon">&lt;</i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="content" >
+        <div class="scroll-content" margin-header>
+            <ul class="count_slot clear flex">
+                <li class="item">
+                    <a href="javascript:;">
+                        <h2>总题数</h2>
+                        <p id="count_all"></p>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="javascript:;">
+                        <h2>答 对</h2>
+                        <p id="count_correctNum"></p>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="javascript:;">
+                        <h2>答 错</h2>
+                        <p id="count_errorNum"></p>
+                    </a>
+                </li>
+            </ul>
+
+            <a href="#dati" class="btn invite_btn">继续答题</a>
+
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>

@@ -195,18 +195,19 @@ function switchPhoto(type) {
     let hash = location.hash;
     let reg = hash.match(/(\d+)/);
     let num = reg[0];
+    let ll = oUl.children.length;
     switch (type) {
         case '+':
-            if (++num > 6) {
+            if (++num > ll) {
                 num = 1
             }
             location.hash = `#${num}`;
             break;
         case '-':
             if (--num < 1) {
-                num = 6
+                num = ll
             }
-            location.hash = `#${--num}`;
+            location.hash = `#${num}`;
             break;
     }
 }
@@ -251,3 +252,11 @@ function hashChange() {
 }
 
 hashChange();
+
+Array.from(document.body.querySelectorAll('[footer]')).map(ref => {
+    ref.innerHTML = `
+        Copyright (C) 2016~${new Date().getFullYear()} 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+    `;
+});
+
+

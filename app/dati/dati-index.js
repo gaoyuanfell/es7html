@@ -8,7 +8,8 @@ Ajax.configSetup({
         config.headers.set('access-token', window.localStorage.getItem('access-token'));
         config.headers.set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
     },
-    baseUrl: 'http://192.168.100.12:9060',
+    baseUrl: 'http://116.228.41.194:9060',
+    // baseUrl: 'http://192.168.100.12:9060',
     // baseUrl: 'http://192.168.100.100:38080',
 });
 
@@ -281,7 +282,9 @@ export class Questioning {
                 let adxData = await this.pushAdxSubject({
                     ti: adxBody.ti,
                     dsc: adxBody.dsc,
-                    checked_option: this.selectSubjectId || 0
+                    checked_option: this.selectSubjectId || 0,
+                    price: adxBody.price,
+                    code: this.subjectId
                 });
                 publishBody = {
                     titleId: adxData.question_id,
@@ -500,7 +503,7 @@ export class HomeInit {
         if (res.status) {
             return res.data;
         } else if (res.code == 401) {
-
+            throw 'not login';
         } else {
             alert('请稍后重试！');
             throw 'server error';
@@ -564,12 +567,13 @@ export class HomeInit {
         }
         Ajax('post', '/api/jwt/user/login', {phoneNum: phoneNum, messageCode: messageCode}).then(res => {
             if (res.status) {
-                window.location.reload();
                 // layerLogin.trigger();
-                // window.localStorage.setItem('access-token', res.data.token);
-                // this.token = res.data.token;
                 // this.loginBtnRef.style.display = 'none';
                 // this.inviteBtnRef.style.display = 'block';
+
+                window.localStorage.setItem('access-token', res.data.token);
+                this.token = res.data.token;
+                window.location.reload();
             } else {
                 alert(res.msg);
             }
