@@ -47,6 +47,7 @@ export class Compile {
                     this.dep.add(() => {
                         this.compileIf(node, attr, vm)
                     })
+                    node.removeAttribute(attr.nodeName)
                 }
 
                 //模板 *for

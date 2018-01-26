@@ -60,9 +60,9 @@ export class Questioning {
 
     constructor() {
         this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 0;
-        // this.subjectInit().then((bo) => {
-        //     bo && this.subjectEnd();
-        // });
+        this.subjectInit().then((bo) => {
+            bo && this.subjectEnd();
+        });
     }
 
     subjectNum = 0;//当前答题的顺序
@@ -457,7 +457,23 @@ export class HomeInit {
             this.loginbtn.style.display='block';
         }
         this.initEvent();
-        this.init();
+        // this.init();
+        // this.showAd();
+    }
+
+    showAd(){
+        let adRef = document.querySelector('#ad');
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.setAttribute('sid','dpnpnnWWWXnWpnoXRp');
+        script.dataset.app = '6';
+        script.src = 'http://js.bcadx.com/bcadx/mv2.js';
+        let script2 = document.createElement('script');
+        script2.type = 'text/javascript';
+        script2.innerHTML = 'var adspaceID="wUiBW2znJwDDAj_mm";';
+        adRef.innerHTML = '';
+        adRef.appendChild(script2);
+        adRef.appendChild(script);
     }
 
     token;//登陆标识
