@@ -51,7 +51,14 @@ export class Compile {
 
                 //模板 *for
                 if (attr.nodeName === '*for') {
-                    this.compileFor(node,attr);
+                    let comment = document.createComment(attr.nodeValue)
+                    comment.$node = node;
+                    node.parentNode.insertBefore(comment, node);
+                    node.parentNode.removeChild(node);
+                    let nodes = this.compileFor(comment, attr);
+                    this.dep.add(() => {
+                        this.compileFor(comment, attr, nodes);
+                    })
                 }
                 return true;
             })
@@ -75,10 +82,10 @@ export class Compile {
         let exgs = exg.split(/;/);
         let vs;
         let is = undefined;
-        if(exgs instanceof Array && exgs.length){
+        if (exgs instanceof Array && exgs.length) {
             vs = exgs[0].match(/let\s+(.*)\s+of\s+(.*)/);
             let index = exgs[1].match(/let\s+(.*)\s?=\s?index/);
-            if(index instanceof Array && index.length){
+            if (index instanceof Array && index.length) {
                 is = index[1].trim();
             }
         }
@@ -91,20 +98,28 @@ export class Compile {
         `)
     }
 
-    compileFor(node, attr) {
-        node.style.display = 'none';
+    compileFor(comment, attr, arr = []) {
+        let node = comment.$node;
+        if (arr instanceof Array && arr.length) {
+            arr.every(n => {
+                comment.parentNode.removeChild(n);
+                return true;
+            });
+            arr.length = 0;
+        }
         this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d, e) => {
             let copy = node.cloneNode(true);
-            copy.attributes.removeNamedItem('*for');
+            copy.removeAttribute('*for');
             copy.style.removeProperty('display');
-            if(!copy.getAttribute('style')) copy.removeAttribute('style');
-            node.parentNode.insertBefore(copy,node);
+            if (!copy.getAttribute('style')) copy.removeAttribute('style');
+            comment.parentNode.insertBefore(copy, comment);
+            arr.push(copy);
             let data = Object.create(this.vm.__proto__);
             data[d] = a;
             data[e] = b;
             this.compileNode(copy, data);
         });
-        node.parentNode.removeChild(node);
+        return arr;
     }
 
     compileIf(node, attr, vm = this.vm) {
@@ -118,7 +133,7 @@ export class Compile {
         values.every(va => {
             textContent.replace(va, value => {
                 let t = value.match(this.valueReg);
-                let val = this.isBooleanValue(this.compileFun(t[1],vm));
+                let val = this.isBooleanValue(this.compileFun(t[1], vm));
                 textContent = textContent.replace(t[0], val)
             });
             return true;
@@ -126,9 +141,9 @@ export class Compile {
         node.textContent = textContent;
     }
 
-    compileFun(exg, vm){
-        let fun = new Function('vm',`
-            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g,'\\\"')}")}
+    compileFun(exg, vm) {
+        let fun = new Function('vm', `
+            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
         `);
         return fun(vm);
     }
@@ -156,22 +171,22 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                             node.oninput = (event) => {
-                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
-                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
                         case 'checkbox':
                             node.onchange = (event) => {
-                                this.compileFun(`${attr.nodeValue}=${event.target.checked}`,vm)
+                                this.compileFun(`${attr.nodeValue}=${event.target.checked}`, vm)
                             };
                             break;
                         case 'radio':
                             node.onchange = (event) => {
-                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`,vm)
+                                this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
                     }
@@ -180,13 +195,12 @@ export class Compile {
             default:
                 node[`on${event}`] = (event) => {
                     vm.__proto__.$event = event;
-                    this.compileFun(attr.nodeValue,vm);
-                    Reflect.deleteProperty(vm.__proto__,'$event');
+                    this.compileFun(attr.nodeValue, vm);
+                    Reflect.deleteProperty(vm.__proto__, '$event');
                 };
         }
         node.removeAttribute(attr.nodeName)
     }
-
     compileAttr(node, attr, vm = this.vm) {
         let event = attr.nodeName.match(this.attrReg)[1];
         switch (event) {
@@ -246,18 +260,12 @@ export class Compile {
 
         node.removeAttribute(attr.nodeName)
     }
-
-    cssStyle2DomStyle(sName) {
-        return sName.replace(/^\-/, '').replace(/\-(\w)(\w+)/g, function (a, b, c) {
-            return b.toUpperCase() + c.toLowerCase();
-        });
-    }
-
 }
 
 class Dep {
     constructor() {
     }
+
     subs = [];
 
     add(sub) {
@@ -294,6 +302,7 @@ export class MVVM {
          */
         new Compile(this.ref, this.vm, this.dep);
 
+
         /**
          * 值变更检测
          */
@@ -304,14 +313,77 @@ export class MVVM {
     ref;
     dep;
 
-    def(data){
+    defValue(obj, key, val, enumerable) {
+        Object.defineProperty(obj, key, {
+            value: val,
+            enumerable: !!enumerable,
+            configurable: true,
+            writable: true
+        })
+    }
+
+    protoAugment(target, src) {
+        target.__proto__ = src;
+    }
+
+    copyAugment(target, src, keys) {
+        for (let i = 0, l = keys.length; i < l; i++) {
+            let key = keys[i];
+            this.defValue(target, key, src[key]);
+        }
+    }
+
+    def(data) {
         if (!data || typeof data !== 'object') {
             return;
         }
 
-        if(data instanceof Array){
-
-        }else{
+        if (data instanceof Array) {
+            let arrayProto = Array.prototype;
+            let arrayMethods = Object.create(arrayProto);
+            [
+                'push',
+                'pop',
+                'shift',
+                'unshift',
+                'splice',
+                'sort',
+                'reverse'
+            ].forEach(method => {
+                let original = arrayMethods[method];
+                let that = this;
+                this.defValue(arrayMethods, method,  function() {
+                    // let arguments$1 = arguments;
+                    // let i = arguments.length;
+                    // let args = new Array(i);
+                    // while (i--) {
+                    //     args[i] = arguments$1[i]
+                    // }
+                    // console.info(args)
+                    console.info(...arguments)
+                    console.info(this)
+                    let result = original.apply(this, arguments);
+                    that.dep.notify();
+                    return result;
+                    // return original.apply(this, args);
+                })
+            })
+            this.copyAugment(data, arrayMethods, Object.getOwnPropertyNames(arrayMethods))
+            Object.keys(data).forEach(key => {
+                this.def(data[key]);
+                data[`_${key}`] = data[key];
+                Object.defineProperty(data, key, {
+                    get: () => {
+                        return data[`_${key}`]
+                    },
+                    set: (val) => {
+                        this.def(val);
+                        data[`_${key}`] = val;
+                        this.dep.notify()
+                    }
+                })
+            })
+        } else {
             Object.keys(data).forEach(key => {
                 this.def(data[key]);
                 data[`_${key}`] = data[key];
@@ -341,7 +413,7 @@ class Test {
         this.g = void 0;
         this.h = 'aaa';
         this.list = [
-            1,2,3,4,5,6,7,8,9,10
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         ];
         this.list2 = [
             {id: 1, name: '一'},
@@ -352,16 +424,16 @@ class Test {
         ];
         new MVVM("#body", this);
 
-        setTimeout(()=> {
-            console.info(this.list2[0])
-        },3000)
+        setTimeout(() => {
+            console.info(this.list2.push({id: 6, name: '六'},))
+        }, 1000)
 
         document.body.innerText
     }
 
     f = {a: 666}
 
-    test(event,index) {
+    test(event, index) {
         console.info(event)
         console.info(index)
     }
@@ -380,11 +452,11 @@ class Test {
     }
 
 
-    str(){
+    str() {
         return '11111'
     }
 
-    bo(b){
+    bo(b) {
         return b;
     }
 }
