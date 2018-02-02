@@ -354,19 +354,9 @@ export class MVVM {
                 let original = arrayMethods[method];
                 let that = this;
                 this.defValue(arrayMethods, method,  function() {
-                    // let arguments$1 = arguments;
-                    // let i = arguments.length;
-                    // let args = new Array(i);
-                    // while (i--) {
-                    //     args[i] = arguments$1[i]
-                    // }
-                    // console.info(args)
-                    console.info(...arguments)
-                    console.info(this)
                     let result = original.apply(this, arguments);
                     that.dep.notify();
                     return result;
-                    // return original.apply(this, args);
                 })
             })
             this.copyAugment(data, arrayMethods, Object.getOwnPropertyNames(arrayMethods))
@@ -424,12 +414,6 @@ class Test {
             {id: 5, name: '五'},
         ];
         new MVVM("#body", this);
-
-        setTimeout(() => {
-            console.info(this.list2.push({id: 6, name: '六'},))
-        }, 1000)
-
-        document.body.innerText
     }
 
     f = {a: 666}

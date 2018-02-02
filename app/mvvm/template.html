@@ -24,7 +24,7 @@
 
     <p *for="let i of list;let index = index;">
         <span>{{index}}</span>
-        <a href="javascript:void 0" (click)="i = 1000">{{i}}</a>
+        <a href="javascript:void 0" (click)="test($event,i)">{{i}}</a>
     </p>
 
     <br>
