@@ -67,18 +67,25 @@ module.exports = [
     //     type:'.ts',
     //     title:'fileUpload'
     // },
+    // {
+    //     path:'dati',
+    //     output:'dati',
+    //     publicPath:'',
+    //     name:'dati-index',
+    //     title:'答题'
+    // },
+    // {
+    //     path:'mvvm',
+    //     output:'mvvm',
+    //     publicPath:'',
+    //     name:'mvvm-index',
+    //     title:'mvvm'
+    // },
     {
-        path:'dati',
-        output:'dati',
+        path:'table',
+        output:'table',
         publicPath:'',
-        name:'dati-index',
-        title:'答题'
-    },
-    {
-        path:'mvvm',
-        output:'mvvm',
-        publicPath:'',
-        name:'mvvm-index',
-        title:'mvvm'
+        name:'table-index',
+        title:'table'
     },
 ];
