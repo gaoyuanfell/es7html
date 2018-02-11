@@ -82,6 +82,13 @@ module.exports = [
     //     title:'mvvm'
     // },
     {
+        path:'mvvm2',
+        output:'mvvm2',
+        publicPath:'',
+        name:'mvvm2-index',
+        title:'mvvm2'
+    },
+    {
         path:'table',
         output:'table',
         publicPath:'',
