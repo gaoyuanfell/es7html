@@ -173,7 +173,7 @@ export class Compile {
             let values = textContent.match(new RegExp(this.valueReg, 'ig'));
             values.forEach(val => {
                 let exp = val.match(this.valueReg)[1]
-                new Watcher(this.vm, exp.trim(), () => { // 实例化订阅者
+                new Watcher(this.vm, exp.trim(), () => {
                     this.compileText(node, vm)
                 });
             })
