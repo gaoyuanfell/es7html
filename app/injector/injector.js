@@ -72,3 +72,15 @@ function WorkerFactory() {
 
 }
 
+function sleep(time = 1000) {
+    return new Promise((resolve, reject)=> {
+        setTimeout(()=> {
+            resolve()
+        },time)
+    })
+}
+
+async function asd() {
+    await sleep();
+    console.info('ok')
+}

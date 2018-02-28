@@ -81,18 +81,18 @@ module.exports = [
     //     name:'mvvm-index',
     //     title:'mvvm'
     // },
-    {
-        path:'mvvm2',
-        output:'mvvm2',
-        publicPath:'',
-        name:'mvvm2-index',
-        title:'mvvm2'
-    },
-    {
-        path:'table',
-        output:'table',
-        publicPath:'',
-        name:'table-index',
-        title:'table'
-    },
+    // {
+    //     path:'mvvm2',
+    //     output:'mvvm2',
+    //     publicPath:'',
+    //     name:'mvvm2-index',
+    //     title:'mvvm2'
+    // },
+    // {
+    //     path:'table',
+    //     output:'table',
+    //     publicPath:'',
+    //     name:'table-index',
+    //     title:'table'
+    // },
 ];

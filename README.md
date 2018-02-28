@@ -35,3 +35,7 @@ pwd:YCdev@#$2017
 帐号            root
 密码            ycmedia_2015
 路径  /opt/cloud/client/tomcat/webapps/question
+
+
+如何添加一个项目
+观看build/config.js即可。
