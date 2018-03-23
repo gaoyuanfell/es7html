@@ -59,6 +59,7 @@ export class Questioning {
     static subject_id = 'subject-id';
 
     constructor() {
+        //
         this.subjectNum = +window.localStorage.getItem(Questioning.subject_data_num) || 0;
         this.subjectInit().then((bo) => {
             bo && this.subjectEnd();

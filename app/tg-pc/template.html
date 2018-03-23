@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="Description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script>
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (!IsPC()) {
+            location.href = '/'
+        }
+    </script>
+</head>
+<body>
+<div class="content-modal">
+    <div class="top">
+        <div class="logo">
+            <img src="./static/images/logo.png" alt="">
+        </div>
+        <div class="phone"><img src="./static/images/phone.png" alt=""></div>
+    </div>
+
+    <div class="content" margin-header>
+        <div class="scroll-content">
+            <img src="./static/images/banner.png" alt="" class="banner">
+            <div class="main">
+                <p><img src="./static/images/01.png" alt=""></p>
+                <p><img src="./static/images/02.png" alt=""></p>
+                <p><img src="./static/images/03.png" alt=""></p>
+                <p><img src="./static/images/04.png" alt=""></p>
+            </div>
+            <div class="footer">
+                Copyright (C) 2016-2018 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1273200326'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1273200326' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

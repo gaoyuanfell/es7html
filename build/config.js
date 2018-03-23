@@ -67,18 +67,33 @@ module.exports = [
     //     type:'.ts',
     //     title:'fileUpload'
     // },
+    // {
+    //     path:'dati',
+    //     output:'dati',
+    //     publicPath:'',
+    //     name:'dati-index',
+    //     title:'答题'
+    // },
+    // {
+    //     path:'mvvm',
+    //     output:'mvvm',
+    //     publicPath:'',
+    //     name:'mvvm-index',
+    //     title:'mvvm'
+    // },
     {
-        path:'dati',
-        output:'dati',
+        path:'tg-lcinc',
+        output:'tg-lcinc',
         publicPath:'',
-        name:'dati-index',
-        title:'答题'
+        name:'tg-index',
+        title:'乐橙'
     },
     {
-        path:'mvvm',
-        output:'mvvm',
+        path:'tg-pc',
+        output:'tg-pc',
+        base:'/pc/',
         publicPath:'',
-        name:'mvvm-index',
-        title:'mvvm'
+        name:'tgpc-index',
+        title:'乐橙'
     },
 ];

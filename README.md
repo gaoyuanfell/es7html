@@ -26,7 +26,7 @@ pwd:YCdev@#$2017
 2018-01-22
 答题小程序版
 
-崔永利
+崔永丽
 2018-01-22
 银橙官网设计改版
 
@@ -35,3 +35,9 @@ pwd:YCdev@#$2017
 帐号            root
 密码            ycmedia_2015
 路径  /opt/cloud/client/tomcat/webapps/question
+
+
+#tg-lcinc
+
+域名：tg.lcinc.cn
+备注：space:lctuiguang
