@@ -1,8 +1,103 @@
+export class MVVM {
+    constructor(id, value) {
+        if (!id) throw `dom节点不能为空`;
+        if (!value) throw `值不能为空`;
+        this.vm = value;
+        this.ref = id;
+        if (!(this.ref instanceof Element)) {
+            this.ref = window.document.querySelector(`${this.ref}`)
+        }
+        new Observe(this.vm);
+        new Compile(this.ref, this.vm);
+    }
+}
+
+export class Observe {
+    constructor(data) {
+        this.proxy(data);
+    }
+
+    proxy(data) {
+        if (!data || typeof(data) !== 'object') {
+            return
+        }
+        Object.keys(data).forEach(key =>
+            this.defineReactive(data, key, data[key])
+        )
+    }
+
+    defineReactive(data, key, value) {
+        let dep = new Dep();
+        this.proxy(value);
+        Object.defineProperty(data, key, {
+            get: function () {
+                if (Dep.target) { // 往订阅器添加订阅者
+                    dep.add(Dep.target)
+                }
+                return value
+            },
+            set: function (newValue) {
+                if (value !== newValue) {
+                    value = newValue;
+                    dep.notify()
+                }
+            }
+        })
+    }
+}
+
+export class Dep {
+    constructor() {
+        this.subs = [];
+    }
+
+    static target;
+    subs;
+
+    add(sub) {
+        this.subs.push(sub);
+    }
+
+    notify() {
+        this.subs.forEach(function (sub) {
+            sub.update()
+        })
+    }
+}
+
+export class Watcher {
+    constructor(vm, exp, fn) {
+        this.vm = vm;
+        this.exp = exp;
+        this.noop = fn;
+        this.value = this.getValue();
+    }
+
+    vm;
+    exp;
+    noop;
+    value;
+
+    update() {
+        this.run()
+    }
+
+    run() {
+        this.noop && this.noop();
+    }
+
+    getValue() {
+        Dep.target = this;
+        const value = this.vm[this.exp];
+        Dep.target = null;
+        return value
+    }
+}
+
 export class Compile {
-    constructor(ref, value, dep) {
+    constructor(ref, value) {
         this.vm = value;
         this.ref = ref;
-        this.dep = dep;
         this.ref.style.display = 'none';
         this.compileElement(this.ref);
         this.ref.style.display = 'block';
@@ -10,7 +105,6 @@ export class Compile {
 
     ref;
     vm;
-    dep;
 
     eventReg = /\((.*)\)/;
     attrReg = /\[(.*)\]/;
@@ -36,30 +130,36 @@ export class Compile {
                 if (this.attrReg.test(attr.nodeName)) {
                     this.compileAttr(node, attr, vm);
 
-                    this.dep.add(() => {
+                    new Watcher(this.vm, attr.nodeValue.trim(), () => { // 实例化订阅者
                         this.compileAttr(node, attr, vm)
-                    })
+                    });
+                    // this.dep.add(() => {
+                    //     this.compileAttr(node, attr, vm)
+                    // })
                 }
 
                 //模板 *if
                 if (attr.nodeName === '*if') {
                     this.compileIf(node, attr, vm);
-                    this.dep.add(() => {
-                        this.compileIf(node, attr, vm)
-                    })
+                    // this.dep.add(() => {
+                    //     this.compileIf(node, attr, vm)
+                    // })
+                    new Watcher(this.vm, attr.nodeValue.trim(), () => { // 实例化订阅者
+                        this.compileIf(node, attr, vm);
+                    });
                     node.removeAttribute(attr.nodeName)
                 }
 
                 //模板 *for
                 if (attr.nodeName === '*for') {
-                    let comment = document.createComment(attr.nodeValue)
+                    let comment = document.createComment(attr.nodeValue);
                     comment.$node = node;
                     node.parentNode.insertBefore(comment, node);
                     node.parentNode.removeChild(node);
                     let nodes = this.compileFor(comment, attr);
-                    this.dep.add(() => {
-                        this.compileFor(comment, attr, nodes);
-                    })
+                    // this.dep.add(() => {
+                    //     this.compileFor(comment, attr, nodes);
+                    // })
                 }
                 return true;
             })
@@ -67,10 +167,15 @@ export class Compile {
 
         //绑值表达式 {{}} /\s*(\.)\s*/
         if (node.nodeType === 3 && this.valueReg.test(text)) {
-            node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
+            let textContent = node.$textContent = node.textContent.replace(/\s*(\.)\s*/, '.');
             this.compileText(node, vm);
-            this.dep.add(() => {
-                this.compileText(node, vm)
+
+            let values = textContent.match(new RegExp(this.valueReg, 'ig'));
+            values.forEach(val => {
+                let exp = val.match(this.valueReg)[1]
+                new Watcher(this.vm, exp.trim(), () => {
+                    this.compileText(node, vm)
+                });
             })
         }
         if (node.childNodes && node.childNodes.length && !~Array.from(node.attributes).map(attr => attr.nodeName).indexOf('*for')) {
@@ -172,11 +277,16 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                             node.oninput = (event) => {
+                                console.info(event.inputType)
+                                console.info(event.type);
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
+                                console.info(this.vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
+                                console.info(event.inputType)
+                                console.info(event.type);
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
@@ -202,6 +312,7 @@ export class Compile {
         }
         node.removeAttribute(attr.nodeName)
     }
+
     compileAttr(node, attr, vm = this.vm) {
         let event = attr.nodeName.match(this.attrReg)[1];
         switch (event) {
@@ -258,138 +369,7 @@ export class Compile {
                     }
                 }
         }
-
         node.removeAttribute(attr.nodeName)
-    }
-}
-
-class Dep {
-    constructor() {
-    }
-
-    subs = [];
-
-    add(sub) {
-        this.subs.unshift(sub);
-    }
-
-    remove(sub) {
-        let index = this.subs.indexOf(sub);
-        if (index !== -1) {
-            this.subs.splice(index, 1);
-        }
-    }
-
-    notify() {
-        this.subs.forEach(sub => {
-            if (sub instanceof Function) sub();
-        });
-    }
-}
-
-export class MVVM {
-    constructor(id, value) {
-        if (!id) throw `dom节点不能为空`;
-        if (!value) throw `值不能为空`;
-        this.vm = value;
-        this.ref = id;
-        this.dep = new Dep();
-        if (!(this.ref instanceof Element)) {
-            this.ref = window.document.querySelector(`${this.ref}`)
-        }
-
-        /**
-         * 解析
-         */
-        new Compile(this.ref, this.vm, this.dep);
-
-
-        /**
-         * 值变更检测
-         */
-        this.def(this.vm)
-    }
-
-    vm;
-    ref;
-    dep;
-
-    defValue(obj, key, val, enumerable) {
-        Object.defineProperty(obj, key, {
-            value: val,
-            enumerable: !!enumerable,
-            configurable: true,
-            writable: true
-        })
-    }
-
-    protoAugment(target, src) {
-        target.__proto__ = src;
-    }
-
-    copyAugment(target, src, keys) {
-        for (let i = 0, l = keys.length; i < l; i++) {
-            let key = keys[i];
-            this.defValue(target, key, src[key]);
-        }
-    }
-
-    def(data) {
-        if (!data || typeof data !== 'object') {
-            return;
-        }
-
-        if (data instanceof Array) {
-            let arrayProto = Array.prototype;
-            let arrayMethods = Object.create(arrayProto);
-            [
-                'push',
-                'pop',
-                'shift',
-                'unshift',
-                'splice',
-                'sort',
-                'reverse'
-            ].forEach(method => {
-                let original = arrayMethods[method];
-                let that = this;
-                this.defValue(arrayMethods, method,  function() {
-                    let result = original.apply(this, arguments);
-                    that.dep.notify();
-                    return result;
-                })
-            })
-            this.copyAugment(data, arrayMethods, Object.getOwnPropertyNames(arrayMethods))
-            Object.keys(data).forEach(key => {
-                this.def(data[key]);
-                data[`_${key}`] = data[key];
-                Object.defineProperty(data, key, {
-                    get: () => {
-                        return data[`_${key}`]
-                    },
-                    set: (val) => {
-                        this.def(val);
-                        data[`_${key}`] = val;
-                        this.dep.notify()
-                    }
-                })
-            })
-        } else {
-            Object.keys(data).forEach(key => {
-                this.def(data[key]);
-                data[`_${key}`] = data[key];
-                Object.defineProperty(data, key, {
-                    get: () => {
-                        return data[`_${key}`]
-                    },
-                    set: (val) => {
-                        this.def(val);
-                        data[`_${key}`] = val;
-                        this.dep.notify()
-                    }
-                })
-            })
-        }
     }
 }
 
@@ -406,44 +386,13 @@ class Test {
         this.list = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         ];
-        this.list2 = [
-            {id: 1, name: '一'},
-            {id: 2, name: '二'},
-            {id: 3, name: '三'},
-            {id: 4, name: '四'},
-            {id: 5, name: '五'},
-        ];
         new MVVM("#body", this);
+
+        setTimeout(() => {
+            this.a = 600
+        }, 2000)
     }
 
-    f = {a: 666}
-
-    test(event, index) {
-        console.info(event)
-        console.info(index)
-    }
-
-    change(event) {
-        console.info(event)
-    }
-
-    input(event, a) {
-        console.info(a)
-        this.a = event.target.value
-    }
-
-    asd(event, b, s, num) {
-        console.info(num);
-    }
-
-
-    str() {
-        return '11111'
-    }
-
-    bo(b) {
-        return b;
-    }
 }
 
 new Test();

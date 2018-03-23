@@ -81,6 +81,7 @@ module.exports = [
     //     name:'mvvm-index',
     //     title:'mvvm'
     // },
+<<<<<<< HEAD
     {
         path:'tg-lcinc',
         output:'tg-lcinc',
@@ -96,4 +97,20 @@ module.exports = [
         name:'tgpc-index',
         title:'乐橙'
     },
+=======
+    // {
+    //     path:'mvvm2',
+    //     output:'mvvm2',
+    //     publicPath:'',
+    //     name:'mvvm2-index',
+    //     title:'mvvm2'
+    // },
+    // {
+    //     path:'table',
+    //     output:'table',
+    //     publicPath:'',
+    //     name:'table-index',
+    //     title:'table'
+    // },
+>>>>>>> 183a2d371311a6f2bfa60a9893467e5477db6b86
 ];

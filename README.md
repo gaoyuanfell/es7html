@@ -37,7 +37,12 @@ pwd:YCdev@#$2017
 路径  /opt/cloud/client/tomcat/webapps/question
 
 
+<<<<<<< HEAD
 #tg-lcinc
 
 域名：tg.lcinc.cn
 备注：space:lctuiguang
+=======
+如何添加一个项目
+观看build/config.js即可。
+>>>>>>> 183a2d371311a6f2bfa60a9893467e5477db6b86
