@@ -1,0 +1,104 @@
+#arrow{
+    width: 0.4rem;
+    height: 0.21rem;
+    background: url(../static/images/arrow.png) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    z-index: 10;
+    bottom: 0.3rem;
+    left: 50%;
+    margin-left: -0.1625rem;
+    animation:arrow 3s ease 0s infinite;
+    -webkit-animation:arrow 3s ease 0s infinite;
+}
+.swiper-container{ width: 100%; height: 100%; overflow: hidden;margin: 0 auto;}
+.yc1{
+    width: 100%;
+    height:100%;
+    background: url("../static/images/yq1bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    img{
+        width: 100%;
+        display: block;
+        padding-top: 0.6rem;
+    }
+}
+.yc2{
+    width: 100%;
+    height:100%;
+    background: url("../static/images/yq2bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    img{
+        width: 100%;
+        display: block;
+    }
+    .p1{
+        padding-top: 0.54rem;
+    }
+    .p2{
+        padding-top:4.1rem;
+    }
+}
+.yc3{
+    width: 100%;
+    height:100%;
+    background: url("../static/images/yq3bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    img{
+        width: 100%;
+        display: block;
+        padding-top: 0.6rem;
+    }
+}
+.yc4{
+    width: 100%;
+    height:100%;
+    background: url("../static/images/yq4bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    img{
+        width: 100%;
+        display: block;
+        padding-top: 0.78rem;
+    }
+}
+.yc5{
+    width: 100%;
+    height:100%;
+    background: url("../static/images/yq5bg.jpg") no-repeat;
+    background-size: 100% 100%;
+    .p1{
+        width: 100%;
+        display: block;
+        padding-top: 0.9rem;
+    }
+    .p2{
+        padding-top:0.26rem;
+        width: 2.8rem;
+        height:auto;
+        margin: 0 auto;
+    }
+}
+
+
+
+
+/**********arrow***********/
+@-webkit-keyframes arrow {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0)
+    }
+}
+@keyframes arrow {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0)
+    }
+}

@@ -110,4 +110,11 @@ module.exports = [
     //     name:'table-index',
     //     title:'table'
     // },
+    {
+        path:'yqdh',
+        output:'yqdh',
+        publicPath:'',
+        name:'yq-index',
+        title:'云栖大会'
+    },
 ];
