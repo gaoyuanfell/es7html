@@ -81,21 +81,21 @@ module.exports = [
     //     name:'mvvm-index',
     //     title:'mvvm'
     // },
-    {
-        path:'tg-lcinc',
-        output:'tg-lcinc',
-        publicPath:'',
-        name:'tg-index',
-        title:'乐橙'
-    },
-    {
-        path:'tg-pc',
-        output:'tg-pc',
-        base:'/pc/',
-        publicPath:'',
-        name:'tgpc-index',
-        title:'乐橙'
-    },
+    // {
+    //     path:'tg-lcinc',
+    //     output:'tg-lcinc',
+    //     publicPath:'',
+    //     name:'tg-index',
+    //     title:'乐橙'
+    // },
+    // {
+    //     path:'tg-pc',
+    //     output:'tg-pc',
+    //     base:'/pc/',
+    //     publicPath:'',
+    //     name:'tgpc-index',
+    //     title:'乐橙'
+    // },
     // {
     //     path:'mvvm2',
     //     output:'mvvm2',
