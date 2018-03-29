@@ -115,6 +115,6 @@ module.exports = [
         output:'yqdh',
         publicPath:'',
         name:'yq-index',
-        title:'云栖大会'
+        title:'智橙移动'
     },
 ];
