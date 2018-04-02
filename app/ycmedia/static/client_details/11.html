@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 萌店
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body "> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/11-1.png" class="yccm_client_details_left"/>
+				<div class="yccm_client_details_right">
+					<div class="client_details_right_top">萌店 </div>
+					<div class="client_details_right_name">案例时间 :<span>2015年</span></div>
+					
+					<div class="client_details_right_name">营销目标 :<span>通过今日头条精准投放，借助平台3.5亿海量用户群体，短时间内迅速扩大品牌知名度，引发网民对品牌的关注与认知，从而提高萌店APP下载率。</span></div>
+					<div class="client_details_right_name">目标受众: <span>1.网购达人 18-30岁
+热爱网上购物，女性偏多，偏好移动端购物群体
+对价格具有一定的敏感度，容易被返利、免税吸引
+热爱生活休闲，对穿搭时尚、美妆护肤等有一定的追求</span></div>
+					<div class="client_details_right_name"><span>2.微商群体 22-30岁
+有生意头脑，时间宽裕，具有一颗创业的心和热情的群体
+钟爱可靠、低门槛、有多渠道推广，且操作便捷的平台
+社交产品重度使用者，注重人际关系的维护</span>
+					<div class="client_details_right_name">媒体策略 :<span>选择广点通、智橙DSP、搜狐汇算和今日头条，基于海量用户资源和个性化推荐引擎，分析人的特征与文章内容语义特征，实现个性化精准推荐，全面覆盖目标受众、高效传递品牌信息。</span>						
+					</div>
+					
+					<div class="client_details_right_name">广告展示 :<span>信息流原生广告</span></div>
+					
+					<div class="client_details_right_name">技术运用 :<span>1.社交和用户行为分析，用户通过微信，微博，QQ账号或注册今日头条账号登陆今日头条。根据其社交行为、阅读行为、地理位置、职业、年龄等挖掘出兴趣。通过社交行为分析，5秒钟计算出用户兴趣；通过用户行为分析，用户每次动作后，10秒内更新用户模型。</span></div>										
+				</div>												
+			</div>				
+		</div>
+		
+		<div class="client_details_body_text">
+			<p>2.基于机器学习的个性化推荐引擎，根据人的特征、环境特征、文章特征三者的匹配程度进行推荐。</p>
+			<p>3.全方位用户分析，从性别、年龄、兴趣、职业、作息时间、地域、天气、关键词等多维度定向投放，精准定位品牌受众进行传播。</p>
+		</div>	
+		
+		<div class="client_details_body">效果总结 :</div>
+		<div class="client_details_body_text">
+			<p>本次广告投放，平均CTR达到2.29%，注册成本约为20元。</p>
+			<p>投放时间段选取工作日及用户打开今日头条的几个高峰段集中投放，密集覆盖目标用户，在投放过程中，依据投放数据实时分析效果，通过优化投放策略等措施，进一步扩展匹配的精准目标受众人群，提高广告效率。</p>
+		</div>				
+	</body>
+</html>
+
+<script>
+		//获取窗口高度
+		var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body ').css('height',ch-200)
+		
+		//当窗口大小改变的时候
+		window.onresize=function(){
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body ').css('height',ch-200)
+		}
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		
+		$('#yccm_client_return').on('click', function(){
+			parent.layer.closeAll('iframe');
+		})
+</script>

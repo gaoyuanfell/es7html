@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 贝贝网
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body "> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/2-2.png" class="yccm_client_details_left"/>
+				<div class="yccm_client_details_right">
+					<div class="client_details_right_top">贝贝网 </div>
+					<div class="client_details_right_name">案例时间 :<span>2015年</span></div>
+					
+					<div class="client_details_right_name">营销目标 :<span>通过广点通精准广告推送，引流目标用户至贝贝网，提升流量，促成销售。</span></div>
+					<div class="client_details_right_name">目标受众: <span>以25至30岁产前孕妇、25至35岁职场妈妈为主，生活节奏快、工作压力大，消费感性、喜欢新颖多变的生活方式，搜集、关注一切关于孩子的讯息。</span></div>
+					<div class="client_details_right_name">媒体策略 :
+						<span>选择智橙DSP和广点通效果推广平台，聚合QQ、QQ空间、微信、腾讯新闻客户端、QQ音乐等数十个社交平台，精准锁定独立时尚、
+							网购频次高的年轻妈妈群体。
+						</span>
+					</div>
+					
+					<div class="client_details_right_name">广告展示 :
+						<span>QQ秀大图，QQ秀小图，QQ空间个人中心，信息流原生广告</span>
+					</div>
+					
+					<div class="client_details_right_name">技术运用 :
+						<span>在投放的过程中，广点通利用腾讯大数据处理算法帮助贝贝网对用户精准定向，依托腾讯用户人口数据属性（年龄、性别、社会阶层、教育水平等）判断，结合多维度访客定向，找到符合品牌需求的目标用户，并结合不同消费群体设计相对应的创意素材，将广告信息精准推送给贝贝网的目标受众。
+						</span>
+					</div>
+					
+					<div class="client_details_right_name">效果总结 :
+						<span>本次投放共产生超过1亿次曝光、300万次点击。</span>
+						<span>本次投放主要覆盖全国一二线城市及各省会城市，对受众进行精准曝光，有效吸引目标人群及潜在人群访问贝贝网并了解商品及推广信息，促成订单转化，最终实现ROI的提升。</span>
+					</div>
+				</div>
+			</div>								
+
+		</div>				
+	</body>
+</html>
+
+<script>
+		//获取窗口高度
+		var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body').css('height',ch-200)
+		
+		//当窗口大小改变的时候
+		window.onresize=function(){
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body').css('height',ch-200)
+		}
+		
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		$('#yccm_client_return').on('click', function(){
+			parent.layer.closeAll('iframe');
+		})
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 闪电降价
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body clear"> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/17-06.png" class="yccm_client_details_left"/>
+				<div class="yccm_client_details_right">
+					<div class="client_details_right_top">闪电降价 </div>
+					<div class="client_details_right_name">案例时间 :<span>2017年</span></div>
+					<div class="client_details_right_name">营销目标 :<span>通过智橙平台精准广告推送，高效传递品牌信息，
+有效提升精准度和转化效果，为品牌带来更多有效用户。</span></div>
+					
+					<div class="client_details_right_img">
+						<img src="../images/imgPopup/sdjj.jpg" alt="" class="">
+					</div>
+					
+				</div>
+			</div>
+						
+			<!--<div class="client_details_body">广告展示 :</div>
+			<div class="client_details_body_text">
+				<p>空间feeds，原生广告，新闻客户端小图 </p>
+			</div>
+			
+			<div class="client_details_body">技术运用 :</div>
+			<div class="client_details_body_text">
+				<p>广点通利用腾讯大数据处理算法帮助e袋洗对用户精准定向，依托腾讯用户人口数据属性（年龄、性别、消费水平等）判断，结合DMP智慧定向系统，找到符合品牌需求的目标用户，并结合不同人群设计相应的素材创意，将广告信息精准推送给e袋洗的目标受众。</p>
+			</div>-->
+			
+			<!--<div class="client_details_body">效果总结 :</div>
+			<div class="client_details_body_text">
+				<p>本次投放共产生超过3亿次曝光、500万次点击。下载成本在1-3元左右，安卓激活成本在5-10元之间，IOS激活成本在20-25元左右。</p>
+				<p>本次投放主要覆盖全国一二线城市及各省会城市，对受众进行精准曝光，有效吸引目标人群，促成订单转化，最终实现ROI的提升。</p>
+			</div>-->
+
+		</div>				
+	</body>
+</html>
+
+<script>
+	var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body ').css('height',ch-200)
+		//窗口改动的时候	
+		window.onresize=function(){
+			//获取窗口高度
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body ').css('height',ch-200)
+			console.log(ch);
+		}
+		
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		
+		$('#yccm_client_return').on('click', function(){
+		parent.layer.closeAll('iframe');
+		})
+</script>

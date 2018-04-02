@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 唯品会
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body "> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/16-1.png"/>
+				<div class="yccm_client_details_right yccm_client_details_right1">
+					<div class="client_details_right_top">唯品会 </div>
+					<div class="client_details_right_name">案例时间 :<span>2015年</span></div>
+					
+					<div class="client_details_right_name">营销目标 :<span>精准锁定目标人群，提升“唯品会”官方网站流量，导入更多潜在目标用户，最终促成购买行为。</span></div>
+					<div class="client_details_right_name">目标受众: <span>以20至35岁年轻女性群体为主，对于服饰搭配、女性时尚、美容美妆、网购等有需求的人群，有一定消费水平。</span></div>
+					<div class="client_details_right_name">媒体策略 :<span>选择广点通、智汇推、陌陌、今日头条和智橙DSP平台进行投放，主要锁定时尚型、偏年轻的网络用户，主要集中在女性时尚类、购物类网站进行投放。</span>						
+					</div>
+					
+					<div class="client_details_right_name">广告展示 :<span>包括banner、button、升窗等多种形式，全方位展示广告信息</span></div>					
+					
+				</div>
+			</div>
+			
+			<div class="client_details_body">技术运用 :</div>
+			<div class="client_details_body_text">
+				<p>智橙DSP平台根据用户人口数据属性（年龄、性别、社会阶层、教育水平、兴趣等）判断，多维度访客定向，将广告信息精准推送给唯品会的目标用户。</p>
+				<p>内容定向：根据目标用户感兴趣的内容，选择如时尚类、购物类、门户类等网站投放；</p>
+				<p>行为定向：根据目标用户上网行为，如曾多次购买或浏览时尚服饰等进行投放；</p>
+				<p>回头客定向：根据用户品牌浏览记录，如曾浏览过唯品会等相关网站进行投放；</p>
+			</div>
+			
+			<div class="client_details_body">效果总结 :</div>
+			<div class="client_details_body_text">
+				<p>本次投放共产生超过2.85亿曝光，近97万点击，ROI达到了5以上，推广效果显著。</p>
+			</div>
+		</div>		
+	</body>
+</html>
+
+<script>
+		//获取窗口高度
+		var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body').css('height',ch-200)
+		
+		//当窗口大小改变的时候
+		window.onresize=function(){
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body').css('height',ch-200)
+		}
+		
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		$('#yccm_client_return').on('click', function(){
+			parent.layer.closeAll('iframe');
+		})
+</script>

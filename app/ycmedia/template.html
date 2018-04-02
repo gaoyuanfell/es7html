@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" type="text/css" href="static/css/jquery.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" />
+    <script>
+        var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
+        if(isMobile){
+            location.href='/wap'
+        }
+    </script>
+    <script src="static/js/jquery-1.11.2.min.js"></script>
+    <script src="static/js/jquery.fullPage.min.js"></script>
+    <script src="static/js/layer.js"></script>
+    <!--[if lt IE 9]><script src="static/js/respond.min.js"></script><![endif]-->
+
+</head>
+<body id="bod" class="bod">
+<img src="static/images/aaa.jpg" id="log" alt="银橙传媒  基于大数据的精准营销专家" title="银橙传媒  基于大数据的精准营销专家"/>
+<div id="yccm_client" class="yccm_client"></div>
+<div id="yc_left">
+    <div class="logo"></div>
+    <ul id="yc_menu">
+        <li data-menuanchor="page1" class="active"><a href="#page1"><i class="icon1"></i>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
+        <li data-menuanchor="page2"><a href="#page2"><i class="icon2"></i>业务板块</a></li>
+        <li data-menuanchor="page3"><a href="#page3"><i class="icon3"></i>媒体资源</a></li>
+        <li data-menuanchor="page4"><a href="#page4"><i class="icon4"></i>解决方案</a></li>
+        <li data-menuanchor="page5"><a href="#page5"><i class="icon5"></i>合作伙伴</a></li>
+        <li data-menuanchor="page6"><a href="#page6"><i class="icon6"></i>关于银橙</a></li>
+        <li data-menuanchor="page7"><a href="#page7"><i class="icon7"></i>投资者关系</a></li>
+    </ul>
+    <div class="codenum">
+        <p>证券代码 : 830999</p>
+        <p><a href="#" id="about">隐私条例</a></p>
+    </div>
+</div>
+<!--------------------以上是yc_left部分内容-------------->
+<div id="dowebok">
+    <div class="section yc_page1">
+        <img src="static/images/yc_index_p1.png" class="pg1"/>
+        <img src="static/images/yc_index_p2.png" class="pg2"/>
+        <img src="static/images/yc_index_p3.png" class="pg3"/>
+        <img src="static/images/yc_index_p41.png" class="pg4"/>
+        <div class="yc_wrapper">
+            <img src="static/images/yc_index_conp1.png" class="pg5"/>
+            <img src="static/images/yc_index_conp2.png" class="pg6"/>
+            <img src="static/images/yc_index_conp3.png" class="pg7"/>
+            <div class="pg1_link">
+                <!--<a href="#page6" class="a1">关于银橙</a>-->
+                <a href="#" id="succeed_case" class="a2">成功案例<div class="div1">CASE</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="section yc_page2">
+        <img src="static/images/yc_gpt_p1.png" class="pg1"/>
+        <img src="static/images/yc_gpt_p2.png" class="pg2"/>
+        <img src="static/images/yc_gpt_p3.png" class="pg3"/>
+        <img src="static/images/yc_gpt_p4.png" class="pg4"/>
+
+        <div class="slide">
+            <div class="slide-con slide-con01">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gpt2_con1p1.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><img src="static/images/zhiclogo.png" alt="" class="logo">智橙移动</div>
+                <div class="slide_con_botm">
+                    <p class="pg7">领先的信息流广告投放平台，2016年10月31日，银橙传媒智橙移动 V3全新上线，智橙V3是基于原2.0版本基础上的又一次全面升级，日覆盖9.5亿+移动终端，50亿+广告展现，2000+国内主流APP资源，4000+行业标签，5000+用户标签，从流量、数据、技术等方面进行全方位的优化，七大核心优势，专注服务于各大广告主，提升广告效果和投资回报率。
+                    </p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con02">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gpt2_con2p1.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><img src="static/images/baiclogo.png" alt="" class="logo">百橙联盟</p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">百橙联盟是银橙传媒旗下的供应方平台，通过整合、优化媒体方的库存广告位资源，挖掘更多有价值的库存流量分配给需求方，大程度的提高媒体的广告位填充率。基于银橙传媒YCould以及DMP等大数据分析平台，通过精准的人群定向技术，智能的多模型和算法，科学的广告位管理技术、实时的广告投放优化技术，帮助网络媒体优化广告资源，实现其价值，并达到提升收益的目的。
+                    </p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con03">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gpt2_con3p1.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><img src="static/images/leclogo.png" alt="" class="logo">乐橙互联</p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">乐橙互联科技有限公司成立于2016年，借助母公司上海银橙文化传媒股份有限公司多年互联网、大数据、新媒体经验和资本实力，通过自主开发的智能系统技术，在电子商务、本地生活服务、O2O、新媒体（新型场景化媒体+移动媒体）等领域积极拓展，致力于整合互联网行业、新零售行业资源，使个人消费者、合作伙伴都能从中获益。</p></div>
+            </div>
+        </div>
+        <!--<div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="slide_con_top">
+                <img src="images/yc_gpt2_con4p1.png" class="pg5"/></div>
+                <div class="slide_con_cont pg6 clear"><p class="fl"><span>智橙DSP&lt;!&ndash;&nbsp;V2&ndash;&gt;</span><a href="https://zc.adpush.cn/Login" target="_blank">用户登录&gt;&gt;</a> <br />全国最大的原生广告平台</p>
+                    <p class="fr"><span>百橙SSP</span><a href="http://ssp.chengadx.com/" target="_blank">用户登录&gt;&gt;</a><br />国内最具变现能力的广告供应平台</p></div>
+                <div class="slide_con_botm pg8 clear">
+                    <div class="gpt_lef1 fl">
+                        智橙DSP，基于大数据的原生广告交易平台。对接国内优质移动资源，日覆盖10亿移动终端，30亿次广告展现，1000+国内主流APP资源；依托立体交叉分析和多维定向技术，以多样化广告展现，为广告主带来最精准、性价比最高的广告曝光，颠覆性地提升广告效果和投资回报率。
+                    </div>
+                    <div class="gpt_rit1 fr">
+                        百橙SSP整合多方优质的媒体资源，形成最庞大媒体群、最全流量覆盖、最高效资源利用、最精准资源匹配的强大供应系统，通过分析处理访问流量、多维定向技术和强大的广告过滤功能，实现媒体广告资源价值利用最大化。
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gpt2_con4p1.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><img src="static/images/zhitlogo.png" alt="" class="logo">智投社交广告</p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">智投社交广告全面对接腾讯各大优质平台资源，日广告曝光量160亿，拥有全国90%整体社交用户份额，依托自身大数据，多维度描绘用户画像，精准锁定用户，结合海量的优质广告素材，同时严格把控广告质量，投放用户感兴趣的高品质广告，助广告主高效实现其营销目标。								</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con06">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gpt2_con6p1.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>广橙代理</span>一站式互联网媒体代理平台</p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">30+主流优质媒体，各大门户效果平台，主流社交平台，排名前列垂直类APP，主流浏览器。
+                        银橙传媒先后代理腾讯社交广告、今日头条、搜狐汇算、新浪扶翼、微博粉丝通、网易新闻、百度信息流、VIVO、OPPO、小米等众多互联网主流媒体资源产品，整合跨屏资源优势，集结精英运营团队，为各行各业广告主提供一站式互联网营销服务。</p></div>
+            </div>
+        </div>
+        <div class="fp-slidesNav bottom" style="margin-left: -84px;">
+            <ul>
+                <li><a href="#"><em class="em1">智橙移动<div></div></em><em class="em2">智橙移动<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">百橙联盟<div></div></em><em class="em2">百橙联盟<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">乐橙互联<div></div></em><em class="em2">乐橙互联<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">智投广告<div></div></em><em class="em2">智投广告<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">广橙代理<div></div></em><em class="em2">广橙代理<div></div></em><span></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section yc_page3">
+        <img src="static/images/yc_mtzy_p1.png" class="pg1"/>
+        <img src="static/images/yc_mtzy_p2.png" class="pg2"/>
+        <img src="static/images/yc_mtzy_p3.png" class="pg3"/>
+        <img src="static/images/yc_mtzy_p4.png" class="pg4"/>
+        <div class="slide">
+            <div class="slide-con slide-con01">
+                <div class="slide_con_top"><img src="static/images/yc_mtzy_conp.png" class="pg5"/></div>
+
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con02">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_mtzy2_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>全网媒体覆盖</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">月覆盖全国85%的互联网受众；丰富的媒体数据库，深入挖掘，不断完善；近20种广告展现形式，高冲击，强互动；频次控制，创意轮播，先进的广告投放技术。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con03">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_mtzy3_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>Wi-Fi无线</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">在无线移动端，银橙传媒整合全国数百家移动应用，涵盖包括新闻、娱乐、时尚、汽车等15大类主流媒体频道，月覆盖全国逾4.5亿移动网民。银橙传媒拥有无线端媒体资源，包括无线WiFi（橙WiFi终端覆盖）、户外媒体终端（户外大屏/电子广告牌等）、智能家居等独段媒体资源，针对线下场景及受众，满足各类企业的场景化精准营销需求。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_mtzy4_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>广告交易市场</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">整合接入广点通、百度、Tanx、ADVIEW、科大讯飞、今日头条、微信、陌陌、WiFi万能钥匙、网易、猎豹、秒针、好耶等国内主流广告交易市场的广告资源，覆盖数百家供应方平台，对不同广告交易市场进行数据资源整合和标签化细分，精准锁定流量的去向。开放式广告交易市场的不断拓展，已经成为银橙传媒整合媒体资源一股源源不断、不可或缺的新鲜活力，在数据为本、流量为王的媒体时代，银橙传媒正运转着庞大能量体。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con05">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_mtzy5_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>家庭软件</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">家庭软件银橙传媒自主开发并代理总计200多款应用软件，涵盖包括视频、音乐、下载、制图、浏览器等在内的6000多万软件应用人群。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con06">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_mtzy6_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>ADCafe网吧</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">银橙传媒网吧媒体，囊括全国一、二线城市总约45000家网吧，覆盖逾5000万年龄在18至35岁之间的互联网用户，单日注册用户超过25万人次，单日登陆并创建角色用户超过15万人次。根据网吧网民行为，锁定用户从开机、应用娱乐、到离开的动态，设定开机广告、桌面图标、跟随升窗、精准升窗、退弹广告等十几种广告展现形式，紧随用户，高效互动。</p></div>
+            </div>
+        </div>
+        <div class="fp-slidesNav bottom" style="margin-left: -84px;">
+            <ul>
+                <li><a href="#"><em class="em1">流量覆盖<div></div></em><em class="em2">流量覆盖<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">多屏整合<div></div></em><em class="em2">多屏整合<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">WiFi无线<div></div></em><em class="em2">WiFi无线<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">广告资源<div></div></em><em class="em2">广告资源<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">家庭软件<div></div></em><em class="em2">家庭软件<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">ADCafe网吧<div></div></em><em class="em2">ADCafe网吧<div></div></em><span></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section yc_page4">
+        <img src="static/images/yc_jiejuefa_p1.png" class="pg1"/>
+        <img src="static/images/yc_jiejuefa_p2.png" class="pg2"/>
+        <img src="static/images/yc_jiejuefa_p3.png" class="pg3"/>
+        <img src="static/images/yc_jiejuefa_p41.png" class="pg4"/>
+        <div class="slide">
+            <div class="slide-con slide-con01">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>一切以客户需求为导向</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">银橙传媒以客户需求为第一要义，为客户提供多元、个性化营销解决方案，迄今为止，已为超过1500多家客户提供数字营销服务，包括电子商务、品牌、网络服务、网络游戏、移动等领域，在广告界营造了优秀的服务口碑。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con02">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa2_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>电商客户</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con03">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa3_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>品牌客户</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa4_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>网站客户</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con05">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa5_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>游戏客户</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con06">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_jiejuefa6_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>移动客户</span></p></div>
+            </div>
+        </div>
+        <div class="fp-slidesNav bottom" style="margin-left: -84px;">
+            <ul>
+                <li><a href="#"><em class="em1">营销战略<div></div></em><em class="em2">营销战略<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">电商客户<div></div></em><em class="em2">电商客户<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">品牌客户<div></div></em><em class="em2">品牌客户<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">网站客户<div></div></em><em class="em2">网站客户<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">游戏客户<div></div></em><em class="em2">游戏客户<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">移动客户<div></div></em><em class="em2">移动客户<div></div></em><span></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section yc_page5">
+        <img src="static/images/yc_hzmt_p1.png" class="pg1"/>
+        <img src="static/images/yc_hzmt_p2.png" class="pg2"/>
+        <img src="static/images/yc_hzmt_p3.png" class="pg3"/>
+        <img src="static/images/yc_hzmt_p4.png" class="pg4"/>
+        <div class="slide">
+            <div class="slide-con slide-con01">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_hzmt_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>更专业的合作，更真实的梦想</span></p></div>
+                <div class="slide_con_botm">
+                    <p class="pg7">将客户的需求放在第一位，尽可能多的为媒体主实现流量变现，与代理公司相辅相成通力合作，实现优势资源互换，将第三方机构作为忠实信赖对象，银橙传媒与互联网广告各方知名企业保持着长期稳定、友好共赢的战略合作关系。</p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con02">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_hzmt2_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>广告主</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con03">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_hzmt3_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>媒体主</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_hzmt4_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>代理公司</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con05">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_hzmt5_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>第三方机构</span></p></div>
+            </div>
+        </div>
+        <div class="fp-slidesNav bottom" style="margin-left: -84px;">
+            <ul>
+                <li><a href="#"><em class="em1">共赢互利<div></div></em><em class="em2">共赢互利<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">广告主<div></div></em><em class="em2">广告主<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">媒体主<div></div></em><em class="em2">媒体主<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">代理公司<div></div></em><em class="em2">代理公司<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">第三方机构<div></div></em><em class="em2">第三方机构<div></div></em><span></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section yc_page6">
+        <img src="static/images/yc_gyyc_p1.png" class="pg1"/>
+        <img src="static/images/yc_gyyc_p2.png" class="pg2"/>
+        <img src="static/images/yc_gyyc_p3.png" class="pg3"/>
+        <img src="static/images/yc_gyyc_p4.png" class="pg4"/>
+        <div class="slide">
+            <div class="slide-con slide-con01">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6 pg6_1"><span>公司理念</span></p></div>
+
+                <div class="slide_con_botm pg8 clear">
+                    <div class="gpt_lef1 fl">
+                        <p><span>捷径：</span>我们致力于为广告主找到互联网营销捷径</p>
+                        <p><span>智能：</span>我们将人工智能作为一切服务的技术核心和硬件支撑</p>
+                        <p><span>领袖：</span>我们力争成为互联网媒体行业的意见和行为领袖</p>
+                    </div>
+                    <div class="gpt_rit1 fl">
+                        <p><span>价值：</span>我们为合作伙伴和公司团队创造双赢价值</p>
+                        <p><span>热情：</span>我们自始至终保持对行业和客户的热情</p>
+                        <p><span>革新：</span>我们秉持不断创新和积极进取的行业精神</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con02">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc2_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>企业历程</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con03">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc3_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>公司管理层</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con04">
+                <div class="pg6"><p><span>每一位银橙人  都是一颗快乐的“橙子”</span><br />热爱工作、快乐成长、简单生活、友爱家人 —— 让我们做一颗快乐的“橙子“！<br />信赖、关爱、再加一份责任感 —— 让我们环抱在和谐的“橙子“家园！<br />正视不足、不断进取、珍视成功、持续创新 —— 让我们永葆源源不断的“橙动力”！</p></div>
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc4_conp.png" class="pg5"/></div>
+
+                <div class="slide_con_botm pg9 clear">
+                    <div class="gpt_lef1 fl">
+                        <p><span>银</span>&nbsp;&nbsp;品质&nbsp;价值</p>
+                        定位于基于大数据的精准营销专家，致力于研发领先的互联网技术，着眼于创建国内优质的媒体资源，为客户创造高附加值，为员工营造高品质生活，为股东创造高投资回报，不断提升客户、员工、股东等多维价值体系。
+                    </div>
+                    <div class="gpt_rit1 fr">
+                        <p><span>橙</span>&nbsp;&nbsp;聚焦&nbsp;分享</p>
+                        聚焦互联网新媒体，与客户分享海量资源和精准用户，与员工分享企业成长中的工作生活乐趣，与股东分享商业合作利益，大数据信息时代，也是分享的时代，银橙传媒，国内互联网精准营销的领跑者，与合作伙伴共铸成功梦想！
+                    </div>
+                </div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>企业文化</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con05">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc5_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont">
+                    <p class="pg6_2"><span>招聘岗位&nbsp;&nbsp;</span>加入我们，做一个热爱工作、快乐成长、简单生活、友爱家人的快乐“橙子”！</p>
+                    <ul class="pg_3">
+                        <li>
+                            <a href="http://jobs.51job.com/shanghai-xhq/74389296.html?s=0" target="_blank">销售经理</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/74888810.html?s=0" target="_blank">运营专员</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/73362812.html?s=0" target="_blank">广告优化师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/73914660.html?s=0" target="_blank" class="marg_no">高级媒介经理/媒介总监</a>
+                        </li>
+                        <li>
+                            <a href="http://jobs.51job.com/shanghai-xhq/73023255.html?s=0" target="_blank">项目经理</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72679938.html?s=0" target="_blank">Java高级工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/75329228.html?s=0" target="_blank">IOS开发工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72341843.html?s=0" target="_blank" class="marg_no">前端开发工程师</a>
+                        </li>
+                        <li>
+                            <a href="http://jobs.51job.com/shanghai-xhq/73827776.html?s=0" target="_blank">Hadoop工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72341844.html?s=0" target="_blank">数据挖掘工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72349195.html?s=0" target="_blank">数据挖掘架构师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72341832.html?s=0" target="_blank" class="marg_no">大数据开发工程师</a>
+                        </li>
+                        <li>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72341807.html?s=0" target="_blank">路由器高级工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/73801880.html?s=0" target="_blank">高级嵌入式软件工程师</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72338958.html?s=0" target="_blank">渠道销售经理/总监</a>
+                            <a href="http://jobs.51job.com/shanghai-xhq/72349127.html?s=0" target="_blank" class="marg_no">路由器底层研发工程师</a>
+                        </li>
+                        <div class="clear"></div>
+                    </ul></div>
+                <div class="slide_con_cont">
+                    <p class="pg6"><span>加入我们</span></p></div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-con slide-con06">
+                <div class="slide_con_top">
+                    <img src="static/images/yc_gyyc6_conp.png" class="pg5"/></div>
+                <div class="slide_con_cont pg6_3">
+                    <p><span>地址：</span>上海市徐汇区漕河泾创意园区桂平路481号19栋6层</p>
+                    <p><span>邮编：</span>200233<span>&nbsp;&nbsp;&nbsp;电话：</span>021--64851212<span>&nbsp;&nbsp;&nbsp;传真：</span>021—33681336</p>
+                </div>
+                <div class="slide_con_botm">
+                    <p class="pg6"><span>联系我们</span></p></div>
+            </div>
+        </div>
+        <div class="fp-slidesNav bottom" style="margin-left: -84px;">
+            <ul>
+                <li><a href="#"><em class="em1">公司理念<div></div></em><em class="em2">公司理念<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">企业历程<div></div></em><em class="em2">企业历程<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">管理层<div></div></em><em class="em2">管理层<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">企业文化<div></div></em><em class="em2">企业文化<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">加入我们<div></div></em><em class="em2">加入我们<div></div></em><span></span></a></li>
+                <li><a href="#"><em class="em1">联系我们<div></div></em><em class="em2">联系我们<div></div></em><span></span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section yc_page7">
+
+        <div class="popup_7">
+            <div class="yc_news">
+                <iframe src="static/iframe_investor.html" width="100%" height="100%" frameborder="0" id="popup_7"></iframe>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<!--------------------以上是dowebok部分内容-------------->
+<div id="yc_right">
+    <!--<div class="blog">
+        <a href="javascript:void(0);" class="sns-wb" title="微博"><span>微博</span></a>
+    </div>-->
+    <div class="sns">
+        <a href="javascript:void(0);" class="sns-wx" title="官方微信"><span>官方微信</span></a>
+    </div>
+    <div class="copyright">
+        <a href="#" target="_blank"></a>
+    </div>
+</div>
+<!--------------------以上是yc_right部分内容-------------->
+
+<script>
+    //			alert(document.documentElement.clientWidth+'x'+document.documentElement.clientHeight)
+    //			alert(screen.width+'x'+screen.height)
+    var bo = $("#bod")
+    //隐私条款
+    $('#about').on('click', function(){
+        if($("#yccm_client").hasClass("yccm_client2")){
+
+        }else{
+            $("#yccm_client").addClass("yccm_client2");
+            hideLayer();
+            layer.open({
+                type: 2,
+                title: false,
+                shadeClose: true,
+                shade: 0.8,
+                end:function(){
+                    $("#yccm_client").removeClass("yccm_client2");
+                    showLayer()
+                },
+                area: ['50%', '90%'],
+                content: 'static/privacy_rules.html' //iframe的url
+            });
+
+            $("#layui-layer-shade1").on("click", function(){
+                $("#yccm_client").removeClass("yccm_client2");
+                showLayer()
+            });
+        }
+    });
+
+    //成功案例
+    $('#succeed_case').on('click', function(){
+        $("#yccm_client").addClass("yccm_client2")
+        hideLayer();
+        layer.open({
+            type: 2,
+            title: false,
+            shadeClose: true,
+            shade: 0.8,
+            end:function(){
+                $("#yccm_client").removeClass("yccm_client2");
+                showLayer()
+            },
+
+            area: ['940px', '90%'],
+            content: 'static/client_case.html' //iframe的url
+        });
+    });
+
+
+
+    //导航
+    $("#yc_menu li").click(function(){
+        parent.layer.closeAll('iframe');
+        $("#yccm_client").removeClass("yccm_client2");
+        showLayer()
+    })
+
+    //禁用滚动
+    function hideLayer(){
+        bo.fullpage.setAllowScrolling(false);
+    }
+
+    //启用滚动
+    function showLayer(){
+        bo.fullpage.setAllowScrolling(true);
+    }
+
+    //禁用滑动
+    $(".yc_news").hover(function(){
+        $("#bod").fullpage.setAllowScrolling(false);
+    },function(){
+        $("#bod").fullpage.setAllowScrolling(true);
+    })
+
+    $(function(){
+        $('#dowebok').fullpage({
+            anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7'],
+            menu: '#yc_menu',
+            css3:true,
+            loopHorizontal:false,
+            slidesNavigation:true,
+            paginationClickable: true
+        });
+    });
+</script>
+
+</body>
+</html>
+

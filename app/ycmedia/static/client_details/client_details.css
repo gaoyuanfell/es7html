@@ -1,0 +1,84 @@
+
+
+
+
+
+*, *:before, *:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i{ padding:0; margin:0;}
+em,i,cite{word-wrap: break-word;font-style:normal;}ul,li {list-style:none;}
+a,a:visited,a:active,a img{outline:none;text-decoration:none;}
+a,button,input,textarea,span,i,div,h2,aside{ -webkit-tap-highlight-color:rgba(0,0,0,0);}
+input:focus::-webkit-input-placeholder {color:rgb(109,109,109); }
+input::-webkit-input-placeholder {color:#C2C2C2; }
+article,aside,details,figcaption,figure,footer,header,menu,nav,section {display:block; margin:0; padding:0;}
+html,body{-webkit-text-size-adjust:100%;text-rendering: optimizelegibility; font-size:12px;font-family: '微软雅黑',simsun,arial;}
+input,button,textarea{
+	border:none;-webkit-appearance: none; -moz-appearance: none; -webkit-border-image: none; border-image: none;
+ -webkit-border-radius: 0; border-radius: 0; -webkit-tap-highlight-color:rgba(0,0,0,0); 
+ }
+input:focus,textarea:focus{outline: 0 none;}
+.clear{zoom:1;}
+.clear:after { content: ""; display: block; height: 0; overflow: hidden; clear: both; visibility: hidden; }
+
+
+
+
+/*弹出框 客户详情*/
+.yccm_client_top{margin: 45px 37px 0 43px;padding-bottom: 15px;border-bottom: 1px solid #D1D4DD;font-size: 16px;}
+#yccm_client_return{float: right;cursor: pointer; font-size: 14px;}
+
+
+.yccm_popup_body{width: 865px;height: 745px;margin:40px 0 0 37px;overflow: overlay;overflow: hidden;}
+.yccm_client_details_left{max-width: 270px;}
+.yccm_client_details_right{float: right;max-width: 540px;margin-right: 20px;margin-top: 10px;}
+.yccm_client_details_right1{max-width: 270px;margin-right: 0;}
+.client_details_right_top{font-size: 22px;color: #f8684d;font-weight: 700;margin: 10px 0 15px 0;}
+.client_details_right_name{font-size: 16px;color: #f8684d;font-weight: 700;margin-top: 10px;}
+.client_details_right_name span{font-size: 14px;color: #8d93a1;font-weight: 700;line-height: 27px;margin: 0 10px 0 5px;}
+.client_details_body {font-size: 16px;color: #f8684d;font-weight: 700;margin:10px 0;}
+.client_details_body_text p {font-size: 14px;color: #8d93a1;font-weight: 700;line-height: 25px;}
+.client_details_right_img{margin-top: 38px;}
+
+html{overflow: hidden;}
+@media only screen and (max-width:1024px) and (max-height:768px){
+    .yccm_client_top {
+        margin: 45px 45px 0 109px;
+    }
+    .yccm_popup_body {
+        width: 800px;
+        margin: 40px 0 0 104px;
+    }
+    .yccm_client_details_right {
+        max-width: 460px;
+    }
+    .yccm_client_details_right1 {
+        max-width: 200px;
+    }
+}
+@media only screen and (max-height:900px){
+	html{margin-top: 30px;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

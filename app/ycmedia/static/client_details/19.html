@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 新兰德
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body "> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/19-1.png"/>
+				<div class="yccm_client_details_right yccm_client_details_right1">
+					<div class="client_details_right_top">新兰德 </div>
+					<div class="client_details_right_name">案例时间 :<span>2015年至今</span></div>
+					
+					<div class="client_details_right_name">营销目标 :<span>通过广点通精准广告推送，增加用户注册量，扩大市场占有，最终促成投资后端转化。</span></div>
+					<div class="client_details_right_name">目标受众: <span>以20至50岁用户，不会炒股，又想要学炒股，或者短期内想迅速炒股获利的人</span></div>
+					<div class="client_details_right_name">媒体策略 :<span>广点通平台，选择QQ浏览器、微信、QQ空间、腾讯新闻客户端</span>						
+					</div>
+					
+					<div class="client_details_right_name">广告展示 :<span>空间feeds，原生广告，新闻客户端小图、QQ浏览器头条，微信热文列表</span></div>
+					
+				</div>
+			</div>
+			
+			<div class="client_details_body">技术运用 :</div>
+			<div class="client_details_body_text">
+				<p>广点通利用腾讯大数据处理算法帮助用户精准定向，依托腾讯用户人口数据属性（年龄、性别、消费能力、商业兴趣）判断，找到符合品牌需求的目标用户，并结合不同人群设计相应的素材创意，将广告信息精准推送给新兰德的目标受众。</p>
+			</div>
+			
+			<div class="client_details_body">效果总结 :</div>
+			<div class="client_details_body_text">
+				<p>本次投放共产生超过2.6亿次曝光、190万次点击。注册成本40-50元。</p>
+				<p>本次投放主要覆盖全部大部分一二线城市及各省会城市，增加用户注册量，扩大市场占有率，最终促成投资后端转化。</p>
+			</div>
+			
+		</div>				
+	</body>
+</html>
+
+<script>
+		//获取窗口高度
+		var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body').css('height',ch-200)
+		
+		//当窗口大小改变的时候
+		window.onresize=function(){
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body').css('height',ch-200)
+		}
+		
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		$('#yccm_client_return').on('click', function(){
+			parent.layer.closeAll('iframe');
+		})
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>	
+		<title>银橙传媒 基于大数据的精准营销专家</title>
+		<meta name="description" content="银橙传媒 基于大数据的精准营销专家">
+		<link rel="stylesheet" type="text/css" href="client_details.css"/>
+		<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css"/>
+		<script src="../js/jquery-1.11.2.min.js"></script>
+		<script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>	
+		<script src="../js/layer.js"></script>
+	</head>
+	<body>
+		<div class="yccm_client_top">
+			首页 > 客户案例 > 草花互动
+			<span id="yccm_client_return">返回</span>
+		</div>	
+		<div class="yccm_popup_body "> 
+			<div class="yccm_client_details clear">
+				<img src="../images/imgPopup/3-3.png" class="yccm_client_details_left"/>
+				<div class="yccm_client_details_right">
+					<div class="client_details_right_top">草花互动 </div>
+					<div class="client_details_right_name">案例时间 :<span>2015年</span></div>
+					
+					<div class="client_details_right_name">营销目标 :<span>借助腾讯海量优质用户及16年大数据优势，增加品牌在手游群体中的曝光度，吸引玩家下载游戏。</span></div>
+					<div class="client_details_right_name">目标受众: <span>以18至50岁男性群体为主，对手游、网友等有需求的人群。其中以18-30岁热衷尝试新事物的年轻群体为主导。</span></div>
+					<div class="client_details_right_name">媒体策略 :<span>选择新浪扶翼、智汇推、智橙DSP、广点通、今日头条、搜狐汇算媒体平台，主要锁定在校学生、年轻上班族等年轻，爱好娱乐游戏的人群。</span></div>
+					
+					<div class="client_details_right_name">广告展示 :<span>信息流新闻广告，以融入阅读浑然天成的广告形式，高效触达目标用户。</span></div>
+					
+					<div class="client_details_right_name">技术运用 :<span>以用户人口数据属性（年龄、性别、社会阶层、教育水平等）结合用户兴趣爱好、网络行为等做精准判断，定向投放，直达受众</span></div>
+					
+					<div class="client_details_right_name">效果总结 :
+						<span>本次投放共产生超过175万的曝光，超过3.5万次的点击。</span>
+						<span>本次投放为全国投放，CTR达到2%，用户锁定精准，推广效果明显。</span>
+					</div>
+				</div>
+			</div>
+			
+		</div>				
+	</body>
+</html>
+
+<script>
+		//获取窗口高度
+		var ch=document.documentElement.clientHeight||document.body.clientHeight;
+		$('.yccm_popup_body').css('height',ch-200)
+		
+		//当窗口大小改变的时候
+		window.onresize=function(){
+			var ch=document.documentElement.clientHeight||document.body.clientHeight;
+			$('.yccm_popup_body').css('height',ch-200)
+		}
+		
+		//滚动条
+		$(function(){	
+			$(".yccm_popup_body").mCustomScrollbar({
+				theme:"3d-thick-dark",
+				 scrollButtons:{ enable:Boolean }
+			});				
+		})
+		$('#yccm_client_return').on('click', function(){
+			parent.layer.closeAll('iframe');
+		})
+</script>

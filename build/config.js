@@ -110,11 +110,18 @@ module.exports = [
     //     name:'table-index',
     //     title:'table'
     // },
+    // {
+    //     path:'yqdh',
+    //     output:'yqdh',
+    //     publicPath:'',
+    //     name:'yq-index',
+    //     title:'智橙移动'
+    // },
     {
-        path:'yqdh',
-        output:'yqdh',
+        path:'ycmedia',
+        output:'ycmedia',
         publicPath:'',
-        name:'yq-index',
-        title:'智橙移动'
+        name:'ycmedia-index',
+        title:'银橙传媒  基于大数据的精准营销专家'
     },
 ];
