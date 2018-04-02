@@ -16,8 +16,6 @@ iframe.onreadystatechange = () => {
 function init() {
     let iw = iframe.contentWindow;
     let id = iw.document
-    console.info(iw.investorLS)
-    console.info(id)
 
     let investorLSref = iw.$(id.querySelector('#investorLS'))
     let investorDQref = iw.$(id.querySelector('#investorDQ'))
@@ -46,7 +44,7 @@ function init() {
 
         investorDQref.mCustomScrollbar({
             theme: "3d-thick-dark",
-            scrollButtons: {enable: Boolean},
+            scrollButtons: {enable: false},
         });
         investorLSref.mCustomScrollbar({
             theme: "3d-thick-dark",
