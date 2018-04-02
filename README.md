@@ -52,7 +52,7 @@ pwd:YCdev@#$2017
 
 
 
-#银橙官网
+#ycmedia
 user:ycmedia
 pwd:www.ycmedia.cn
 资源发布地址:180.97.75.138
