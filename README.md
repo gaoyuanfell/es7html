@@ -49,3 +49,10 @@ pwd:YCdev@#$2017
 
 如何添加一个项目
 观看build/config.js即可。
+
+
+
+#银橙官网
+user:ycmedia
+pwd:www.ycmedia.cn
+资源发布地址:180.97.75.138
