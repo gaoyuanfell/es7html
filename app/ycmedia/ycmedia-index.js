@@ -31,14 +31,16 @@ function init() {
 
         for (let i = 0; i < investorLS.length; i++) {
             let provi = investorLS[i];
-            provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '')
-            let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + '</a><span>' + provi.publishDate + '</span>';
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
+            provi.disclosurePostTitle=provi.disclosurePostTitle;
+            let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle +'" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle +'</a><span>' + provi.publishDate + '</span>';
             investorLSref.append(add);
         }
         for (let i = 0; i < investorDQ.length; i++) {
             let provi = investorDQ[i];
-            provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '')
-            let add = '<li><a target="_blank" title="' + provi.disclosureTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + '</a><span>' + provi.publishDate + '</span?';
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
+            provi.disclosurePostTitle = provi.disclosurePostTitle;
+            let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle +'"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle +'</a><span>' + provi.publishDate + '</span>';
             investorDQref.append(add);
         }
 
