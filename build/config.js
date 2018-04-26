@@ -29,14 +29,14 @@ module.exports = [
     //     title:'乐橙互联科技有限公司',
     //     filename:'index2.html',
     // },
-    // {
-    //     path:'lcinc-pc',
-    //     output:'lcinc-pc',
-    //     base:'/pc/',
-    //     publicPath:'',
-    //     name:'lcincpc-index',
-    //     title:'乐橙互联科技有限公司'
-    // },
+     {
+         path:'lcinc-pc',
+         output:'lcinc-pc',
+        base:'/pc/',
+         publicPath:'',
+         name:'lcincpc-index',
+         title:'乐橙互联科技有限公司'
+     },
     // {
     //     path:'pwa',
     //     output:'pwa',
@@ -117,11 +117,11 @@ module.exports = [
     //     name:'yq-index',
     //     title:'智橙移动'
     // },
-    {
-        path:'ycmedia',
-        output:'ycmedia',
-        publicPath:'',
-        name:'ycmedia-index',
-        title:'银橙传媒  基于大数据的精准营销专家'
-    },
+    // {
+    //     path:'ycmedia',
+    //     output:'ycmedia',
+    //     publicPath:'',
+    //     name:'ycmedia-index',
+    //     title:'银橙传媒  基于大数据的精准营销专家'
+    // },
 ];
