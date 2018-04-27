@@ -1,0 +1,176 @@
+*, *:before, *:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+body,h1,h2,h3,h4,dl,dt,dd,ul,ol,li,a,div,em,span,img,form,input,p,i{ padding:0; margin:0;}
+em,i,cite{word-wrap: break-word;font-style:normal;}ul,li {list-style:none;}
+a,a:visited,a:active,a img{outline:none;text-decoration:none;}
+a,button,input,textarea,span,i,div,h2,aside{ -webkit-tap-highlight-color:rgba(0,0,0,0);}
+input:focus::-webkit-input-placeholder {color:rgb(109,109,109); }
+input::-webkit-input-placeholder {color:#C2C2C2; }
+article,aside,details,figcaption,figure,footer,header,menu,nav,section {display:block; margin:0; padding:0;}
+html,body{-webkit-text-size-adjust:100%;text-rendering: optimizelegibility; font-size:12px;font-family: '微软雅黑',simsun,arial;}
+input,button,textarea{
+    border:none;-webkit-appearance: none; -moz-appearance: none; -webkit-border-image: none; border-image: none;
+    -webkit-border-radius: 0; border-radius: 0; -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+input:focus,textarea:focus{outline: 0 none;}
+.clear{zoom:1;}
+.clear:after { content: ""; display: block; height: 0; overflow: hidden; clear: both; visibility: hidden; }
+
+
+
+/*弹出框 客户详情*/
+.yccm_client_top {
+    padding-bottom: 42px;
+    width: 1200px;
+    margin: auto;
+    margin-top: 218px;
+}
+
+#yccm_client_return {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+    color: #9e9e9e;
+}
+
+.yccm_popup_body {
+    margin: auto;
+    width: 1200px;
+}
+
+.yccm_client_details_left {
+    width: 490px;
+    float: left;
+    margin-right: 126px;
+    position: relative;
+    padding-right: 40px;
+}
+
+.yccm_client_details_right {
+    float: left;
+    width: 450px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+html {
+    overflow: hidden;
+}
+
+.yccm_client_details_right .title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    border-bottom: 1px rgba(255, 255, 255, 0.15) solid;
+    padding-bottom: 28px;
+}
+
+.yccm_client_details_right .title span {
+    font-size: 16px;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.25);
+    margin-left: 22px;
+}
+
+.yccm_client_details_right .text {
+    text-align: justify;
+    padding: 28px 0;
+    border-bottom: 1px rgba(255, 255, 255, 0.15) solid;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.yccm_client_details_right .features {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 16px;
+    padding: 28px 0;
+    line-height: 1.8;
+}
+
+.baizi {
+    color: #fff;
+}
+
+.btn_box a {
+    font-size: 16px;
+}
+
+.kongbtn {
+    width: 140px;
+    height: 45px;
+    line-height: 45px;
+    border: 1px #ff9803 solid;
+    color: #ff9d00;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
+.previous {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 50px;
+}
+
+#imgbox {
+    position: relative;
+    width: 254px;
+    height: 494px;
+    overflow: hidden;
+    float: right;
+}
+
+#list {
+    position: absolute;
+    z-index: 1;
+    width: 1778px;
+    height: 494px;
+}
+
+#list img {
+    float: left;
+    width: 254px;
+    height: 494px;
+}
+
+.arrow {
+    position: absolute;
+    top: 180px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 39px;
+    text-align: center;
+    color: rgba(255, 255, 255, .6);
+    cursor: pointer;
+}
+
+#prev {
+    right: 294px;
+}
+
+#next {
+    right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

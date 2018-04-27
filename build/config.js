@@ -117,11 +117,18 @@ module.exports = [
     //     name:'yq-index',
     //     title:'智橙移动'
     // },
+    // {
+    //     path:'ycmedia',
+    //     output:'ycmedia',
+    //     publicPath:'',
+    //     name:'ycmedia-index',
+    //     title:'银橙传媒  基于大数据的精准营销专家'
+    // },
     {
-        path:'ycmedia',
-        output:'ycmedia',
+        path:'ycmedia2018',
+        output:'ycmedia2018',
         publicPath:'',
-        name:'ycmedia-index',
+        name:'ycmedia-2018',
         title:'银橙传媒  基于大数据的精准营销专家'
     },
 ];
