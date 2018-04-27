@@ -14,7 +14,7 @@ module.exports = merge(baseWebpackConfig(config), {
         filename: "[name].js", //打包后输出文件的文件名
         publicPath:`/`,
     },
-    devtool: 'source-map',
+    devtool: '#source-map',
     devServer: {
         contentBase:'static',
         historyApiFallback: false, //不跳转
