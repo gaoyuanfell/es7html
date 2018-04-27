@@ -62,6 +62,22 @@ for (let i = 0; i < oli.length; i++) {
     }
 }
 
+/*业务版块*/
+var scrol=document.querySelector("#contentener");
+var offSet = $('#guangcheng').offset().top;
+// console.info(offSet);
+scrol && scrol.addEventListener('scroll' , function(){
+    var t = scrol.scrollTop;
+    // console.info(t);
+    if(t > offSet){
+        $('.img1').addClass('animat1')
+        $('.img2').addClass('animat2')
+        $('.img3').addClass('animat3')
+        $('.img4').addClass('animat4')
+        $('.img5').addClass('animat5')
+    }
+
+})
 
 
 /*案例中心*/

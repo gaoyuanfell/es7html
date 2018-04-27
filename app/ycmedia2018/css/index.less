@@ -35,6 +35,9 @@
 .hei{
     color: #1a1a1a;
 }
+.navbg{
+    background: url("../static/images/nav_bg.jpg") no-repeat;
+}
 .top_nav{
     height: 90px;
     line-height: 90px;
@@ -44,6 +47,7 @@
     position: absolute;
     z-index: 10;
     width: 100%;
+    min-width: 1200px;
     .logo{
         float: left;
     }
@@ -557,32 +561,42 @@
             .img1{
                 bottom: 32px;
                 left: 72px;
-                animation:fadeInLeftBig 3s ease-in  both;
-                -webkti-animation:fadeInLeftBig 3s ease-in  both;
+            }
+            .animat1{
+                animation:fadeInLeftBig 1.5s ease-in both;
+                -webkti-animation:fadeInLeftBig 1.5s ease-in both;
             }
             .img2{
                 bottom: 21px;
                 left: 44px;
-                animation:fadeInLeftBig 3s ease-in 1s both;
-                -webkti-animation:fadeInLeftBig 3s ease-in 1s both;
+            }
+            .animat2{
+                animation:fadeInLeftBig 2s ease-in 0.5s both;
+                -webkti-animation:fadeInLeftBig 2s ease-in 0.5s both;
             }
             .img3{
                 bottom: 10px;
                 left: 17px;
-                animation:fadeInLeftBig 3s ease-in 2s both;
-                -webkti-animation:fadeInLeftBig 3s ease-in 2s both;
+            }
+            .animat3{
+                animation:fadeInLeftBig 2s ease-in 1s both;
+                -webkti-animation:fadeInLeftBig 2s ease-in 1s both;
             }
             .img4{
                 bottom: -1px;
                 left: -12px;
-                animation:fadeInLeftBig 3s ease-in 3s both;
-                -webkti-animation:fadeInLeftBig 3s ease-in 3s both;
+            }
+            .animat4{
+                animation:fadeInLeftBig 2s ease-in 1.5s both;
+                -webkti-animation:fadeInLeftBig 2s ease-in 1.5s both;
             }
             .img5{
                 bottom: -12px;
                 left: -41px;
-                animation:fadeInLeftBig 3s ease-in 4s both;
-                -webkti-animation:fadeInLeftBig 3s ease-in 4s both;
+            }
+            .animat5{
+                animation:fadeInLeftBig 2s ease-in 2s both;
+                -webkti-animation:fadeInLeftBig 2s ease-in 2s both;
             }
         }
     }
@@ -1407,8 +1421,8 @@
 @-webkit-keyframes fadeInLeftBig {
     0% {
         opacity: 0;
-        -webkit-transform: translate(-1000px, 0);
-        transform: translate(-1000px, 0)
+        -webkit-transform: translate(-500px, 0);
+        transform: translate(-500px, 0)
     }
     90%{
         opacity: 0.8
@@ -1422,9 +1436,9 @@
 @keyframes fadeInLeftBig {
     0% {
         opacity: 0;
-        -webkit-transform: translate(-1000px, 0);
-        -ms-transform: translate(-1000px, 0);
-        transform: translate(-1000px, 0)
+        -webkit-transform: translate(-500px, 0);
+        -ms-transform: translate(-500px, 0);
+        transform: translate(-500px, 0)
     }
     90%{
         opacity: 0.8
