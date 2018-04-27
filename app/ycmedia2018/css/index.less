@@ -245,7 +245,7 @@
     padding: 0;
     padding-top: 33.1%;
     height: 0;
-    overflow: hidden;
+    //overflow: hidden;
     &:hover {
         .main:before{
             opacity: 1;
@@ -264,6 +264,13 @@
         top:0;
         width: 100%;
         z-index: 2;
+        .upper{
+            position: absolute;
+            top: 0;
+            margin-left: -12px;
+            animation:arrow 3s ease 0s infinite;
+            -webkit-animation:arrow 3s ease 0s infinite;
+        }
     }
     .main{
         width: 264px;
@@ -470,9 +477,6 @@
             left: -34px;
             animation:bounce 2s ease-in infinite;
             -webkti-animation:bounce 2s ease-in infinite;
-            -webkit-transform-origin: center bottom;
-            -ms-transform-origin: center bottom;
-            transform-origin: center bottom;
         }
         .two{
             position: absolute;
@@ -498,9 +502,6 @@
             right:0;
             animation:bounce 2s ease-in infinite;
             -webkti-animation:bounce 2s ease-in infinite;
-            -webkit-transform-origin: center bottom;
-            -ms-transform-origin: center bottom;
-            transform-origin: center bottom;
         }
         .two{
             position: absolute;
@@ -525,9 +526,6 @@
             margin-top: 90px;
             animation:bounce 2s ease-in infinite;
             -webkti-animation:bounce 2s ease-in infinite;
-            -webkit-transform-origin:right center;
-            -ms-transform-origin:right center ;
-            transform-origin:right center;
             /*animation:bounce1 2s ease-in 1s infinite;
             -webkti-animation:bounce1 2s ease-in 1s infinite;
             -webkit-transform-origin:right center;
@@ -1419,8 +1417,26 @@
 
 
 /*动画*/
+@-webkit-keyframes arrow {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0)
+    }
+}
+@keyframes arrow {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0)
+    }
+}
 
-/*the animation definition*/
 @-webkit-keyframes bounce {
     0%, 100%, 20%, 53%, 80% {
         -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
