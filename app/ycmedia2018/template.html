@@ -9,12 +9,11 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script src="./static/js/jquery.min.js"></script>
     <script src="./static/js/layer.js"></script>
-    <!--[if lt IE 9]><script src="./static/js/respond.min.js"></script><![endif]-->
     <script>
-//        var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
-//        if(isMobile){
-//            location.href='/wap'
-//        }
+        //        var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
+        //        if(isMobile){
+        //            location.href='/wap'
+        //        }
     </script>
 
 </head>
@@ -28,7 +27,7 @@
                 </div>
                 <div class="right flex">
                     <ul class="nav flex" id="filters">
-                        <li class="item active"><a href="#home">首页</a></li>
+                        <li class="item"><a href="#home">首页</a></li>
                         <li class="item"><a href="#business_modules">业务板块</a></li>
                         <li class="item"><a href="#solution">解决方案</a></li>
                         <li class="item"><a href="#case_center">案例中心</a></li>
@@ -44,7 +43,7 @@
 
             <div id="page_list">
                 <!--首页-->
-                <div class="contentener" data-contentener data-type="home" marginbotm>
+                <div class="contentener" data-contentener data-type="home" margintop marginbotm>
                     <div class="banner">
                         <img src="./static/images/banner.jpg" alt="" class="bg">
                         <p class="text">
@@ -91,7 +90,8 @@
                                     <ul id="head_list" class="clear">
                                         <li class="active"><img src="./static/images/anli_tu1.jpg" alt="" width="240" height="160"></li>
                                         <li><img src="./static/images/anli_tu2.jpg" alt="" width="240" height="160"></li>
-                                        <li><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li><br>
+                                        <li><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li>
+                                        <br>
                                         <li><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
                                         <li><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
                                     </ul>
@@ -111,8 +111,12 @@
                     </div>
                     <div class="mobel baibg">
                         <div class="top"><img src="./static/images/huoban_tit.png" alt=""></div>
-                        <div class="main">
-                            <img src="./static/images/huoban.png" alt="">
+                        <div class="main" style="position: relative;height: 200px;">
+                            <div id="huoban1" style="height: 200px;width: 1200px;position: absolute;">
+                                <img src="./static/images/huoban.png" alt="">
+                            </div>
+                            <div id="huoban2" style="background: url(./static/images/huoban_active.png) #fff;">
+                            </div>
                         </div>
                     </div>
                     <div class="mobel contact">
@@ -130,7 +134,7 @@
                     </div>
                 </div>
                 <!--业务板块-->
-                <div class="contentener" id="contentener" data-contentener data-type="business_modules" margintop marginbotm>
+                <div class="contentener" data-contentener data-type="business_modules" margintop marginbotm>
                     <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
                     <div class="sector_cont baibg">
                         <div class="main clear zhicheng">
@@ -233,59 +237,61 @@
                 </div>
                 <!--案例中心-->
                 <div class="contentener" data-contentener data-type="case_center" margintop marginbotm>
-                    <div class="sectortit case_tit"><img src="./static/images/anzxy_tit.png" alt=""></div>
+                    <div class="sectortit case_tit">
+                        <img src="./static/images/anzxy_tit.png" alt="">
+                    </div>
                     <div class="yccm_popup_bodyText clear">
                         <div class="yccm_client_case_group" data-href="case01.html">
                             <p class="img"><img src="./static/images/images/case01.jpg"/></p>
-                            <div class="yccm_client_case_text" >网易严选</div>
+                            <div class="yccm_client_case_text">网易严选</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case02.html">
                             <p class="img"><img src="./static/images/images/case02.jpg"/></p>
-                            <div class="yccm_client_case_text" >荒野行动</div>
+                            <div class="yccm_client_case_text">荒野行动</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case03.html">
                             <p class="img"><img src="./static/images/images/case03.jpg"/></p>
-                            <div class="yccm_client_case_text" >KEEP</div>
+                            <div class="yccm_client_case_text">KEEP</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case04.html">
                             <p class="img"><img src="./static/images/images/case04.jpg"/></p>
-                            <div class="yccm_client_case_text" >网易严选</div>
+                            <div class="yccm_client_case_text">网易严选</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case05.html">
                             <p class="img"><img src="./static/images/images/case05.jpg"/></p>
-                            <div class="yccm_client_case_text" >大众点评</div>
+                            <div class="yccm_client_case_text">大众点评</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case06.html">
                             <p class="img"><img src="./static/images/images/case06.jpg"/></p>
-                            <div class="yccm_client_case_text" >VIPKID</div>
+                            <div class="yccm_client_case_text">VIPKID</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case07.html">
                             <p class="img"><img src="./static/images/images/case07.jpg"/></p>
-                            <div class="yccm_client_case_text" >交大成人教育</div>
+                            <div class="yccm_client_case_text">交大成人教育</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case08.html">
                             <p class="img"><img src="./static/images/images/case08.jpg"/></p>
-                            <div class="yccm_client_case_text" >网易考拉</div>
+                            <div class="yccm_client_case_text">网易考拉</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
                         <div class="yccm_client_case_group" data-href="case09.html">
                             <p class="img"><img src="./static/images/images/case09.jpg"/></p>
-                            <div class="yccm_client_case_text" >JJ斗地主</div>
+                            <div class="yccm_client_case_text">JJ斗地主</div>
                             <p class="yccm_client_case_timetext"><span>客户类型：工具类</span><span>CPC成本：0.70</span></p>
                             <p class="yccm_client_case_timetext"><span>激活成本：8.00</span><span>点击率：6.00%</span></p>
                         </div>
@@ -349,7 +355,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责广告平台相关后台业务系统的设计和核心代码开发，不断提升用户体验。
 2、负责核心技术问题的攻关，架构设计，系统优化，指导项目组成员的开发工作。
 3、构建高可靠、易扩展、高效的广告平台，推动业务持续发展。
@@ -358,7 +364,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">岗位要求：</span>
-<pre>
+                                                <pre>
 1、本科以上学历，计算机相关专业背景毕业5年以上，丰富的项目经验；
 2、扎实的Java编程基础，熟悉面向对象设计及开发，熟悉常见的设计模式以及运用；
 3、熟练掌握Spring/Struts/MyBatis或其他主流JAVA框架，会使用HTML、JQuery、JS等；
@@ -380,7 +386,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">工作职责：</span>
-<pre>
+                                                <pre>
 1、基于Hive， Spark，Hadoop的计算架构，进行大数据开发工作
 2、负责业务数据的收集，清洗，表设计及报表的开发和维护;
 3、负责数据平台的日常报表数据的监控、维护及优化;
@@ -389,7 +395,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">工作要求：</span>
-<pre>
+                                                <pre>
 1、本科以上学历，计算机专业背景毕业3年以上，丰富的项目经验；
 2、扎实的Java编程基础，熟悉面向对象设计及开发，熟悉常见的设计模式以及运用；
 3、熟悉Hadoop大数据生态圈，熟练使用HDFS、MapReduce、Hive、Hbase等
@@ -409,7 +415,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、精通HTML、CSS、JavaScript、Ajax、jQuery等，熟悉HTML5，CSS3，及常见Mobile WEB方案或框架；
 2、精通至少一种JS库或者框架 - 精通的定义：研究过核心模块源代码/分析过框架的缺陷；
 3、具备前端开发能力--具备Vue.js/AngularJS等至少一种主流前端框架的使用经验；
@@ -418,7 +424,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、熟悉互联网公司开发流程；
 2、熟悉前端常见工具库和框架；
 3、对于前端性能、前端安全等有实际应用或处理经验；
@@ -434,7 +440,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责行业客户的开拓、维护、业务规划等工作
 2、负责完成全年销售额KPI，并制定相关年度、季度、月度目标落实
 3、定期开展客户活动、做好市场宣传工作
@@ -443,7 +449,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">岗位要求：</span>
-<pre>
+                                                <pre>
 1、大专以上学历
 2、互联网广告销售工作2年以上经验
 3、熟悉广点通、微信朋友圈、今日头条广告代理业务经验优先
@@ -459,7 +465,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责广告投放计划制定以及日常投放，提取广告数据报表，分析投放效果并优化投放策略；
 2、负责广告素材的协调，协助设计制定广告创意，并跟踪优化；
 3、和客户进行良好的沟通；
@@ -468,7 +474,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职要求：</span>
-<pre>
+                                                <pre>
 1、做事踏实负责有耐心；
 2、思路清晰，对数据敏感，有较强的数据分析能力；
 3、有主流广告交易平台或者腾讯广点通、FaceBook、今日头条、SEM等投放经验或者广告代理公司运营经验
@@ -485,7 +491,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、主要负责公司车辆的日常驾驶及完成接待任务；
 2、负责公司车辆的管理，负责车辆的保险、保养、维护、违章、索赔、年检办理等，保持车辆整洁和车况良好；
 3、安全驾驶，正确执行驾驶操作规程，严格遵守交通法规；
@@ -494,7 +500,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、相貌端正，沉着稳重，为人正直忠厚，具有良好的职业道德，无刑事犯罪记录等
 2、身高172cm以上，退伍军人及党员优先
 3、五年以上机动车驾龄；3年以上高管专职司机经验优先录取；
@@ -512,7 +518,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、协助领导制定公司行政发展规划、计划以及预算方案；
 2、组织制定公司行政管理规章制度，并督促检查制度的贯彻、执行； 具有行政制度设计、实施管理的能力；
 3、负责公司固定资产的管理，保障资产的管理制度化、规范化；
@@ -524,7 +530,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">岗位要求：</span>
-<pre>
+                                                <pre>
 1、大专及以上学历，专业不限，2年以上行政主管工作经验，有互联网行业工作经验、有驾照者优先；
 2、熟悉各类办公软件应用；
 3、思维缜密，沟通有思路和策略，做事肯思考，能够抓住关键点，落实到要实现的结果上，抗压能力强、职业素养较高。
@@ -539,7 +545,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责协助行政主管执行公司各项规章制度，追踪和维护公司各项规章制度的权威；
 2、负责公司车辆的管理和司机的管理工作，包括车辆调度、使用、维护保养，确保车辆及人身的安全；
 3、负责协助行政主管做好公司资产的管理、办公用品和劳保用品的管理工作,避免公司资产流失和浪费；
@@ -548,7 +554,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、大专以上学历有行政相关工作经验；
 2、有CI驾照且有较熟练的驾驶技术；
 3、有团队协作精神，能够合理的管理时间；
@@ -563,7 +569,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责日常良好沟通处理各投诉渠道的客诉及合作咨询，并通知提醒对应运营人员/商务，直至有处理结果；
 2、在系统上做好客诉记录，并跟进结果，完成退货/退款，记录统计合作咨询信息；
 3、运用客户服务技巧解决客户的抱怨及投诉，提高客户满意度；
@@ -573,7 +579,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职要求：</span>
-<pre>
+                                                <pre>
 1、21-26岁之间，性别男女不限，大专学历及以上；
 2、有过客服工作经验，沟通表达能力强，普通话标准清晰，团队合作意识强；
 3、能吃苦，服从管理，有一定计算机基础，熟练使用office软件工具；
@@ -590,7 +596,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责公司广告平台和媒体方（资源方api对接）程序化对接
 2、独立完成竞品分析报告、媒介排期制定、协助采购谈判及监测报告；
 3、负责媒介关系的维护，保持与媒体的日常联络，随时掌控有关媒体动态的各类信息；
@@ -604,7 +610,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、具有DSP（精准投放广告）公司、4A公司资源者，互联网大媒体经验者优先；
 2、具有百度网盟，广点通从事媒介工作优先；
 3、具有高度责任感，和良好的抗压能力，能保持对专业工作的持续热情；
@@ -621,7 +627,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、通过电话或网络拜访及客户活动等方式,搭建目标客户群；
 2、执行公司各项销售政策，完成销售指标；
 3、积极反馈客户和市场动态；
@@ -630,7 +636,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">岗位要求：</span>
-<pre>
+                                                <pre>
 1、高中或以上学历，广告业或互联网行业销售优先；
 2、思路清晰，目标明确，积极主动，有责任心，能在一定强度下完成销售任务；
 3、性格外向.反应敏捷.表达能力强，具有较强的沟通能力及谈判技巧；
@@ -647,7 +653,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责互联网广告业务的推广及销售，完成销售任务；
 2、独立开发客户，按照专业化、标准化的销售流程跟进目标客户；
 3、准确把握及分析客户需求，为客户提供最具针对性的产品及服务；
@@ -657,7 +663,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、大专以上学历，市场营销、广告、传媒专业优先；
 2、具有广告销售经验，有客户资源者优先；
 3、具有广告行业相关的策划能力、客户分析能力和市场判断力；
@@ -674,7 +680,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责推广赠送小型饮料机；
 2、日常的的推广和渠道开发工作，饮料机的安装业务介绍；
 3、执行公司制度，完成公司下达的任务。
@@ -682,7 +688,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、学历不限，想要从事销售工作；
 2、具备良好的沟通能力，有上进心和良好的心理素质；
 3、熟悉上海各区域路线，能够吃苦耐劳
@@ -690,7 +696,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">薪资待遇：</span>
-<pre>
+                                                <pre>
 1、底薪+全勤奖+提成（综合工资6-8k）;
 2、完善的社保和福利待遇；
 3、公司作为自动售货机和无人零售行业的企业具有良好的行业前景，能够为员工提供良好的平台和发展。
@@ -705,7 +711,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、公司设备和产品的日常运营数据监测、采集、统计和分析，定期制作报表，为优化点位及运营提供数据支持和建议。
 2、通过数据统计分析及相关表单，监察各分公司、营业所的库存等数据，确保数据的准确性和合规性。
 3、每月在规定时间内按要求完成与供应商、代运营公司等的对账结算工作。
@@ -715,7 +721,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、21-26岁之间，性别男女不限，本科学历及以上；
 2、有财务专业知识或会计工作经验优先，做过数据方面工作亦可，沟通表达能力强，团队合作意识强；
 3、能吃苦，服从管理，有一定计算机基础，熟练使用office软件工具；
@@ -732,7 +738,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责公司广告项目管理
 2、负责领导广告项目计划的制定、跟踪和质量控制，及时发现并跟踪解决项目问题，有效控制项目风险，把控节点，确保项目按照计划并保证质量完成
 3、负责团队人员管理，负责项目资源的协调与组织，确保各项目参与人协同工作
@@ -740,7 +746,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职资格：</span>
-<pre>
+                                                <pre>
 1、本科以上学历，3年以上工作经验，具有丰富的项目经验；
 2、具备很强的沟通协调能力、执行能力、项目管理能力
 3、具有较高水平的沟通技巧，能够快速理解业务需求；
@@ -758,7 +764,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、负责与DSP广告投放优化和数据分析工作；
 2、负责线上推广方案的制定.计划.预算与执行等工作，并对方案效果进行监控与负责；
 3、掌握客户最新信息和需求，与客户保持良好沟通；
@@ -767,7 +773,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职要求：</span>
-<pre>
+                                                <pre>
 1、本科及以上学历，DSP相关行业工作经验者优先；
 2、熟悉互联网广告，擅长媒介数据分析.媒体策略制定等；
 3、解DSP.广点通等主流投放渠道的投放方法及技巧，有过成功的推广案例者优先；
@@ -784,7 +790,7 @@
                                         <div class="list-item none">
                                             <div class="cont flex">
                                                 <span class="left">岗位职责：</span>
-<pre>
+                                                <pre>
 1、能够独立开展招聘模块的工作；
 2、根据需求，执行招聘计划，发布招聘信息、收集筛选简历，利用各种有效途径满足人才需求；
 3、进行各招聘岗位的面试安排及甄选；做好招聘效果的分析和招聘成果的跟踪；
@@ -793,7 +799,7 @@
                                             </div>
                                             <div class="cont flex">
                                                 <span class="left">任职要求：</span>
-<pre>
+                                                <pre>
 1、专科及以上学历，1年左右的招聘工作经验优先；
 2、有亲和力，思路清晰、性格开朗，有较强的沟通能力；
 3、工作认真、细致，有责任心，内驱力强；
@@ -823,27 +829,27 @@
                                 <div class="bodyText clear">
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu1.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu2.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu3.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu4.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu5.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                     <div class="yccm_group">
                                         <p class="img"><img src="./static/images/whtu6.jpg"/></p>
-                                        <div class="yccm_text" >活动照片</div>
+                                        <div class="yccm_text">活动照片</div>
                                     </div>
                                 </div>
                             </div>
@@ -1075,7 +1081,7 @@
                             <div class="yc_news_top">
                                 <div class="list_up">临时公告</div>
                                 <div class="news_list">
-                                    <ul id="investorLS" >
+                                    <ul id="investorLS">
                                         <li><a target="_blank" title="银橙传媒:股票解除限售公告" href="#">银橙传媒:股票解除限售公告</a><span>2018-04-26</span></li>
                                     </ul>
                                 </div>
@@ -1092,7 +1098,7 @@
                     </div>
                 </div>
                 <div class="footer">
-                    上海银橙文化传媒股份有限公司    银橙（上海）信息技术有限公司    Copyright（C）2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1       证券代码 : 830999 ｜ 隐私条例
+                    上海银橙文化传媒股份有限公司 银橙（上海）信息技术有限公司 Copyright（C）2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
                 </div>
             </div>
         </div>
@@ -1100,4 +1106,3 @@
 </div>
 </body>
 </html>
-
