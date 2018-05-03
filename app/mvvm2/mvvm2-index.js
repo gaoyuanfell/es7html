@@ -17,18 +17,45 @@ export class Observe {
         this.proxy(data);
     }
 
-    proxy(data) {
+    proxy(data, dep = new Dep(1)) {
         if (!data || typeof(data) !== 'object') {
             return
         }
-        Object.keys(data).forEach(key =>
-            this.defineReactive(data, key, data[key])
-        )
+        if (data instanceof Array) {
+
+            let arrayProto = Array.prototype;
+            let arrayMethods = Object.create(arrayProto);
+            [
+                'push',
+                'pop',
+                'shift',
+                'unshift',
+                'splice',
+                'sort',
+                'reverse'
+            ].forEach(method => {
+                let original = arrayMethods[method];
+                this.defValue(arrayMethods, method, () => {
+                    let r = original.apply(this, arguments);
+                    dep.notify()
+                    return r;
+                })
+            });
+            this.copyAugment(data, arrayMethods, Object.getOwnPropertyNames(arrayMethods))
+            Object.keys(data).forEach(key =>
+                this.defineReactive(data, key, data[key], dep)
+            )
+        } else {
+            Object.keys(data).forEach(key =>
+                this.defineReactive(data, key, data[key])
+            )
+        }
     }
 
-    defineReactive(data, key, value) {
-        let dep = new Dep();
-        this.proxy(value);
+    defineReactive(data, key, value, dep = new Dep(2)) {
+        if (data && typeof(data) === 'object') {
+            this.proxy(value, dep);
+        }
         Object.defineProperty(data, key, {
             configurable: true,
             enumerable: false,
@@ -46,15 +73,45 @@ export class Observe {
             }
         })
     }
+
+    defValue(obj, key, val, enumerable) {
+        Object.defineProperty(obj, key, {
+            value: val,
+            enumerable: !!enumerable,
+            configurable: true,
+            writable: true,
+            // get: function () {
+            //     value = val
+            //     if(typeof(val) === 'function' ){
+            //         value = val();
+            //     }
+            // },
+            // set: function (newValue) {
+            //     if(value !== newValue){
+            //         value = newValue
+            //     }
+            //     console.info(newValue)
+            // }
+        })
+    }
+
+    copyAugment(target, src, keys) {
+        for (let i = 0, l = keys.length; i < l; i++) {
+            let key = keys[i];
+            this.defValue(target, key, src[key]);
+        }
+    }
 }
 
 export class Dep {
-    constructor() {
+    constructor(name = 0) {
         this.subs = [];
+        this.name = name
     }
 
     static target;
     subs;
+    name
 
     add(sub) {
         this.subs.push(sub);
@@ -159,9 +216,13 @@ export class Compile {
                     node.parentNode.insertBefore(comment, node);
                     node.parentNode.removeChild(node);
 
-                    let nodes = this.compileFor(comment, attr);
+                    let {nodes, exp} = this.compileFor(comment, attr);
                     console.info(nodes)
-
+                    console.info(exp)
+                    new Watcher(vm, exp, () => { // 实例化订阅者
+                        debugger
+                        this.compileFor(comment, attr, nodes);
+                    });
                     // this.dep.add(() => {
                     //     this.compileFor(comment, attr, nodes);
                     // })
@@ -205,7 +266,7 @@ export class Compile {
         return new Function('vm', `
             return function (fn) {
                 for (let ${vs[1]} of vm.${vs[2]}){
-                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', ${is});
+                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', ${is}, '${vs[2]}');
                 }
             }
         `);
@@ -220,7 +281,8 @@ export class Compile {
             });
             arr.length = 0;
         }
-        this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d, e) => {
+        let exp = null;
+        this.getForFun(attr.nodeValue)(this.vm)((a, b, c, d, e, f) => {
             let copy = node.cloneNode(true);
             copy.removeAttribute('*for');
             copy.style.removeProperty('display');
@@ -233,10 +295,14 @@ export class Compile {
             if (e) {
                 data[e] = b;
             }
-            Object.setPrototypeOf(data,this.vm)
+            Object.setPrototypeOf(data, this.vm)
+            exp = f;
             this.compileNode(copy, data);
         });
-        return arr;
+        return {
+            nodes: arr,
+            exp: exp
+        };
     }
 
     compileIf(node, attr, vm = this.vm) {
@@ -288,19 +354,19 @@ export class Compile {
                     switch (node.type) {
                         case 'number':
                             node.oninput = (event) => {
-                                if(event.inputType === 'insertCompositionText') return;
+                                if (event.inputType === 'insertCompositionText') return;
                                 this.compileFun(`${attr.nodeValue}='${parseInt(event.target.value)}'`, vm)
                             };
                             break;
                         case 'text':
                             node.oninput = (event) => {
-                                if(event.inputType === 'insertCompositionText') return;
+                                if (event.inputType === 'insertCompositionText') return;
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
-                                if(event.inputType === 'insertCompositionText') return;
+                                if (event.inputType === 'insertCompositionText') return;
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
@@ -404,27 +470,19 @@ class Test {
         this.h = 'aaa';
         this.list = [
             {a: 1},
-            {a: '2'},
-            {a: 3},
-            {a: 4},
-            {a: 5},
-            {a: 6},
-            {a: 7},
-            {a: 8},
-            {a: 9},
-            {a: 10},
         ];
         new MVVM("#body", this);
 
         setTimeout(() => {
             this.a = 600
+            this.list.push({a: 11})
         }, 2000)
     }
 
     test(l) {
         console.info(this.a)
         console.info(l)
-        this.list.push({a:11})
+        this.list.push({a: 11})
     }
 
 }
