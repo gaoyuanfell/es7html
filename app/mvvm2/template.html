@@ -9,8 +9,8 @@
 <body>
 <div id="body">
     <p *for="let a of list">
-        <!--<input [(model)]="l.a">-->
-        <span>{{a.a}}</span>
+        <input type="number" [(model)]="a.a">
+        <span (click)="test(a)">{{a.a}}</span>
     </p>
     <p [title]="a">{{ a + b }} {{ b * d }}</p>
     <p [title]="a">{{ a }} {{ b * d }}</p>

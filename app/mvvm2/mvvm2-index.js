@@ -30,6 +30,8 @@ export class Observe {
         let dep = new Dep();
         this.proxy(value);
         Object.defineProperty(data, key, {
+            configurable: true,
+            enumerable: false,
             get: function () {
                 if (Dep.target) { // 往订阅器添加订阅者
                     dep.add(Dep.target)
@@ -136,7 +138,6 @@ export class Compile {
                 //属性
                 if (this.attrReg.test(attr.nodeName)) {
                     this.compileAttr(node, attr, vm);
-
                     new Watcher(vm, attr.nodeValue.trim(), () => { // 实例化订阅者
                         this.compileAttr(node, attr, vm)
                     });
@@ -159,6 +160,7 @@ export class Compile {
                     node.parentNode.removeChild(node);
 
                     let nodes = this.compileFor(comment, attr);
+                    console.info(nodes)
 
                     // this.dep.add(() => {
                     //     this.compileFor(comment, attr, nodes);
@@ -203,10 +205,10 @@ export class Compile {
         return new Function('vm', `
             return function (fn) {
                 for (let ${vs[1]} of vm.${vs[2]}){
-                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', ${is})
+                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', ${is});
                 }
             }
-        `)
+        `);
     }
 
     compileFor(comment, attr, arr = []) {
@@ -226,19 +228,12 @@ export class Compile {
             comment.parentNode.insertBefore(copy, comment);
             arr.push(copy);
 
-            let data = Object.create({})
-            Object.setPrototypeOf(data, this.vm)
-            // Object.keys(data).every(d => {
-            //     if (!Object.hasOwnProperty(d)) return true;
-            //     Reflect.deleteProperty(data, d)
-            //     return true;
-            // })
-            //
-            // console.info(data);
+            let data = {};
             data[d] = a;
             if (e) {
                 data[e] = b;
             }
+            Object.setPrototypeOf(data,this.vm)
             this.compileNode(copy, data);
         });
         return arr;
@@ -267,7 +262,7 @@ export class Compile {
         let fun = new Function('vm', `
             with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
         `);
-        return fun(vm);
+        return fun.bind(Object.getPrototypeOf(vm))(vm);
     }
 
     isBooleanValue(val) {
@@ -291,13 +286,21 @@ export class Compile {
             case 'model':
                 if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
                     switch (node.type) {
+                        case 'number':
+                            node.oninput = (event) => {
+                                if(event.inputType === 'insertCompositionText') return;
+                                this.compileFun(`${attr.nodeValue}='${parseInt(event.target.value)}'`, vm)
+                            };
+                            break;
                         case 'text':
                             node.oninput = (event) => {
+                                if(event.inputType === 'insertCompositionText') return;
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
+                                if(event.inputType === 'insertCompositionText') return;
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
@@ -331,6 +334,9 @@ export class Compile {
             case 'model':
                 if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) {
                     switch (node.type) {
+                        case 'number':
+                            node.value = this.compileFun(attr.nodeValue, vm);
+                            break;
                         case 'text':
                         case 'textarea':
                             node.value = this.compileFun(attr.nodeValue, vm);
@@ -398,7 +404,7 @@ class Test {
         this.h = 'aaa';
         this.list = [
             {a: 1},
-            {a: 2},
+            {a: '2'},
             {a: 3},
             {a: 4},
             {a: 5},
@@ -415,8 +421,10 @@ class Test {
         }, 2000)
     }
 
-    test() {
+    test(l) {
         console.info(this.a)
+        console.info(l)
+        this.list.push({a:11})
     }
 
 }
