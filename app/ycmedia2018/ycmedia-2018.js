@@ -54,12 +54,14 @@ class BackgroundSwitch {
         this.init()
         this.initEvent()
     }
+
     init() {
         this.appoint.style.display = `none`
         this.appoint.style.position = `absolute`
         this.appoint.style.overflow = `hidden`
         this.appoint.style.backgroundRepeat = `no-repeat`
     }
+
     initEvent() {
         this.ref.addEventListener('mouseout', (event) => {
             this.refMouseout(event)
@@ -76,6 +78,7 @@ class BackgroundSwitch {
             }
         })
     }
+
     refMouseout() {
         this.bo1 = false;
         if (!this.bo1 && !this.bo2) {
@@ -84,6 +87,7 @@ class BackgroundSwitch {
             this.bo2 = true;
         }
     }
+
     refMousemove(event) {
         let ref = event.target;
         let w = ref.clientWidth;
@@ -110,6 +114,11 @@ class BackgroundSwitch {
 new BackgroundSwitch(document.querySelector('#huoban1'), document.querySelector('#huoban2'), {
     rate_x: 5,
     rate_y: 2,
+});
+
+new BackgroundSwitch(document.querySelector('#huob1'), document.querySelector('#huob2'), {
+    rate_x: 5,
+    rate_y: 8,
 });
 
 /**/
@@ -351,13 +360,427 @@ class Template {
     }
 }
 
-let html = '{{asd}}123{{zxc}}456{{qwe}}78{{aa.bb}}9';
+/*let html = '{{asd}}123{{zxc}}456{{qwe}}78{{aa.bb}}9';
 let value = {
     asd: 'asd',
     zxc: 'zxc',
     qwe: 'qwe',
     aa: {bb: 'bb'}
 };
-
 let val = new Template(html, value).compile()
-console.info(val);
+console.info(val);*/
+
+
+let str = `
+<div class="yccm_client_case_group" data-index="{{$index}}">
+    <p class="img"><img src="{{img}}"></p>
+    <div class="yccm_client_case_text">{{title}}</div>
+    <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
+    <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
+</div>
+`;
+
+let html = `
+    <div class="yccm_client_details clear" data-index="{{$index}}">
+        <div class="yccm_client_details_left">
+            <div class="imgtubox">
+                <div class="tulist" style="left: -254px;">
+                    
+                </div>
+            </div>
+            <a href="javascript:;" class="prev" class="arrow">&lt;</a>
+            <a href="javascript:;" class="next" class="arrow">&gt;</a>
+        </div>
+        <div class="yccm_client_details_right">
+            <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
+            <p class="text">
+                {{target}}
+            </p>
+            <ul class="features">
+                <li>案例类型：{{type}}</li>
+                <li>投放平台：{{platform}}</li>
+                <li>CPC成本：{{cost}}</li>
+                <li class="baizi">激活成本：{{activation}}</li>
+                <li>点击率：{{rate}}</li>
+            </ul>
+            <div class="btn_box">
+                <a href="javascript:;" class="kongbtn">下一个案例</a>
+                <a href="javascript:;" class="previous">上一个</a>
+            </div>
+        </div>
+    </div>
+`;
+
+let list = [
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '光荣使命',
+        type: '工具类',
+        cost: '0.70',
+        activation: '8.00',
+        rate: '6.0%',
+        imglist: ['./static/images/caseimg/case01-01.jpg', './static/images/caseimg/case01-02.jpg'],
+        time: '2017年',
+        target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息，有效提升精准度和转化效果，为品牌带来更多有效用户。',
+        platform: '智橙移动端'
+    },
+    {
+        img: './static/images/caseimg/case02.jpg',
+        title: '荒野行动',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg', './static/images/caseimg/case02-03.jpg'],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '最强NBA',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '唯品会',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case04.jpg',
+        title: '网易严选',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '闪电降价',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '你我贷',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case01.jpg',
+        title: '拍拍贷',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '交通银行',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '每日优鲜',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '搜狗搜索',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: 'UC浏览器',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '天天快报',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: '火山小视频',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case05.jpg',
+        title: '大众点评',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case03.jpg',
+        title: 'KEEP',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case06.jpg',
+        title: 'VIPKID',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case07.jpg',
+        title: '交大成人教育',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case08.jpg',
+        title: '网易考拉',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+    {
+        img: './static/images/caseimg/case09.jpg',
+        title: 'JJ斗地主',
+        type: '工具类',
+        cost: '',
+        activation: '',
+        rate: '',
+        imglist: ['', '', ''],
+        time: '',
+        target: '',
+        platform: ''
+    },
+]
+let caseList = [];
+list.forEach((l,i) => {
+    l.$index = i;
+    caseList += new Template(str, l).compile();
+})
+document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+
+
+$('.yccm_client_case_group').on('click', function () {
+    let popup = document.querySelector('#popup').innerHTML;
+    let data_index = $(this).attr("data-index");
+    // console.info(htmlindex)
+    layer.open({
+        type: 1,
+        area: ['100%', '100%'], //宽高
+        title: false,
+        content: popup,
+        success: () => {
+            console.info(list[data_index]);
+            let htmlStr = new Template(html, list[data_index]).compile();
+            document.querySelector('.yccm_popup_body').innerHTML = htmlStr;
+
+
+
+            // let htmlList = [];
+            // list.forEach((l,i) => {
+            //     l.$index = i;
+            //     htmlList += new Template(html, l).compile();
+            // })
+            //
+            // let htmllists =document.querySelector('.yccm_popup_body')
+            //
+            // Array.from(htmllists.children).forEach(f => {
+            //     console.info(f)
+            // })
+            // // let htmllists =document.querySelector('.yccm_popup_body').children;
+            //
+            // console.info(htmllists[dataindex])
+            // if(dataindex && htmllists[dataindex]){
+            //     // document.querySelector('.yccm_popup_body').innerHTML = htmlindex[dataindex]
+            //     // htmlList[dataindex].style.display='block';
+            // }
+        }
+    });
+})
+
+/*const aboutRef = document.querySelector("#about_menu");
+const aboutListRef = document.querySelector("#aboutlist");
+
+aboutRef.addEventListener('click', (e) => {
+    let fRef = null;
+    Array.from(aboutRef.children).forEach(f => {
+        f.classList.remove('active')
+        if (f.contains(e.target)) {
+            f.classList.add('active')
+            fRef = f
+        }
+    })
+    if (fRef && aboutListRef) {
+        let type = fRef.dataset.type;
+        if (+type) {
+            Array.from(aboutListRef.children).forEach(p => {
+                p.style.display = 'none';
+                if (p.dataset.type == type) {
+                    p.style.display = 'block';
+                    p.animate([
+                        {opacity: 0},
+                        {opacity: 1}
+                    ], {
+                        duration: 500
+                    })
+                }
+            })
+        }
+    }
+});*/
+
+
+
+/*var imgbox = document.querySelector('.imgtubox');
+var list1 = document.querySelector('.tulist');
+var prev = document.querySelector('.prev');
+var next = document.querySelector('.next');
+var index = 1;
+var timer;
+function animate(offset) {
+    //获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
+    //且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+    var newLeft = parseInt(list1.style.left) + offset;
+    list1.style.left = newLeft + 'px';
+    //无限滚动判断
+    if (newLeft > -254) {
+        list1.style.left = -1270 + 'px';
+    }
+    if (newLeft < -1270) {
+        list1.style.left = -254 + 'px';
+    }
+}
+function play() {
+    //重复执行的定时器
+    timer = setInterval(function() {
+        next.onclick();
+    }, 2000)
+}
+
+function stop() {
+    clearInterval(timer);
+}
+prev.onclick = function() {
+    index -= 1;
+    if (index < 1) {
+        index = 5
+    }
+    animate(254);
+};
+
+next.onclick = function() {
+    //由于上边定时器的作用，index会一直递增下去，我们只有5个小圆点，所以需要做出判断
+    index += 1;
+    if (index > 5) {
+        index = 1
+    }
+    animate(-254);
+};
+imgbox.onmouseover = stop;
+imgbox.onmouseout = play;
+play();*/
+
+
+
+

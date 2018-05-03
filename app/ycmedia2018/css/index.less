@@ -57,41 +57,44 @@
             li{
                 margin: 0 2px;
                 a{
-                    padding: 0 11px;
                     color:rgba(255,255,255,0.5);
-                    position: relative;
+                    display: block;
+                    span{
+                        padding: 0 14px;
+                        position: relative;
+                    }
                 }
             }
             li.active{
                 a{
                     color:#fff;
-                }
-                a::before{
-                    content: '';
-                    background: url("../static/images/nav_active.png") no-repeat;
-                    width: 23px;
-                    height: 16px;
-                    background-size: 100% 100%;
-                    display: inline-block;
-                    position: absolute;
-                    left:-2px;
-                    top:-5px;
+                    span::before{
+                        content: '';
+                        background: url("../static/images/nav_active.png") no-repeat;
+                        width: 23px;
+                        height: 16px;
+                        background-size: 100% 100%;
+                        display: inline-block;
+                        position: absolute;
+                        left:0;
+                        top:-5px;
+                    }
                 }
             }
             li:hover{
                 a{
                     color:#fff;
-                }
-                a::before{
-                    content: '';
-                    background: url("../static/images/nav_active.png") no-repeat;
-                    width: 23px;
-                    height: 16px;
-                    background-size: 100% 100%;
-                    display: inline-block;
-                    position: absolute;
-                    left:-2px;
-                    top:-5px;
+                    span::before{
+                        content: '';
+                        background: url("../static/images/nav_active.png") no-repeat;
+                        width: 23px;
+                        height: 16px;
+                        background-size: 100% 100%;
+                        display: inline-block;
+                        position: absolute;
+                        left:0;
+                        top:-5px;
+                    }
                 }
             }
         }
@@ -138,7 +141,7 @@
 /*首页*/
 .banner{
     position: relative;
-    padding-top: 47.9%;
+    padding-top: 53.7%;
     height: 0;
     overflow: hidden;
     .bg{
@@ -167,7 +170,13 @@
             margin: auto;
         }
     }
-
+    .down{
+        position: absolute;
+        bottom:18px;
+        margin-left: -13px;
+        animation:down 3s ease 0s infinite;
+        -webkit-animation:down 3s ease 0s infinite;
+    }
 }
 .mobel{
     padding: 80px 0 100px 0;
@@ -374,7 +383,7 @@
         position: relative;
     }
 }
-.arrow {
+.arrow1 {
     position: absolute;
     top: 180px;
     z-index: 2;
@@ -387,11 +396,11 @@
     cursor: pointer;
 }
 
-#prev {
+#prev1 {
     left: -45px;
 }
 
-#next {
+#next1 {
     right: -45px;
 }
 
@@ -634,6 +643,140 @@
 /*案例中心*/
 .case_tit{
     margin-bottom: 70px;
+}
+
+.yccm_client_top {
+    padding-bottom: 42px;
+    width: 1200px;
+    margin: auto;
+    margin-top: 218px;
+}
+
+.yccm_client_return {
+    float: right;
+    cursor: pointer;
+    font-size: 24px;
+    color: #9e9e9e;
+}
+
+.yccm_popup_body {
+    margin: auto;
+    width: 1200px;
+}
+
+.yccm_client_details_left {
+    width: 490px;
+    float: left;
+    margin-right: 126px;
+    position: relative;
+    padding-right: 40px;
+}
+
+.yccm_client_details_right {
+    float: left;
+    width: 450px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+html {
+    overflow: hidden;
+}
+
+.yccm_client_details_right {
+    .title {
+        font-size: 24px;
+        font-weight: 500;
+        color: #fff;
+        border-bottom: 1px rgba(255, 255, 255, 0.15) solid;
+        padding-bottom: 28px;
+        text-align: left;
+        span {
+            font-size: 16px;
+            font-weight: normal;
+            color: rgba(255, 255, 255, 0.25);
+            margin-left: 22px;
+        }
+    }
+    .text {
+        text-align: justify;
+        padding: 28px 0;
+        border-bottom: 1px rgba(255, 255, 255, 0.15) solid;
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 16px;
+        line-height: 1.8;
+    }
+    .features {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 16px;
+        padding: 28px 0;
+        line-height: 1.8;
+        text-align: left;
+    }
+}
+
+.baizi {
+    color: #fff;
+}
+
+.btn_box a {
+    font-size: 16px;
+}
+
+.kongbtn {
+    width: 140px;
+    height: 45px;
+    line-height: 45px;
+    border: 1px #ff9803 solid;
+    color: #ff9d00;
+    border-radius: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
+.previous {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 50px;
+}
+
+.imgtubox {
+    position: relative;
+    width: 254px;
+    height: 494px;
+    overflow: hidden;
+    float: right;
+    .tulist {
+        position: absolute;
+        z-index: 1;
+        width: 1778px;
+        height: 494px;
+        img {
+            float: left;
+            width: 254px;
+            height: 494px;
+        }
+    }
+}
+
+.arrow {
+    position: absolute;
+    top: 180px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    line-height: 39px;
+    text-align: center;
+    color: rgba(255, 255, 255, .6);
+    cursor: pointer;
+}
+
+.prev {
+    right: 294px;
+}
+
+.next {
+    right: 0;
 }
 .yccm_popup_bodyText{
     width:1200px;
@@ -1335,6 +1478,10 @@
             color: #333333;
             margin-bottom: 60px;
         }
+        .imgbody{
+            position: relative;
+            width: 1200px;
+        }
     }
 }
 
@@ -1434,6 +1581,26 @@
         opacity: 0;
         -ms-transform: translate3d(0, -100%, 0);
         transform: translate3d(0, -100%, 0)
+    }
+}
+@-webkit-keyframes down {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, -50%, 0)
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0)
+    }
+}
+@keyframes down {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, -50%, 0)
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0)
     }
 }
 
