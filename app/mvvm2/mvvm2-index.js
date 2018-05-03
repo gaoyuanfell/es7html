@@ -88,9 +88,16 @@ export class Watcher {
 
     getValue() {
         Dep.target = this;
-        const value = this.vm[this.exp];
+        const value = this.compileFun(this.exp, this.vm);
         Dep.target = null;
         return value
+    }
+
+    compileFun(exg, vm) {
+        let fun = new Function('vm', `
+            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
+        `);
+        return fun(vm);
     }
 }
 
@@ -130,21 +137,15 @@ export class Compile {
                 if (this.attrReg.test(attr.nodeName)) {
                     this.compileAttr(node, attr, vm);
 
-                    new Watcher(this.vm, attr.nodeValue.trim(), () => { // 实例化订阅者
+                    new Watcher(vm, attr.nodeValue.trim(), () => { // 实例化订阅者
                         this.compileAttr(node, attr, vm)
                     });
-                    // this.dep.add(() => {
-                    //     this.compileAttr(node, attr, vm)
-                    // })
                 }
 
                 //模板 *if
                 if (attr.nodeName === '*if') {
                     this.compileIf(node, attr, vm);
-                    // this.dep.add(() => {
-                    //     this.compileIf(node, attr, vm)
-                    // })
-                    new Watcher(this.vm, attr.nodeValue.trim(), () => { // 实例化订阅者
+                    new Watcher(vm, attr.nodeValue.trim(), () => { // 实例化订阅者
                         this.compileIf(node, attr, vm);
                     });
                     node.removeAttribute(attr.nodeName)
@@ -156,7 +157,9 @@ export class Compile {
                     comment.$node = node;
                     node.parentNode.insertBefore(comment, node);
                     node.parentNode.removeChild(node);
+
                     let nodes = this.compileFor(comment, attr);
+
                     // this.dep.add(() => {
                     //     this.compileFor(comment, attr, nodes);
                     // })
@@ -173,7 +176,7 @@ export class Compile {
             let values = textContent.match(new RegExp(this.valueReg, 'ig'));
             values.forEach(val => {
                 let exp = val.match(this.valueReg)[1]
-                new Watcher(this.vm, exp.trim(), () => {
+                new Watcher(vm, exp.trim(), () => {
                     this.compileText(node, vm)
                 });
             })
@@ -190,15 +193,17 @@ export class Compile {
         let is = undefined;
         if (exgs instanceof Array && exgs.length) {
             vs = exgs[0].match(/let\s+(.*)\s+of\s+(.*)/);
-            let index = exgs[1].match(/let\s+(.*)\s?=\s?index/);
-            if (index instanceof Array && index.length) {
-                is = index[1].trim();
+            if (exgs[1]) {
+                let index = exgs[1].match(/let\s+(.*)\s?=\s?index/);
+                if (index instanceof Array && index.length) {
+                    is = index[1].trim();
+                }
             }
         }
         return new Function('vm', `
             return function (fn) {
                 for (let ${vs[1]} of vm.${vs[2]}){
-                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', '${is}')
+                    fn && fn(${vs[1]}, vm.${vs[2]}.indexOf(${vs[1]}), vm, '${vs[1]}', ${is})
                 }
             }
         `)
@@ -220,9 +225,20 @@ export class Compile {
             if (!copy.getAttribute('style')) copy.removeAttribute('style');
             comment.parentNode.insertBefore(copy, comment);
             arr.push(copy);
-            let data = Object.create(this.vm.__proto__);
+
+            let data = Object.create({})
+            Object.setPrototypeOf(data, this.vm)
+            // Object.keys(data).every(d => {
+            //     if (!Object.hasOwnProperty(d)) return true;
+            //     Reflect.deleteProperty(data, d)
+            //     return true;
+            // })
+            //
+            // console.info(data);
             data[d] = a;
-            data[e] = b;
+            if (e) {
+                data[e] = b;
+            }
             this.compileNode(copy, data);
         });
         return arr;
@@ -277,16 +293,11 @@ export class Compile {
                     switch (node.type) {
                         case 'text':
                             node.oninput = (event) => {
-                                console.info(event.inputType)
-                                console.info(event.type);
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
-                                console.info(this.vm)
                             };
                             break;
                         case 'textarea':
                             node.oninput = (event) => {
-                                console.info(event.inputType)
-                                console.info(event.type);
                                 this.compileFun(`${attr.nodeValue}='${event.target.value}'`, vm)
                             };
                             break;
@@ -375,6 +386,8 @@ export class Compile {
 
 
 class Test {
+    static ab = 1
+
     constructor() {
         this.a = 500;
         this.b = 2;
@@ -384,13 +397,26 @@ class Test {
         this.g = void 0;
         this.h = 'aaa';
         this.list = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            {a: 1},
+            {a: 2},
+            {a: 3},
+            {a: 4},
+            {a: 5},
+            {a: 6},
+            {a: 7},
+            {a: 8},
+            {a: 9},
+            {a: 10},
         ];
         new MVVM("#body", this);
 
         setTimeout(() => {
             this.a = 600
         }, 2000)
+    }
+
+    test() {
+        console.info(this.a)
     }
 
 }

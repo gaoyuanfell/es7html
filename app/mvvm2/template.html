@@ -8,11 +8,16 @@
 </head>
 <body>
 <div id="body">
+    <p *for="let a of list">
+        <!--<input [(model)]="l.a">-->
+        <span>{{a.a}}</span>
+    </p>
     <p [title]="a">{{ a + b }} {{ b * d }}</p>
     <p [title]="a">{{ a }} {{ b * d }}</p>
     <p *if="a">{{ a }} {{ b * d }}</p>
     <input [(model)]="b">
     <input [(model)]="a">
+    <button type="button" (click)="test()">test</button>
 </div>
 </body>
 </html>
