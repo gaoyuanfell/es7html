@@ -641,15 +641,14 @@ let html = `
 
 $('.yccm_client_case_group').on('click', function () {
     let data_index = $(this).attr("data-index");
-
     asd(data_index)
 })
 
+//好了 换名称
 function asd(index) {
+    let data = list[+index];
     document.querySelector('.yccm_popup_body').innerHTML = '';
-    console.info(list[index]);
-    document.querySelector('.yccm_popup_body').innerHTML = new Template(html, list[index]).compile();
-
+    document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
     layer.open({
         type: 1,
         shade:0,
@@ -657,15 +656,18 @@ function asd(index) {
         title: false,
         content: $('#popup'),
     });
-
-    console.info(document.querySelector('[data-js-active=next]'))
-
     document.querySelector('[data-js-active=next]').addEventListener('click',()=>{
-        console.info(+index + 1)
-        if(list.length > +index + 1){
+        if(list.length <= data.$index + 1){
             asd(0)
         }else{
-            asd(++index)
+            asd(data.$index + 1)
+        }
+    })
+    document.querySelector('[data-js-active=prev]').addEventListener('click',()=>{
+        if(data.$index - 1 < 0){
+            asd(list.length - 1)
+        }else{
+            asd(data.$index - 1)
         }
     })
 }
