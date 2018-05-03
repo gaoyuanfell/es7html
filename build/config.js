@@ -96,13 +96,13 @@ module.exports = [
     //     name:'tgpc-index',
     //     title:'乐橙'
     // },
-     {
-         path:'mvvm2',
-         output:'mvvm2',
-         publicPath:'',
-         name:'mvvm2-index',
-         title:'mvvm2'
-     },
+    //  {
+    //      path:'mvvm2',
+    //      output:'mvvm2',
+    //      publicPath:'',
+    //      name:'mvvm2-index',
+    //      title:'mvvm2'
+    //  },
     // {
     //     path:'table',
     //     output:'table',

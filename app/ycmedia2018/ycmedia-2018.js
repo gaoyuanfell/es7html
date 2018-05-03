@@ -155,22 +155,6 @@ scrol && scrol.addEventListener('scroll', function () {
     }
 })
 
-/*案例中心*/
-$('.yccm_client_case_group').on('click', function () {
-
-    let hrefa = $(this).attr("data-href");
-    let obj = "../static/client_details/" + hrefa + '?_=' + Date.now();
-    $(document.body).innerHeight()
-    let width = $(document.body).outerWidth();
-    layer.open({
-        type: 2,
-        title: false,
-        shadeClose: true,
-        shade: 0.9,
-        area: [width + 'px', '100%'],
-        content: obj //iframe的url
-    });
-});
 
 /*关于银橙*/
 const aboutRef = document.querySelector("#about_menu");
@@ -360,56 +344,6 @@ class Template {
     }
 }
 
-/*let html = '{{asd}}123{{zxc}}456{{qwe}}78{{aa.bb}}9';
-let value = {
-    asd: 'asd',
-    zxc: 'zxc',
-    qwe: 'qwe',
-    aa: {bb: 'bb'}
-};
-let val = new Template(html, value).compile()
-console.info(val);*/
-
-
-let str = `
-<div class="yccm_client_case_group" data-index="{{$index}}">
-    <p class="img"><img src="{{img}}"></p>
-    <div class="yccm_client_case_text">{{title}}</div>
-    <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
-    <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
-</div>
-`;
-
-let html = `
-    <div class="yccm_client_details clear" data-index="{{$index}}">
-        <div class="yccm_client_details_left">
-            <div class="imgtubox">
-                <div class="tulist" style="left: -254px;">
-                    
-                </div>
-            </div>
-            <a href="javascript:;" class="prev" class="arrow">&lt;</a>
-            <a href="javascript:;" class="next" class="arrow">&gt;</a>
-        </div>
-        <div class="yccm_client_details_right">
-            <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
-            <p class="text">
-                {{target}}
-            </p>
-            <ul class="features">
-                <li>案例类型：{{type}}</li>
-                <li>投放平台：{{platform}}</li>
-                <li>CPC成本：{{cost}}</li>
-                <li class="baizi">激活成本：{{activation}}</li>
-                <li>点击率：{{rate}}</li>
-            </ul>
-            <div class="btn_box">
-                <a href="javascript:;" class="kongbtn">下一个案例</a>
-                <a href="javascript:;" class="previous">上一个</a>
-            </div>
-        </div>
-    </div>
-`;
 
 let list = [
     {
@@ -653,51 +587,89 @@ let list = [
         platform: ''
     },
 ]
-let caseList = [];
-list.forEach((l,i) => {
-    l.$index = i;
-    caseList += new Template(str, l).compile();
-})
-document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+
+~function () {
+    let str = `
+<div class="yccm_client_case_group" data-index="{{$index}}">
+    <p class="img"><img src="{{img}}"></p>
+    <div class="yccm_client_case_text">{{title}}</div>
+    <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
+    <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
+</div>
+`;
+    let caseList = [];
+    list.forEach((l, i) => {
+        l.$index = i;
+        caseList += new Template(str, l).compile();
+    })
+    document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+
+}()
+
+
+let html = `
+    <div class="yccm_client_details clear" data-index="{{$index}}">
+        <div class="yccm_client_details_left">
+            <div class="imgtubox">
+                <div class="tulist" style="left: -254px;">
+                    
+                </div>
+            </div>
+            <a href="javascript:;" class="prev" class="arrow">&lt;</a>
+            <a href="javascript:;" class="next" class="arrow">&gt;</a>
+        </div>
+        <div class="yccm_client_details_right">
+            <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
+            <p class="text">
+                {{target}}
+            </p>
+            <ul class="features">
+                <li>案例类型：{{type}}</li>
+                <li>投放平台：{{platform}}</li>
+                <li>CPC成本：{{cost}}</li>
+                <li class="baizi">激活成本：{{activation}}</li>
+                <li>点击率：{{rate}}</li>
+            </ul>
+            <div class="btn_box">
+                <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
+                <a href="javascript:;" class="previous" data-js-active="prev">上一个</a>
+            </div>
+        </div>
+    </div>
+`;
 
 
 $('.yccm_client_case_group').on('click', function () {
-    let popup = document.querySelector('#popup').innerHTML;
     let data_index = $(this).attr("data-index");
-    // console.info(htmlindex)
+
+    asd(data_index)
+})
+
+function asd(index) {
+    document.querySelector('.yccm_popup_body').innerHTML = '';
+    console.info(list[index]);
+    document.querySelector('.yccm_popup_body').innerHTML = new Template(html, list[index]).compile();
+
     layer.open({
         type: 1,
+        shade:0,
         area: ['100%', '100%'], //宽高
         title: false,
-        content: popup,
-        success: () => {
-            console.info(list[data_index]);
-            let htmlStr = new Template(html, list[data_index]).compile();
-            document.querySelector('.yccm_popup_body').innerHTML = htmlStr;
-
-
-
-            // let htmlList = [];
-            // list.forEach((l,i) => {
-            //     l.$index = i;
-            //     htmlList += new Template(html, l).compile();
-            // })
-            //
-            // let htmllists =document.querySelector('.yccm_popup_body')
-            //
-            // Array.from(htmllists.children).forEach(f => {
-            //     console.info(f)
-            // })
-            // // let htmllists =document.querySelector('.yccm_popup_body').children;
-            //
-            // console.info(htmllists[dataindex])
-            // if(dataindex && htmllists[dataindex]){
-            //     // document.querySelector('.yccm_popup_body').innerHTML = htmlindex[dataindex]
-            //     // htmlList[dataindex].style.display='block';
-            // }
-        }
+        content: $('#popup'),
     });
-})
+
+    console.info(document.querySelector('[data-js-active=next]'))
+
+    document.querySelector('[data-js-active=next]').addEventListener('click',()=>{
+        console.info(+index + 1)
+        if(list.length > +index + 1){
+            asd(0)
+        }else{
+            asd(++index)
+        }
+    })
+}
+
 
 /*const aboutRef = document.querySelector("#about_menu");
 const aboutListRef = document.querySelector("#aboutlist");
@@ -729,7 +701,6 @@ aboutRef.addEventListener('click', (e) => {
         }
     }
 });*/
-
 
 
 /*var imgbox = document.querySelector('.imgtubox');
