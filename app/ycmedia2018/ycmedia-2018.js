@@ -112,13 +112,22 @@ new BackgroundSwitch(document.querySelector('#huoban1'), document.querySelector(
     rate_y: 2,
 });
 
-new BackgroundSwitch(document.querySelector('#huob1'), document.querySelector('#huob2'), {
+new BackgroundSwitch(document.querySelector('#adzhu1'), document.querySelector('#adzhu2'), {
     rate_x: 5,
     rate_y: 8,
 });
 
-/**/
+new BackgroundSwitch(document.querySelector('#mediazhu1'), document.querySelector('#mediazhu2'), {
+    rate_x: 5,
+    rate_y: 11,
+});
 
+new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector('#agentzy2'), {
+    rate_x: 5,
+    rate_y: 3,
+});
+
+/*首页案例轮播*/
 const head_list = document.getElementById("head_list");
 const menu_content = document.getElementById("menu_content");
 const oli = head_list.getElementsByTagName("li");//获取tab列表
@@ -138,10 +147,8 @@ for (let i = 0; i < oli.length; i++) {
 /*业务版块*/
 let scrol = document.querySelector("#contentener");
 let offSet = $('#guangcheng').offset().top;
-// console.info(offSet);
 scrol && scrol.addEventListener('scroll', function () {
     let t = scrol.scrollTop;
-    // console.info(t);
     if (t > offSet) {
         $('.img1').addClass('animat1')
         $('.img2').addClass('animat2')
@@ -278,18 +285,65 @@ function jsonp(url, body = {}, config = {}, fn) {
 * page默认第一页
 * 改变page值获取对应页码的值
 * */
-async function getData(page = 0) {
-    return await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
-        disclosureType: 5,
-        page: page,
-        companyCd: 830999,
-        isNewThree: 1,
-        startTime: '',
-        endTime: '',
-        keyword: '关键字',
-        xxfcbj: '',
-    })
+async function getData() {
+    let bo = true;
+    let page = 0;
+
+    let list;
+    let contentList = [];
+
+    while (bo) {
+        let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
+            disclosureType: 5,
+            page: page,
+            companyCd: 830999,
+            isNewThree: 1,
+            startTime: '',
+            endTime: '',
+            keyword: '关键字',
+            xxfcbj: '',
+        })
+        ++page
+        if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
+            list = data[0].list;
+            bo = false;
+            return contentList
+        }
+        contentList.push(...data[0].listInfo.content)
+    }
 }
+
+let investorLSref = document.querySelector('#investorLS');
+let investorDQref = document.querySelector('#investorDQ');
+
+getData().then(contentList => {
+    let investorLS = contentList.filter((ele) => {
+        if (ele.disclosureType === '9504') return true;
+    })
+
+    let investorDQ = contentList.filter((ele) => {
+        if (ele.disclosureType === '9503') return true;
+    })
+
+    let investorLSHtml = ''
+    for (let i = 0; i < investorLS.length; i++) {
+        let provi = investorLS[i];
+        provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
+        provi.disclosurePostTitle = provi.disclosurePostTitle;
+        let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+        investorLSHtml += add
+    }
+    investorLSref.innerHTML = investorLSHtml
+    let investorDQHtml = ''
+    for (let i = 0; i < investorDQ.length; i++) {
+        let provi = investorDQ[i];
+        provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
+        provi.disclosurePostTitle = provi.disclosurePostTitle;
+        let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+        investorDQHtml += add
+    }
+    investorDQref.innerHTML = investorDQHtml
+});
 
 /*
 * 模板编译
@@ -593,6 +647,7 @@ let list = [
             <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
         </div>
     `;
+
     let caseList = [];
     list.forEach((l, i) => {
         l.$index = i;
@@ -605,17 +660,17 @@ let list = [
 
 $('.yccm_client_case_group').on('click', function () {
     let data_index = $(this).attr("data-index");
-    asd(data_index)
+    Details(data_index)
 })
 
-//好了 换名称
-function asd(index) {
+
+function Details(index) {
     let html = `
-        <div class="yccm_client_details clear" data-index="{{$index}}">
+        <div class="yccm_client_details clear">
             <div class="yccm_client_details_left">
                 <div class="imgtubox">
                     <div class="tulist" style="left: -254px;">
-                        
+                        {{imghtml}}
                     </div>
                 </div>
                 <a href="javascript:;" class="prev" class="arrow">&lt;</a>
@@ -641,6 +696,7 @@ function asd(index) {
         </div>
     `;
     let data = list[+index];
+    data.imghtml = data.imglist.map(l => `<img src="${l}"/>`).join('')
     document.querySelector('.yccm_popup_body').innerHTML = '';
     document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
     layer.open({
@@ -651,102 +707,24 @@ function asd(index) {
         content: $('#popup'),
     });
     document.querySelector('[data-js-active=next]').onclick = () => {
+        console.info(data.$index)
+        console.info(list.length)
         if (list.length <= data.$index + 1) {
-            asd(0)
+            Details(0)
         } else {
-            asd(data.$index + 1)
+            Details(data.$index + 1)
         }
     }
     document.querySelector('[data-js-active=prev]').onclick = () => {
         if (data.$index - 1 < 0) {
-            asd(list.length - 1)
+            Details(list.length - 1)
         } else {
-            asd(data.$index - 1)
+            Details(data.$index - 1)
         }
     }
+
 }
 
-
-/*const aboutRef = document.querySelector("#about_menu");
-const aboutListRef = document.querySelector("#aboutlist");
-
-aboutRef.addEventListener('click', (e) => {
-    let fRef = null;
-    Array.from(aboutRef.children).forEach(f => {
-        f.classList.remove('active')
-        if (f.contains(e.target)) {
-            f.classList.add('active')
-            fRef = f
-        }
-    })
-    if (fRef && aboutListRef) {
-        let type = fRef.dataset.type;
-        if (+type) {
-            Array.from(aboutListRef.children).forEach(p => {
-                p.style.display = 'none';
-                if (p.dataset.type == type) {
-                    p.style.display = 'block';
-                    p.animate([
-                        {opacity: 0},
-                        {opacity: 1}
-                    ], {
-                        duration: 500
-                    })
-                }
-            })
-        }
-    }
-});*/
-
-
-/*var imgbox = document.querySelector('.imgtubox');
-var list1 = document.querySelector('.tulist');
-var prev = document.querySelector('.prev');
-var next = document.querySelector('.next');
-var index = 1;
-var timer;
-function animate(offset) {
-    //获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
-    //且style.left获取的是字符串，需要用parseInt()取整转化为数字。
-    var newLeft = parseInt(list1.style.left) + offset;
-    list1.style.left = newLeft + 'px';
-    //无限滚动判断
-    if (newLeft > -254) {
-        list1.style.left = -1270 + 'px';
-    }
-    if (newLeft < -1270) {
-        list1.style.left = -254 + 'px';
-    }
-}
-function play() {
-    //重复执行的定时器
-    timer = setInterval(function() {
-        next.onclick();
-    }, 2000)
-}
-
-function stop() {
-    clearInterval(timer);
-}
-prev.onclick = function() {
-    index -= 1;
-    if (index < 1) {
-        index = 5
-    }
-    animate(254);
-};
-
-next.onclick = function() {
-    //由于上边定时器的作用，index会一直递增下去，我们只有5个小圆点，所以需要做出判断
-    index += 1;
-    if (index > 5) {
-        index = 1
-    }
-    animate(-254);
-};
-imgbox.onmouseover = stop;
-imgbox.onmouseout = play;
-play();*/
 
 
 

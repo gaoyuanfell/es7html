@@ -89,21 +89,21 @@
                             <div id="casebox" class="clear">
                                 <div class="left">
                                     <ul id="head_list" class="clear">
-                                        <li class="active"><img src="./static/images/anli_tu1.jpg" alt="" width="240" height="160"></li>
-                                        <li><img src="./static/images/anli_tu2.jpg" alt="" width="240" height="160"></li>
-                                        <li><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li>
+                                        <li class="active" data-index="0"><img src="./static/images/anli_tu1.jpg" alt="" width="240" height="160"></li>
+                                        <li data-index="1"><img src="./static/images/anli_tu2.jpg" alt="" width="240" height="160"></li>
+                                        <li data-index="2"><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li>
                                         <br>
-                                        <li><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
-                                        <li><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
+                                        <li data-index="3"><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
+                                        <li data-index="4"><img src="./static/images/anli_tu5.jpg" alt="" width="375" height="160"></li>
                                     </ul>
                                     <a href="#case_center" class="link">去看更多案例&nbsp;&gt;</a>
                                 </div>
                                 <div id="menu_content">
-                                    <div style="display:block;"><img src="./static/images/anli_tu5.jpg" width="254"/></div>
+                                    <div style="display:block;"><img src="./static/images/anli_tu_1.png" width="254"/></div>
                                     <div style="display:none;"><img src="./static/images/anli_tu_2.png" alt=""></div>
-                                    <div style="display:none;"><img src="./static/images/anli_tu1.jpg" alt="" width="254"></div>
-                                    <div style="display:none;"><img src="./static/images/anli_tu4.jpg" alt="" width="254"></div>
-                                    <div style="display:none;"><img src="./static/images/anli_tu3.jpg" alt="" width="254"></div>
+                                    <div style="display:none;"><img src="./static/images/anli_tu_3.png" alt="" width="254"></div>
+                                    <div style="display:none;"><img src="./static/images/anli_tu_4.png" alt="" width="254"></div>
+                                    <div style="display:none;"><img src="./static/images/anli_tu_5.png" alt="" width="254"></div>
                                     <a href="javascript:;" id="prev1" class="arrow1">&lt;</a>
                                     <a href="javascript:;" id="next1" class="arrow1">&gt;</a>
                                 </div>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <!--业务板块-->
-                <div class="contentener" data-contentener data-type="business_modules" margintop marginbotm>
+                <div class="contentener" id="contentener" data-contentener data-type="business_modules" margintop marginbotm>
                     <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
                     <div class="sector_cont baibg">
                         <div class="main clear zhicheng">
@@ -253,10 +253,10 @@
                             <div class="main">
                                 <p class="title">广告主</p>
                                 <div class="imgbody" style="height: 967px;">
-                                    <div id="huob1" style="height: 967px;width: 1200px;position: relative;">
+                                    <div id="adzhu1" style="height: 967px;width: 1200px;position: relative;">
                                         <img src="./static/images/guanggaozhu.png" alt="" width="100%">
                                     </div>
-                                    <div id="huob2" style="background: url('./static/images/guanggaozhu_active.png')">
+                                    <div id="adzhu2" style="background: url('./static/images/guanggaozhu_active.png')">
 
                                     </div>
                                 </div>
@@ -265,13 +265,25 @@
                         <div class="huibg">
                             <div class="main">
                                 <p class="title">媒体资源</p>
-                                <img src="./static/images/meitizy.png" alt="" width="100%">
+                                <div class="imgbody" style="height: 1332px;">
+                                    <div id="mediazhu1" style="height: 1332px;width: 1200px;position: relative;">
+                                        <img src="./static/images/meitizy.png" alt="" width="100%">
+                                    </div>
+                                    <div id="mediazhu2" style="background: url('./static/images/meitizy_active.png')">
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="baibg">
                             <div class="main">
                                 <p class="title">代理资源</p>
-                                <img src="./static/images/dailizy.png" alt="" width="100%">
+                                <div class="imgbody" style="height:362px;">
+                                    <div id="agentzy1" style="height: 362px;width: 1200px;position: relative;">
+                                        <img src="./static/images/dailizy.png" alt="" width="100%">
+                                    </div>
+                                    <div id="agentzy2" style="background: url('./static/images/dailizy_active.png')"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1035,17 +1047,25 @@
                         <div id="popup_7" class="notice_box">
                             <div class="yc_news_top">
                                 <div class="list_up">临时公告</div>
-                                <div class="news_list">
+                                <div class="news_list clear">
                                     <ul id="investorLS">
-                                        <li><a target="_blank" title="银橙传媒:股票解除限售公告" href="#">银橙传媒:股票解除限售公告</a><span>2018-04-26</span></li>
+
                                     </ul>
+                                    <!--<div class="pagebox">
+                                        <span class="triangle-left"></span>
+                                        <ul class="page">
+                                            <li>1</li>
+                                            <li class="active">2</li>
+                                        </ul>
+                                        <span class="triangle-right"></span>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="yc_news_bottom">
                                 <div class="list_up">定期公告</div>
                                 <div class="news_list">
                                     <ul id="investorDQ">
-                                        <li><a target="_blank" title="银橙传媒:股票解除限售公告" href="#">银橙传媒:股票解除限售公告</a><span>2018-04-26</span></li>
+
                                     </ul>
                                 </div>
                             </div>
