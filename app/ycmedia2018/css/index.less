@@ -673,6 +673,33 @@
     margin-right: 126px;
     position: relative;
     padding-right: 40px;
+    .arrow {
+        position: absolute;
+        top: 180px;
+        z-index: 2;
+        width: 40px;
+        height: 40px;
+        line-height: 39px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .prev {
+        position: absolute;
+        right:322px;
+        font-size: 24px;
+        color: rgba(255, 255, 255, .6);
+        top:50%;
+        margin-top: -20px;
+    }
+
+    .next {
+        position: absolute;
+        right: 0;
+        font-size: 24px;
+        color: rgba(255, 255, 255, .6);
+        top:50%;
+        margin-top: -20px;
+    }
 }
 
 .yccm_client_details_right {
@@ -761,26 +788,8 @@ html {
     }
 }
 
-.arrow {
-    position: absolute;
-    top: 180px;
-    z-index: 2;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    line-height: 39px;
-    text-align: center;
-    color: rgba(255, 255, 255, .6);
-    cursor: pointer;
-}
 
-.prev {
-    right: 294px;
-}
 
-.next {
-    right: 0;
-}
 .yccm_popup_bodyText{
     width:1200px;
     margin:auto;
