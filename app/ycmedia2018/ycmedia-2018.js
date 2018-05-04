@@ -10,7 +10,7 @@ window.addEventListener('hashchange', () => {
     hashChange()
 });
 
-function init() {
+function hashChange() {
     let refs = Array.from(document.querySelectorAll('[data-contentener]'));
     refs.every(ref => {
         ref.style.display = 'none';
@@ -34,10 +34,6 @@ function init() {
     });
     let aRef = document.querySelector(`[href="#${hash}"]`);
     if (aRef) aRef.parentNode.classList.add('active')
-}
-
-function hashChange() {
-    init();
 }
 
 class BackgroundSwitch {
@@ -590,13 +586,13 @@ let list = [
 
 ~function () {
     let str = `
-<div class="yccm_client_case_group" data-index="{{$index}}">
-    <p class="img"><img src="{{img}}"></p>
-    <div class="yccm_client_case_text">{{title}}</div>
-    <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
-    <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
-</div>
-`;
+        <div class="yccm_client_case_group" data-index="{{$index}}">
+            <p class="img"><img src="{{img}}"></p>
+            <div class="yccm_client_case_text">{{title}}</div>
+            <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
+            <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
+        </div>
+    `;
     let caseList = [];
     list.forEach((l, i) => {
         l.$index = i;
@@ -607,38 +603,6 @@ let list = [
 }()
 
 
-let html = `
-    <div class="yccm_client_details clear" data-index="{{$index}}">
-        <div class="yccm_client_details_left">
-            <div class="imgtubox">
-                <div class="tulist" style="left: -254px;">
-                    
-                </div>
-            </div>
-            <a href="javascript:;" class="prev" class="arrow">&lt;</a>
-            <a href="javascript:;" class="next" class="arrow">&gt;</a>
-        </div>
-        <div class="yccm_client_details_right">
-            <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
-            <p class="text">
-                {{target}}
-            </p>
-            <ul class="features">
-                <li>案例类型：{{type}}</li>
-                <li>投放平台：{{platform}}</li>
-                <li>CPC成本：{{cost}}</li>
-                <li class="baizi">激活成本：{{activation}}</li>
-                <li>点击率：{{rate}}</li>
-            </ul>
-            <div class="btn_box">
-                <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
-                <a href="javascript:;" class="previous" data-js-active="prev">上一个</a>
-            </div>
-        </div>
-    </div>
-`;
-
-
 $('.yccm_client_case_group').on('click', function () {
     let data_index = $(this).attr("data-index");
     asd(data_index)
@@ -646,6 +610,36 @@ $('.yccm_client_case_group').on('click', function () {
 
 //好了 换名称
 function asd(index) {
+    let html = `
+        <div class="yccm_client_details clear" data-index="{{$index}}">
+            <div class="yccm_client_details_left">
+                <div class="imgtubox">
+                    <div class="tulist" style="left: -254px;">
+                        
+                    </div>
+                </div>
+                <a href="javascript:;" class="prev" class="arrow">&lt;</a>
+                <a href="javascript:;" class="next" class="arrow">&gt;</a>
+            </div>
+            <div class="yccm_client_details_right">
+                <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
+                <p class="text">
+                    {{target}}
+                </p>
+                <ul class="features">
+                    <li>案例类型：{{type}}</li>
+                    <li>投放平台：{{platform}}</li>
+                    <li>CPC成本：{{cost}}</li>
+                    <li class="baizi">激活成本：{{activation}}</li>
+                    <li>点击率：{{rate}}</li>
+                </ul>
+                <div class="btn_box">
+                    <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
+                    <a href="javascript:;" class="previous" data-js-active="prev">上一个</a>
+                </div>
+            </div>
+        </div>
+    `;
     let data = list[+index];
     document.querySelector('.yccm_popup_body').innerHTML = '';
     document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
