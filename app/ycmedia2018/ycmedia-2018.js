@@ -651,25 +651,25 @@ function asd(index) {
     document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
     layer.open({
         type: 1,
-        shade:0,
+        shade: 0,
         area: ['100%', '100%'], //宽高
         title: false,
         content: $('#popup'),
     });
-    document.querySelector('[data-js-active=next]').addEventListener('click',()=>{
-        if(list.length <= data.$index + 1){
+    document.querySelector('[data-js-active=next]').onclick = () => {
+        if (list.length <= data.$index + 1) {
             asd(0)
-        }else{
+        } else {
             asd(data.$index + 1)
         }
-    })
-    document.querySelector('[data-js-active=prev]').addEventListener('click',()=>{
-        if(data.$index - 1 < 0){
+    }
+    document.querySelector('[data-js-active=prev]').onclick = () => {
+        if (data.$index - 1 < 0) {
             asd(list.length - 1)
-        }else{
+        } else {
             asd(data.$index - 1)
         }
-    })
+    }
 }
 
 
