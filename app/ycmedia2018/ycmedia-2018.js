@@ -313,37 +313,40 @@ async function getData() {
     }
 }
 
-let investorLSref = document.querySelector('#investorLS');
-let investorDQref = document.querySelector('#investorDQ');
+!function () {
+    let investorLSref = document.querySelector('#investorLS');
+    let investorDQref = document.querySelector('#investorDQ');
 
-getData().then(contentList => {
-    let investorLS = contentList.filter((ele) => {
-        if (ele.disclosureType === '9504') return true;
-    })
+    getData().then(contentList => {
+        let investorLS = contentList.filter((ele) => {
+            if (ele.disclosureType === '9504') return true;
+        })
 
-    let investorDQ = contentList.filter((ele) => {
-        if (ele.disclosureType === '9503') return true;
-    })
+        let investorDQ = contentList.filter((ele) => {
+            if (ele.disclosureType === '9503') return true;
+        })
 
-    let investorLSHtml = ''
-    for (let i = 0; i < investorLS.length; i++) {
-        let provi = investorLS[i];
-        provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
-        provi.disclosurePostTitle = provi.disclosurePostTitle;
-        let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-        investorLSHtml += add
-    }
-    investorLSref.innerHTML = investorLSHtml
-    let investorDQHtml = ''
-    for (let i = 0; i < investorDQ.length; i++) {
-        let provi = investorDQ[i];
-        provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
-        provi.disclosurePostTitle = provi.disclosurePostTitle;
-        let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-        investorDQHtml += add
-    }
-    investorDQref.innerHTML = investorDQHtml
-});
+        let investorLSHtml = ''
+        for (let i = 0; i < investorLS.length; i++) {
+            let provi = investorLS[i];
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
+            provi.disclosurePostTitle = provi.disclosurePostTitle;
+            let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+            investorLSHtml += add
+        }
+        investorLSref.innerHTML = investorLSHtml
+        let investorDQHtml = ''
+        for (let i = 0; i < investorDQ.length; i++) {
+            let provi = investorDQ[i];
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
+            provi.disclosurePostTitle = provi.disclosurePostTitle;
+            let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+            investorDQHtml += add
+        }
+        investorDQref.innerHTML = investorDQHtml
+    });
+}()
+
 
 /*
 * 模板编译
@@ -661,6 +664,12 @@ let list = [
 $('.yccm_client_case_group').on('click', function () {
     let data_index = $(this).attr("data-index");
     Details(data_index)
+
+
+    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_prev]'), document.querySelector('[data-js-active=img_next]'), {
+        imgWidth: 254,
+        imgHeight: 494,
+    })
 })
 
 
@@ -669,12 +678,12 @@ function Details(index) {
         <div class="yccm_client_details clear">
             <div class="yccm_client_details_left">
                 <div class="imgtubox">
-                    <div class="tulist" style="left: -254px;">
+                    <div class="tulist" data-js-active="img_box">
                         {{imghtml}}
                     </div>
                 </div>
-                <a href="javascript:;" class="prev" class="arrow">&lt;</a>
-                <a href="javascript:;" class="next" class="arrow">&gt;</a>
+                <a href="javascript:;" class="prev" data-js-active="img_prev">&lt;</a>
+                <a href="javascript:;" class="next" data-js-active="img_next">&gt;</a>
             </div>
             <div class="yccm_client_details_right">
                 <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
@@ -707,8 +716,6 @@ function Details(index) {
         content: $('#popup'),
     });
     document.querySelector('[data-js-active=next]').onclick = () => {
-        console.info(data.$index)
-        console.info(list.length)
         if (list.length <= data.$index + 1) {
             Details(0)
         } else {
@@ -722,10 +729,55 @@ function Details(index) {
             Details(data.$index - 1)
         }
     }
-
 }
 
+//图片循环
+class ImgLoop {
+    boxRef
+    nextRef
+    prevRef
+    params
 
+    constructor(boxRef, nextRef, prevRef, params = {}) {
+        this.boxRef = boxRef;
+        this.nextRef = nextRef;
+        this.prevRef = prevRef;
+        this.params = params;
+        this.init()
+    }
 
+    init() {
+        let length = this.boxRef.children.length;
+        let width = this.params.imgWidth * length;
+        this.boxRef.style.width = `${width}px`;
+        this.boxRef.style.height = `${this.params.imgHeight}px`;
 
+        this.nextRef.onclick = () => {
+            this.next()
+        };
+        this.prevRef.onclick = () => {
+            this.prev()
+        }
+    }
+
+    start() {
+
+    }
+
+    stop() {
+
+    }
+
+    next() {
+
+    }
+
+    prev() {
+
+    }
+
+    go() {
+
+    }
+}
 
