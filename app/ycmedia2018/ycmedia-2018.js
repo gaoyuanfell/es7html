@@ -648,6 +648,7 @@ let list = [
             <div class="yccm_client_case_text">{{title}}</div>
             <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
             <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
+            <a href="javascript:void(0);" class="link">查看详情&nbsp;&gt;</a>
         </div>
     `;
 
