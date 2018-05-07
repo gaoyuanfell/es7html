@@ -138,4 +138,11 @@ module.exports = [
     //     name:'ycmedia2018-wap',
     //     title:'银橙传媒  基于大数据的精准营销专家'
     // },
+    // {
+    //     path:'lcyp',
+    //     output:'lcyp',
+    //     publicPath:'',
+    //     name:'lcyp',
+    //     title:'乐橙优品'
+    // },
 ];
