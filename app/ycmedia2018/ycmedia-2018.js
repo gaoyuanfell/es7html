@@ -36,6 +36,144 @@ function hashChange() {
     if (aRef) aRef.parentNode.classList.add('active')
 }
 
+/*
+* 模板编译
+* */
+class Template {
+    html
+    value
+    reg = /\{\{((?:.|\n)+?)\}\}/
+
+    constructor(html, value) {
+        this.html = html;
+        this.value = value;
+    }
+
+    compileFun(exg) {
+        let fun = new Function('vm', `
+            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
+        `);
+        return fun(this.value);
+    }
+
+    compile() {
+        this.html.match(new RegExp(this.reg, 'ig')).every(va => {
+            this.html.replace(va, value => {
+                let t = value.match(this.reg)
+                let a = t[1].replace(/\s/ig, '').replace(/\s*(\.)\s*/, '.')
+                let val = this.isBooleanValue(this.compileFun(a));
+                this.html = this.html.replace(t[0], val)
+            })
+            return true;
+        })
+        return this.html;
+    }
+
+    isBooleanValue(val) {
+        switch (val) {
+            case true:
+                return String(true);
+            case false:
+                return String(false);
+            case null:
+                return String();
+            case void 0:
+                return String();
+            default:
+                return String(val)
+        }
+    }
+}
+
+//图片循环
+class ImgLoop {
+    boxRef
+    nextRef
+    prevRef
+    params
+    boxWidth
+
+    state = 0;//0 初始状态 1开始轮播状态 2被操作状态
+
+    constructor(boxRef, nextRef, prevRef, params = {}) {
+        this.boxRef = boxRef;
+        this.nextRef = nextRef;
+        this.prevRef = prevRef;
+        this.params = params;
+        this.init()
+    }
+
+    init() {
+        let length = this.boxRef.children.length;
+        this.boxWidth = this.params.imgWidth * length;
+        this.boxRef.style.width = `${this.boxWidth}px`;
+        this.boxRef.style.height = `${this.params.imgHeight}px`;
+        this.boxRef.style.left = `0px`;
+        this.boxRef.style.transition = `left 0.3s`;
+        this.boxRef.style.MozTransform = `left 0.3s`;
+        this.boxRef.style.webkitTransition = `left 0.3s`;
+
+        this.nextRef.onclick = () => {
+            this.next()
+        };
+        this.prevRef.onclick = () => {
+            this.prev()
+        }
+    }
+
+    sleep(time) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve();
+            }, time);
+        })
+    }
+
+    async start() {
+        this.state = 1;
+        while (this.state > 1) {
+            this.state = 1;
+            await this.sleep(this.params.time);
+            this.state ===1 && this.next()
+        }
+    }
+
+    stop() {
+        this.state = 0;
+    }
+
+    next() {
+        this.state = 2;
+        let left = this.boxRef.style.left.replace(/px$/,'');
+        left = Math.abs(left) + this.params.imgWidth
+        if(Math.abs(left) > this.boxWidth - this.params.imgWidth){
+            left = 0
+        }
+        this.boxRef.style.left = `-${left}px`
+    }
+
+    prev() {
+        this.state = 2;
+        let left = this.boxRef.style.left.replace(/px$/,'');
+        left = Math.abs(left) - this.params.imgWidth;
+        if(left < 0){
+            left = this.boxWidth - this.params.imgWidth;
+        }
+        this.boxRef.style.left = `-${left}px`
+    }
+
+    go(index) {
+        let left = this.params.imgWidth * index;
+        if(left > this.boxWidth){
+            left = this.boxWidth
+        }
+        if(left < 0){
+            left = this.params.imgWidth
+        }
+        this.boxRef.style.left = `-${left - this.params.imgWidth}px`
+    }
+}
+
 class BackgroundSwitch {
     ref;
     appoint;
@@ -127,53 +265,32 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     rate_y: 3,
 });
 
-
-let anlituList = [
-    {
-        imgli: ['./static/images/anli_tu_1.png']
-    },
-    {
-        imgli: ['./static/images/anli_tu_2.png']
-    },
-    {
-        imgli: ['./static/images/anli_tu_3.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
-    },
-    {
-        imgli: ['./static/images/anli_tu_4.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
-    },
-    {
-        imgli: ['./static/images/anli_tu_5.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
-    }
-]
-/*首页案例轮播*/
-/*const head_list = document.getElementById("head_list");
-const menu_content = document.getElementById("menu_content");
-const oli = head_list.getElementsByTagName("li");//获取tab列表
-const odiv = menu_content.querySelector(".imgqh");//获取tab内容列表
-for (let i = 0; i < oli.length; i++) {
-    oli[i].index = i;//定义index变量，以便让tab按钮和tab内容相互对应
-    oli[i].onclick = function () {//移除全部tab样式和tab内容
-        for (let i = 0; i < oli.length; i++) {
-            oli[i].className = "";
-            odiv[i].style.display = "none";
+!function () {
+    let anlituList = [
+        {
+            imgli: ['./static/images/anli_tu_1.png']
+        },
+        {
+            imgli: ['./static/images/anli_tu_2.png']
+        },
+        {
+            imgli: ['./static/images/anli_tu_3.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
+        },
+        {
+            imgli: ['./static/images/anli_tu_4.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
+        },
+        {
+            imgli: ['./static/images/anli_tu_5.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
         }
-        this.className = "active";//为当前tab添加样式
-        odiv[this.index].style.display = "block";//显示当前tab对应的内容
+    ]
 
-
+    $('.headimg').on('mouseover', function () {
         let data_index = $(this).attr("data-index");
-        console.info(data_index)
         anlitu(data_index)
-    }
-}*/
+    })
 
-$('.headimg').on('mouseover', function () {
-    let data_index = $(this).attr("data-index");
-    anlitu(data_index)
-})
-
-function anlitu(index) {
-    let html = `
+    function anlitu(index) {
+        let html = `
         <div class="imgqh">
             <div class="imgtubox">
                 <div class="tulist" data-js-active="img_box">
@@ -185,16 +302,17 @@ function anlitu(index) {
         </div>
     `;
 
-    let imgdata = anlituList[+index];
-    console.info(imgdata)
-    imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
-    document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
-    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
-        imgWidth: 254,
-        imgHeight: 494,
-    })
-}
-
+        let imgdata = anlituList[+index];
+        console.info(imgdata)
+        imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
+        document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
+        new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+            imgWidth: 254,
+            imgHeight: 494,
+        })
+    }
+    anlitu(0)
+}()
 
 /*业务版块*/
 let scrol = document.querySelector("#contentener");
@@ -398,57 +516,6 @@ async function getData() {
         investorDQref.innerHTML = investorDQHtml
     });
 }()
-
-
-/*
-* 模板编译
-* */
-class Template {
-    html
-    value
-    reg = /\{\{((?:.|\n)+?)\}\}/
-
-    constructor(html, value) {
-        this.html = html;
-        this.value = value;
-    }
-
-    compileFun(exg) {
-        let fun = new Function('vm', `
-            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
-        `);
-        return fun(this.value);
-    }
-
-    compile() {
-        this.html.match(new RegExp(this.reg, 'ig')).every(va => {
-            this.html.replace(va, value => {
-                let t = value.match(this.reg)
-                let a = t[1].replace(/\s/ig, '').replace(/\s*(\.)\s*/, '.')
-                let val = this.isBooleanValue(this.compileFun(a));
-                this.html = this.html.replace(t[0], val)
-            })
-            return true;
-        })
-        return this.html;
-    }
-
-    isBooleanValue(val) {
-        switch (val) {
-            case true:
-                return String(true);
-            case false:
-                return String(false);
-            case null:
-                return String();
-            case void 0:
-                return String();
-            default:
-                return String(val)
-        }
-    }
-}
-
 
 let list = [
     {
@@ -719,7 +786,6 @@ $('.yccm_client_case_group').on('click', function () {
     Details(data_index)
 })
 
-
 function Details(index) {
     let html = `
         <div class="yccm_client_details clear">
@@ -783,86 +849,3 @@ function Details(index) {
         time:1500,
     })
 }
-
-//图片循环
-class ImgLoop {
-    boxRef
-    nextRef
-    prevRef
-    params
-    boxWidth
-
-    state = 0;//0 初始状态 1开始轮播状态 2被操作状态
-
-    constructor(boxRef, nextRef, prevRef, params = {}) {
-        this.boxRef = boxRef;
-        this.nextRef = nextRef;
-        this.prevRef = prevRef;
-        this.params = params;
-        this.init()
-    }
-
-    init() {
-        let length = this.boxRef.children.length;
-        this.boxWidth = this.params.imgWidth * length;
-        this.boxRef.style.width = `${this.boxWidth}px`;
-        this.boxRef.style.height = `${this.params.imgHeight}px`;
-        this.boxRef.style.left = `0px`;
-        this.boxRef.style.transition = `left 0.3s`;
-        this.boxRef.style.MozTransform = `left 0.3s`;
-        this.boxRef.style.webkitTransition = `left 0.3s`;
-
-        this.nextRef.onclick = () => {
-            this.next()
-        };
-        this.prevRef.onclick = () => {
-            this.prev()
-        }
-    }
-
-    sleep(time) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                resolve();
-            }, time);
-        })
-    }
-
-    async start() {
-        this.state = 1;
-        while (this.state > 1) {
-            this.state = 1;
-            await this.sleep(this.params.time);
-            this.state ===1 && this.next()
-        }
-    }
-
-    stop() {
-        this.state = 0;
-    }
-
-    next() {
-        this.state = 2;
-        let left = this.boxRef.style.left.replace(/px$/,'');
-        left = Math.abs(left) + this.params.imgWidth
-        if(Math.abs(left) > this.boxWidth - this.params.imgWidth){
-            left = 0
-        }
-        this.boxRef.style.left = `-${left}px`
-    }
-
-    prev() {
-        this.state = 2;
-        let left = this.boxRef.style.left.replace(/px$/,'');
-        left = Math.abs(left) - this.params.imgWidth;
-        if(left < 0){
-            left = this.boxWidth - this.params.imgWidth;
-        }
-        this.boxRef.style.left = `-${left}px`
-    }
-
-    go() {
-
-    }
-}
-
