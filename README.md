@@ -56,3 +56,8 @@ pwd:YCdev@#$2017
 user:ycmedia
 pwd:www.ycmedia.cn
 资源发布地址:180.97.75.138
+
+#2018银橙官网
+ycmedia2018
+空间 www-ycmedia
+测试域名test.ycmedia.cn
