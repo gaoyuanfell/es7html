@@ -728,6 +728,7 @@ function Details(index) {
     new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
         imgWidth: 254,
         imgHeight: 494,
+        time:1500,
     })
 }
 
@@ -739,13 +740,14 @@ class ImgLoop {
     params
     boxWidth
 
+    state = 0;//0 初始状态 1开始轮播状态 2被操作状态
+
     constructor(boxRef, nextRef, prevRef, params = {}) {
         this.boxRef = boxRef;
         this.nextRef = nextRef;
         this.prevRef = prevRef;
         this.params = params;
         this.init()
-        console.info('init')
     }
 
     init() {
@@ -755,6 +757,8 @@ class ImgLoop {
         this.boxRef.style.height = `${this.params.imgHeight}px`;
         this.boxRef.style.left = `0px`;
         this.boxRef.style.transition = `left 0.3s`;
+        this.boxRef.style.MozTransform = `left 0.3s`;
+        this.boxRef.style.webkitTransition = `left 0.3s`;
 
         this.nextRef.onclick = () => {
             this.next()
@@ -764,15 +768,29 @@ class ImgLoop {
         }
     }
 
-    start() {
+    sleep(time) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve();
+            }, time);
+        })
+    }
 
+    async start() {
+        this.state = 1;
+        while (this.state > 1) {
+            this.state = 1;
+            await this.sleep(this.params.time);
+            this.state ===1 && this.next()
+        }
     }
 
     stop() {
-
+        this.state = 0;
     }
 
     next() {
+        this.state = 2;
         let left = this.boxRef.style.left.replace(/px$/,'');
         left = Math.abs(left) + this.params.imgWidth
         if(Math.abs(left) > this.boxWidth - this.params.imgWidth){
@@ -782,6 +800,7 @@ class ImgLoop {
     }
 
     prev() {
+        this.state = 2;
         let left = this.boxRef.style.left.replace(/px$/,'');
         left = Math.abs(left) - this.params.imgWidth;
         if(left < 0){
