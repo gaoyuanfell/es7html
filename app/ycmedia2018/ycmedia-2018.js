@@ -665,12 +665,6 @@ let list = [
 $('.yccm_client_case_group').on('click', function () {
     let data_index = $(this).attr("data-index");
     Details(data_index)
-
-
-    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_prev]'), document.querySelector('[data-js-active=img_next]'), {
-        imgWidth: 254,
-        imgHeight: 494,
-    })
 })
 
 
@@ -730,6 +724,11 @@ function Details(index) {
             Details(data.$index - 1)
         }
     }
+
+    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+        imgWidth: 254,
+        imgHeight: 494,
+    })
 }
 
 //图片循环
@@ -738,6 +737,7 @@ class ImgLoop {
     nextRef
     prevRef
     params
+    boxWidth
 
     constructor(boxRef, nextRef, prevRef, params = {}) {
         this.boxRef = boxRef;
@@ -745,13 +745,16 @@ class ImgLoop {
         this.prevRef = prevRef;
         this.params = params;
         this.init()
+        console.info('init')
     }
 
     init() {
         let length = this.boxRef.children.length;
-        let width = this.params.imgWidth * length;
-        this.boxRef.style.width = `${width}px`;
+        this.boxWidth = this.params.imgWidth * length;
+        this.boxRef.style.width = `${this.boxWidth}px`;
         this.boxRef.style.height = `${this.params.imgHeight}px`;
+        this.boxRef.style.left = `0px`;
+        this.boxRef.style.transition = `left 0.3s`;
 
         this.nextRef.onclick = () => {
             this.next()
@@ -770,11 +773,21 @@ class ImgLoop {
     }
 
     next() {
-
+        let left = this.boxRef.style.left.replace(/px$/,'');
+        left = Math.abs(left) + this.params.imgWidth
+        if(Math.abs(left) > this.boxWidth - this.params.imgWidth){
+            left = 0
+        }
+        this.boxRef.style.left = `-${left}px`
     }
 
     prev() {
-
+        let left = this.boxRef.style.left.replace(/px$/,'');
+        left = Math.abs(left) - this.params.imgWidth;
+        if(left < 0){
+            left = this.boxWidth - this.params.imgWidth;
+        }
+        this.boxRef.style.left = `-${left}px`
     }
 
     go() {
