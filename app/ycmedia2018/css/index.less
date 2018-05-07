@@ -1,6 +1,8 @@
+
 .content{
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
+    overflow-x: auto;
 }
 .btn{
     width: 140px;
@@ -126,6 +128,7 @@
     -webkit-overflow-scrolling: touch;
     will-change: scroll-position;
     contain: size style layout;
+    min-width: 1200px;
 }
 .blocks{
     display: block;
@@ -134,7 +137,7 @@
     margin-top: 90px;
 }
 [marginbotm]{
-    margin-bottom: 39px;
+    margin-bottom: 40px;
 }
 /*首页*/
 .banner{
@@ -142,12 +145,11 @@
     padding-top: 53.7%;
     height: 0;
     overflow: hidden;
-    .bg{
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top:0;
-    }
+    width: 100%;
+    min-width: 1200px;
+    min-height: 644px;
+    background: url("../static/images/banner.png") no-repeat;
+    background-size: 100%;
     .text{
         width: 723px;
         height: 98px;
@@ -178,11 +180,12 @@
 }
 .mobel{
     padding: 80px 0 100px 0;
+    min-width: 1200px;
     .top{
         margin-bottom: 80px;
     }
     .main{
-        width: 1214px;
+        width: 1200px;
         margin: auto;
         margin-bottom: 21px;
         .sector{
@@ -257,6 +260,12 @@
     padding-top: 33.1%;
     height: 0;
     //overflow: hidden;
+    width: 100%;
+    min-width: 1200px;
+    background: url("../static/images/lianxi_bg.png") no-repeat;
+    background-size: 100% 100%;
+    min-height: 422px;
+    overflow: hidden;
     &:hover {
         .main:before{
             opacity: 1;
@@ -278,7 +287,7 @@
         z-index: 2;
         .upper{
             position: absolute;
-            top: 0;
+            top: 9px;
             margin-left: -12px;
             animation:arrow 3s ease 0s infinite;
             -webkit-animation:arrow 3s ease 0s infinite;
@@ -341,12 +350,14 @@
 .footer{
     color:rgba(255,255,255,0.3);
     font-size: 14px;
+    height: 40px;
     padding: 10px 0;
     background: #070321;
     margin-top: 60px;
     position: absolute;
     width: 100%;
     bottom: 0;
+    min-width: 1200px;
     span{
         margin-right: 20px;
     }
@@ -395,10 +406,27 @@
         }
     }
     #menu_content {
-        float: right;
         position: relative;
-        .imgqh:nth-child(1){
-            display: block;
+        float: left;
+        margin-left: 100px;
+        .imgtubox{
+            width: 224px;
+            height: 395px;
+            float: left;
+            left: 15px;
+            top: 44px;
+        }
+        .tulist{
+            img{
+                width: 224px;
+                height: 395px;
+            }
+        }
+        .imgqh{
+            width: 253px;
+            height:500px;
+            background: url("../static/images/shoujike.png") no-repeat;
+            background-size: 100% 100%;
         }
         .arrow {
             position: absolute;

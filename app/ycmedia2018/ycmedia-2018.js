@@ -274,19 +274,19 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 !function () {
     let anlituList = [
         {
-            imgli: ['./static/images/anli_tu_1.png']
+            imgli: ['./static/images/anli_tu_1_01.png']
         },
         {
-            imgli: ['./static/images/anli_tu_2.png']
+            imgli: ['./static/images/anli_tu_2_01.png']
         },
         {
-            imgli: ['./static/images/anli_tu_3.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
+            imgli: ['./static/images/anli_tu_3_01.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
         },
         {
-            imgli: ['./static/images/anli_tu_4.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
+            imgli: ['./static/images/anli_tu_4_01.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
         },
         {
-            imgli: ['./static/images/anli_tu_5.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
+            imgli: ['./static/images/anli_tu_5_01.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
         }
     ]
 
@@ -307,15 +307,15 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
             <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
         </div>
     `;
+    let imgdata = anlituList[+index];
+    imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
+    document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
+    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+        imgWidth: 224,
+        imgHeight: 395,
+    })
+}
 
-        let imgdata = anlituList[+index];
-        imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
-        document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
-        new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
-            imgWidth: 254,
-            imgHeight: 494,
-        })
-    }
     anlitu(0)
 }()
 

@@ -318,17 +318,16 @@
     }
 
 }
-
-#box{
+.wrap{
     position: relative;
     margin-top: 0.27rem;
-    #head_list{
+    .tabClick{
         width: 2.4rem;
         margin: auto;
         height: 0.22rem;
         border: 1px #e3e3e3 solid;
         border-radius: 0.05rem;
-        span{//div是块级元素，定义为float后在宽度允许的情况下，能在一行内容纳
+        li{
             float:left;
             height:100%;
             flex: 1;
@@ -352,10 +351,15 @@
             }
         }
     }
-    #menu_content{
-        padding: 0.22rem 0.17rem;
-        img{
-            width: 100%;
+    .tabCon{
+        padding: 0.22rem 0;
+        width: 3.1rem;
+        margin: auto;
+        overflow: hidden;
+        .tabList{
+            img{
+                width: 100%;
+            }
         }
     }
     #dian{
@@ -405,8 +409,8 @@
                     color: #666;
                 }
             }
-            &:nth-child(2){
-                margin-left: 0.3rem;
+            &:nth-child(1){
+                margin-right: 0.3rem;
             }
         }
     }
