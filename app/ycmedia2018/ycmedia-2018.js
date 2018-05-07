@@ -39,8 +39,18 @@ function hashChange() {
         document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
         document.querySelector('.top_nav').style.backgroundSize='100% 100%';
 
-    }else {
-
+    }else if(hash == 'home') {
+        let scrol = document.querySelector(".contentener");
+        let offSet = 80;
+        scrol && scrol.addEventListener('scroll', function () {
+            let t = scrol.scrollTop;
+            if (t > offSet) {
+                document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
+                document.querySelector('.top_nav').style.backgroundSize='100% 100%';
+            }else {
+                document.querySelector('.top_nav').style.background='none';
+            }
+        })
     }
 
 }
