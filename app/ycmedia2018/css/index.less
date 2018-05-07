@@ -2,6 +2,7 @@
 .content{
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
+    overflow-x: auto;
 }
 .btn{
     width: 140px;
@@ -122,10 +123,12 @@
     right: 0;
     left: 0;
     z-index: 2;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     will-change: scroll-position;
     contain: size style layout;
+    min-width: 1200px;
 }
 .blocks{
     display: block;
@@ -134,7 +137,7 @@
     margin-top: 90px;
 }
 [marginbotm]{
-    margin-bottom: 39px;
+    margin-bottom: 40px;
 }
 /*首页*/
 .banner{
@@ -182,7 +185,7 @@
         margin-bottom: 80px;
     }
     .main{
-        width: 1214px;
+        width: 1200px;
         margin: auto;
         margin-bottom: 21px;
         .sector{
@@ -347,12 +350,14 @@
 .footer{
     color:rgba(255,255,255,0.3);
     font-size: 14px;
+    height: 40px;
     padding: 10px 0;
     background: #070321;
     margin-top: 60px;
     position: absolute;
     width: 100%;
     bottom: 0;
+    min-width: 1200px;
     span{
         margin-right: 20px;
     }
@@ -401,8 +406,9 @@
         }
     }
     #menu_content {
-        float: right;
         position: relative;
+        float: left;
+        margin-left: 100px;
         .imgtubox{
             width: 224px;
             height: 395px;
