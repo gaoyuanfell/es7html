@@ -34,6 +34,15 @@ function hashChange() {
     });
     let aRef = document.querySelector(`[href="#${hash}"]`);
     if (aRef) aRef.parentNode.classList.add('active')
+
+    if(hash != 'home'){
+        document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
+        document.querySelector('.top_nav').style.backgroundSize='100% 100%';
+
+    }else {
+
+    }
+
 }
 
 /*
