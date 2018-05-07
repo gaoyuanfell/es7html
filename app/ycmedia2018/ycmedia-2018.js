@@ -729,8 +729,8 @@ function Details(index) {
                         {{imghtml}}
                     </div>
                 </div>
-                <a href="javascript:;" class="prev" data-js-active="img_prev">&lt;</a>
-                <a href="javascript:;" class="next" data-js-active="img_next">&gt;</a>
+                <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
+                <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
             </div>
             <div class="yccm_client_details_right">
                 <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
