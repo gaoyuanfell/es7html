@@ -2,6 +2,11 @@
 
 user:ycdev
 pwd:YCdev@#$2017
+
+项目配置看build/config.js
+
+项目介绍
+此项目用于管理多个h5项目
     
 #ruzhu
 
@@ -46,11 +51,6 @@ pwd:YCdev@#$2017
 
 域名：http://tg.zcmobi.com
 备注：space:zcmobi
-
-如何添加一个项目
-观看build/config.js即可。
-
-
 
 #ycmedia
 user:ycmedia
