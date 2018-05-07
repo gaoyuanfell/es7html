@@ -130,42 +130,21 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 
 let anlituList = [
     {
-        imgli: ['./static/images/anli_tu_1.png']
+        imgli: ['./static/images/anli_tu_1_01.png']
     },
     {
-        imgli: ['./static/images/anli_tu_2.png']
+        imgli: ['./static/images/anli_tu_2_01.png']
     },
     {
-        imgli: ['./static/images/anli_tu_3.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
+        imgli: ['./static/images/anli_tu_3_01.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
     },
     {
-        imgli: ['./static/images/anli_tu_4.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
+        imgli: ['./static/images/anli_tu_4_01.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
     },
     {
-        imgli: ['./static/images/anli_tu_5.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
+        imgli: ['./static/images/anli_tu_5_01.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
     }
 ]
-/*首页案例轮播*/
-/*const head_list = document.getElementById("head_list");
-const menu_content = document.getElementById("menu_content");
-const oli = head_list.getElementsByTagName("li");//获取tab列表
-const odiv = menu_content.querySelector(".imgqh");//获取tab内容列表
-for (let i = 0; i < oli.length; i++) {
-    oli[i].index = i;//定义index变量，以便让tab按钮和tab内容相互对应
-    oli[i].onclick = function () {//移除全部tab样式和tab内容
-        for (let i = 0; i < oli.length; i++) {
-            oli[i].className = "";
-            odiv[i].style.display = "none";
-        }
-        this.className = "active";//为当前tab添加样式
-        odiv[this.index].style.display = "block";//显示当前tab对应的内容
-
-
-        let data_index = $(this).attr("data-index");
-        console.info(data_index)
-        anlitu(data_index)
-    }
-}*/
 
 $('.headimg').on('mouseover', function () {
     let data_index = $(this).attr("data-index");
@@ -186,12 +165,11 @@ function anlitu(index) {
     `;
 
     let imgdata = anlituList[+index];
-    console.info(imgdata)
     imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
     document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
     new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
-        imgWidth: 254,
-        imgHeight: 494,
+        imgWidth: 224,
+        imgHeight: 395,
     })
 }
 

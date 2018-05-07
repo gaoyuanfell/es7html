@@ -1,3 +1,4 @@
+
 .content{
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
@@ -121,8 +122,7 @@
     right: 0;
     left: 0;
     z-index: 2;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: auto;
     -webkit-overflow-scrolling: touch;
     will-change: scroll-position;
     contain: size style layout;
@@ -142,12 +142,11 @@
     padding-top: 53.7%;
     height: 0;
     overflow: hidden;
-    .bg{
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top:0;
-    }
+    width: 100%;
+    min-width: 1200px;
+    min-height: 644px;
+    background: url("../static/images/banner.png") no-repeat;
+    background-size: 100%;
     .text{
         width: 723px;
         height: 98px;
@@ -178,6 +177,7 @@
 }
 .mobel{
     padding: 80px 0 100px 0;
+    min-width: 1200px;
     .top{
         margin-bottom: 80px;
     }
@@ -257,6 +257,12 @@
     padding-top: 33.1%;
     height: 0;
     //overflow: hidden;
+    width: 100%;
+    min-width: 1200px;
+    background: url("../static/images/lianxi_bg.png") no-repeat;
+    background-size: 100% 100%;
+    min-height: 422px;
+    overflow: hidden;
     &:hover {
         .main:before{
             opacity: 1;
@@ -278,7 +284,7 @@
         z-index: 2;
         .upper{
             position: absolute;
-            top: 0;
+            top: 9px;
             margin-left: -12px;
             animation:arrow 3s ease 0s infinite;
             -webkit-animation:arrow 3s ease 0s infinite;
@@ -397,8 +403,24 @@
     #menu_content {
         float: right;
         position: relative;
-        .imgqh:nth-child(1){
-            display: block;
+        .imgtubox{
+            width: 224px;
+            height: 395px;
+            float: left;
+            left: 15px;
+            top: 44px;
+        }
+        .tulist{
+            img{
+                width: 224px;
+                height: 395px;
+            }
+        }
+        .imgqh{
+            width: 253px;
+            height:500px;
+            background: url("../static/images/shoujike.png") no-repeat;
+            background-size: 100% 100%;
         }
         .arrow {
             position: absolute;
