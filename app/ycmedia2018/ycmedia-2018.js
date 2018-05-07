@@ -127,11 +127,29 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     rate_y: 3,
 });
 
+
+let anlituList = [
+    {
+        imgli: ['./static/images/anli_tu_1.png']
+    },
+    {
+        imgli: ['./static/images/anli_tu_2.png']
+    },
+    {
+        imgli: ['./static/images/anli_tu_3.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
+    },
+    {
+        imgli: ['./static/images/anli_tu_4.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
+    },
+    {
+        imgli: ['./static/images/anli_tu_5.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
+    }
+]
 /*首页案例轮播*/
-const head_list = document.getElementById("head_list");
+/*const head_list = document.getElementById("head_list");
 const menu_content = document.getElementById("menu_content");
 const oli = head_list.getElementsByTagName("li");//获取tab列表
-const odiv = menu_content.getElementsByTagName("div");//获取tab内容列表
+const odiv = menu_content.querySelector(".imgqh");//获取tab内容列表
 for (let i = 0; i < oli.length; i++) {
     oli[i].index = i;//定义index变量，以便让tab按钮和tab内容相互对应
     oli[i].onclick = function () {//移除全部tab样式和tab内容
@@ -141,8 +159,42 @@ for (let i = 0; i < oli.length; i++) {
         }
         this.className = "active";//为当前tab添加样式
         odiv[this.index].style.display = "block";//显示当前tab对应的内容
+
+
+        let data_index = $(this).attr("data-index");
+        console.info(data_index)
+        anlitu(data_index)
     }
+}*/
+
+$('.headimg').on('mouseover', function () {
+    let data_index = $(this).attr("data-index");
+    anlitu(data_index)
+})
+
+function anlitu(index) {
+    let html = `
+        <div class="imgqh">
+            <div class="imgtubox">
+                <div class="tulist" data-js-active="img_box">
+                    {{imghtml}}
+                </div>
+            </div>
+            <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
+            <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
+        </div>
+    `;
+
+    let imgdata = anlituList[+index];
+    console.info(imgdata)
+    imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
+    document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
+    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+        imgWidth: 254,
+        imgHeight: 494,
+    })
 }
+
 
 /*业务版块*/
 let scrol = document.querySelector("#contentener");
@@ -418,7 +470,7 @@ let list = [
         cost: '0.68 元',
         activation: '4.00 元',
         rate: '3%',
-        imglist: ['./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg', './static/images/caseimg/case02-03.jpg'],
+        imglist: ['./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg', './static/images/caseimg/case02-03.png'],
         time: '2017年',
         target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
         platform: '智橙移动端'
