@@ -72,7 +72,7 @@ class Template {
 
     compileFun(exg) {
         let fun = new Function('vm', `
-            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
+            with(vm){try {return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}catch (e) {return ''}}
         `);
         return fun(this.value);
     }
@@ -161,7 +161,7 @@ class ImgLoop {
         while (this.state > 1) {
             this.state = 1;
             await this.sleep(this.params.time);
-            this.state ===1 && this.next()
+            this.state === 1 && this.next()
         }
     }
 
@@ -790,16 +790,26 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_case_group" data-index="{{$index}}">
             <p class="img"><img src="{{img}}"></p>
             <div class="yccm_client_case_text">{{title}}</div>
-            <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
-            <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
+            <p class="yccm_client_case_timetext">
+                <span style="display: {{typeShow}}">客户类型：{{type}}</span>
+                <span style="display: {{costShow}}">CPC成本：{{cost}}</span>
+            </p>
+            <p class="yccm_client_case_timetext">
+                <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
+                <span style="display: {{rateShow}}">点击率：{{rate}}</span>
+            </p>
             <a href="javascript:void(0);" class="link">查看详情&nbsp;&gt;</a>
         </div>
     `;
 
     let caseList = [];
-    list.forEach((l, i) => {
-        l.$index = i;
-        caseList += new Template(str, l).compile();
+    list.forEach((data, i) => {
+        data.$index = i;
+        if(!data.type) data.typeShow = 'none';
+        if(!data.cost) data.costShow = 'none';
+        if(!data.activation) data.activationShow = 'none';
+        if(!data.rate) data.rateShow = 'none';
+        caseList += new Template(str, data).compile();
     })
     document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
 
@@ -826,11 +836,11 @@ function jsonp(url, body = {}, config = {}, fn) {
                     {{target}}
                 </p>
                 <ul class="features">
-                    <li>案例类型：{{type}}</li>
-                    <li>投放平台：{{platform}}</li>
-                    <li>CPC成本：{{cost}}</li>
-                    <li class="baizi">激活成本：{{activation}}</li>
-                    <li>点击率：{{rate}}</li>
+                    <li style="display: {{typeShow}}">案例类型：{{type}}</li>
+                    <li style="display: {{platformShow}}">投放平台：{{platform}}</li>
+                    <li style="display: {{costShow}}">CPC成本：{{cost}}</li>
+                    <li style="display: {{activationShow}}" class="baizi">激活成本：{{activation}}</li>
+                    <li style="display: {{rateShow}}">点击率：{{rate}}</li>
                 </ul>
                 <div class="btn_box">
                     <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
@@ -842,6 +852,13 @@ function jsonp(url, body = {}, config = {}, fn) {
         let data = list[+index];
         data.imghtml = data.imglist.map(l => `<img src="${l}"/>`).join('')
         document.querySelector('.yccm_popup_body').innerHTML = '';
+
+        if(!data.type) data.typeShow = 'none';
+        if(!data.platform) data.platformShow = 'none';
+        if(!data.cost) data.costShow = 'none';
+        if(!data.activation) data.activationShow = 'none';
+        if(!data.rate) data.rateShow = 'none';
+
         document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
         layer.open({
             type: 1,
@@ -868,7 +885,7 @@ function jsonp(url, body = {}, config = {}, fn) {
         new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
             imgWidth: 254,
             imgHeight: 494,
-        })
+        }).start().catch(e => console.error(e))
     }
 
 }()
