@@ -131,13 +131,13 @@ module.exports = [
         name:'ycmedia-2018',
         title:'银橙传媒  基于大数据的精准营销专家'
     },
-    // {
-    //     path:'ycmedia2018-wap',
-    //     output:'ycmedia2018-wap',
-    //     publicPath:'',
-    //     name:'ycmedia2018-wap',
-    //     title:'银橙传媒  基于大数据的精准营销专家'
-    // },
+    {
+        path:'ycmedia2018-wap',
+        output:'ycmedia2018-wap',
+        publicPath:'',
+        name:'ycmedia2018-wap',
+        title:'银橙传媒  基于大数据的精准营销专家'
+    },
     // {
     //     path:'lcyp',
     //     output:'lcyp',
