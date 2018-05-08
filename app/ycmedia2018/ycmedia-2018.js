@@ -160,7 +160,7 @@ class ImgLoop {
 
     async start() {
         this.state = 1;
-        while (this.state > 1) {
+        while (this.state >= 1 && document.body.contains(this.boxRef)) {
             this.state = 1;
             await this.sleep(this.params.time);
             this.state === 1 && this.next()
@@ -336,9 +336,8 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'),document.querySelector('[data-js-active=img_prev1]'),{
         imgWidth: 224,
         imgHeight: 395,
-    })
+    }).start().catch(e => console.error(e))
 }
-
     anlitu(0)
 }()
 
@@ -825,12 +824,12 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_details clear">
             <div class="yccm_client_details_left">
                 <div class="imgtubox">
-                    <div class="tulist" data-js-active="img_box">
+                    <div class="tulist" data-js-case-active="img_box">
                         {{imghtml}}
                     </div>
                 </div>
-                <a href="javascript:;" class="prev arrow" data-js-active="img_prev"><img src="./static/images/zuojiantou.png" alt=""></a>
-                <a href="javascript:;" class="next arrow" data-js-active="img_next"><img src="./static/images/youjiantou.png" alt=""></a>
+                <a href="javascript:;" class="prev arrow" data-js-case-active="img_prev"><img src="./static/images/zuojiantou.png" alt=""></a>
+                <a href="javascript:;" class="next arrow" data-js-case-active="img_next"><img src="./static/images/youjiantou.png" alt=""></a>
             </div>
             <div class="yccm_client_details_right">
                 <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
@@ -845,8 +844,8 @@ function jsonp(url, body = {}, config = {}, fn) {
                     <li style="display: {{rateShow}}">点击率：{{rate}}</li>
                 </ul>
                 <div class="btn_box">
-                    <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
-                    <a href="javascript:;" class="previous" data-js-active="prev">上一个</a>
+                    <a href="javascript:;" class="kongbtn" data-js-case-active="next">下一个案例</a>
+                    <a href="javascript:;" class="previous" data-js-case-active="prev">上一个</a>
                 </div>
             </div>
         </div>
@@ -869,14 +868,14 @@ function jsonp(url, body = {}, config = {}, fn) {
             title: false,
             content: $('#popup'),
         });
-        document.querySelector('[data-js-active=next]').onclick = () => {
+        document.querySelector('[data-js-case-active=next]').onclick = () => {
             if (list.length <= data.$index + 1) {
                 Details(0)
             } else {
                 Details(data.$index + 1)
             }
         }
-        document.querySelector('[data-js-active=prev]').onclick = () => {
+        document.querySelector('[data-js-case-active=prev]').onclick = () => {
             if (data.$index - 1 < 0) {
                 Details(list.length - 1)
             } else {
@@ -884,7 +883,7 @@ function jsonp(url, body = {}, config = {}, fn) {
             }
         }
 
-        new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), document.querySelector('[data-js-case-active=img_next]'),document.querySelector('[data-js-case-active=img_prev]'),{
             imgWidth: 254,
             imgHeight: 494,
         }).start().catch(e => console.error(e))
