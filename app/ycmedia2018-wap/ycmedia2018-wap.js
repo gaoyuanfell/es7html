@@ -40,7 +40,7 @@ scrol && scrol.addEventListener('scroll', function () {
 })
 
 
-var windowWidth = document.querySelector('.tabCon').clientWidth; //window 宽度;
+var windowWidth = document.querySelector('.tabCon').clientWidth;
 var wrap = document.getElementById('wrap');
 var tabClick = wrap.querySelectorAll('.tabClick')[0];
 var tabLi = tabClick.getElementsByTagName('li');
