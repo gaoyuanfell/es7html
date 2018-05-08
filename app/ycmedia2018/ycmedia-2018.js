@@ -39,7 +39,7 @@ function hashChange() {
         document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
         document.querySelector('.top_nav').style.backgroundSize='100% 100%';
 
-    }else if(hash == 'home') {
+    }else {
         let scrol = document.querySelector(".contentener");
         let offSet = 80;
         scrol && scrol.addEventListener('scroll', function () {
@@ -47,8 +47,10 @@ function hashChange() {
             if (t > offSet) {
                 document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
                 document.querySelector('.top_nav').style.backgroundSize='100% 100%';
+                document.querySelector('.top_nav').style.transition='all 1s';
             }else {
                 document.querySelector('.top_nav').style.background='none';
+                document.querySelector('.top_nav').style.transition='all 1s';
             }
         })
     }
@@ -315,21 +317,21 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     })
 
     function anlitu(index) {
-        let html = `
+        let html1 = `
         <div class="imgqh">
             <div class="imgtubox">
-                <div class="tulist" data-js-active="img_box">
-                    {{imghtml}}
+                <div class="tulist" data-js-active="img_box1">
+                    {{imghtm}}
                 </div>
             </div>
-            <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
-            <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
+            <a href="javascript:;" class="prev arrow" data-js-active="img_prev1">&lt;</a>
+            <a href="javascript:;" class="next arrow" data-js-active="img_next1">&gt;</a>
         </div>
     `;
     let imgdata = anlituList[+index];
-    imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
-    document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
-    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+    imgdata.imghtm = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
+    document.querySelector('#menu_content').innerHTML = new Template(html1, imgdata).compile();
+    new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'),document.querySelector('[data-js-active=img_prev1]'),{
         imgWidth: 224,
         imgHeight: 395,
     })
@@ -815,8 +817,8 @@ function jsonp(url, body = {}, config = {}, fn) {
                         {{imghtml}}
                     </div>
                 </div>
-                <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
-                <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
+                <a href="javascript:;" class="prev arrow" data-js-active="img_prev"><img src="./static/images/zuojiantou.png" alt=""></a>
+                <a href="javascript:;" class="next arrow" data-js-active="img_next"><img src="./static/images/youjiantou.png" alt=""></a>
             </div>
             <div class="yccm_client_details_right">
                 <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
