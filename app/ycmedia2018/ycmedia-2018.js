@@ -159,7 +159,7 @@ class ImgLoop {
         while (this.state > 1) {
             this.state = 1;
             await this.sleep(this.params.time);
-            this.state ===1 && this.next()
+            this.state === 1 && this.next()
         }
     }
 
@@ -883,7 +883,7 @@ function jsonp(url, body = {}, config = {}, fn) {
         new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
             imgWidth: 254,
             imgHeight: 494,
-        })
+        }).start().catch(e => console.error(e))
     }
 
 }()
