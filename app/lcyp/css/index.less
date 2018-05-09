@@ -169,15 +169,21 @@
 /* 商品中心 */
 .goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px;
 	
-	.level{  color:#aaaaaa; line-height: 24px; margin-right: 52px;}
+	.level{  color:#aaaaaa; line-height: 24px;width: 94px; display: block;}
 
-	.top_cont ul li{ color:#535353; line-height: 24px; padding: 0 15px; margin-right: 46px;
-		&.on{ background: @color_blue; border-radius: 6px; }
+	.classify ul li{ width:120px;overflow:hidden;text-overflow: ellipsis;
+		a{ color:#535353; line-height: 24px; padding: 0 15px; height: 24px; display: inline-block; cursor: pointer; white-space:nowrap;}
+
+		&.active a{ background: @color_blue; border-radius: 6px;color:#fff;}
 	}
 
-	.first_level{ margin-bottom: 21px; }
+	#secondLevel li{ margin-bottom: 5px;  }
 
-	.second_level{ margin-bottom: 42px; }
+	.first_level{ margin-bottom: 21px;  }
+
+	.second_level{ margin-bottom: 42px; 
+		ul{ flex-wrap:wrap;width: 480px;  }
+	}
 
 	.top_cont{ justify-content: space-between;}
 
@@ -186,30 +192,49 @@
 		}
 		i{position: absolute;top:0;left:15px; width: 16px; height:35px; display: block; background: url('../static/images/search_icon.png') no-repeat center;  }
 
-		.search_btn{ position: absolute; right:0; top:0;height: 35px; line-height: 35px; width: 97px; background: @color_blue; }
+		.search_btn{ position: absolute; right:0; top:0;height: 35px; line-height: 35px; width: 97px; background: @color_blue; color:#fff; }
 	}
 	.search_history{  font-size: 12px; text-align: left; margin-top: 12px;
-		a{ line-height: 20px;  margin-right:10px; color:#aca9a9;}
+		a{ line-height: 20px;  margin-right:10px; color:#aca9a9; cursor: pointer;}
 	}
 	
 	.lists{ width: 100%; 
 
-		.img{ text-align: center; }
+		.img{ text-align: center; height: 200px; }
 
-		ul{  border:1px solid #b7b7b7; border-left:none; border-right:none; }
+		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; }
 
-		ul li{ float: left; width: 21%; text-align: left; margin:0 2%; padding-bottom: 15px;
+		.goods_lists li{ float: left; width: 21%; text-align: left; margin:20px 2% 0; padding-bottom: 15px;
 
-			.title{ color:#535353; font-size: 18px; line-height: 35px; }
+			img{  max-height: 100%; max-width: 100%;}
+
+			.title{ color:#535353; font-size: 18px; line-height: 35px; white-space: nowrap; overflow:hidden; text-align: justify;text-overflow: ellipsis}
 
 			.msg span{ width: 50%; float: left; display: block; line-height: 20px; color:#6c6b6b ; font-size: 12px; white-space:nowrap; overflow:hidden;}				
 
 		}
-		.buy_btn{ width: 127px; height: 35px; background: #f7931e; border-radius: 5px; display: block; margin:0 auto;text-align: center; margin-top: 19px;
+		.buy_btn{ width: 127px; height: 35px; background: #f7931e; border-radius: 5px; display: block; margin:0 auto;text-align: center; margin-top: 19px; cursor: pointer;
 
 			i{ width: 20px; height: 35px; background: url('../static/images/cart_icon.png') no-repeat center; display: inline-block; vertical-align: top; }
 			span{ line-height: 35px; color:#fff;  }
 		}
+	}
+
+	.paging{ justify-content: center; margin:71px; color:#aaaaaa;
+		ul li{ color:#7d7d7d; width: 37px; line-height: 32px; height: 32px; border-radius: 2px; border:1px solid #aaaaaa; margin-right:5px;  cursor: pointer;
+
+			&:hover{ background: @color_blue; color:#fff; border:1px solid @color_blue; };
+		}
+		span{line-height: 32px; height: 32px; margin-right: 5px; padding: 0 10px;  }
+
+		.border{ border:1px solid #aaaaaa;border-radius: 2px; cursor: pointer; }
+
+		button#pageJump{ background: @color_blue; color:#fff; cursor: pointer; }
+
+		input{ width: 37px; padding-left: 5px; }
+
+		.active{ background: @color_blue; color:#fff; border:1px solid @color_blue; }
+		
 	}
 }
 /* 物流服务 */
@@ -218,7 +243,7 @@
 
 	.title{ position:absolute; top:129px; color:#fff; width: 100%;
 		h1{ font-size: 48px; line-height: 108px; }
-		span{ color:#00b7ee; }
+		span{ color:@color_blue; }
 		p{ color:#fbfbfb; font-size: 24px; }
 	}
 
@@ -245,7 +270,7 @@
 
 	.title{ position: absolute; top:129px;  width: 100%;
 
-		h1{color:#00b7ee; line-height: 108px; font-size: 48px;}
+		h1{color:@color_blue; line-height: 108px; font-size: 48px;}
 		p{ color:#fbfbfb; font-size: 24px; }
 	}
 
@@ -276,7 +301,7 @@
 
 	.title{ position: absolute; top:129px;  width: 100%;
 
-		h1{color:#00b7ee; line-height: 108px; font-size: 48px;}
+		h1{color:@color_blue; line-height: 108px; font-size: 48px;}
 		p{ color:#fbfbfb; font-size: 24px; }
 	}
 

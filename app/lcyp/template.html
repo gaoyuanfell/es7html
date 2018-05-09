@@ -146,52 +146,44 @@
 						<div class="classify">
 							<div class="first_level flex">
 								<span class="level">一级分类</span>
-								<ul class="flex" id="tabs">
-									<li class="on">全部</li>
-									<li>11</li>
-									<li>11</li>
+								<ul class="flex" id="firstLevel">
+									
 								</ul>
 							</div>					
 							<div class="second_level flex">
 								<span class="level">二级分类</span>
-								<ul class="flex" id="tabs">
-									<li class="on">全部</li>
-									<li>22</li>
-									<li>22</li>
+								<ul class="flex" id="secondLevel">
+																
 								</ul>
 							</div>
 						</div>
 						<div class="search">
 							<div class="search_input">
 								<i></i>
-								<input type="text" placeholder="请输入商品名称">
-								<button class="search_btn">搜索</button>
+								<input type="text" placeholder="请输入商品名称" id="searchInput" >
+								<button class="search_btn" id="searchBtn">搜索</button>
 							</div>
-							<div class="search_history">
-								<a href="">雪碧</a>
-								<a href="">可乐</a>
-								<a href="">冰红茶</a>
+							<div class="search_history" id="searchHistory">
+								<a>雪碧</a>
+								<a>可乐</a>
+								<a>冰红茶</a>
 							</div>
 						</div>
 					</div>
 					<div class="lists">
-						<ul class="clear">
-							<li>
-								<div class="img"><img src="./static/images/goods.jpg"></div>
-								<div class="msg clear">
-									<p class="title">维他柠檬茶听装</p>
-									<span>一级分类：饮料</span>
-									<span title="茶饮料类饮料类饮料类饮料类饮料类饮料类">二级分类：茶饮料类饮料类饮料类饮料类饮料类饮料类</span>
-									<span>零售规格：500ml</span>
-									<span>生产厂商：娃哈哈</span>
-								</div>
-								<a href="" class="buy_btn">
-									<i></i>
-									<span>前往购买</span>
-								</a>
-							</li>
+						<ul class="clear goods_lists" id="goodsLists">
+							
 						</ul>
-						<div class="paging clear">111</div>
+						<div class="paging clear flex" id="paging">
+							<span class="prev_page border" id="prevPage">上一页</span>
+							<ul class="flex" id="currPage">
+								
+							</ul>
+							<span class="next_page border" id="nextPage">下一页</span>
+							<span class="last_page border" id="lastPage"> >> </span>
+							<span>共<b id="count"></b>页 到第</span><input class="border page_num" type="number" name="" id="inputNum"><span>页</span>
+							<button id="pageJump">确定</button>
+						</div>
 					</div>
 				</div>
             </div>
