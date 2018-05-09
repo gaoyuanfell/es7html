@@ -39,8 +39,6 @@ scrol && scrol.addEventListener('scroll', function () {
     }
 })
 
-
-<<<<<<< HEAD
 /**
  * 合作伙伴切换
  */
@@ -61,12 +59,6 @@ ImageSwiper.prototype.bindTouchEvn = function() {
     this.imgBox.addEventListener('touchstart', this.touchstart.bind(this), false)
     // this.imgBox.addEventListener('touchmove', this.touchmove.bind(this), false)
     this.imgBox.addEventListener('touchend', this.touchend.bind(this), false)
-=======
-var windowWidth = document.querySelector('.tabCon').clientWidth; //window 宽度;
-var wrap = document.getElementById('wrap');
-var tabClick = wrap.querySelectorAll('.tabClick')[0];
-var tabLi = tabClick.getElementsByTagName('li');
->>>>>>> 8f9fc244a7a70b9cbec31045f8cdd858cdce3c56
 
 }
 ImageSwiper.prototype.touchstart = function(e) {

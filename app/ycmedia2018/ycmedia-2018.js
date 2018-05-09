@@ -788,7 +788,6 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_case_group" data-index="{{$index}}">
             <p class="img"><img src="{{img}}"></p>
             <div class="yccm_client_case_text">{{title}}</div>
-<<<<<<< HEAD
             <p class="yccm_client_case_timetext clear">
                 <span style="display: {{typeShow}}">客户类型：{{type}}</span>
                 <span style="display: {{costShow}}">CPC成本：{{cost}}</span>
@@ -797,10 +796,6 @@ function jsonp(url, body = {}, config = {}, fn) {
                 <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
                 <span style="display: {{rateShow}}">点击率：{{rate}}</span>
             </p>
-=======
-            <p class="yccm_client_case_timetext"><span>客户类型：{{type}}</span><span>CPC成本：{{cost}}</span></p>
-            <p class="yccm_client_case_timetext"><span>激活成本：{{activation}}</span><span>点击率：{{rate}}</span></p>
->>>>>>> 8f9fc244a7a70b9cbec31045f8cdd858cdce3c56
             <a href="javascript:void(0);" class="link">查看详情&nbsp;&gt;</a>
         </div>
     `;

@@ -1,11 +1,4 @@
-.clear:after {
-    content: "";
-    display: inline-block !important;
-    height: 0;
-    overflow: hidden;
-    clear: both;
-    visibility: hidden;
-}
+
 .content{
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
@@ -834,6 +827,14 @@ html {
 .yccm_popup_bodyText{
     width:1160px;
     margin:auto;
+    &:after{
+        content: "";
+        display: inline-block;
+        height: 0;
+        overflow: hidden;
+        clear: both;
+        visibility: hidden;
+    }
     .yccm_client_case_group{
         width:346px;
         margin:0 60px 70px 0;
