@@ -1,4 +1,4 @@
-import '../../common/js/vendor'
+﻿import '../../common/js/vendor'
 import '../../common/css/base.less'
 import './css/index.less'
 import {getHash} from "../../common/js/util";
