@@ -257,6 +257,7 @@ class BackgroundSwitch {
         let h = ref.clientHeight;
         let layerX = event.layerX;
         let layerY = event.layerY;
+        console.info(layerX)
         let average_w = w / (this.params.rate_x || 1);
         let average_h = h / (this.params.rate_y || 1);
         let x = parseInt(String(layerX / average_w)) + (layerX % average_w ? 1 : 0);
@@ -546,7 +547,7 @@ function jsonp(url, body = {}, config = {}, fn) {
 
 ~function () {
     let list = [
-        {
+        /*{
             img: './static/images/caseimg/tu1701.jpg',
             title: '光荣使命',
             type: '游戏类',
@@ -554,18 +555,6 @@ function jsonp(url, body = {}, config = {}, fn) {
             activation: '6.00 元',
             rate:'',
             imglist: ['./static/images/caseimg/case01-01.png'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1702.jpg',
-            title: '荒野行动',
-            type: '游戏类',
-            cost: '0.68 元',
-            activation: '4.00 元',
-            rate: '3%',
-            imglist: ['./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg', './static/images/caseimg/case02-03.png'],
             time: '2017年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
@@ -595,18 +584,6 @@ function jsonp(url, body = {}, config = {}, fn) {
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1705.jpg',
-            title: '网易严选',
-            type: '电商类',
-            cost: '0.58 元',
-            activation: '',
-            rate: '',
-            imglist: ['./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg', './static/images/caseimg/case05-03.jpg'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
             img: './static/images/caseimg/tu1706.jpg',
             title: '闪电降价',
             type: '电商类',
@@ -626,18 +603,6 @@ function jsonp(url, body = {}, config = {}, fn) {
             activation: '',
             rate: '3% - 5%',
             imglist: ['./static/images/caseimg/case07-01.jpg', './static/images/caseimg/case07-02.jpg', './static/images/caseimg/case07-03.jpg'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1708.jpg',
-            title: '拍拍贷',
-            type: '金融类',
-            cost: '0.40 元',
-            activation: '',
-            rate: '2.50 %',
-            imglist: ['./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg'],
             time: '2017年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
@@ -715,6 +680,65 @@ function jsonp(url, body = {}, config = {}, fn) {
             platform: '智橙移动端'
         },
         {
+            img: './static/images/caseimg/tu1717.jpg',
+            title: 'VIPKID',
+            type: '工具类',
+            cost: '0.70',
+            activation: '8.00',
+            rate: '6.00%',
+            imglist: ['', '', ''],
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },{
+            img: './static/images/caseimg/tu1718.jpg',
+            title: '交大成人教育',
+            type: '工具类',
+            cost: '0.70',
+            activation: '8.00',
+            rate: '6.00%',
+            imglist: ['', '', ''],
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },*/
+        {
+            img: './static/images/caseimg/tu1708.jpg',
+            title: '拍拍贷',
+            type: '金融类',
+            cost: '0.40 元',
+            activation: '',
+            rate: '2.50 %',
+            imglist: ['./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg'],
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/caseimg/tu1702.jpg',
+            title: '荒野行动',
+            type: '游戏类',
+            cost: '0.68 元',
+            activation: '4.00 元',
+            rate: '3%',
+            imglist: ['./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg', './static/images/caseimg/case02-03.png'],
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/caseimg/tu1705.jpg',
+            title: '网易严选',
+            type: '电商类',
+            cost: '0.58 元',
+            activation: '',
+            rate: '',
+            imglist: ['./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg', './static/images/caseimg/case05-03.jpg'],
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
             img: './static/images/caseimg/tu1715.jpg',
             title: '大众点评',
             type: '工具类',
@@ -730,72 +754,48 @@ function jsonp(url, body = {}, config = {}, fn) {
             img: './static/images/caseimg/tu1716.jpg',
             title: 'KEEP',
             type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
+            cost: '0.25元',
+            activation: '5-6元',
+            rate: '',
+            imglist: ['./static/images/caseimg/case16-01.jpg', './static/images/caseimg/case16-02.jpg', './static/images/caseimg/case16-03.jpg'],
             time: '2017年',
-            target: '营销目标：',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1717.jpg',
-            title: 'VIPKID',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
-            time: '2017年',
-            target: '营销目标：',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1718.jpg',
-            title: '交大成人教育',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
-            time: '2017年',
-            target: '营销目标：',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
             img: './static/images/caseimg/tu1719.jpg',
             title: '网易考拉',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
+            type: '电商类',
+            cost: '0.30元',
+            activation: '15元',
+            rate: '',
+            imglist: ['./static/images/caseimg/case19-01.jpg', './static/images/caseimg/case19-02.jpg', './static/images/caseimg/case19-03.jpg'],
             time: '2017年',
-            target: '营销目标：',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
             img: './static/images/caseimg/tu1720.jpg',
             title: 'JJ斗地主',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
+            type: '游戏类',
+            cost: '0.23元',
+            activation: '3-6元',
+            rate: '4.50%',
+            imglist: ['./static/images/caseimg/case20-01.jpg', './static/images/caseimg/case20-02.jpg'],
             time: '2017年',
-            target: '营销目标：',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
-        },
+        }
     ]
     let str = `
         <div class="yccm_client_case_group" data-index="{{$index}}">
             <p class="img"><img src="{{img}}"></p>
             <div class="yccm_client_case_text">{{title}}</div>
-            <p class="yccm_client_case_timetext">
+            <p class="yccm_client_case_timetext clear">
                 <span style="display: {{typeShow}}">客户类型：{{type}}</span>
                 <span style="display: {{costShow}}">CPC成本：{{cost}}</span>
             </p>
-            <p class="yccm_client_case_timetext">
+            <p class="yccm_client_case_timetext clear">
                 <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
                 <span style="display: {{rateShow}}">点击率：{{rate}}</span>
             </p>

@@ -23,7 +23,7 @@
             s();
         })(window);
     </script>
-    <!--<script>
+    <script>
         function IsPC()
         {
             var userAgentInfo = navigator.userAgent;
@@ -35,19 +35,19 @@
             return flag;
         }
         if(IsPC()){
-            location.href='/pc/'
+            location.href='/'
         }
-    </script>-->
+    </script>
 </head>
 <body>
 <div class="content-modal">
     <div class="top clear">
         <a href="" class="logo"><img src="static/images/logo1.png" alt=""></a>
-        <span class="navbar-toggle" id="navbar-toggle">
+        <!--<span class="navbar-toggle" id="navbar-toggle">
                 <i class="icon-bar"> </i>
                 <i class="icon-bar"> </i>
                 <i class="icon-bar"> </i>
-            </span>
+            </span>-->
     </div>
     <div class="content" id="home">
         <div class="scroll-content">
@@ -134,61 +134,213 @@
             </div>
             <div class="mobel partner huibg">
                 <p class="title"><img src="./static/images/hzhbtit.png" alt=""></p>
-                <div class="wrap" id="wrap">
-                    <ul class="tabClick flex">
-                        <li class="active">广告主</li>
-                        <li>媒体资源</li>
-                        <li>代理资源</li>
-                    </ul>
-                    <div class="lineBorder">
-                        <div class="lineDiv"><!--移动的div--></div>
+                <div id="box">
+                    <div id="head_list" class="flex">
+                        <span class="active">广告主</span>
+                        <span>媒体资源</span>
+                        <span>代理资源</span>
                     </div>
-                    <div class="tabCon">
-                        <div class="tabBox">
-                            <div class="tabList">
-                                <img src="./static/images/dlzy.png" alt="">
+                    <div id="menu_content">
+                        <div style="display:block;" class="menu_tu">
+                            <div class="wrap">
+                                <div id="imgs0" class="imgs">
+                                    <div class="bg fadeIn">
+                                        <img src="./static/images/guanggao/gg1-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg1-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg1-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg1-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg1-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg2-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg2-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg2-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg2-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg2-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg3-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg3-2.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/guanggao/gg3-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg3-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg3-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg4-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg4-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg4-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg4-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg4-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg5-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg5-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg5-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg5-4.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/guanggao/gg5-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg6-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg6-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg6-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg6-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg6-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg7-1.png" alt="">
+                                        <img src="./static/images/guanggao/gg7-2.png" alt="">
+                                        <img src="./static/images/guanggao/gg7-3.png" alt="">
+                                        <img src="./static/images/guanggao/gg7-4.png" alt="">
+                                        <img src="./static/images/guanggao/gg7-5.png" alt="">
+                                        <img src="./static/images/guanggao/gg8-1.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/guanggao/gg8-2.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="pagination-panel">
+                                    <ul class="pagination">
+                                        <li class="dot_0 on"></li>
+                                        <li class="dot_1"></li>
+                                        <li class="dot_2"></li>
+                                        <li class="dot_3"></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="tabList">
-                                2
+                        </div>
+                        <div style="display:none;" class="menu_tu">
+                            <div class="wrap">
+                                <div id="imgs1" class="imgs">
+                                    <div class="bg fadeIn">
+                                        <img src="./static/images/meiti/mt1-1.png" alt="">
+                                        <img src="./static/images/meiti/mt1-2.png" alt="">
+                                        <img src="./static/images/meiti/mt1-3.png" alt="">
+                                        <img src="./static/images/meiti/mt1-4.png" alt="">
+                                        <img src="./static/images/meiti/mt1-5.png" alt="">
+                                        <img src="./static/images/meiti/mt2-1.png" alt="">
+                                        <img src="./static/images/meiti/mt2-2.png" alt="">
+                                        <img src="./static/images/meiti/mt2-3.png" alt="">
+                                        <img src="./static/images/meiti/mt2-4.png" alt="">
+                                        <img src="./static/images/meiti/mt2-5.png" alt="">
+                                        <img src="./static/images/meiti/mt3-1.png" alt="">
+                                        <img src="./static/images/meiti/mt3-2.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/meiti/mt3-3.png" alt="">
+                                        <img src="./static/images/meiti/mt3-4.png" alt="">
+                                        <img src="./static/images/meiti/mt3-5.png" alt="">
+                                        <img src="./static/images/meiti/mt4-1.png" alt="">
+                                        <img src="./static/images/meiti/mt4-2.png" alt="">
+                                        <img src="./static/images/meiti/mt4-3.png" alt="">
+                                        <img src="./static/images/meiti/mt4-4.png" alt="">
+                                        <img src="./static/images/meiti/mt4-5.png" alt="">
+                                        <img src="./static/images/meiti/mt5-1.png" alt="">
+                                        <img src="./static/images/meiti/mt5-2.png" alt="">
+                                        <img src="./static/images/meiti/mt5-3.png" alt="">
+                                        <img src="./static/images/meiti/mt5-4.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/meiti/mt5-5.png" alt="">
+                                        <img src="./static/images/meiti/mt6-1.png" alt="">
+                                        <img src="./static/images/meiti/mt6-2.png" alt="">
+                                        <img src="./static/images/meiti/mt6-3.png" alt="">
+                                        <img src="./static/images/meiti/mt6-4.png" alt="">
+                                        <img src="./static/images/meiti/mt6-5.png" alt="">
+                                        <img src="./static/images/meiti/mt7-1.png" alt="">
+                                        <img src="./static/images/meiti/mt7-2.png" alt="">
+                                        <img src="./static/images/meiti/mt7-3.png" alt="">
+                                        <img src="./static/images/meiti/mt7-4.png" alt="">
+                                        <img src="./static/images/meiti/mt7-5.png" alt="">
+                                        <img src="./static/images/meiti/mt8-1.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/meiti/mt8-2.png" alt="">
+                                        <img src="./static/images/meiti/mt8-3.png" alt="">
+                                        <img src="./static/images/meiti/mt8-4.png" alt="">
+                                        <img src="./static/images/meiti/mt8-5.png" alt="">
+                                        <img src="./static/images/meiti/mt9-1.png" alt="">
+                                        <img src="./static/images/meiti/mt9-2.png" alt="">
+                                        <img src="./static/images/meiti/mt9-3.png" alt="">
+                                        <img src="./static/images/meiti/mt9-4.png" alt="">
+                                        <img src="./static/images/meiti/mt9-5.png" alt="">
+                                        <img src="./static/images/meiti/mt10-1.png" alt="">
+                                        <img src="./static/images/meiti/mt10-2.png" alt="">
+                                        <img src="./static/images/meiti/mt10-3.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/meiti/mt10-4.png" alt="">
+                                        <img src="./static/images/meiti/mt10-5.png" alt="">
+                                        <img src="./static/images/meiti/mt11-1.png" alt="">
+                                        <img src="./static/images/meiti/mt11-2.png" alt="">
+                                        <img src="./static/images/meiti/mt11-3.png" alt="">
+                                        <img src="./static/images/meiti/mt11-4.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="pagination-panel">
+                                    <ul class="pagination">
+                                        <li class="dot_0 on"></li>
+                                        <li class="dot_1"></li>
+                                        <li class="dot_2"></li>
+                                        <li class="dot_3"></li>
+                                        <li class="dot_4"></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="tabList">
-                                <img src="./static/images/dlzy.png" alt="">
+                        </div>
+                        <div style="display:none;" class="menu_tu">
+                            <div class="wrap">
+                                <div id="imgs2" class="imgs">
+                                    <div class="bg fadeIn">
+                                        <img src="./static/images/daili/dl1-1.png" alt="">
+                                        <img src="./static/images/daili/dl1-2.png" alt="">
+                                        <img src="./static/images/daili/dl1-3.png" alt="">
+                                        <img src="./static/images/daili/dl1-4.png" alt="">
+                                        <img src="./static/images/daili/dl1-5.png" alt="">
+                                        <img src="./static/images/daili/dl2-1.png" alt="">
+                                        <img src="./static/images/daili/dl2-2.png" alt="">
+                                        <img src="./static/images/daili/dl2-3.png" alt="">
+                                        <img src="./static/images/daili/dl2-4.png" alt="">
+                                        <img src="./static/images/daili/dl2-5.png" alt="">
+                                        <img src="./static/images/daili/dl3-1.png" alt="">
+                                        <img src="./static/images/daili/dl3-2.png" alt="">
+                                    </div>
+                                    <div class="bg">
+                                        <img src="./static/images/daili/dl3-2.png" alt="">
+                                        <img src="./static/images/daili/dl3-3.png" alt="">
+                                        <img src="./static/images/daili/dl3-4.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="pagination-panel">
+                                    <ul class="pagination">
+                                        <li class="dot_0 on"></li>
+                                        <li class="dot_1"></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id="dian">
-                        <span class="on"></span>
-                        <span></span>
-                        <span></span>
+
                     </div>
-                </div>
-            </div>
-            <div class="mobel contcact baibg">
-                <p class="title"><img src="./static/images/lxwmtit.png" alt=""></p>
-                <img src="./static/images/weiz.png" alt="" class="map">
-                <div class="link_style">
-                    <p><img src="./static/images/dh1.png" alt=""><span><em>电话：</em>021-64851212</span></p>
-                    <p><img src="./static/images/cz1.png" alt=""><span><em>传真：</em>021-33681336</span></p><br>
-                    <p><img src="./static/images/diz1.png" alt=""><span><em>地址：</em>上海市徐汇区漕河泾开发区桂平路481号19栋6层</span></p>
-                </div>
-            </div>
+
+                    </div>
+                                    <div class="mobel contcact baibg">
+                                        <p class="title"><img src="./static/images/lxwmtit.png" alt=""></p>
+                                        <img src="./static/images/weiz.png" alt="" class="map">
+                                        <div class="link_style">
+                                            <p><img src="./static/images/dh1.png" alt=""><span><em>电话：</em>021-64851212</span></p>
+                                            <p><img src="./static/images/cz1.png" alt=""><span><em>传真：</em>021-33681336</span></p><br>
+                                            <p><img src="./static/images/diz1.png" alt=""><span><em>地址：</em>上海市徐汇区漕河泾开发区桂平路481号19栋6层</span></p>
+                                        </div>
+                                    </div>
 
 
 
 
-            <p class="footer"><small>Copyright(C)2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1</small></p>
-        </div>
-    </div>
-</div>
+                                    <p class="footer"><small>Copyright(C)2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1</small></p>
+                                </div>
+                            </div>
+                        </div>
 
-<div id="loadedImages"></div>
+                        <div id="loadedImages"></div>
 
-<div class="description_box" id="description_box"></div>
-<div class="bomb_box" id="bomb_box">
-    <ul class="item_box">
-        <!--<li class="item"><a href="https://us.lcinc.cn/">公司首页 <i>&gt;</i></a></li>-->
-    </ul>
-</div>
+                        <!--<div class="description_box" id="description_box"></div>
+                        <div class="bomb_box" id="bomb_box">
+                            <ul class="item_box">
+                                &lt;!&ndash;<li class="item"><a href="https://us.lcinc.cn/">公司首页 <i>&gt;</i></a></li>&ndash;&gt;
+                            </ul>
+                        </div>-->
 
 </body>
 </html>

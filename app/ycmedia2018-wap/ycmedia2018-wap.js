@@ -3,7 +3,7 @@ import './css/index.less'
 import '../../common/js/vendor'
 
 
-let navbar=document.getElementById("navbar-toggle");
+/*let navbar=document.getElementById("navbar-toggle");
 let description_box=document.getElementById("description_box");
 let item_box=document.getElementById("bomb_box")
 
@@ -24,11 +24,11 @@ description_box.addEventListener('click',(e)=>{
         item_box.classList.remove('blocks');
         description_box.classList.remove('blocks');
     }
-})
+})*/
 
-
+/*顶部菜单渐变*/
 let scrol = document.querySelector(".scroll-content");
-let offSet = document.querySelector(".introduction").offsetTop;
+let offSet = 100;
 let aa = document.querySelector('.top');
 scrol && scrol.addEventListener('scroll', function () {
     let t = scrol.scrollTop;
@@ -40,137 +40,143 @@ scrol && scrol.addEventListener('scroll', function () {
 })
 
 
-var windowWidth = document.querySelector('.tabCon').clientWidth;
-var wrap = document.getElementById('wrap');
-var tabClick = wrap.querySelectorAll('.tabClick')[0];
-var tabLi = tabClick.getElementsByTagName('li');
-
-var tabBox =  wrap.querySelectorAll('.tabBox')[0];
-var tabList = tabBox.querySelectorAll('.tabList');
-
-var lineBorder = wrap.querySelectorAll('.lineBorder')[0];
-var lineDiv = lineBorder.querySelectorAll('.lineDiv')[0];
-var odian = document.getElementById("dian").getElementsByTagName("span");
-
-var tar = 0;
-var endX = 0;
-var dist = 0;
-
-tabBox.style.overflow='hidden';
-tabBox.style.position='relative';
-tabBox.style.width=windowWidth*tabList.length+"px";
-
-for(var i = 0 ;i<tabLi.length; i++ ){
-    tabList[i].style.width=windowWidth+"px";
-    tabList[i].style.float='left';
-    tabList[i].style.float='left';
-    tabList[i].style.padding='0';
-    tabList[i].style.margin='0';
-    tabList[i].style.verticalAlign='top';
-    tabList[i].style.display='table-cell';
+/**
+ * 合作伙伴切换
+ */
+let ImageSwiper = function(imgs, minRange) {
+    this.imgBox = imgs
+    this.imgs = imgs.children
+    this.cur_img = 1  //起始图片设为1 ,而非0,将在图片显示方法中作-1处理
+    this.ready_moved = true  //判断每次滑动开始的标记变量
+    this.imgs_count = this.imgs.length
+    this.touchX  //触控开始的手指最初落点
+    this.minRange = Number(minRange)
+    this.fadeIn  //图片切换的方式,这里使用淡入淡出
+    this.fadeOut
+    this.bindTouchEvn() //初始化绑定滑动事件
+    this.showPic(this.cur_img) //显示图片方法,注意其中图片编号的-1处理
 }
+ImageSwiper.prototype.bindTouchEvn = function() {
+    this.imgBox.addEventListener('touchstart', this.touchstart.bind(this), false)
+    // this.imgBox.addEventListener('touchmove', this.touchmove.bind(this), false)
+    this.imgBox.addEventListener('touchend', this.touchend.bind(this), false)
 
-for(var i = 0 ;i<tabLi.length; i++ ){
-    tabLi[i].start = i;
-    tabLi[i].onclick = function(){
-        var star = this.start;
-        for(var i = 0 ;i<tabLi.length; i++ ){
-            tabLi[i].className='';
-            odian[i].className='';
-        };
-        tabLi[star].className='active';
-        odian[star].className='on';
-        init.lineAnme(lineDiv,windowWidth/tabLi.length*star)
-        init.translate(tabBox,windowWidth,star);
-        endX= -star*windowWidth;
+}
+ImageSwiper.prototype.touchstart = function(e) {
+    if (this.ready_moved) {
+        let touch = e.touches[0];
+        this.touchX = touch.pageX;
+        this.ready_moved = false;
     }
 }
 
-function OnTab(star){
-    if(star<0){
-        star=0;
-    }else if(star>=tabLi.length){
-        star=tabLi.length-1
+ImageSwiper.prototype.touchmove = function(e) {
+    e.preventDefault();
+    let minRange = this.minRange
+    let touchX = this.touchX
+    let imgs_count = this.imgs_count
+
+    if (!this.ready_moved) {
+        let release = e.changedTouches[0];
+        let releasedAt = release.pageX;
+        if (releasedAt + minRange < this.touchX) {
+            this.ready_moved = true;
+            if (this.cur_img > (imgs_count - 1)) {
+                this.cur_img = 0;
+            }
+            this.cur_img++;
+            this.showPic(this.cur_img);
+
+        } else if (releasedAt - minRange > this.touchX) {
+            if (this.cur_img <= 1) {
+                this.cur_img = imgs_count + 1
+            }
+            this.cur_img--;
+            this.showPic(this.cur_img);
+            this.ready_moved = true;
+        }
     }
-    for(var i = 0 ;i<tabLi.length; i++ ){
-        tabLi[i].className='';
-        odian[i].className='';
-    };
-
-    tabLi[star].className='active';
-    odian[star].className='on';
-    init.translate(tabBox,windowWidth,star);
-    endX= -star*windowWidth;
-};
-
-tabBox.addEventListener('touchstart',chstart,false);
-tabBox.addEventListener('touchmove',chmove,false);
-tabBox.addEventListener('touchend',chend,false);
-//按下
-function chstart(ev){
-    ev.preventDefault;
-    var touch = ev.touches[0];
-    tar=touch.pageX;
-    tabBox.style.webkitTransition='all 0s ease-in-out';
-    tabBox.style.transition='all 0s ease-in-out';
-};
-//滑动
-function chmove(ev){
-    var stars = wrap.querySelector('.active').start;
-    ev.preventDefault;
-    var touch = ev.touches[0];
-    var distance = touch.pageX-tar;
-    dist = distance;
-    init.touchs(tabBox,windowWidth,tar,distance,endX);
-    init.lineAnme(lineDiv,-dist/tabLi.length-endX/4);
-};
-//离开
-function chend(ev){
-    var str= tabBox.style.transform;
-    var strs = JSON.stringify(str.split(",",1));
-    endX = Number(strs.substr(14,strs.length-18));
-
-    if(endX>0){
-        init.back(tabBox,windowWidth,tar,0,0,0.3);
-        endX=0
-    }else if(endX<-windowWidth*tabList.length+windowWidth){
-        endX=-windowWidth*tabList.length+windowWidth
-        init.back(tabBox,windowWidth,tar,0,endX,0.3);
-    }else if(dist<-windowWidth/3){
-        OnTab(tabClick.querySelector('.active').start+1);
-        init.back(tabBox,windowWidth,tar,0,endX,0.3);
-    }else if(dist>windowWidth/3){
-        OnTab(tabClick.querySelector('.active').start-1);
-    }else{
-        OnTab(tabClick.querySelector('.active').start);
-    }
-    var stars = wrap.querySelector('.active').start;
-    init.lineAnme(lineDiv,stars*windowWidth/4);
-
-};
-
-
-var init={
-    translate:function(obj,windowWidth,star){
-        obj.style.webkitTransform='translate3d('+-star*windowWidth+'px,0,0)';
-        obj.style.transform='translate3d('+-star*windowWidth+',0,0)px';
-        obj.style.webkitTransition='all 0.3s ease-in-out';
-        obj.style.transition='all 0.3s ease-in-out';
-    },
-    touchs:function(obj,windowWidth,tar,distance,endX){
-        obj.style.webkitTransform='translate3d('+(distance+endX)+'px,0,0)';
-        obj.style.transform='translate3d('+(distance+endX)+',0,0)px';
-    },
-    lineAnme:function(obj,stance){
-        obj.style.webkitTransform='translate3d('+stance+'px,0,0)';
-        obj.style.transform='translate3d('+stance+'px,0,0)';
-        obj.style.webkitTransition='all 0.1s ease-in-out';
-        obj.style.transition='all 0.1s ease-in-out';
-    },
-    back:function(obj,windowWidth,tar,distance,endX,time){
-        obj.style.webkitTransform='translate3d('+(distance+endX)+'px,0,0)';
-        obj.style.transform='translate3d('+(distance+endX)+',0,0)px';
-        obj.style.webkitTransition='all '+time+'s ease-in-out';
-        obj.style.transition='all '+time+'s ease-in-out';
-    },
 }
+
+ImageSwiper.prototype.touchend = function(e) {
+    e.preventDefault();
+    let minRange = this.minRange
+    let touchX = this.touchX
+    let imgs_count = this.imgs_count
+    if (!this.ready_moved) {
+        let release = e.changedTouches[0];
+        let releasedAt = release.pageX;
+        if (releasedAt + minRange < this.touchX) {
+            this.ready_moved = true;
+            if (this.cur_img > (imgs_count - 1)) {
+                this.cur_img = 0;
+            }
+            this.cur_img++;
+            this.showPic(this.cur_img);
+
+        } else if (releasedAt - minRange > this.touchX) {
+            if (this.cur_img <= 1) {
+                this.cur_img = imgs_count + 1
+            }
+            this.cur_img--;
+            this.showPic(this.cur_img);
+            this.ready_moved = true;
+        }
+    }
+
+}
+//在样式表中设置好 .fadeIn 的透明度为0
+ImageSwiper.prototype.fadeIn = function(e) {
+    e.classList.add("fadeIn")
+}
+
+ImageSwiper.prototype.fadeOut = function(e) {
+    Array.prototype.forEach.call(e, function(e) {
+        e.className = "bg"
+    })
+}
+
+ImageSwiper.prototype.showPic = function(cur_img) {
+    this.hidePics(this.imgs)
+//得到图片元素的真实索引
+    let index = cur_img - 1
+    if (this.imgBox.nextElementSibling.getElementsByClassName("on")[0]) {
+        let active = this.imgBox.nextElementSibling.getElementsByClassName("on")[0];
+        active.classList.remove("on")
+    }
+    console.log(this.cur_img)
+    this.imgBox.nextElementSibling.querySelector(".dot_" + index).classList.add("on");
+    console.info(this.imgs[index])
+    this.fadeIn(this.imgs[index]);
+
+}
+ImageSwiper.prototype.hidePics = function(e) {
+    this.fadeOut(e)
+
+}
+//传参
+new ImageSwiper(document.querySelector('#imgs0'), 30)
+new ImageSwiper(document.querySelector('#imgs1'), 30)
+new ImageSwiper(document.querySelector('#imgs2'), 30)
+
+let head_list = document.getElementById("head_list");
+let oli = head_list.getElementsByTagName("span");//获取tab列表
+let odiv = document.getElementById("menu_content").querySelectorAll(".menu_tu");
+
+for(let i=0 ; i<oli.length ; i++){
+    oli[i].index = i;//定义index变量，以便让tab按钮和tab内容相互对应
+    oli[0].className ='active';
+    oli[i].onclick = function(){
+        for(let i =0; i < oli.length; i++){
+            oli[i].className = "";
+            odiv[i].style.display = "none";
+        }
+        this.className = "active";//为当前tab添加样式
+        odiv[this.index].style.display="block";//显示当前tab对应的内容
+    }
+}
+
+
+
+
+

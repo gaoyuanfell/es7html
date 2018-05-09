@@ -1,4 +1,11 @@
-
+.clear:after {
+    content: "";
+    display: inline-block !important;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+    visibility: hidden;
+}
 .content{
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
@@ -887,9 +894,13 @@ html {
             color: #999999;
             text-align: left;
             position: relative;
-            span:nth-child(2){
-                position: absolute;
-                left: 172px;
+            span{
+                float: left;
+            }
+            span:nth-child(1){
+                /*position: absolute;
+                left: 172px;*/
+                margin-right: 0.5rem;
             }
         }
         &:nth-child(3n){
