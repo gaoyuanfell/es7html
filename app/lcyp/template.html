@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,286 @@
     <meta name="description" content="<%= htmlWebpackPlugin.options.title %>"/>
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
-<body>
+<body>	
+	<div class="content">
+		<div class="top_msg clear">
+			<div class="wrap">
+				<p class="left">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外) </p>
+				<div class="top_right right">
+					<!-- <a href=""><span class="cart">我的购物车(0)</span></a>
+					<span class="vertical_line">|</span> -->
+					<a href=""><span class="service">我的客服</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="top_nav clear">
+			<div class="wrap">
+	            <div class="logo left"></div>
+	            <div class="flex left">
+	                <ul class="nav flex" id="filters">
+	                    <li class="item active"><a href="#home"><span>首页</span></a><span class="line"></span></li>
+	                    <li class="item"><a href="#commodity_center"><span>商品中心</span></a><span class="line"></span></li>
+	                    <li class="item"><a href="#Logistics_service"><span>物流服务</span></a><span class="line"></span></li>
+	                    <li class="item"><a href="#about_us"><span>关于我们</span></a><span class="line"></span></li>
+	                    <li class="item"><a href="#contact_us"><span>联系我们</span></a><span class="line"></span></li>                    
+	                </ul>               
+	            </div>
+	            <div class="right_btn right">
+	            	<a href="#login" class="btn reg_btn">注册</a>
+					<a href="#login" class="btn">登录</a>
+	            </div>
+            </div>
+        </div>
+
+		<div id="page_list">
+			<!-- 登录 -->
+			<div class="contentener" data-contentener data-type="login"> 
+				<div class="login">
+					<div class="wrap">						
+						<div class="logo"><img src="./static/images/logo.png"></div>
+						<div class="cont flex">
+							<div class="left_cont">
+								<img src="./static/images/text_msg.png">
+								<p class="txt1">新零售行业供货平台，<span class="color_blue">提供全面智能的采购管理服务</span></p>
+								<p class="txt2">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外) </p>
+							</div>
+							<div class="login_box">
+								<div class="login_logo"></div>
+								<div class="form">
+									<h6>账号登录</h6>
+									<input class="phone_number" id="phoneNumber" placeholder="请输入您的手机号" type="text" name="">
+									<p class="declare">若手机号未注册则会自动注册</p>
+									<input class="code" id="code" type="text" placeholder="请输入您的验证码" name="">
+									<button id="sendCode">发送验证码</button>
+									<i class="checkbox"></i>已阅读并同意<a href="" class="agreement">《乐橙优品用户注册协议》</a>
+									<button class="login_btn" id="loginBtn">登录</button>
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="coryright">
+						Copyright (C) 2016~2018 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+			        </div>
+				</div>
+            </div>		
+
+            <!--首页-->
+            <div class="contentener" data-contentener data-type="home" marginbotm margintop> 
+				<div class="home">
+					<div class="wrap">
+						<div class="wrap_cont">
+							<img src="./static/images/index_banner.jpg">						
+						</div>
+						<div class="top_cont">
+							<div class="title">
+								<h1>乐橙优品</h1>
+				            	<p>新零售，新批发，新商业，提供全面智能的采购管理服务</p>
+				            	<p>更低价.更便捷.更高效</p>
+							</div>
+							<div class="advantage">
+								<div class="resource">
+									<h2>模式与资源优势</h2>
+									<p>打通供货商→终端门店/营业所零售的快速通路。为供应商、经销商、零售商赋能，抢占线上线下市场
+									</p>
+									<p>优质资源供给，快速响应线上采购需求。提升采购效率、降低采购成本、优化采购策略</p>
+								</div>
+								<div class="system">
+									<h2>智能管理系统</h2>
+									<ul class="flex system_msg">
+										<li>
+											<img src="static/images/map_icon.png">
+											<h6>下单更便捷</h6>
+											<p>避免错单、漏单</p>
+										</li>
+										<li>
+											<img src="static/images/mang_icon.png">
+											<h6>库存管理</h6>
+											<p>智能缺货预警</p>
+										</li>
+										<li>
+											<img src="static/images/check_icon.png">
+											<h6>财务对账</h6>
+											<p>轻松快捷</p>
+										</li>										
+									</ul>
+									<ul class="table clear">
+										<li>在线快捷订货</li>
+										<li>B2B专业商城</li>
+										<li>线上线下聚合支付</li>
+										<li>实时库存精准管控</li>
+										<li>线下销售订单管理</li>
+										<li>采购入库管理</li>
+									</ul>									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom_cont flex">
+						<div class="left_msg">
+							<h3>传统业务<span class="line"></span></h3>
+							<p class="p1">不同渠道、地域采购，以及商品采购量级不同，导致价格体系不一致，价格存在较大差异，对于小型零售商来说盈利差异较大</p>
+							<p class="p2">人工抄写管理出入库单及账款，难以实现长期清晰对账需求</p>
+							<p class="p3">支付方式、合同、发票方式单一，不够灵活，拉长时间成本</p>
+						</div>		
+						<div class="middle_msg"><img src="./static/images/vs.png"></div>		
+						<div class="right_msg">
+							<h3>乐橙优品<span class="line"></span></h3>
+							<p class="p1">集中采购,综合供应链解决方案。不同量级供应</p>
+							<p class="p2">提供灵活的管理模块，避免错单、漏单等情况，且有强大的智能库存管理系统</p>
+							<p class="p3">支持预存款、支付宝、微信等主流支付方式，统计每笔订单，方便渠道上下级之间结算对账</p>
+						</div>		
+					</div>
+				</div>
+            </div>
+            <!--商品中心-->
+            <div class="contentener" data-contentener data-type="commodity_center" marginbotm margintop> 
+				<div class="goods_center">
+					<div class="top_cont flex">
+						<div class="classify">
+							<div class="first_level flex">
+								<span class="level">一级分类</span>
+								<ul class="flex" id="firstLevel">
+									
+								</ul>
+							</div>					
+							<div class="second_level flex">
+								<span class="level">二级分类</span>
+								<ul class="flex" id="secondLevel">
+																
+								</ul>
+							</div>
+						</div>
+						<div class="search">
+							<div class="search_input">
+								<i></i>
+								<input type="text" placeholder="请输入商品名称" id="searchInput" >
+								<button class="search_btn" id="searchBtn">搜索</button>
+							</div>
+							<div class="search_history" id="searchHistory">
+								<a>雪碧</a>
+								<a>可乐</a>
+								<a>冰红茶</a>
+							</div>
+						</div>
+					</div>
+					<div class="lists">
+						<ul class="clear goods_lists" id="goodsLists">
+							
+						</ul>
+						<div class="paging clear flex" id="paging">
+							<span class="prev_page border" id="prevPage">上一页</span>
+							<ul class="flex" id="currPage">
+								
+							</ul>
+							<span class="next_page border" id="nextPage">下一页</span>
+							<span class="last_page border" id="lastPage"> >> </span>
+							<span>共<b id="count"></b>页 到第</span><input class="border page_num" type="number" name="" id="inputNum"><span>页</span>
+							<button id="pageJump">确定</button>
+						</div>
+					</div>
+				</div>
+            </div>
+            <!--物流服务-->
+            <div class="contentener" data-contentener data-type="Logistics_service" marginbotm margintop> 
+				<div class="logistics">
+					<div class="wrap">
+						<div class="wrap_cont">
+							<img src="./static/images/logistics_banner.jpg">
+							<div class="title">
+								<h1>借助科技影响力 <span>引领智能物流新时代</span></h1>
+								<p>全方位满足各企业多层次需要</p>
+							</div>						
+						</div>
+					</div>
+					<div class="main_cont">
+						<div class="main_title">
+							<h2>服务优势</h2>
+							<p>服务路线覆盖广泛，可进行灵活的物流调度，实时监控物流信息</p>
+						</div>
+						<ul class="flex cont">
+							<li>
+								<img src="./static/images/logistics_icon1.png">
+								<h3>准时抵达</h3>
+								<p>以“准时”、“安全”为准则，实现高时效性、安全性，严格遵守服务准则，建立高标准客户服务体系</p>
+							</li>
+							<li>
+								<img src="./static/images/logistics_icon2.png">
+								<h3>整车特运</h3>
+								<p>专人负责货物全程物流追踪，安全为第一要素，确保货品安全抵达，保障服务品质</p>
+							</li>
+							<li>
+								<img src="./static/images/logistics_icon3.png">
+								<h3>降低成本</h3>
+								<p>依据客户差异化需求，优化各区域路线方案，保障货物抵达的高时效性，也为客户节约运输成本</p>
+							</li>
+							<li>
+								<img src="./static/images/logistics_icon4.png">
+								<h3>灵活操作</h3>
+								<p>为客户提供专属的最佳服务方案，灵活调度物流资源，多维度满足客户不同需求</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+            </div>
+            <!--关于我们-->
+            <div class="contentener" data-contentener data-type="about_us" marginbotm margintop> 
+				<div class="about_us">
+					<div class="wrap">
+						<div class="wrap_cont">
+							<img src="./static/images/about_us_banner.jpg">
+							<div class="title">
+								<h1>关于我们</h1>
+								<p>公司简介  ·  主要业务  ·  平台优势</p>
+							</div>						
+						</div>
+					</div>
+					<div class="main_cont flex">
+						<div class="left_cont"><img src="./static/images/about_us.png"></div>
+						<div class="right_cont">
+							<h2>公司简介</h2>
+							<p>乐橙互联科技有限公司成立于2016年，借助母公司上海银橙文化传媒股份有限公司（证券简称：银橙传媒；证券代码：830999）多年互联网、大数据、新媒体经验和资本实力，通过自主开发的智能系统技术，在电子商务、本地生活服务、O2O、新媒体（新型场景化媒体+移动媒体）等领域积极拓展，致力于整合互联网行业、新零售行业资源，使个人消费者、合作伙伴都能从中获益。努力成长为中国领先的新零售、新媒体领军企业。</p>
+							<h2>主要业务</h2>
+							<p>"乐橙优品"是乐橙互联下的一个专门针对零售行业的商贸平台，主要提供各种饮料食品。旨在为买卖双方搭建电子商务平台, 促进双方高效、便捷交易。为卖家提供在线营销渠道,同时也帮助买家开拓了更多的采购渠道,方便买家在线筛选各种商品,省时省力且高效筛选出商品,从而完成交易。</p>
+							<h2>平台优势</h2>
+							<p>我们的团队大多数拥有资深的零售行业、供应链管理以及网络销售经验,通过整合、筛选分析实时供货方和采购方的数据信息,使卖方免受开发客户群体的困惑,同时也让买家省时、省力、高效筛选出货品 , 从而促进双方的贸易顺利完成。</p>
+
+						</div>
+					</div>
+				</div>
+            </div>
+            <!--联系我们-->
+            <div class="contentener" data-contentener data-type="contact_us" marginbotm margintop> 
+				<div class="about_us">
+					<div class="wrap">
+						<div class="wrap_cont">
+							<img src="./static/images/about_us_banner.jpg">
+							<div class="title">
+								<h1>联系我们</h1>
+								<p>公司位置  ·  联系方式</p>
+							</div>						
+						</div>
+					</div>
+					<div class="main_cont flex">
+						<div class="left_cont clear">
+							<div class="qrcode left"><img src="./static/images/wechat.jpg" width="100%"></div>
+							<div class="msg left">
+								<p><i class="email"></i><span>200233</span></p>
+								<p><i class="tell"></i><span>400-626-9606</span></p>
+								<p><i class="addr"></i><span>上海市 徐汇区<br>&nbsp;&nbsp;桂平路481号桂中园18栋6层</span></p>
+							</div>
+						</div>
+						<div class="right_cont">							
+							<img src="./static/images/address.png">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+
+        <div class="bottom_coryright">
+			Copyright (C) 2016~2018 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+        </div>
+	</div>
+
 </body>
 </html>
