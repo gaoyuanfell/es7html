@@ -38,17 +38,21 @@ function hashChange() {
     if(hash != 'home'){
         document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
         document.querySelector('.top_nav').style.backgroundSize='100% 100%';
-
-    }else if(hash == 'home') {
+    }else {
+        document.querySelector('.top_nav').style.background='none';
         let scrol = document.querySelector(".contentener");
-        let offSet = 80;
+        let offSet = 100;
         scrol && scrol.addEventListener('scroll', function () {
             let t = scrol.scrollTop;
             if (t > offSet) {
                 document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
                 document.querySelector('.top_nav').style.backgroundSize='100% 100%';
+                document.querySelector('.top_nav').style.transition='all 1s ease';
+                document.querySelector('.top_nav').style.WebkitTransition='all 1s ease';
             }else {
                 document.querySelector('.top_nav').style.background='none';
+                document.querySelector('.top_nav').style.transition='all 1s ease';
+                document.querySelector('.top_nav').style.WebkitTransition='all 1s ease';
             }
         })
     }
@@ -70,7 +74,7 @@ class Template {
 
     compileFun(exg) {
         let fun = new Function('vm', `
-            with(vm){return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}
+            with(vm){try {return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}catch (e) {return ''}}
         `);
         return fun(this.value);
     }
@@ -253,7 +257,6 @@ class BackgroundSwitch {
         let h = ref.clientHeight;
         let layerX = event.layerX;
         let layerY = event.layerY;
-        console.info(layerX)
         let average_w = w / (this.params.rate_x || 1);
         let average_h = h / (this.params.rate_y || 1);
         let x = parseInt(String(layerX / average_w)) + (layerX % average_w ? 1 : 0);
@@ -316,26 +319,25 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     })
 
     function anlitu(index) {
-        let html = `
+        let html1 = `
         <div class="imgqh">
             <div class="imgtubox">
-                <div class="tulist" data-js-active="img_box">
-                    {{imghtml}}
+                <div class="tulist" data-js-active="img_box1">
+                    {{imghtm}}
                 </div>
             </div>
-            <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
-            <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
+            <a href="javascript:;" class="prev arrow" data-js-active="img_prev1">&lt;</a>
+            <a href="javascript:;" class="next arrow" data-js-active="img_next1">&gt;</a>
         </div>
     `;
-    let imgdata = anlituList[+index];
-    imgdata.imghtml = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
-    document.querySelector('#menu_content').innerHTML = new Template(html, imgdata).compile();
-    new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
-        imgWidth: 224,
-        imgHeight: 395,
-    })
-}
-
+        let imgdata = anlituList[+index];
+        imgdata.imghtm = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
+        document.querySelector('#menu_content').innerHTML = new Template(html1, imgdata).compile();
+        new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'),document.querySelector('[data-js-active=img_prev1]'),{
+            imgWidth: 224,
+            imgHeight: 395,
+        }).start().catch(e => console.error(e))
+    }
     anlitu(0)
 }()
 
@@ -788,11 +790,11 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_case_group" data-index="{{$index}}">
             <p class="img"><img src="{{img}}"></p>
             <div class="yccm_client_case_text">{{title}}</div>
-            <p class="yccm_client_case_timetext clear">
+            <p class="yccm_client_case_timetext">
                 <span style="display: {{typeShow}}">客户类型：{{type}}</span>
                 <span style="display: {{costShow}}">CPC成本：{{cost}}</span>
             </p>
-            <p class="yccm_client_case_timetext clear">
+            <p class="yccm_client_case_timetext">
                 <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
                 <span style="display: {{rateShow}}">点击率：{{rate}}</span>
             </p>
@@ -800,10 +802,14 @@ function jsonp(url, body = {}, config = {}, fn) {
         </div>
     `;
 
-    let caseList = [];
-    list.forEach((l, i) => {
-        l.$index = i;
-        caseList += new Template(str, l).compile();
+    let caseList = '';
+    list.forEach((data, i) => {
+        data.$index = i;
+        if(!data.type) data.typeShow = 'none';
+        if(!data.cost) data.costShow = 'none';
+        if(!data.activation) data.activationShow = 'none';
+        if(!data.rate) data.rateShow = 'none';
+        caseList += new Template(str, data).compile();
     })
     document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
 
@@ -817,12 +823,12 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_details clear">
             <div class="yccm_client_details_left">
                 <div class="imgtubox">
-                    <div class="tulist" data-js-active="img_box">
+                    <div class="tulist" data-js-case-active="img_box">
                         {{imghtml}}
                     </div>
                 </div>
-                <a href="javascript:;" class="prev arrow" data-js-active="img_prev">&lt;</a>
-                <a href="javascript:;" class="next arrow" data-js-active="img_next">&gt;</a>
+                <a href="javascript:;" class="prev arrow" data-js-case-active="img_prev"><img src="./static/images/zuojiantou.png" alt=""></a>
+                <a href="javascript:;" class="next arrow" data-js-case-active="img_next"><img src="./static/images/youjiantou.png" alt=""></a>
             </div>
             <div class="yccm_client_details_right">
                 <h2 class="title">{{title}}<span>案例时间：{{time}}</span></h2>
@@ -830,15 +836,15 @@ function jsonp(url, body = {}, config = {}, fn) {
                     {{target}}
                 </p>
                 <ul class="features">
-                    <li>案例类型：{{type}}</li>
-                    <li>投放平台：{{platform}}</li>
-                    <li>CPC成本：{{cost}}</li>
-                    <li class="baizi">激活成本：{{activation}}</li>
-                    <li>点击率：{{rate}}</li>
+                    <li style="display: {{typeShow}}">案例类型：{{type}}</li>
+                    <li style="display: {{platformShow}}">投放平台：{{platform}}</li>
+                    <li style="display: {{costShow}}">CPC成本：{{cost}}</li>
+                    <li style="display: {{activationShow}}" class="baizi">激活成本：{{activation}}</li>
+                    <li style="display: {{rateShow}}">点击率：{{rate}}</li>
                 </ul>
                 <div class="btn_box">
-                    <a href="javascript:;" class="kongbtn" data-js-active="next">下一个案例</a>
-                    <a href="javascript:;" class="previous" data-js-active="prev">上一个</a>
+                    <a href="javascript:;" class="kongbtn" data-js-case-active="next">下一个案例</a>
+                    <a href="javascript:;" class="previous" data-js-case-active="prev">上一个</a>
                 </div>
             </div>
         </div>
@@ -846,6 +852,13 @@ function jsonp(url, body = {}, config = {}, fn) {
         let data = list[+index];
         data.imghtml = data.imglist.map(l => `<img src="${l}"/>`).join('')
         document.querySelector('.yccm_popup_body').innerHTML = '';
+
+        if(!data.type) data.typeShow = 'none';
+        if(!data.platform) data.platformShow = 'none';
+        if(!data.cost) data.costShow = 'none';
+        if(!data.activation) data.activationShow = 'none';
+        if(!data.rate) data.rateShow = 'none';
+
         document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
         layer.open({
             type: 1,
@@ -854,14 +867,14 @@ function jsonp(url, body = {}, config = {}, fn) {
             title: false,
             content: $('#popup'),
         });
-        document.querySelector('[data-js-active=next]').onclick = () => {
+        document.querySelector('[data-js-case-active=next]').onclick = () => {
             if (list.length <= data.$index + 1) {
                 Details(0)
             } else {
                 Details(data.$index + 1)
             }
         }
-        document.querySelector('[data-js-active=prev]').onclick = () => {
+        document.querySelector('[data-js-case-active=prev]').onclick = () => {
             if (data.$index - 1 < 0) {
                 Details(list.length - 1)
             } else {
@@ -869,10 +882,10 @@ function jsonp(url, body = {}, config = {}, fn) {
             }
         }
 
-        new ImgLoop(document.querySelector('[data-js-active=img_box]'), document.querySelector('[data-js-active=img_next]'),document.querySelector('[data-js-active=img_prev]'),{
+        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), document.querySelector('[data-js-case-active=img_next]'),document.querySelector('[data-js-case-active=img_prev]'),{
             imgWidth: 254,
             imgHeight: 494,
-        })
+        }).start().catch(e => console.error(e))
     }
 
 }()
