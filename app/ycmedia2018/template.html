@@ -10,320 +10,320 @@
     <script src="./static/js/jquery.min.js"></script>
     <script src="./static/js/layer.js"></script>
     <script>
-                var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
-                if(isMobile){
-                    location.href='/wap'
-                }
+       var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
+       if(isMobile){
+           location.href='/wap'
+       }
     </script>
 
 </head>
 <body>
-    <div class="content">
-        <div class="top_nav clear">
-            <div class="logo">
-                <img src="./static/images/logo.png" alt="">
+<div class="content">
+    <div class="top_nav clear">
+        <div class="logo">
+            <img src="./static/images/logo.png" alt="">
+        </div>
+        <div class="right flex">
+            <ul class="nav flex" id="filters">
+                <li class="item"><a href="#home"><span>首页</span></a></li>
+                <li class="item"><a href="#business_modules"><span>业务板块</span></a></li>
+                <li class="item"><a href="#solution"><span>解决方案</span></a></li>
+                <li class="item"><a href="#case_center"><span>案例中心</span></a></li>
+                <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
+                <li class="item"><a href="#about_us"><span>关于银橙</span></a></li>
+                <li class="item"><a href="#investor_relations"><span>投资者关系</span></a></li>
+            </ul>
+            <div class="sns">
+                <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
             </div>
-            <div class="right flex">
-                <ul class="nav flex" id="filters">
-                    <li class="item"><a href="#home"><span>首页</span></a></li>
-                    <li class="item"><a href="#business_modules"><span>业务板块</span></a></li>
-                    <li class="item"><a href="#solution"><span>解决方案</span></a></li>
-                    <li class="item"><a href="#case_center"><span>案例中心</span></a></li>
-                    <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
-                    <li class="item"><a href="#about_us"><span>关于银橙</span></a></li>
-                    <li class="item"><a href="#investor_relations"><span>投资者关系</span></a></li>
-                </ul>
-                <div class="sns">
-                    <a href="javascript:void(0);" class="sns-wx" title="官方微信"><!--<span>官方微信</span>--></a>
+        </div>
+    </div>
+
+    <div id="page_list">
+        <!--首页-->
+        <div class="contentener" data-contentener data-type="home" marginbotm>
+            <div class="banner">
+                <!--<img src="./static/images/banner.png" alt="" class="bg">-->
+                <p class="text">
+                    <img src="./static/images/banner_text.png" alt="">
+                    <a href="#case_center" class="btn"></a>
+                </p>
+                <img src="./static/images/xiajt.png" alt="" class="down">
+            </div>
+            <div class="mobel baibg">
+                <div class="top"><img src="./static/images/yewu_tit.png" alt=""></div>
+                <div class="main flex">
+                    <div class="sector">
+                        <div class="text_main hover_on">
+                            <h4 class="title spot">智橙移动</h4>
+                            <p class="text">领先的信息流广告投放平台，基于主流媒体资源和<br>大数据分析的能力，高效实现营销目标。</p>
+                            <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
+                        </div>
+                        <div class="text_main hover_on">
+                            <h4 class="title spot">新零售</h4>
+                            <p class="text">乐橙互联科技有限公司旗下拥有新零售及星橙互联<br>两大业务板块，形成新零售、新媒体整合新格局。</p>
+                            <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="center"><img src="./static/images/yew_tu.jpg" alt=""></div>
+                    <div class="sector">
+                        <div class="text_main hover_on">
+                            <h4 class="title spot">百橙联盟</h4>
+                            <p class="text">卓越的流量变现平台，基于整合媒体和挖掘流量价<br>值的能力，全面提升流量收益。</p>
+                            <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
+                        </div>
+                        <div class="text_main hover_on">
+                            <h4 class="title spot">广橙代理</h4>
+                            <p class="text">代理30+主流互联网媒体，整合跨屏资源优势，为<br>广告主提供一站式互联网营销服务。</p>
+                            <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#business_modules" class="btn more">更多业务</a>
+            </div>
+            <div class="mobel case_mobel huibg">
+                <div class="top"><img src="./static/images/anli_tit.png" alt=""></div>
+                <div class="main">
+                    <div id="casebox" class="clear">
+                        <div class="left">
+                            <ul id="head_list" class="clear">
+                                <li class="headimg" data-index="0"><img src="./static/images/anli_tu1.jpg" alt="" width="240" height="160"></li>
+                                <li class="headimg" data-index="1"><img src="./static/images/anli_tu2.jpg" alt="" width="240" height="160"></li>
+                                <li class="headimg" data-index="2"><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li>
+                                <br>
+                                <li class="headimg" data-index="3"><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
+                                <li class="headimg" data-index="4"><img src="./static/images/anli_tu5.jpg" alt="" width="375" height="160"></li>
+                            </ul>
+                            <a href="#case_center" class="link">去看更多案例&nbsp;&gt;</a>
+                        </div>
+                        <div id="menu_content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobel baibg">
+                <div class="top"><img src="./static/images/huoban_tit.png" alt=""></div>
+                <div class="main" style="position: relative;height: 200px;">
+                    <div id="huoban1" style="height: 200px;width: 1200px;position: absolute;">
+                        <img src="./static/images/huoban.png" alt="">
+                    </div>
+                    <div id="huoban2" style="background: url(./static/images/huoban_active.png) #fff;">
+                    </div>
+                </div>
+            </div>
+            <div class="mobel contact">
+                <!--<img src="./static/images/lianxi_bg.png" alt="" class="bg">-->
+                <div class="cont">
+                    <img src="./static/images/shangjiant.png" alt="" class="upper">
+                    <div class="top"><img src="./static/images/lianxi_tit.png" alt=""></div>
+                    <div class="main">
+                        <p><span class="left"><img src="./static/images/diz.png" alt="">地址：</span><span class="right">上海市&nbsp;徐汇区&nbsp;漕河泾创意园区桂平路481号19栋6层</span></p>
+                        <p><span class="left"><img src="./static/images/cz.png" alt="">传真：</span><span class="right">021-33681336</span></p>
+                        <p><span class="left"><img src="./static/images/dh.png" alt="">电话：</span><span class="right">021-64851212</span></p>
+                        <a href="#about_us" class="kongbtn join">加入银橙</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div id="page_list">
-            <!--首页-->
-            <div class="contentener" data-contentener data-type="home" marginbotm>
-                <div class="banner">
-                    <!--<img src="./static/images/banner.png" alt="" class="bg">-->
-                    <p class="text">
-                        <img src="./static/images/banner_text.png" alt="">
-                        <a href="#case_center" class="btn"></a>
-                    </p>
-                    <img src="./static/images/xiajt.png" alt="" class="down">
+        <!--业务板块-->
+        <div class="contentener" id="contentener" data-contentener data-type="business_modules" margintop marginbotm>
+            <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
+            <div class="sector_cont baibg">
+                <div class="main clear zhicheng">
+                    <div class="briefing_text fl hover_on">
+                        <h4 class="title spot">智橙移动</h4>
+                        <p class="text">
+                            国内领先的信息流广告投放平台，2016年10月31日，银橙传媒智橙移动V3全新上线，智橙V3是基于原2.0版本基础上的又一次<span class="lan">全面升级</span>，日覆盖<span class="lan">9.5亿+</span>移动终端，<span class="lan">50亿+</span>广告展现，<span class="lan">2000+</span>国内主流APP资源，4000+行业标签，<span class="lan">5000+</span>用户标签，从流量、数据、技术等方面进行全方位的优化，七大核心优势，专注服务于各大广告主，<span class="lan">大程度提升</span>广告效果和投资回报率。
+                        </p>
+                        <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
+                    </div>
+                    <div class="imgright fr">
+                        <img src="./static/images/ywytop1_01.png" alt="" class="one">
+                        <img src="./static/images/ywytop1_02.png" alt="" class="two">
+                    </div>
                 </div>
-                <div class="mobel baibg">
-                    <div class="top"><img src="./static/images/yewu_tit.png" alt=""></div>
-                    <div class="main flex">
-                        <div class="sector">
-                            <div class="text_main hover_on">
-                                <h4 class="title spot">智橙移动</h4>
-                                <p class="text">领先的信息流广告投放平台，基于主流媒体资源和<br>大数据分析的能力，高效实现营销目标。</p>
-                                <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
-                            </div>
-                            <div class="text_main hover_on">
-                                <h4 class="title spot">新零售</h4>
-                                <p class="text">乐橙互联科技有限公司旗下拥有新零售及星橙互联<br>两大业务板块，形成新零售、新媒体整合新格局。</p>
-                                <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
-                            </div>
-                        </div>
-                        <div class="center"><img src="./static/images/yew_tu.jpg" alt=""></div>
-                        <div class="sector">
-                            <div class="text_main hover_on">
-                                <h4 class="title spot">百橙联盟</h4>
-                                <p class="text">卓越的流量变现平台，基于整合媒体和挖掘流量价<br>值的能力，全面提升流量收益。</p>
-                                <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
-                            </div>
-                            <div class="text_main hover_on">
-                                <h4 class="title spot">广橙代理</h4>
-                                <p class="text">代理30+主流互联网媒体，整合跨屏资源优势，为<br>广告主提供一站式互联网营销服务。</p>
-                                <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
-                            </div>
+            </div>
+            <div class="sector_cont huibg">
+                <div class="main clear baicheng">
+                    <div class="briefing_text fr hover_on">
+                        <h4 class="title spot">百橙联盟</h4>
+                        <p class="text">
+                            银橙传媒旗下卓越的流量变现平台，通过整合、优化媒体方的库存广告位资源，将精细化库存流量按需分配给需求方，<span class="lan">大程度提高</span>广告位填充率。充分了解各类流量特征，依托实时广告投放优化技术、多维度数据实时反馈技术，结合丰富的广告展现形式，并通过多样化合作方式及售卖方式，使挖掘流量推广价值的过程变得<span class="lan">便捷高效</span>，实现流量<span class="lan">快速变现</span>，全面提升流量收益。
+                        </p>
+                        <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
+                    </div>
+                    <div class="imgright fl">
+                        <img src="./static/images/ywytop2_01.png" alt="" class="one">
+                        <img src="./static/images/ywytop2_02.png" alt="" class="two">
+                    </div>
+                </div>
+            </div>
+            <div class="sector_cont baibg">
+                <div class="main clear lingshou">
+                    <div class="briefing_text fl hover_on">
+                        <h4 class="title spot">新零售</h4>
+                        <p class="text">
+                            乐橙互联旗下拥有新零售及星橙互联两大业务板块。新零售业务已覆盖深圳、杭州、重庆、成都、苏州、安徽、南京、上海等多省市的高客流量优质场景，与新华社安徽分社、中华慈善总会、深圳软件产业基地等机构深度合作，积极拓展自动贩卖机、多媒体自助娱乐产品等业务。星橙互联为新零售终端机提供媒体支持，将线上、线下数据打通，进行<span class="lan">联动营销</span>，从而实现<span class="lan">品效合一</span>。
+                        </p>
+                        <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
+                    </div>
+                    <div class="imgright fr" id="guangcheng">
+                        <img src="./static/images/ywytop3_01.png" alt="" class="one">
+                        <img src="./static/images/ywytop3_02.png" alt="" class="two">
+                    </div>
+                </div>
+            </div>
+            <div class="sector_cont huibg">
+                <div class="main clear guangcheng">
+                    <div class="briefing_text fr hover_on">
+                        <h4 class="title spot">广橙代理</h4>
+                        <p class="text">
+                            <span class="lan">30+主流优质媒体</span>，各大门户效果平台，主流社交平台，排名前列垂直类APP，主流浏览器。银橙传媒先后代理腾讯社交广告、今日头条、搜狐汇算、新浪扶翼、微博粉丝通、网易新闻、百度信息流、VIVO、OPPO、小米等众多互联网主流媒体资源产品，整合跨屏资源优势，集结精英运营团队，为各行各业广告主提供<span class="lan">一站式互联网营销服务</span>。
+                        </p>
+                        <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
+                    </div>
+                    <div class="imgright fl">
+                        <img src="./static/images/ywytop4_01.png" alt="" class="one">
+                        <div class="imgbox">
+                            <img src="./static/images/ywytop4_02.png" alt="" class="img1"/>
+                            <img src="./static/images/ywytop4_02.png" alt="" class="img2"/>
+                            <img src="./static/images/ywytop4_02.png" alt="" class="img3"/>
+                            <img src="./static/images/ywytop4_02.png" alt="" class="img4"/>
+                            <img src="./static/images/ywytop4_02.png" alt="" class="img5"/>
                         </div>
                     </div>
-                    <a href="#business_modules" class="btn more">更多业务</a>
                 </div>
-                <div class="mobel case_mobel huibg">
-                    <div class="top"><img src="./static/images/anli_tit.png" alt=""></div>
+            </div>
+        </div>
+        <!--解决方案-->
+        <div class="contentener" data-contentener data-type="solution" margintop marginbotm>
+            <div class="sectortit"><img src="./static/images/any_tit.png" alt=""></div>
+            <div class="solution_box flex">
+                <div class="left">
+                    <div class="text_main hover_on">
+                        <h4 class="title spot">电商类客户</h4>
+                        <p class="text">通过全面市场分析，精准地为客户锁定目标用户群体并进行广告曝光，通过访客找回、算法、动态创意等技术找回高价值老客，并将新客引流至APP或官网，促进有效订单达成的同时<span class="lan">提升品牌知名度</span>。</p>
+                    </div>
+                    <div class="text_main hover_on">
+                        <h4 class="title spot">游戏类客户</h4>
+                        <p class="text">研究游戏产品及竞品情况，并通过DMP大数据分析潜在目标用户游戏全过程，找出其行为习惯及兴趣需求，获取利益点，并通过定制多样创意素材引流目标用户，<span class="lan">达成游戏下载及用户活跃</span>等需求。</p>
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="text_main hover_on">
+                        <h4 class="title spot">网服类客户</h4>
+                        <p class="text">精准锁定目标群体，引发其对产品的关注，同时让更多新用户知晓，提高目标网站的浏览量，促进目标<span class="lan">用户使用该产品或达成销售转化</span>的最终目的。</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="text_main hover_on">
+                        <h4 class="title spot">金融类客户</h4>
+                        <p class="text">从品牌定位、竞品情况、市场环境等，对品牌进行全方位分析，了解品牌需求及目标用户群体核心诉求，形成直击用户痛点的广告创意，并通过平台技术精准投放，<span class="lan">促使用户了解并使用推广产品</span>。</p>
+                    </div>
+                    <div class="text_main hover_on">
+                        <h4 class="title spot">工具类客户</h4>
+                        <p class="text">通过大数据追踪目标用户APP使用轨迹，筛选多类别高活跃+高关注度的APP，将不同的创意形式精准触达目标用户，引流至所推广产品，有效地<span class="lan">增加该产品的知名度</span>，提升使用率。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--案例中心-->
+        <div class="contentener" data-contentener data-type="case_center" margintop marginbotm>
+            <div class="sectortit case_tit">
+                <img src="./static/images/anzxy_tit.png" alt="">
+            </div>
+            <div class="yccm_popup_bodyText clear">
+
+            </div>
+        </div>
+        <!--合作伙伴-->
+        <div class="contentener" data-contentener data-type="partners" margintop marginbotm>
+            <div class="sectortit"><img src="./static/images/hzhb_tit.png" alt=""></div>
+            <div class="partners">
+                <div class="baibg">
                     <div class="main">
-                        <div id="casebox" class="clear">
-                            <div class="left">
-                                <ul id="head_list" class="clear">
-                                    <li class="headimg" data-index="0"><img src="./static/images/anli_tu1.jpg" alt="" width="240" height="160"></li>
-                                    <li class="headimg" data-index="1"><img src="./static/images/anli_tu2.jpg" alt="" width="240" height="160"></li>
-                                    <li class="headimg" data-index="2"><img src="./static/images/anli_tu3.jpg" alt="" width="240" height="160"></li>
-                                    <br>
-                                    <li class="headimg" data-index="3"><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
-                                    <li class="headimg" data-index="4"><img src="./static/images/anli_tu5.jpg" alt="" width="375" height="160"></li>
-                                </ul>
-                                <a href="#case_center" class="link">去看更多案例&nbsp;&gt;</a>
+                        <p class="title">广告主</p>
+                        <div class="imgbody" style="height: 967px;">
+                            <div id="adzhu1" style="height: 967px;width: 1200px;position: relative;">
+                                <img src="./static/images/guanggaozhu.png" alt="" width="100%">
                             </div>
-                            <div id="menu_content">
+                            <div id="adzhu2" style="background: url('./static/images/guanggaozhu_active.png')">
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mobel baibg">
-                    <div class="top"><img src="./static/images/huoban_tit.png" alt=""></div>
-                    <div class="main" style="position: relative;height: 200px;">
-                        <div id="huoban1" style="height: 200px;width: 1200px;position: absolute;">
-                            <img src="./static/images/huoban.png" alt="">
-                        </div>
-                        <div id="huoban2" style="background: url(./static/images/huoban_active.png) #fff;">
-                        </div>
-                    </div>
-                </div>
-                <div class="mobel contact">
-                    <!--<img src="./static/images/lianxi_bg.png" alt="" class="bg">-->
-                    <div class="cont">
-                        <img src="./static/images/shangjiant.png" alt="" class="upper">
-                        <div class="top"><img src="./static/images/lianxi_tit.png" alt=""></div>
-                        <div class="main">
-                            <p><span class="left"><img src="./static/images/diz.png" alt="">地址：</span><span class="right">上海市&nbsp;徐汇区&nbsp;漕河泾创意园区桂平路481号19栋6层</span></p>
-                            <p><span class="left"><img src="./static/images/cz.png" alt="">传真：</span><span class="right">021-33681336</span></p>
-                            <p><span class="left"><img src="./static/images/dh.png" alt="">电话：</span><span class="right">021-64851212</span></p>
-                            <a href="#about_us" class="kongbtn join">加入银橙</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--业务板块-->
-            <div class="contentener" id="contentener" data-contentener data-type="business_modules" margintop marginbotm>
-                <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
-                <div class="sector_cont baibg">
-                    <div class="main clear zhicheng">
-                        <div class="briefing_text fl hover_on">
-                            <h4 class="title spot">智橙移动</h4>
-                            <p class="text">
-                                国内领先的信息流广告投放平台，2016年10月31日，银橙传媒智橙移动V3全新上线，智橙V3是基于原2.0版本基础上的又一次<span class="lan">全面升级</span>，日覆盖<span class="lan">9.5亿+</span>移动终端，<span class="lan">50亿+</span>广告展现，<span class="lan">2000+</span>国内主流APP资源，4000+行业标签，<span class="lan">5000+</span>用户标签，从流量、数据、技术等方面进行全方位的优化，七大核心优势，专注服务于各大广告主，<span class="lan">大程度提升</span>广告效果和投资回报率。
-                            </p>
-                            <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
-                        </div>
-                        <div class="imgright fr">
-                            <img src="./static/images/ywytop1_01.png" alt="" class="one">
-                            <img src="./static/images/ywytop1_02.png" alt="" class="two">
-                        </div>
-                    </div>
-                </div>
-                <div class="sector_cont huibg">
-                    <div class="main clear baicheng">
-                        <div class="briefing_text fr hover_on">
-                            <h4 class="title spot">百橙联盟</h4>
-                            <p class="text">
-                                银橙传媒旗下卓越的流量变现平台，通过整合、优化媒体方的库存广告位资源，将精细化库存流量按需分配给需求方，<span class="lan">大程度提高</span>广告位填充率。充分了解各类流量特征，依托实时广告投放优化技术、多维度数据实时反馈技术，结合丰富的广告展现形式，并通过多样化合作方式及售卖方式，使挖掘流量推广价值的过程变得<span class="lan">便捷高效</span>，实现流量<span class="lan">快速变现</span>，全面提升流量收益。
-                            </p>
-                            <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
-                        </div>
-                        <div class="imgright fl">
-                            <img src="./static/images/ywytop2_01.png" alt="" class="one">
-                            <img src="./static/images/ywytop2_02.png" alt="" class="two">
-                        </div>
-                    </div>
-                </div>
-                <div class="sector_cont baibg">
-                    <div class="main clear lingshou">
-                        <div class="briefing_text fl hover_on">
-                            <h4 class="title spot">新零售</h4>
-                            <p class="text">
-                                乐橙互联旗下拥有新零售及星橙互联两大业务板块。新零售业务已覆盖深圳、杭州、重庆、成都、苏州、安徽、南京、上海等多省市的高客流量优质场景，与新华社安徽分社、中华慈善总会、深圳软件产业基地等机构深度合作，积极拓展自动贩卖机、多媒体自助娱乐产品等业务。星橙互联为新零售终端机提供媒体支持，将线上、线下数据打通，进行<span class="lan">联动营销</span>，从而实现<span class="lan">品效合一</span>。
-                            </p>
-                            <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
-                        </div>
-                        <div class="imgright fr" id="guangcheng">
-                            <img src="./static/images/ywytop3_01.png" alt="" class="one">
-                            <img src="./static/images/ywytop3_02.png" alt="" class="two">
-                        </div>
-                    </div>
-                </div>
-                <div class="sector_cont huibg">
-                    <div class="main clear guangcheng">
-                        <div class="briefing_text fr hover_on">
-                            <h4 class="title spot">广橙代理</h4>
-                            <p class="text">
-                                <span class="lan">30+主流优质媒体</span>，各大门户效果平台，主流社交平台，排名前列垂直类APP，主流浏览器。银橙传媒先后代理腾讯社交广告、今日头条、搜狐汇算、新浪扶翼、微博粉丝通、网易新闻、百度信息流、VIVO、OPPO、小米等众多互联网主流媒体资源产品，整合跨屏资源优势，集结精英运营团队，为各行各业广告主提供<span class="lan">一站式互联网营销服务</span>。
-                            </p>
-                            <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
-                        </div>
-                        <div class="imgright fl">
-                            <img src="./static/images/ywytop4_01.png" alt="" class="one">
-                            <div class="imgbox">
-                                <img src="./static/images/ywytop4_02.png" alt="" class="img1"/>
-                                <img src="./static/images/ywytop4_02.png" alt="" class="img2"/>
-                                <img src="./static/images/ywytop4_02.png" alt="" class="img3"/>
-                                <img src="./static/images/ywytop4_02.png" alt="" class="img4"/>
-                                <img src="./static/images/ywytop4_02.png" alt="" class="img5"/>
+                <div class="huibg">
+                    <div class="main">
+                        <p class="title">媒体资源</p>
+                        <div class="imgbody" style="height: 1332px;">
+                            <div id="mediazhu1" style="height: 1332px;width: 1200px;position: relative;">
+                                <img src="./static/images/meitizy.png" alt="" width="100%">
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--解决方案-->
-            <div class="contentener" data-contentener data-type="solution" margintop marginbotm>
-                <div class="sectortit"><img src="./static/images/any_tit.png" alt=""></div>
-                <div class="solution_box flex">
-                    <div class="left">
-                        <div class="text_main hover_on">
-                            <h4 class="title spot">电商类客户</h4>
-                            <p class="text">通过全面市场分析，精准地为客户锁定目标用户群体并进行广告曝光，通过访客找回、算法、动态创意等技术找回高价值老客，并将新客引流至APP或官网，促进有效订单达成的同时<span class="lan">提升品牌知名度</span>。</p>
-                        </div>
-                        <div class="text_main hover_on">
-                            <h4 class="title spot">游戏类客户</h4>
-                            <p class="text">研究游戏产品及竞品情况，并通过DMP大数据分析潜在目标用户游戏全过程，找出其行为习惯及兴趣需求，获取利益点，并通过定制多样创意素材引流目标用户，<span class="lan">达成游戏下载及用户活跃</span>等需求。</p>
-                        </div>
-                    </div>
-                    <div class="center">
-                        <div class="text_main hover_on">
-                            <h4 class="title spot">网服类客户</h4>
-                            <p class="text">精准锁定目标群体，引发其对产品的关注，同时让更多新用户知晓，提高目标网站的浏览量，促进目标<span class="lan">用户使用该产品或达成销售转化</span>的最终目的。</p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="text_main hover_on">
-                            <h4 class="title spot">金融类客户</h4>
-                            <p class="text">从品牌定位、竞品情况、市场环境等，对品牌进行全方位分析，了解品牌需求及目标用户群体核心诉求，形成直击用户痛点的广告创意，并通过平台技术精准投放，<span class="lan">促使用户了解并使用推广产品</span>。</p>
-                        </div>
-                        <div class="text_main hover_on">
-                            <h4 class="title spot">工具类客户</h4>
-                            <p class="text">通过大数据追踪目标用户APP使用轨迹，筛选多类别高活跃+高关注度的APP，将不同的创意形式精准触达目标用户，引流至所推广产品，有效地<span class="lan">增加该产品的知名度</span>，提升使用率。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--案例中心-->
-            <div class="contentener" data-contentener data-type="case_center" margintop marginbotm>
-                <div class="sectortit case_tit">
-                    <img src="./static/images/anzxy_tit.png" alt="">
-                </div>
-                <div class="yccm_popup_bodyText clear">
+                            <div id="mediazhu2" style="background: url('./static/images/meitizy_active.png')">
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!--合作伙伴-->
-            <div class="contentener" data-contentener data-type="partners" margintop marginbotm>
-                <div class="sectortit"><img src="./static/images/hzhb_tit.png" alt=""></div>
-                <div class="partners">
-                    <div class="baibg">
-                        <div class="main">
-                            <p class="title">广告主</p>
-                            <div class="imgbody" style="height: 967px;">
-                                <div id="adzhu1" style="height: 967px;width: 1200px;position: relative;">
-                                    <img src="./static/images/guanggaozhu.png" alt="" width="100%">
-                                </div>
-                                <div id="adzhu2" style="background: url('./static/images/guanggaozhu_active.png')">
-
-                                </div>
+                <div class="baibg">
+                    <div class="main">
+                        <p class="title">代理资源</p>
+                        <div class="imgbody" style="height:362px;">
+                            <div id="agentzy1" style="height: 362px;width: 1200px;position: relative;">
+                                <img src="./static/images/dailizy.png" alt="" width="100%">
                             </div>
-                        </div>
-                    </div>
-                    <div class="huibg">
-                        <div class="main">
-                            <p class="title">媒体资源</p>
-                            <div class="imgbody" style="height: 1332px;">
-                                <div id="mediazhu1" style="height: 1332px;width: 1200px;position: relative;">
-                                    <img src="./static/images/meitizy.png" alt="" width="100%">
-                                </div>
-                                <div id="mediazhu2" style="background: url('./static/images/meitizy_active.png')">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="baibg">
-                        <div class="main">
-                            <p class="title">代理资源</p>
-                            <div class="imgbody" style="height:362px;">
-                                <div id="agentzy1" style="height: 362px;width: 1200px;position: relative;">
-                                    <img src="./static/images/dailizy.png" alt="" width="100%">
-                                </div>
-                                <div id="agentzy2" style="background: url('./static/images/dailizy_active.png')"></div>
-                            </div>
+                            <div id="agentzy2" style="background: url('./static/images/dailizy_active.png')"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--关于银橙-->
-            <div class="contentener" data-contentener data-type="about_us" margintop marginbotm>
-                <div class="sectortit about_tit clear">
-                    <img src="./static/images/gyyc_tit.png" alt="">
-                    <ul class="about_menu flex" id="about_menu">
-                        <li class="active" data-type="1">招兵买马</li>
-                        <li data-type="2">企业文化</li>
-                        <li data-type="3">企业历程</li>
-                        <li data-type="4">企业荣誉</li>
-                        <li data-type="5">创始人团队</li>
-                    </ul>
-                </div>
-                <div id="aboutlist">
-                    <div class="about" data-type="1">
-                        <div class="top huibg">
-                            <div class="slogan">
-                                <div class="left"><img src="./static/images/xrtu.jpg" alt=""></div>
-                                <div class="right">
-                                    <h3><span>简单</span><span>信任</span><span class="yellow">正能量</span></h3>
-                                    <p>欢迎加入我们！<br>
-                                        做一个热爱工作、快乐成长、简单生活、友爱家人的快乐“橙子”！
-                                    </p>
-                                </div>
+        </div>
+        <!--关于银橙-->
+        <div class="contentener" data-contentener data-type="about_us" margintop marginbotm>
+            <div class="sectortit about_tit clear">
+                <img src="./static/images/gyyc_tit.png" alt="">
+                <ul class="about_menu flex" id="about_menu">
+                    <li class="active" data-type="1">招兵买马</li>
+                    <li data-type="2">企业文化</li>
+                    <li data-type="3">企业历程</li>
+                    <li data-type="4">企业荣誉</li>
+                    <li data-type="5">创始人团队</li>
+                </ul>
+            </div>
+            <div id="aboutlist">
+                <div class="about" data-type="1">
+                    <div class="top huibg">
+                        <div class="slogan">
+                            <div class="left"><img src="./static/images/xrtu.jpg" alt=""></div>
+                            <div class="right">
+                                <h3><span>简单</span><span>信任</span><span class="yellow">正能量</span></h3>
+                                <p>欢迎加入我们！<br>
+                                    做一个热爱工作、快乐成长、简单生活、友爱家人的快乐“橙子”！
+                                </p>
                             </div>
                         </div>
-                        <div class="main">
-                            <ul id="nav_dot" class="nav_dot2">
-                                <li>
-                                    <div class="recommend">
-                                        java开发经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                    </div>
+                    <div class="main">
+                        <ul id="nav_dot" class="nav_dot2">
+                            <li>
+                                <div class="recommend">
+                                    java开发经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责广告平台相关后台业务系统的设计和核心代码开发，不断提升用户体验。
 2、负责核心技术问题的攻关，架构设计，系统优化，指导项目组成员的开发工作。
 3、构建高可靠、易扩展、高效的广告平台，推动业务持续发展。
 4、负责跨部门的协调与沟通。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">岗位要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">岗位要求：</span>
+                                        <pre>
 1、本科以上学历，计算机相关专业背景毕业5年以上，丰富的项目经验；
 2、扎实的Java编程基础，熟悉面向对象设计及开发，熟悉常见的设计模式以及运用；
 3、熟练掌握Spring/Struts/MyBatis或其他主流JAVA框架，会使用HTML、JQuery、JS等；
@@ -335,26 +335,26 @@
 9、较强的学习能力和解决问题的能力，良好的需求归纳分析能力和文档编写能力、表达能力，具备强烈的责任心和团队合作的精神，思路清晰；
 10、有广告系统开发经验优先，有adx，dsp，dmp开发经验优先
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        大数据高级开发工程师<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">工作职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    大数据高级开发工程师<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">工作职责：</span>
+                                        <pre>
 1、基于Hive， Spark，Hadoop的计算架构，进行大数据开发工作
 2、负责业务数据的收集，清洗，表设计及报表的开发和维护;
 3、负责数据平台的日常报表数据的监控、维护及优化;
 4、负责数据仓库etl流程优化及解决etl相关技术问题
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">工作要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">工作要求：</span>
+                                        <pre>
 1、本科以上学历，计算机专业背景毕业3年以上，丰富的项目经验；
 2、扎实的Java编程基础，熟悉面向对象设计及开发，熟悉常见的设计模式以及运用；
 3、熟悉Hadoop大数据生态圈，熟练使用HDFS、MapReduce、Hive、Hbase等
@@ -364,102 +364,102 @@
 7、有互联网工作经验和Hadoop数据处理经验者优先
 8、有广告行业开发经验优先
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        高级前端工程师<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    高级前端工程师<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、精通HTML、CSS、JavaScript、Ajax、jQuery等，熟悉HTML5，CSS3，及常见Mobile WEB方案或框架；
 2、精通至少一种JS库或者框架 - 精通的定义：研究过核心模块源代码/分析过框架的缺陷；
 3、具备前端开发能力--具备Vue.js/AngularJS等至少一种主流前端框架的使用经验；
 4、熟练掌握NodeJS、webpack、SASS等前端开发工具；
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、熟悉互联网公司开发流程；
 2、熟悉前端常见工具库和框架；
 3、对于前端性能、前端安全等有实际应用或处理经验；
 4、踏实、稳重，责任心较强，有上进心，学习能力较强。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        广橙代理-渠道经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    广橙代理-渠道经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责行业客户的开拓、维护、业务规划等工作
 2、负责完成全年销售额KPI，并制定相关年度、季度、月度目标落实
 3、定期开展客户活动、做好市场宣传工作
 4、配合公司新媒体业务的政策制定、目标建立、销售落实
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">岗位要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">岗位要求：</span>
+                                        <pre>
 1、大专以上学历
 2、互联网广告销售工作2年以上经验
 3、熟悉广点通、微信朋友圈、今日头条广告代理业务经验优先
 4、对电商、互联网金融、在线教育、品牌客户资源的优先
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        广橙代理-产品经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    广橙代理-产品经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责广告投放计划制定以及日常投放，提取广告数据报表，分析投放效果并优化投放策略；
 2、负责广告素材的协调，协助设计制定广告创意，并跟踪优化；
 3、和客户进行良好的沟通；
 3、有效完成上级所制定各项任务目标。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职要求：</span>
+                                        <pre>
 1、做事踏实负责有耐心；
 2、思路清晰，对数据敏感，有较强的数据分析能力；
 3、有主流广告交易平台或者腾讯广点通、FaceBook、今日头条、SEM等投放经验或者广告代理公司运营经验
 者优先；
 4、具备较强的沟通协调能力，善于学习新东西。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        行政司机<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    行政司机<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、主要负责公司车辆的日常驾驶及完成接待任务；
 2、负责公司车辆的管理，负责车辆的保险、保养、维护、违章、索赔、年检办理等，保持车辆整洁和车况良好；
 3、安全驾驶，正确执行驾驶操作规程，严格遵守交通法规；
 4、完成领导交办的其他工作并协助部门做力所能及的工作。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、相貌端正，沉着稳重，为人正直忠厚，具有良好的职业道德，无刑事犯罪记录等
 2、身高172cm以上，退伍军人及党员优先
 3、五年以上机动车驾龄；3年以上高管专职司机经验优先录取；
@@ -467,17 +467,17 @@
 5、对上海市区及周边交通路线熟悉
 6、注重礼仪礼貌，有团队协作精神
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        行政主管<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    行政主管<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、协助领导制定公司行政发展规划、计划以及预算方案；
 2、组织制定公司行政管理规章制度，并督促检查制度的贯彻、执行； 具有行政制度设计、实施管理的能力；
 3、负责公司固定资产的管理，保障资产的管理制度化、规范化；
@@ -486,76 +486,76 @@
 6、掌握行政系统工作情况和公司行政管理工作的运作情况，适时向上级汇报；
 7、发展和传播公司企业文化，协作完成公司大型会议与活动的组织策划；
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">岗位要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">岗位要求：</span>
+                                        <pre>
 1、大专及以上学历，专业不限，2年以上行政主管工作经验，有互联网行业工作经验、有驾照者优先；
 2、熟悉各类办公软件应用；
 3、思维缜密，沟通有思路和策略，做事肯思考，能够抓住关键点，落实到要实现的结果上，抗压能力强、职业素养较高。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        行政专员<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    行政专员<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责协助行政主管执行公司各项规章制度，追踪和维护公司各项规章制度的权威；
 2、负责公司车辆的管理和司机的管理工作，包括车辆调度、使用、维护保养，确保车辆及人身的安全；
 3、负责协助行政主管做好公司资产的管理、办公用品和劳保用品的管理工作,避免公司资产流失和浪费；
 4、负责公司各项活动的组织和活动正常进行；
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、大专以上学历有行政相关工作经验；
 2、有CI驾照且有较熟练的驾驶技术；
 3、有团队协作精神，能够合理的管理时间；
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        客服专员<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    客服专员<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责日常良好沟通处理各投诉渠道的客诉及合作咨询，并通知提醒对应运营人员/商务，直至有处理结果；
 2、在系统上做好客诉记录，并跟进结果，完成退货/退款，记录统计合作咨询信息；
 3、运用客户服务技巧解决客户的抱怨及投诉，提高客户满意度；
 4、每月分门别类汇总统计各投诉信息，为运营提供分析参考建议，为对账提供正确、原始的数据。
 5、领导临时交办的工作。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职要求：</span>
+                                        <pre>
 1、21-26岁之间，性别男女不限，大专学历及以上；
 2、有过客服工作经验，沟通表达能力强，普通话标准清晰，团队合作意识强；
 3、能吃苦，服从管理，有一定计算机基础，熟练使用office软件工具；
 4、有良好的客户服务意识及责任心，较强工作积极主动性，懂得自我调配时间，合理安排工作；
 5、身体健康，品行端正，无不良嗜好如抽烟等。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        媒介经理/总监<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    媒介经理/总监<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责公司广告平台和媒体方（资源方api对接）程序化对接
 2、独立完成竞品分析报告、媒介排期制定、协助采购谈判及监测报告；
 3、负责媒介关系的维护，保持与媒体的日常联络，随时掌控有关媒体动态的各类信息；
@@ -566,146 +566,146 @@
 8、了解各媒体效果情况,以精确的数据分析、严谨的逻辑推论为媒介策略的支撑;
 9、完成上级交给的其它媒介相关工作。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、具有DSP（精准投放广告）公司、4A公司资源者，互联网大媒体经验者优先；
 2、具有百度网盟，广点通从事媒介工作优先；
 3、具有高度责任感，和良好的抗压能力，能保持对专业工作的持续热情；
 4、具备良好的时间管理能力和变通能力；
 5、理解并认同企业文化；积极进取，有良好的客户服务意识。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        销售经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    销售经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、通过电话或网络拜访及客户活动等方式,搭建目标客户群；
 2、执行公司各项销售政策，完成销售指标；
 3、积极反馈客户和市场动态；
 4、在公司的一系列的培训及指引下，稳定长期发展。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">岗位要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">岗位要求：</span>
+                                        <pre>
 1、高中或以上学历，广告业或互联网行业销售优先；
 2、思路清晰，目标明确，积极主动，有责任心，能在一定强度下完成销售任务；
 3、性格外向.反应敏捷.表达能力强，具有较强的沟通能力及谈判技巧；
 4、熟练使用网络及办公软件；
 5、欢迎优秀愿意挑战自己的优秀应届毕业生。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        广告销售经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    广告销售经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责互联网广告业务的推广及销售，完成销售任务；
 2、独立开发客户，按照专业化、标准化的销售流程跟进目标客户；
 3、准确把握及分析客户需求，为客户提供最具针对性的产品及服务；
 4、与公司其他部门协作，维护客户和公司之间的广告合作关系。
 5、有4A公司经验优先，有互联网相关客户资源、广告、品牌客户资源优先。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、大专以上学历，市场营销、广告、传媒专业优先；
 2、具有广告销售经验，有客户资源者优先；
 3、具有广告行业相关的策划能力、客户分析能力和市场判断力；
 4、能够独立完成从市场开发、谈判到销售服务的各项销售工作；
 5、善于与人沟通，表达能力强，有良好的团队精神。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        商务经理<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    商务经理<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责推广赠送小型饮料机；
 2、日常的的推广和渠道开发工作，饮料机的安装业务介绍；
 3、执行公司制度，完成公司下达的任务。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、学历不限，想要从事销售工作；
 2、具备良好的沟通能力，有上进心和良好的心理素质；
 3、熟悉上海各区域路线，能够吃苦耐劳
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">薪资待遇：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">薪资待遇：</span>
+                                        <pre>
 1、底薪+全勤奖+提成（综合工资6-8k）;
 2、完善的社保和福利待遇；
 3、公司作为自动售货机和无人零售行业的企业具有良好的行业前景，能够为员工提供良好的平台和发展。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        数据专员<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    数据专员<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、公司设备和产品的日常运营数据监测、采集、统计和分析，定期制作报表，为优化点位及运营提供数据支持和建议。
 2、通过数据统计分析及相关表单，监察各分公司、营业所的库存等数据，确保数据的准确性和合规性。
 3、每月在规定时间内按要求完成与供应商、代运营公司等的对账结算工作。
 4、数据档案材料管理。
 5、做好领导临时交办的工作。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、21-26岁之间，性别男女不限，本科学历及以上；
 2、有财务专业知识或会计工作经验优先，做过数据方面工作亦可，沟通表达能力强，团队合作意识强；
 3、能吃苦，服从管理，有一定计算机基础，熟练使用office软件工具；
 4、认真细心，有耐心及责任心，工作积极主动性强，懂得自我调配时间，合理安排工作；
 5、身体健康，品行端正，无不良嗜好如抽烟等；
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        项目总监<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    项目总监<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责公司广告项目管理
 2、负责领导广告项目计划的制定、跟踪和质量控制，及时发现并跟踪解决项目问题，有效控制项目风险，把控节点，确保项目按照计划并保证质量完成
 3、负责团队人员管理，负责项目资源的协调与组织，确保各项目参与人协同工作
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职资格：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职资格：</span>
+                                        <pre>
 1、本科以上学历，3年以上工作经验，具有丰富的项目经验；
 2、具备很强的沟通协调能力、执行能力、项目管理能力
 3、具有较高水平的沟通技巧，能够快速理解业务需求；
@@ -713,372 +713,372 @@
 5、工作责任心强, 独立工作能力强, 认真诚实、积极主动, 能适应紧张高强度的工作；
 6、熟悉互联网广告行业生态，熟悉adx，dsp，dmp优先考虑。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        运营专员<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    运营专员<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、负责与DSP广告投放优化和数据分析工作；
 2、负责线上推广方案的制定.计划.预算与执行等工作，并对方案效果进行监控与负责；
 3、掌握客户最新信息和需求，与客户保持良好沟通；
 4、实验其他DSP渠道，时刻关注ROI。
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职要求：</span>
+                                        <pre>
 1、本科及以上学历，DSP相关行业工作经验者优先；
 2、熟悉互联网广告，擅长媒介数据分析.媒体策略制定等；
 3、解DSP.广点通等主流投放渠道的投放方法及技巧，有过成功的推广案例者优先；
 4、思维敏捷，逻辑性强，工作风格细致认真，良好的服务意识和团队合作精神；
 5、责任心强，品行端正，有良好的沟通能力和成本意识。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="recommend">
-                                        招聘专员<i class="jiantou"></i>
-                                    </div>
-                                    <div class="list-item none">
-                                        <div class="cont flex">
-                                            <span class="left">岗位职责：</span>
-                                            <pre>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="recommend">
+                                    招聘专员<i class="jiantou"></i>
+                                </div>
+                                <div class="list-item none">
+                                    <div class="cont flex">
+                                        <span class="left">岗位职责：</span>
+                                        <pre>
 1、能够独立开展招聘模块的工作；
 2、根据需求，执行招聘计划，发布招聘信息、收集筛选简历，利用各种有效途径满足人才需求；
 3、进行各招聘岗位的面试安排及甄选；做好招聘效果的分析和招聘成果的跟踪；
 4、开发招聘渠道，维护公司人力储备库，做好招聘分析工作；
 </pre>
-                                        </div>
-                                        <div class="cont flex">
-                                            <span class="left">任职要求：</span>
-                                            <pre>
+                                    </div>
+                                    <div class="cont flex">
+                                        <span class="left">任职要求：</span>
+                                        <pre>
 1、专科及以上学历，1年左右的招聘工作经验优先；
 2、有亲和力，思路清晰、性格开朗，有较强的沟通能力；
 3、工作认真、细致，有责任心，内驱力强；
 4、熟练操作office工作软件；
 5、注重工作效率，善于学习，执行力强。
 </pre>
-                                        </div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about" data-type="2">
+                    <div class="top huibg">
+                        <div class="slogan">
+                            <div class="left"><img src="./static/images/qywh_tu.jpg" alt=""></div>
+                            <div class="right">
+                                <h3><span class="marg"><em class="yellow">银</em>品质&nbsp;&nbsp;价值</span><span><em class="yellow">橙</em>聚焦&nbsp;&nbsp;分享</span></h3>
+                                <p>定位于基于大数据的精准营销专家，致力于研发领先的互联网技术，着眼于创建国内优质的媒体资源，为客户创造高附加值，为员工营造高品质生活，为股东创造高投资回报，不断提升客户、员工、股东等多维价值体系。</p>
+                                <p>
+                                    聚焦互联网新媒体，与客户分享海量资源和精准用户，与员工分享企业成长中的工作生活乐趣，与股东分享商业合作利益，大数据信息时代，也是分享的时代，银橙传媒，国内互联网精准营销的领跑者，与合作伙伴共铸成功梦想！
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="about" data-type="2">
-                        <div class="top huibg">
-                            <div class="slogan">
-                                <div class="left"><img src="./static/images/qywh_tu.jpg" alt=""></div>
+                    <div class="main">
+                        <div class="bodyText clear">
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu1.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu2.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu3.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu4.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu5.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="yccm_group">
+                                <p class="img"><img src="./static/images/whtu6.jpg"/></p>
+                                <div class="yccm_text">活动照片</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about" data-type="3">
+                    <div class="huibg">
+                        <ul class="course_box clear">
+                            <li class="clear li_first">
+                                <div class="lcMask"></div>
+                                <div class="list_lef first hover_on">
+                                    <p class="top spot">2008年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            银橙正式启航，创立初期即获天使投资;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_lef second hover_on">
+                                    <p class="top spot">2009年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            银橙传媒CPC媒体系统上线，单日PV量3,000万+，覆盖逾500万互联网用户;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_lef third hover_on">
+                                    <p class="top spot">2010年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            银橙传媒CPC媒体系统上线，单日PV量3,000万+，覆盖逾500万互联网用户;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="clear li_second">
+                                <div class="lcMask"></div>
+                                <div class="list_rig first hover_on">
+                                    <p class="top spot">2011年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            广告供应方平台上线、广告需求方平台上线;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_rig second hover_on">
+                                    <p class="top spot">2012年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            YCloud大数据分析平台、ADPush精准营销平台上线，单日PV2.5亿，覆盖逾5,200万互联网用户;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_rig third hover_on">
+                                    <p class="top spot">2013年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            ADPush对接国内主流媒体，单日PV30亿+;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="clear li_third">
+                                <div class="lcMask"></div>
+                                <div class="list_lef first hover_on">
+                                    <p class="top spot">2014年</p>
+                                    <div class="bottom">
+                                        <div class="text_bord">
+                                            <div class="text">
+                                                2014.08北交所正式挂牌上市 发行证券代码 830999 橙Wi-Fi广告平台上线，实现资源独家竞争，单日PV突破70亿，移动端日均PV突破8亿;
+                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_lef second hover_on">
+                                    <p class="top spot">2015年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            着力开拓移动端数字营销业务，全面整合PC与移动端资源，为客户提供定制化广告服务;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_lef third hover_on">
+                                    <p class="top spot">2016年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            智橙原生广告投放平台全新升级，依托大数据分析、用户数据标签化，为广告主真正实现实时竞价自助投放;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="clear li_fourth">
+                                <div class="lcMask"></div>
+                                <div class="list_rig first hover_on">
+                                    <p class="top spot">2017年</p>
+                                    <div class="bottom">
+                                        <div class="text">
+                                            银橙传媒进军新零售行业，乐橙互联正式启航；星橙互动户外媒体广告交易平台上线;
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list_rig second">
+                                    <p class="top yellow">银橙未来</p>
+                                    <div class="bottom">
+                                        <div class="text yellow">
+                                            更多精彩
+                                            <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about" data-type="4">
+                    <div class="honor huibg">
+                        <div class="contented">
+                            <div class="ryMask"></div>
+                            <div class="list flex hover_on">
+                                <div class="left spot">
+                                    2017年&nbsp;荣誉
+                                </div>
                                 <div class="right">
-                                    <h3><span class="marg"><em class="yellow">银</em>品质&nbsp;&nbsp;价值</span><span><em class="yellow">橙</em>聚焦&nbsp;&nbsp;分享</span></h3>
-                                    <p>定位于基于大数据的精准营销专家，致力于研发领先的互联网技术，着眼于创建国内优质的媒体资源，为客户创造高附加值，为员工营造高品质生活，为股东创造高投资回报，不断提升客户、员工、股东等多维价值体系。</p>
-                                    <p>
-                                        聚焦互联网新媒体，与客户分享海量资源和精准用户，与员工分享企业成长中的工作生活乐趣，与股东分享商业合作利益，大数据信息时代，也是分享的时代，银橙传媒，国内互联网精准营销的领跑者，与合作伙伴共铸成功梦想！
-                                    </p>
+                                    <ul>
+                                        <li><span>荣获</span>奉贤区经发园区商会副理事长单位</li>
+                                        <li><span>荣获</span>新三板公司潜力企业榜</li>
+                                        <li><span>荣获</span>2017年度腾讯社交广告服务商</li>
+                                    </ul>
+                                    <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="main">
-                            <div class="bodyText clear">
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu1.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                            <div class="list flex hover_on">
+                                <div class="left spot">
+                                    2016年&nbsp;荣誉
                                 </div>
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu2.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                                <div class="right">
+                                    <ul>
+                                        <li><span>荣获</span>腾讯社交广告KA服务商</li>
+                                        <li class="hei"><span class="yellow">荣获</span>新三板最具成长潜力企业</li>
+                                        <li><span>荣获</span>2015中国新三板十佳公司</li>
+                                        <li><span>荣获</span>新三板创新百强</li>
+                                        <li><span>荣获</span>2016年度搜狐核心代理商</li>
+                                        <li><span>荣获</span>2016腾讯程序化广告交易平台合作伙伴</li>
+                                        <li><span>荣获</span>智橙DSP荣获年度最佳移动DSP平台奖</li>
+                                        <li><span>荣获</span>奉贤新经济园区企业联合会理事长单位</li>
+                                    </ul>
+                                    <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
                                 </div>
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu3.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="list flex hover_on">
+                                <div class="left spot">
+                                    2015年&nbsp;荣誉
                                 </div>
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu4.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                                <div class="right">
+                                    <ul>
+                                        <li><span>荣获</span>2015年优秀纳税企业。</li>
+                                        <li><span>荣获</span>2015年度核心网服务代理商。</li>
+                                        <li><span>荣获</span>华新奖年度最具成长性公司奖.</li>
+                                        <li><span>荣获</span>华新奖年度最佳做市企业表现奖.</li>
+                                    </ul>
+                                    <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
                                 </div>
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu5.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                            </div>
+                            <div class="list flex hover_on">
+                                <div class="left spot">
+                                    2013年&nbsp;荣誉
                                 </div>
-                                <div class="yccm_group">
-                                    <p class="img"><img src="./static/images/whtu6.jpg"/></p>
-                                    <div class="yccm_text">活动照片</div>
+                                <div class="right">
+                                    <ul>
+                                        <li><span>荣获</span>2013年优秀纳税企业。</li>
+                                    </ul>
+                                    <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="about" data-type="3">
-                        <div class="huibg">
-                            <ul class="course_box clear">
-                                <li class="clear li_first">
-                                    <div class="lcMask"></div>
-                                    <div class="list_lef first hover_on">
-                                        <p class="top spot">2008年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                银橙正式启航，创立初期即获天使投资;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_lef second hover_on">
-                                        <p class="top spot">2009年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                银橙传媒CPC媒体系统上线，单日PV量3,000万+，覆盖逾500万互联网用户;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_lef third hover_on">
-                                        <p class="top spot">2010年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                银橙传媒CPC媒体系统上线，单日PV量3,000万+，覆盖逾500万互联网用户;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="clear li_second">
-                                    <div class="lcMask"></div>
-                                    <div class="list_rig first hover_on">
-                                        <p class="top spot">2011年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                广告供应方平台上线、广告需求方平台上线;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_rig second hover_on">
-                                        <p class="top spot">2012年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                YCloud大数据分析平台、ADPush精准营销平台上线，单日PV2.5亿，覆盖逾5,200万互联网用户;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_rig third hover_on">
-                                        <p class="top spot">2013年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                ADPush对接国内主流媒体，单日PV30亿+;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="clear li_third">
-                                    <div class="lcMask"></div>
-                                    <div class="list_lef first hover_on">
-                                        <p class="top spot">2014年</p>
-                                        <div class="bottom">
-                                            <div class="text_bord">
-                                                <div class="text">
-                                                    2014.08北交所正式挂牌上市 发行证券代码 830999 橙Wi-Fi广告平台上线，实现资源独家竞争，单日PV突破70亿，移动端日均PV突破8亿;
-                                                    <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_lef second hover_on">
-                                        <p class="top spot">2015年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                着力开拓移动端数字营销业务，全面整合PC与移动端资源，为客户提供定制化广告服务;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_lef third hover_on">
-                                        <p class="top spot">2016年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                智橙原生广告投放平台全新升级，依托大数据分析、用户数据标签化，为广告主真正实现实时竞价自助投放;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="clear li_fourth">
-                                    <div class="lcMask"></div>
-                                    <div class="list_rig first hover_on">
-                                        <p class="top spot">2017年</p>
-                                        <div class="bottom">
-                                            <div class="text">
-                                                银橙传媒进军新零售行业，乐橙互联正式启航；星橙互动户外媒体广告交易平台上线;
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list_rig second">
-                                        <p class="top yellow">银橙未来</p>
-                                        <div class="bottom">
-                                            <div class="text yellow">
-                                                更多精彩
-                                                <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                </div>
+                <div class="about huibg clear" data-type="5">
+                    <div class="main clear" style="padding-top: 40px; width: 1140px;">
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr01.jpg"/></p>
+                            <h2 class="name">隋恒举<span>董事长</span></h2>
+                            <p class="text">从业经历：能源、非营利机构、互联网、财经公关、网络游戏、商务、互联网媒体。</p>
+                        </div>
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr02.jpg"/></p>
+                            <h2 class="name">王宇<span>CEO</span></h2>
+                            <p class="text">从业经历：用户平台系统研发、电信级网络系统集成、互联网平台技术、互联网传媒。</p>
+                        </div>
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr03.jpg"/></p>
+                            <h2 class="name">许敏<span>CMO</span></h2>
+                            <p class="text">从业经历：商务合作、渠道拓展、网络游戏运营、市场营销、互联网传媒。</p>
+                        </div>
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr04.jpg"/></p>
+                            <h2 class="name">彭文元<span>CTO</span></h2>
+                            <p class="text">从业经历：用户平台系统研发、互联网平台技术、互联网传媒。</p>
+                        </div>
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr05.jpg"/></p>
+                            <h2 class="name">张建平<span>副总裁</span></h2>
+                            <p class="text">从业经历：商务合作、渠道拓展、市场营销、互联网传媒。</p>
+                        </div>
+                        <div class="leader">
+                            <p class="img"><img src="./static/images/ldr06.jpg"/></p>
+                            <h2 class="name">孙峻峰<span>董秘&副总裁</span></h2>
+                            <p class="text">从业经历：传媒、投资、互联网媒体。</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--投资者关系-->
+        <div class="contentener" data-contentener data-type="investor_relations" margintop marginbotm>
+            <div class="sectortit about_tit"><img src="./static/images/tzzgx_tit.png" alt=""></div>
+            <div class="main huibg">
+                <div id="popup_7" class="notice_box">
+                    <div class="yc_news_top">
+                        <div class="list_up">临时公告</div>
+                        <div class="news_list clear">
+                            <ul id="investorLS">
+
+                            </ul>
+                            <!--<div class="pagebox">
+                                <span class="triangle-left"></span>
+                                <ul class="page">
+                                    <li>1</li>
+                                    <li class="active">2</li>
+                                </ul>
+                                <span class="triangle-right"></span>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="yc_news_bottom">
+                        <div class="list_up">定期公告</div>
+                        <div class="news_list">
+                            <ul id="investorDQ">
+
                             </ul>
                         </div>
                     </div>
-                    <div class="about" data-type="4">
-                        <div class="honor huibg">
-                            <div class="contented">
-                                <div class="ryMask"></div>
-                                <div class="list flex hover_on">
-                                    <div class="left spot">
-                                        2017年&nbsp;荣誉
-                                    </div>
-                                    <div class="right">
-                                        <ul>
-                                            <li><span>荣获</span>奉贤区经发园区商会副理事长单位</li>
-                                            <li><span>荣获</span>新三板公司潜力企业榜</li>
-                                            <li><span>荣获</span>2017年度腾讯社交广告服务商</li>
-                                        </ul>
-                                        <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="list flex hover_on">
-                                    <div class="left spot">
-                                        2016年&nbsp;荣誉
-                                    </div>
-                                    <div class="right">
-                                        <ul>
-                                            <li><span>荣获</span>腾讯社交广告KA服务商</li>
-                                            <li class="hei"><span class="yellow">荣获</span>新三板最具成长潜力企业</li>
-                                            <li><span>荣获</span>2015中国新三板十佳公司</li>
-                                            <li><span>荣获</span>新三板创新百强</li>
-                                            <li><span>荣获</span>2016年度搜狐核心代理商</li>
-                                            <li><span>荣获</span>2016腾讯程序化广告交易平台合作伙伴</li>
-                                            <li><span>荣获</span>智橙DSP荣获年度最佳移动DSP平台奖</li>
-                                            <li><span>荣获</span>奉贤新经济园区企业联合会理事长单位</li>
-                                        </ul>
-                                        <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="list flex hover_on">
-                                    <div class="left spot">
-                                        2015年&nbsp;荣誉
-                                    </div>
-                                    <div class="right">
-                                        <ul>
-                                            <li><span>荣获</span>2015年优秀纳税企业。</li>
-                                            <li><span>荣获</span>2015年度核心网服务代理商。</li>
-                                            <li><span>荣获</span>华新奖年度最具成长性公司奖.</li>
-                                            <li><span>荣获</span>华新奖年度最佳做市企业表现奖.</li>
-                                        </ul>
-                                        <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="list flex hover_on">
-                                    <div class="left spot">
-                                        2013年&nbsp;荣誉
-                                    </div>
-                                    <div class="right">
-                                        <ul>
-                                            <li><span>荣获</span>2013年优秀纳税企业。</li>
-                                        </ul>
-                                        <div class="yuan"><img src="./static/images/quan.png" alt=""></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about huibg clear" data-type="5">
-                        <div class="main clear" style="padding-top: 40px; width: 1140px;">
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr01.jpg"/></p>
-                                <h2 class="name">隋恒举<span>董事长</span></h2>
-                                <p class="text">从业经历：能源、非营利机构、互联网、财经公关、网络游戏、商务、互联网媒体。</p>
-                            </div>
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr02.jpg"/></p>
-                                <h2 class="name">王宇<span>CEO</span></h2>
-                                <p class="text">从业经历：用户平台系统研发、电信级网络系统集成、互联网平台技术、互联网传媒。</p>
-                            </div>
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr03.jpg"/></p>
-                                <h2 class="name">许敏<span>CMO</span></h2>
-                                <p class="text">从业经历：商务合作、渠道拓展、网络游戏运营、市场营销、互联网传媒。</p>
-                            </div>
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr04.jpg"/></p>
-                                <h2 class="name">彭文元<span>CTO</span></h2>
-                                <p class="text">从业经历：用户平台系统研发、互联网平台技术、互联网传媒。</p>
-                            </div>
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr05.jpg"/></p>
-                                <h2 class="name">张建平<span>副总裁</span></h2>
-                                <p class="text">从业经历：商务合作、渠道拓展、市场营销、互联网传媒。</p>
-                            </div>
-                            <div class="leader">
-                                <p class="img"><img src="./static/images/ldr06.jpg"/></p>
-                                <h2 class="name">孙峻峰<span>董秘&副总裁</span></h2>
-                                <p class="text">从业经历：传媒、投资、互联网媒体。</p>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
-            <!--投资者关系-->
-            <div class="contentener" data-contentener data-type="investor_relations" margintop marginbotm>
-                <div class="sectortit about_tit"><img src="./static/images/tzzgx_tit.png" alt=""></div>
-                <div class="main huibg">
-                    <div id="popup_7" class="notice_box">
-                        <div class="yc_news_top">
-                            <div class="list_up">临时公告</div>
-                            <div class="news_list clear">
-                                <ul id="investorLS">
-
-                                </ul>
-                                <!--<div class="pagebox">
-                                    <span class="triangle-left"></span>
-                                    <ul class="page">
-                                        <li>1</li>
-                                        <li class="active">2</li>
-                                    </ul>
-                                    <span class="triangle-right"></span>
-                                </div>-->
-                            </div>
-                        </div>
-                        <div class="yc_news_bottom">
-                            <div class="list_up">定期公告</div>
-                            <div class="news_list">
-                                <ul id="investorDQ">
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span>上海银橙文化传媒股份有限公司</span>银橙（上海）信息技术有限公司 Copyright（C）2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
-            </div>
+        </div>
+        <div class="footer">
+            <span>上海银橙文化传媒股份有限公司</span>银橙（上海）信息技术有限公司 Copyright（C）2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
         </div>
     </div>
+</div>
 
-    <!--案例中心弹框-->
-    <div id="popup">
-        <div class="yccm_client_top clear">
-            <span class="yccm_client_return" onclick="layer.closeAll()">&times;</span>
-        </div>
-        <div class="yccm_popup_body">
-
-        </div>
+<!--案例中心弹框-->
+<div id="popup">
+    <div class="yccm_client_top clear">
+        <span class="yccm_client_return" onclick="layer.closeAll()">&times;</span>
     </div>
+    <div class="yccm_popup_body">
+
+    </div>
+</div>
 
 </body>
 </html>

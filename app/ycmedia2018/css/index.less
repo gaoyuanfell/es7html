@@ -1,44 +1,52 @@
 
-.content{
+.content {
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
     overflow-x: auto;
 }
-.btn{
+
+.btn {
     width: 140px;
-    height:45px;
+    height: 45px;
     line-height: 45px;
     background: #4665c6;
     color: #fefefe;
-    border-radius:30px;
+    border-radius: 30px;
     font-size: 18px;
 }
-.kongbtn{
+
+.kongbtn {
     width: 140px;
-    height:45px;
+    height: 45px;
     line-height: 45px;
-    border:1px #ff9803 solid;
+    border: 1px #ff9803 solid;
     color: #ff9803;
-    border-radius:30px;
+    border-radius: 30px;
     font-size: 18px;
     text-align: center;
 }
-.baibg{
+
+.baibg {
     background: #fff;
 }
-.huibg{
+
+.huibg {
     background: #f7f8fc;
 }
-.lan{
+
+.lan {
     color: #4363c5;
 }
-.yellow{
+
+.yellow {
     color: #ff9700 !important;
 }
-.hei{
+
+.hei {
     color: #1a1a1a;
 }
-.top_nav{
+
+.top_nav {
     height: 90px;
     line-height: 90px;
     padding: 0 120px;
@@ -48,27 +56,27 @@
     z-index: 10;
     width: 100%;
     min-width: 1200px;
-    .logo{
+    .logo {
         float: left;
     }
-    .right{
+    .right {
         float: right;
-        .nav{
-            li{
+        .nav {
+            li {
                 margin: 0 2px;
-                a{
-                    color:rgba(255,255,255,0.5);
+                a {
+                    color: rgba(255, 255, 255, 0.5);
                     display: block;
-                    span{
+                    span {
                         padding: 0 14px;
                         position: relative;
                     }
                 }
             }
-            li.active{
-                a{
-                    color:#fff;
-                    span::before{
+            li.active {
+                a {
+                    color: #fff;
+                    span::before {
                         content: '';
                         background: url("../static/images/nav_active.png") no-repeat;
                         width: 23px;
@@ -76,15 +84,15 @@
                         background-size: 100% 100%;
                         display: inline-block;
                         position: absolute;
-                        left:0;
-                        top:-5px;
+                        left: 0;
+                        top: -5px;
                     }
                 }
             }
-            li:hover{
-                a{
-                    color:#fff;
-                    span::before{
+            li:hover {
+                a {
+                    color: #fff;
+                    span::before {
                         content: '';
                         background: url("../static/images/nav_active.png") no-repeat;
                         width: 23px;
@@ -92,26 +100,43 @@
                         background-size: 100% 100%;
                         display: inline-block;
                         position: absolute;
-                        left:0;
-                        top:-5px;
+                        left: 0;
+                        top: -5px;
                     }
                 }
             }
         }
-        .sns{
+        .sns {
             margin: auto;
             margin-left: 40px;
-            .sns-wx{
+            .sns-wx {
                 display: block;
                 width: 42px;
                 height: 42px;
                 background: url(../static/images/weix.png) center center;
                 background-size: contain;
+                position: relative;
+                span {
+                    background: url(../static/images/weixin.png) center left no-repeat;
+                    width: 105px;
+                    height: 111px;
+                    position: absolute;
+                    left: -31px;
+                    top: 45px;
+                    font-size: 0;
+                    display: none;
+                }
+            }
+            &:hover {
+                span {
+                    display: block;
+                }
             }
         }
     }
 }
-.contentener{
+
+.contentener {
     display: none;
     position: absolute;
     bottom: 0;
@@ -127,17 +152,21 @@
     contain: size style layout;
     min-width: 1200px;
 }
-.blocks{
+
+.blocks {
     display: block;
 }
-[margintop]{
+
+[margintop] {
     margin-top: 90px;
 }
-[marginbotm]{
+
+[marginbotm] {
     margin-bottom: 40px;
 }
+
 /*首页*/
-.banner{
+.banner {
     position: relative;
     padding-top: 53.7%;
     height: 0;
@@ -147,7 +176,7 @@
     min-height: 644px;
     background: url("../static/images/banner.png") no-repeat;
     background-size: 100%;
-    .text{
+    .text {
         width: 723px;
         height: 98px;
         margin: auto;
@@ -156,10 +185,10 @@
         left: 0;
         right: 0;
         z-index: 2;
-        img{
+        img {
             margin-bottom: 56px;
         }
-        .btn{
+        .btn {
             width: 140px;
             height: 45px;
             background: url("../static/images/btn.png") no-repeat;
@@ -167,32 +196,33 @@
             margin: auto;
         }
     }
-    .down{
+    .down {
         position: absolute;
-        bottom:18px;
+        bottom: 18px;
         margin-left: -13px;
-        animation:down 3s ease 0s infinite;
-        -webkit-animation:down 3s ease 0s infinite;
+        animation: down 3s ease 0s infinite;
+        -webkit-animation: down 3s ease 0s infinite;
     }
 }
-.mobel{
+
+.mobel {
     padding: 80px 0 100px 0;
     min-width: 1200px;
-    .top{
+    .top {
         margin-bottom: 80px;
     }
-    .main{
+    .main {
         width: 1170px;
         margin: auto;
         margin-bottom: 21px;
-        .sector{
+        .sector {
             margin-top: -20px;
         }
-        .center{
+        .center {
             position: relative;
             margin-right: 60px;
             margin-left: 25px;
-            &:before{
+            &:before {
                 content: '';
                 background: url("../static/images/yw_tudian.png") no-repeat;
                 width: 314px;
@@ -202,56 +232,58 @@
                 left: -19px;
                 top: -13px;
                 opacity: 0.25;
-                filter:alpha(opacity=25);
+                filter: alpha(opacity=25);
                 transition: opacity 1s;
             }
-            img{
+            img {
                 display: block;
             }
-            &:hover{
-                &:before{
+            &:hover {
+                &:before {
                     opacity: 1;
-                    filter:alpha(opacity=100);
+                    filter: alpha(opacity=100);
                     transition: opacity 1s;
                 }
             }
         }
     }
-    .more{
+    .more {
         display: block;
         margin: auto;
     }
 }
-.text_main{
+
+.text_main {
     width: 410px;
     height: 145px;
     text-align: left;
     line-height: 1.8;
-    .title{
+    .title {
         color: #343434;
         font-size: 22px;
         font-weight: 500;
         position: relative;
     }
-    .text{
+    .text {
         color: #333333;
         font-size: 16px;
         text-align: justify;
     }
-    .link{
+    .link {
         color: #ff9700;
         font-size: 16px;
         opacity: 0;
         transition: opacity 1s;
     }
-    &:hover{
-        .link{
+    &:hover {
+        .link {
             opacity: 1;
             transition: opacity 1s;
         }
     }
 }
-.contact{
+
+.contact {
     position: relative;
     padding: 0;
     padding-top: 33.1%;
@@ -264,40 +296,40 @@
     min-height: 422px;
     overflow: hidden;
     &:hover {
-        .main:before{
+        .main:before {
             opacity: 1;
-            filter:alpha(opacity=100);
+            filter: alpha(opacity=100);
             transition: opacity 1s;
         }
     }
-    .bg{
+    .bg {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
     }
-    .cont{
+    .cont {
         position: absolute;
         padding-top: 80px;
-        top:0;
+        top: 0;
         width: 100%;
         z-index: 2;
-        .upper{
+        .upper {
             position: absolute;
             top: 9px;
             margin-left: -12px;
-            animation:arrow 3s ease 0s infinite;
-            -webkit-animation:arrow 3s ease 0s infinite;
+            animation: arrow 3s ease 0s infinite;
+            -webkit-animation: arrow 3s ease 0s infinite;
         }
     }
-    .main{
+    .main {
         width: 270px;
         color: #736f93;
         margin: 0;
         font-size: 16px;
         position: relative;
-        left:260px;
-        &:before{
+        left: 260px;
+        &:before {
             content: '';
             background: url("../static/images/lianxi_dian.png") no-repeat;
             width: 342px;
@@ -307,45 +339,46 @@
             left: -65px;
             top: -45px;
             opacity: 0.25;
-            filter:alpha(opacity=25);
+            filter: alpha(opacity=25);
             transition: opacity 1s;
         }
-        p{
+        p {
             text-align: left;
-            margin-bottom:20px;
+            margin-bottom: 20px;
             display: table;
             width: 100%;
             position: relative;
             z-index: 3;
-            span{
+            span {
                 display: table-cell;
             }
-            .left{
+            .left {
                 white-space: nowrap;
                 width: 70px;
                 float: none;
-                top:0;
-                img{
+                top: 0;
+                img {
                     width: 22px;
-                    height:auto;
+                    height: auto;
                     display: inline-block;
                     vertical-align: middle;
                     margin-right: 10px;
                 }
             }
-            .right{
+            .right {
                 color: #fff;
             }
         }
-        .join{
+        .join {
             display: block;
             position: relative;
             z-index: 3;
         }
     }
 }
-.footer{
-    color:rgba(255,255,255,0.3);
+
+.footer {
+    color: rgba(255, 255, 255, 0.3);
     font-size: 14px;
     height: 40px;
     padding: 10px 0;
@@ -355,10 +388,11 @@
     width: 100%;
     bottom: 0;
     min-width: 1200px;
-    span{
+    span {
         margin-right: 20px;
     }
 }
+
 #casebox {
     #head_list {
         li {
@@ -366,11 +400,11 @@
             padding-left: 18px;
             padding-top: 12px;
             position: relative;
-            margin:0 4px 30px 4px;
-            &:nth-child(1){
+            margin: 0 4px 30px 4px;
+            &:nth-child(1) {
                 margin-left: 0;
             }
-            img{
+            img {
                 display: block;
             }
             &:before {
@@ -380,23 +414,23 @@
                 height: 131px;
                 background-size: 100%;
                 position: absolute;
-                left:0;
+                left: 0;
                 top: 0;
                 opacity: 0.25;
                 filter: alpha(opacity=25);
                 transition: opacity 1s;
             }
-            &:hover{
-                &:before{
+            &:hover {
+                &:before {
                     opacity: 1;
-                    filter:alpha(opacity=100);
+                    filter: alpha(opacity=100);
                     transition: opacity 1s;
                 }
             }
-            &.active{
-                &:before{
+            &.active {
+                &:before {
                     opacity: 1;
-                    filter:alpha(opacity=100);
+                    filter: alpha(opacity=100);
                     transition: opacity 1s;
                 }
             }
@@ -406,28 +440,28 @@
         position: relative;
         float: left;
         margin-left: 100px;
-        .imgtubox{
+        .imgtubox {
             width: 224px;
             height: 395px;
             float: left;
             left: 15px;
             top: 44px;
         }
-        .tulist{
-            img{
+        .tulist {
+            img {
                 width: 224px;
                 height: 395px;
             }
         }
-        .imgqh{
+        .imgqh {
             width: 253px;
-            height:500px;
+            height: 500px;
             background: url("../static/images/shoujike.png") no-repeat;
             background-size: 100% 100%;
         }
         .arrow {
             position: absolute;
-            top:0;
+            top: 0;
             z-index: 2;
             width: 40px;
             height: 494px;
@@ -448,13 +482,13 @@
     }
 }
 
-.case_mobel{
-    .left{
+.case_mobel {
+    .left {
         float: left;
         position: relative;
         width: 802px;
         top: 70px;
-        .link{
+        .link {
             color: #ff9700;
             font-size: 16px;
             position: absolute;
@@ -463,39 +497,39 @@
     }
 }
 
-
 /*业务板块*/
-.sectortit{
+.sectortit {
     text-align: left;
     padding-top: 99px;
     width: 1160px;
     margin: auto;
-    img{
+    img {
         display: inline-block;
     }
 }
-.sector_cont{
-    .main{
+
+.sector_cont {
+    .main {
         width: 1160px;
         margin: auto;
     }
-    .briefing_text{
+    .briefing_text {
         width: 500px;
         text-align: left;
         line-height: 1.8;
-        .link{
+        .link {
             color: #ff9700;
             font-size: 16px;
             opacity: 0;
             transition: opacity 1s;
         }
-        &:hover{
-            .link{
-               opacity: 1;
-               transition: opacity 1s;
+        &:hover {
+            .link {
+                opacity: 1;
+                transition: opacity 1s;
             }
         }
-        .title{
+        .title {
             text-align: left;
             font-size: 22px;
             color: #333333;
@@ -503,185 +537,188 @@
             position: relative;
             margin-bottom: 14px;
         }
-        .text{
+        .text {
             text-align: justify;
             font-size: 16px;
             color: #323232;
             margin-bottom: 12px;
-            span{
+            span {
                 font-size: 18px;
             }
         }
     }
 }
-.zhicheng{
+
+.zhicheng {
     padding-top: 34px;
     padding-bottom: 58px;
-    .briefing_text{
-        margin-top:90px;
+    .briefing_text {
+        margin-top: 90px;
     }
-    .imgright{
+    .imgright {
         width: 600px;
         height: 450px;
         margin: auto;
         position: relative;
-        .one{
+        .one {
             position: relative;
             z-index: 3;
             left: -34px;
-            animation:bounce 2s ease-in infinite;
-            -webkti-animation:bounce 2s ease-in infinite;
+            animation: bounce 2s ease-in infinite;
+            -webkti-animation: bounce 2s ease-in infinite;
         }
-        .two{
+        .two {
             position: absolute;
-            left:0;
-            top:87px;
-        }
-    }
-}
-.baicheng{
-    padding-top: 78px;
-    padding-bottom: 49px;
-    .briefing_text{
-        margin-top:60px;
-    }
-    .imgright{
-        width: 554px;
-        height: 409px;
-        margin: auto;
-        position: relative;
-        .one{
-            position: absolute;
-            z-index: 3;
-            right:0;
-            animation:bounce 2s ease-in infinite;
-            -webkti-animation:bounce 2s ease-in infinite;
-        }
-        .two{
-            position: absolute;
-            left:0;
-            top:90px;
+            left: 0;
+            top: 87px;
         }
     }
 }
 
-.lingshou{
-    padding-top: 62px;
-    padding-bottom: 28px;
-    .briefing_text{
-        margin-top:75px;
+.baicheng {
+    padding-top: 78px;
+    padding-bottom: 49px;
+    .briefing_text {
+        margin-top: 60px;
     }
-    .imgright{
+    .imgright {
         width: 554px;
         height: 409px;
         margin: auto;
         position: relative;
-        .one{
-            margin-top: 90px;
-            animation:bounce 2s ease-in infinite;
-            -webkti-animation:bounce 2s ease-in infinite;
+        .one {
+            position: absolute;
+            z-index: 3;
+            right: 0;
+            animation: bounce 2s ease-in infinite;
+            -webkti-animation: bounce 2s ease-in infinite;
         }
-        .two{
+        .two {
+            position: absolute;
+            left: 0;
+            top: 90px;
+        }
+    }
+}
+
+.lingshou {
+    padding-top: 62px;
+    padding-bottom: 28px;
+    .briefing_text {
+        margin-top: 75px;
+    }
+    .imgright {
+        width: 554px;
+        height: 409px;
+        margin: auto;
+        position: relative;
+        .one {
+            margin-top: 90px;
+            animation: bounce 2s ease-in infinite;
+            -webkti-animation: bounce 2s ease-in infinite;
+        }
+        .two {
             float: right;
             padding-right: 75px;
         }
     }
 }
-.guangcheng{
+
+.guangcheng {
     padding-top: 48px;
     padding-bottom: 48px;
-    .briefing_text{
-        margin-top:75px;
+    .briefing_text {
+        margin-top: 75px;
     }
-    .imgright{
+    .imgright {
         width: 554px;
         height: 409px;
         margin: auto;
         position: relative;
-        .imgbox{
+        .imgbox {
             position: absolute;
             z-index: 3;
             bottom: 0;
-            img{
+            img {
                 position: relative;
             }
-            .img1{
+            .img1 {
                 bottom: 32px;
                 left: 72px;
             }
-            .animat1{
-                animation:fadeInLeftBig 1.5s ease-in both;
-                -webkti-animation:fadeInLeftBig 1.5s ease-in both;
+            .animat1 {
+                animation: fadeInLeftBig 1.5s ease-in both;
+                -webkti-animation: fadeInLeftBig 1.5s ease-in both;
             }
-            .img2{
+            .img2 {
                 bottom: 21px;
                 left: 44px;
             }
-            .animat2{
-                animation:fadeInLeftBig 2s ease-in 0.5s both;
-                -webkti-animation:fadeInLeftBig 2s ease-in 0.5s both;
+            .animat2 {
+                animation: fadeInLeftBig 2s ease-in 0.5s both;
+                -webkti-animation: fadeInLeftBig 2s ease-in 0.5s both;
             }
-            .img3{
+            .img3 {
                 bottom: 10px;
                 left: 17px;
             }
-            .animat3{
-                animation:fadeInLeftBig 2s ease-in 1s both;
-                -webkti-animation:fadeInLeftBig 2s ease-in 1s both;
+            .animat3 {
+                animation: fadeInLeftBig 2s ease-in 1s both;
+                -webkti-animation: fadeInLeftBig 2s ease-in 1s both;
             }
-            .img4{
+            .img4 {
                 bottom: -1px;
                 left: -12px;
             }
-            .animat4{
-                animation:fadeInLeftBig 2s ease-in 1.5s both;
-                -webkti-animation:fadeInLeftBig 2s ease-in 1.5s both;
+            .animat4 {
+                animation: fadeInLeftBig 2s ease-in 1.5s both;
+                -webkti-animation: fadeInLeftBig 2s ease-in 1.5s both;
             }
-            .img5{
+            .img5 {
                 bottom: -12px;
                 left: -41px;
             }
-            .animat5{
-                animation:fadeInLeftBig 2s ease-in 2s both;
-                -webkti-animation:fadeInLeftBig 2s ease-in 2s both;
+            .animat5 {
+                animation: fadeInLeftBig 2s ease-in 2s both;
+                -webkti-animation: fadeInLeftBig 2s ease-in 2s both;
             }
         }
     }
 }
 
 /*解决方案*/
-.solution_box{
+.solution_box {
     background: url("../static/images/jjan_bg.png") no-repeat top center;
     background-size: 100%;
     width: 1160px;
     height: 836px;
     margin: auto;
     position: relative;
-    .text_main{
+    .text_main {
         width: 313px;
         height: auto;
         margin-bottom: 140px;
     }
-    .left{
+    .left {
         margin-top: 210px;
-        .text_main:last-child{
+        .text_main:last-child {
             margin-bottom: 0;
         }
     }
-    .center{
+    .center {
         margin-left: 100px;
         margin-right: 132px
     }
-    .right{
+    .right {
         margin-top: 220px;
-        .text_main:last-child{
+        .text_main:last-child {
             margin-bottom: 0;
         }
     }
 }
 
 /*案例中心*/
-.case_tit{
+.case_tit {
     margin-bottom: 70px;
 }
 
@@ -713,7 +750,7 @@
     padding-right: 40px;
     .arrow {
         position: absolute;
-        top:0;
+        top: 0;
         z-index: 2;
         width: 40px;
         height: 494px;
@@ -723,7 +760,7 @@
     }
     .prev {
         position: absolute;
-        right:322px;
+        right: 294px;
         font-size: 24px;
         color: rgba(255, 255, 255, .6);
     }
@@ -822,12 +859,10 @@ html {
     }
 }
 
-
-
-.yccm_popup_bodyText{
-    width:1160px;
-    margin:auto;
-    &:after{
+.yccm_popup_bodyText {
+    width: 1160px;
+    margin: auto;
+    &:after {
         content: "";
         display: inline-block;
         height: 0;
@@ -835,21 +870,21 @@ html {
         clear: both;
         visibility: hidden;
     }
-    .yccm_client_case_group{
-        width:346px;
-        margin:0 60px 70px 0;
+    .yccm_client_case_group {
+        width: 346px;
+        margin: 0 60px 70px 0;
         float: left;
         cursor: pointer;
-        .img{
+        .img {
             position: relative;
             width: 346px;
             height: 231px;
-            img{
+            img {
                 display: block;
                 width: 100%;
                 height: 100%;
             }
-            &:before{
+            &:before {
                 content: '';
                 background: url("../static/images/alzx_dian.png") no-repeat;
                 width: 352px;
@@ -859,35 +894,35 @@ html {
                 left: -20px;
                 top: -13px;
                 opacity: 0.25;
-                filter:alpha(opacity=25);
+                filter: alpha(opacity=25);
                 transition: opacity 1s;
             }
         }
-        .yccm_client_case_text{
+        .yccm_client_case_text {
             font-size: 22px;
             color: #323232;
             margin: 10px 0;
             text-align: left;
         }
-        .yccm_client_case_timetext{
+        .yccm_client_case_timetext {
             line-height: 1.5;
             font-size: 16px;
             color: #999999;
             text-align: left;
             position: relative;
-            span{
+            span {
                 float: left;
             }
-            span:nth-child(1){
+            span:nth-child(1) {
                 /*position: absolute;
                 left: 172px;*/
                 margin-right: 0.5rem;
             }
         }
-        &:nth-child(3n){
+        &:nth-child(3n) {
             margin-right: 0;
         }
-        .link{
+        .link {
             color: #ff9700;
             font-size: 16px;
             text-align: left;
@@ -896,45 +931,47 @@ html {
             opacity: 0;
             transition: opacity 1s;
         }
-        &:hover{
-            .img:before{
+        &:hover {
+            .img:before {
                 opacity: 1;
-                filter:alpha(opacity=100);
+                filter: alpha(opacity=100);
                 transition: opacity 1s;
             }
-            .link{
+            .link {
                 opacity: 1;
                 transition: opacity 1s;
             }
         }
     }
 }
-.layui-layer{
-    background:rgba(0,0,0,0.9);
+
+.layui-layer {
+    background: rgba(0, 0, 0, 0.9);
 }
+
 .layui-layer-shade {
     width: 100%;
     height: 100%;
     margin: 0;
-    background:none;
-    opacity: 0!important;
+    background: none;
+    opacity: 0 !important;
 }
 
 /*关于银橙*/
 /*招兵买马*/
-.slogan{
+.slogan {
     width: 1170px;
     margin: auto;
     padding: 36px 0 50px 0;
     display: table;
-    .left{
+    .left {
         display: table-cell;
         position: relative;
         padding-right: 96px;
-        padding-left:20px;
+        padding-left: 20px;
         padding-top: 13px;
         text-align: left;
-        &:before{
+        &:before {
             content: '';
             background: url("../static/images/xrtu_dian.png") no-repeat;
             width: 478px;
@@ -944,54 +981,55 @@ html {
             left: 0;
             top: 0;
             opacity: 0.25;
-            filter:alpha(opacity=25);
+            filter: alpha(opacity=25);
             transition: opacity 1s;
         }
     }
-    .right{
+    .right {
         display: table-cell;
         vertical-align: middle;
         text-align: left;
         color: #333;
-        h3{
+        h3 {
             font-weight: 500;
             font-size: 24px;
             margin-bottom: 12px;
-            span{
+            span {
                 margin-right: 18px;
             }
-            .marg{
+            .marg {
                 margin-right: 40px
             }
-            em{
+            em {
                 margin-right: 10px;
             }
         }
-        p{
+        p {
             line-height: 1.8;
             font-size: 16px;
             color: #666;
         }
     }
-    &:hover{
-        .left:before{
+    &:hover {
+        .left:before {
             opacity: 1;
-            filter:alpha(opacity=100);
+            filter: alpha(opacity=100);
             transition: opacity 1s;
         }
     }
 }
-#nav_dot{
-    li{
+
+#nav_dot {
+    li {
         border-bottom: 1px #e5e5e5 solid;
-        .recommend{
+        .recommend {
             height: 50px;
             line-height: 50px;
             text-align: left;
             font-size: 16px;
             color: #656565;
             position: relative;
-            .jiantou{
+            .jiantou {
                 display: inline-block;
                 border: 5px solid transparent;
                 border-top-color: #e5e5e5;
@@ -1000,61 +1038,62 @@ html {
                 float: right;
                 position: absolute;
                 right: 0;
-                top:50%;
-                transform:translate(0,-50%);
+                top: 50%;
+                transform: translate(0, -50%);
             }
         }
-        .list-item{
+        .list-item {
             padding: 20px 0;
             border-top: 1px #e5e5e5 solid;
-            .cont{
+            .cont {
                 text-align: left;
                 font-size: 14px;
                 color: #999999;
                 margin-bottom: 26px;
-                pre{
+                pre {
                     margin: 0;
                     line-height: 1.8;
                     font-size: 14px;
-                    font-family: Helvetica Neue,Calibri Light,Roboto,sans-serif;
+                    font-family: Helvetica Neue, Calibri Light, Roboto, sans-serif;
                 }
-                &:last-child{
+                &:last-child {
                     margin-bottom: 0;
                 }
-                .left{
-                    width:90px;
+                .left {
+                    width: 90px;
                     text-align: right;
                     margin-right: 5px;
                 }
             }
         }
     }
-    li.selected{
-        .jiantou{
+    li.selected {
+        .jiantou {
             border: 5px solid transparent;
-            border-bottom-color:#ff9700;
+            border-bottom-color: #ff9700;
         }
     }
 }
-.none{
+
+.none {
     display: none;
 }
 
 /*企业文化*/
-.bodyText{
-    width:1170px;
-    margin:auto;
+.bodyText {
+    width: 1170px;
+    margin: auto;
     padding-top: 80px;
-    .yccm_group{
-        width:350px;
-        margin:0 60px 70px 0;
+    .yccm_group {
+        width: 350px;
+        margin: 0 60px 70px 0;
         float: left;
         cursor: pointer;
-        .img{
+        .img {
             position: relative;
             padding-left: 20px;
             padding-top: 12px;
-            &:before{
+            &:before {
                 content: '';
                 background: url("../static/images/alzx_dian.png") no-repeat;
                 width: 352px;
@@ -1064,40 +1103,41 @@ html {
                 left: 0;
                 top: 0;
                 opacity: 0.25;
-                filter:alpha(opacity=25);
+                filter: alpha(opacity=25);
                 transition: opacity 1s;
             }
         }
-        &:nth-child(3n){
+        &:nth-child(3n) {
             margin-right: 0;
         }
-        &:hover{
-            .img:before{
+        &:hover {
+            .img:before {
                 opacity: 1;
-                filter:alpha(opacity=100);
+                filter: alpha(opacity=100);
                 transition: opacity 1s;
             }
-            .yccm_text{
+            .yccm_text {
                 color: #1a1a1a;
                 font-size: 16px;
             }
         }
-        .yccm_text{
+        .yccm_text {
             color: #666;
             font-size: 16px;
         }
     }
 }
+
 /*企业历程*/
-.course_box{
+.course_box {
     width: 1170px;
-    min-height:600px ;
+    min-height: 600px;
     margin: auto;
     padding-top: 99px;
     padding-bottom: 80px;
-    li{
+    li {
         position: relative;
-        .lcMask{
+        .lcMask {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -1108,106 +1148,106 @@ html {
             top: -7px;
         }
     }
-    .yuan{
-        img{
+    .yuan {
+        img {
             display: block;
         }
     }
-    .list_lef{
+    .list_lef {
         float: left;
         text-align: left;
         position: relative;
-        .top{
+        .top {
             position: relative;
             font-size: 22px;
             margin-bottom: 15px;
             color: #333333;
             font-weight: 500;
         }
-        .bottom{
+        .bottom {
             border-top: 1px #4564c6 solid;
             padding-top: 23px;
             padding-right: 126px;
             position: relative;
-            .text{
+            .text {
                 color: #666;
                 font-size: 16px;
                 width: 264px;
                 text-align: justify;
                 line-height: 1.5;
             }
-            .yuan{
-                background:#f7f8fc;
+            .yuan {
+                background: #f7f8fc;
                 position: absolute;
-                left:0;
-                top:-8px;
+                left: 0;
+                top: -8px;
                 padding: 0 8px;
             }
         }
     }
-    .list_rig{
+    .list_rig {
         float: right;
         text-align: left;
         position: relative;
-        .top{
+        .top {
             position: relative;
             font-size: 22px;
             margin-bottom: 15px;
             color: #333333;
             font-weight: 500;
         }
-        .bottom{
+        .bottom {
             border-top: 1px #4564c6 solid;
             padding-top: 23px;
             padding-right: 126px;
             position: relative;
-            .text{
+            .text {
                 color: #666;
                 font-size: 16px;
                 width: 264px;
                 text-align: justify;
                 line-height: 1.5;
             }
-            .yuan{
-                background:#f7f8fc;
+            .yuan {
+                background: #f7f8fc;
                 position: absolute;
-                left:0;
-                top:-8px;
+                left: 0;
+                top: -8px;
                 padding: 0 8px;
             }
         }
     }
-    .li_first{
-        .lcMask{
+    .li_first {
+        .lcMask {
             animation: zuoy 1.5s ease-in both;
-            -webkti-animation:zuoy 1.5s ease-in both;
+            -webkti-animation: zuoy 1.5s ease-in both;
         }
-        .first{
-            .yuan{
+        .first {
+            .yuan {
                 padding-left: 0 !important;
             }
         }
-        .second{
+        .second {
 
         }
-        .third{
-            .bottom{
-                border-top:none;
-                &:before{
+        .third {
+            .bottom {
+                border-top: none;
+                &:before {
                     content: '';
                     width: 353px;
-                    height:103px;
+                    height: 103px;
                     background: url("../static/images/you.png") no-repeat top;
                     background-size: 100%;
                     position: absolute;
-                    top:0;
+                    top: 0;
                 }
             }
         }
     }
-    .li_second{
-        margin-top:66px;
-        .lcMask{
+    .li_second {
+        margin-top: 66px;
+        .lcMask {
             position: absolute;
             width: 100%;
             height: 164%;
@@ -1215,42 +1255,42 @@ html {
             background: #f7f8fc;
             top: -66%;
             animation: youz 1.5s 1.5s ease-in both;
-            -webkti-animation:youz 1.5s 1.5s ease-in both;
+            -webkti-animation: youz 1.5s 1.5s ease-in both;
         }
-        .first{
-            .bottom{
-                border-top:none;
-                padding-right:24px;
-                &:before{
+        .first {
+            .bottom {
+                border-top: none;
+                padding-right: 24px;
+                &:before {
                     content: '';
                     width: 250px;
-                    height:103px;
+                    height: 103px;
                     background: url("../static/images/youyi.png") no-repeat top;
                     background-size: 100%;
                     position: absolute;
-                    top:-103px;
+                    top: -103px;
                 }
             }
         }
-        .second{
+        .second {
 
         }
-        .third{
-            .bottom{
-                &:before{
+        .third {
+            .bottom {
+                &:before {
                     content: '';
                     width: 96px;
-                    height:151px;
+                    height: 151px;
                     background: url("../static/images/zuo.png") no-repeat;
                     background-size: 100% 100%;
                     position: absolute;
-                    top:0;
-                    left:-96px;
+                    top: 0;
+                    left: -96px;
                 }
             }
         }
     }
-    .li_third{
+    .li_third {
         position: relative;
         margin-top: 32px;
         .lcMask {
@@ -1261,37 +1301,37 @@ html {
             top: -35px;
             background: #f7f8fc;
             animation: zuoy 1.5s 3s ease-in both;
-            -webkti-animation:zuoy 1.5s 3s ease-in both;
+            -webkti-animation: zuoy 1.5s 3s ease-in both;
         }
-        .list_lef{
+        .list_lef {
             margin-top: 33px;
-            .bottom{
+            .bottom {
                 padding-right: 106px;
             }
         }
-        .first{
+        .first {
             padding-left: 45px;
             margin-top: 0;
-            .top{
+            .top {
                 margin-bottom: 9px;
             }
-            .yuan{
+            .yuan {
                 left: -34px;
-                top:-9px;
+                top: -9px;
             }
-            .bottom{
+            .bottom {
                 border-top: none;
                 padding-right: 0;
-                .text_bord{
+                .text_bord {
                     padding-right: 136px;
                     border-top: 1px solid #4564c6;
                     margin-top: 16px;
                     padding-top: 23px;
                 }
-                &:before{
+                &:before {
                     content: '';
                     width: 69px;
-                    height:29px;
+                    height: 29px;
                     background: #f7f8fc url("../static/images/zuoyi.png") no-repeat top;
                     background-size: 100%;
                     position: absolute;
@@ -1300,27 +1340,27 @@ html {
                 }
             }
         }
-        .second{
+        .second {
 
         }
-        .third{
-            .bottom{
+        .third {
+            .bottom {
                 padding-right: 90px;
-                border-top:none;
-                &:before{
+                border-top: none;
+                &:before {
                     content: '';
                     width: 340px;
-                    height:103px;
+                    height: 103px;
                     background: url("../static/images/you.png") no-repeat top;
                     background-size: 100%;
                     position: absolute;
-                    top:0;
+                    top: 0;
                 }
             }
         }
     }
-    .li_fourth{
-        margin-top:38px;
+    .li_fourth {
+        margin-top: 38px;
         .lcMask {
             position: absolute;
             width: 100%;
@@ -1329,36 +1369,36 @@ html {
             background: #f7f8fc;
             top: -43px;
             animation: youz 1.5s 4.5s ease-in both;
-            -webkti-animation:youz 1.5s 4.5s ease-in both;
+            -webkti-animation: youz 1.5s 4.5s ease-in both;
         }
-        .first{
-            .bottom{
-                border-top:none;
-                padding-right:2px;
-                &:before{
+        .first {
+            .bottom {
+                border-top: none;
+                padding-right: 2px;
+                &:before {
                     content: '';
                     width: 250px;
-                    height:103px;
+                    height: 103px;
                     background: url("../static/images/youyi.png") no-repeat top;
                     background-size: 100%;
                     position: absolute;
-                    top:-103px;
+                    top: -103px;
                 }
             }
         }
-        .second{
+        .second {
             .bottom {
-                &:before{
+                &:before {
                     content: '';
                     width: 198px;
-                    height:1px;
+                    height: 1px;
                     background: url("../static/images/gengjingc.png") no-repeat;
                     background-size: 100%;
                     position: absolute;
-                    top:0;
+                    top: 0;
                     left: -195px;
                 }
-                .text{
+                .text {
                     font-size: 22px;
                 }
             }
@@ -1369,26 +1409,26 @@ html {
 }
 
 /*企业荣誉*/
-.honor{
+.honor {
     padding: 112px 0;
-    .contented{
+    .contented {
         width: 566px;
         margin: auto;
         position: relative;
         padding-bottom: 4%;
-        .ryMask{
+        .ryMask {
             position: absolute;
             width: 100%;
             height: 100%;
             background: #f7f8fc;
             z-index: 60;
         }
-        .list{
+        .list {
             .spot:before {
                 left: -3px;
                 top: -7px;
             }
-            .left{
+            .left {
                 width: 192px;
                 padding-right: 72px;
                 font-size: 22px;
@@ -1396,7 +1436,7 @@ html {
                 font-weight: 500;
                 position: relative;
             }
-            .right{
+            .right {
                 text-align: left;
                 padding-left: 60px;
                 border-left: 1px #4564c6 solid;
@@ -1404,29 +1444,29 @@ html {
                 position: relative;
                 color: #666;
                 font-size: 16px;
-                li{
+                li {
                     line-height: 2;
-                    span{
+                    span {
                         margin-right: 7px;
                     }
                 }
-                .yuan{
-                    background:#f7f8fc;
+                .yuan {
+                    background: #f7f8fc;
                     position: absolute;
                     left: -9px;
-                    top:0;
+                    top: 0;
                     padding: 7px 0;
                 }
             }
-            &:first-child{
-                .yuan{
+            &:first-child {
+                .yuan {
                     padding-top: 0;
                 }
             }
-            &:last-child{
-                .right{
+            &:last-child {
+                .right {
                     border-left: none;
-                    &:before{
+                    &:before {
                         content: '';
                         background: url("../static/images/rongyuxian.png") no-repeat;
                         width: 1px;
@@ -1443,29 +1483,29 @@ html {
 
 }
 
-.ryMask{
+.ryMask {
     animation: shangxi 4s ease-in both;
-    -webkti-animation:shangxi 4s ease-in both;
+    -webkti-animation: shangxi 4s ease-in both;
 }
-
 
 /*创始人团队*/
-.about_tit{
+.about_tit {
     padding-bottom: 32px;
 }
-.about_menu{
+
+.about_menu {
     float: right;
     line-height: 51px;
-    li{
+    li {
         padding: 0 12px;
         margin: 0 18px;
         cursor: pointer;
         position: relative;
         font-size: 16px;
     }
-    li.active{
+    li.active {
         color: #ff9d00;
-        &:before{
+        &:before {
             content: '';
             background: url("../static/images/nav_active.png") no-repeat;
             width: 23px;
@@ -1473,13 +1513,13 @@ html {
             background-size: 100% 100%;
             display: inline-block;
             position: absolute;
-            left:-2px;
-            top:12px;
+            left: -2px;
+            top: 12px;
         }
     }
-    li:hover{
+    li:hover {
         color: #ff9d00;
-        &:before{
+        &:before {
             content: '';
             background: url("../static/images/nav_active.png") no-repeat;
             width: 23px;
@@ -1487,39 +1527,40 @@ html {
             background-size: 100% 100%;
             display: inline-block;
             position: absolute;
-            left:-2px;
-            top:12px;
+            left: -2px;
+            top: 12px;
         }
     }
 }
-.about{
+
+.about {
     display: none;
-    &:first-child{
+    &:first-child {
         display: block;
     }
-    .main{
+    .main {
         width: 1170px;
         margin: auto;
     }
-    .leader{
+    .leader {
         float: left;
         width: 290px;
         text-align: left;
-        padding:40px 0;
-        margin-right:135px;
-        &:nth-child(3n){
+        padding: 40px 0;
+        margin-right: 135px;
+        &:nth-child(3n) {
             margin-right: 0;
         }
-        .img{
+        .img {
             width: 269px;
             height: 340px;
             position: relative;
-            img{
+            img {
                 display: block;
                 width: 100%;
                 height: 100%;
             }
-            &:before{
+            &:before {
                 content: '';
                 background: url("../static/images/csr_dian.png") no-repeat;
                 width: 254px;
@@ -1530,61 +1571,59 @@ html {
                 left: -20px;
                 top: -13px;
                 opacity: 0.25;
-                filter:alpha(opacity=25);
+                filter: alpha(opacity=25);
                 transition: opacity 1s;
             }
         }
-        .name{
+        .name {
             font-size: 30px;
             color: #333333;
             margin: 22px 0 16px 0;
             font-weight: 500;
-            span{
+            span {
                 font-size: 22px;
                 color: #ff9700;
                 margin-left: 24px;
                 font-weight: normal;
             }
         }
-        .text{
+        .text {
             text-align: justify;
             color: #333333;
             font-size: 16px;
             line-height: 1.8;
         }
-        &:hover{
-            .img:before{
+        &:hover {
+            .img:before {
                 opacity: 1;
-                filter:alpha(opacity=100);
+                filter: alpha(opacity=100);
                 transition: opacity 1s;
             }
         }
     }
 }
 
-
 /*合作伙伴*/
-.partners{
-    .main{
+.partners {
+    .main {
         width: 1170px;
         margin: auto;
         padding: 60px 0;
-        .title{
+        .title {
             font-size: 26px;
             color: #333333;
             margin-bottom: 60px;
         }
-        .imgbody{
+        .imgbody {
             position: relative;
             width: 1170px;
         }
     }
 }
 
-
 /*投资者关系*/
 
-.notice_box{
+.notice_box {
     width: 1170px;
     margin: auto;
     padding: 80px 0;
@@ -1595,9 +1634,9 @@ html {
         color: #343434;
         padding-bottom: 15px;
     }
-    .news_list{
+    .news_list {
         margin-top: 10px;
-        li{
+        li {
             line-height: 36px;
             color: #666666;
             font-size: 16px;
@@ -1618,87 +1657,90 @@ html {
                 top: 0;
             }
             &:hover {
-                a{
-                   color: #1a1a1a;
+                a {
+                    color: #1a1a1a;
                 }
-                span{
-                   color: #333;
+                span {
+                    color: #333;
                 }
             }
         }
     }
 }
-#investorLS{
+
+#investorLS {
     height: 215px;
     overflow-y: auto;
     padding-right: 10px;
 }
-#investorDQ{
-    height:215px;
+
+#investorDQ {
+    height: 215px;
     overflow-y: auto;
     padding-right: 10px;
 }
-.yc_news_bottom{
+
+.yc_news_bottom {
     margin-top: 86px;
 }
-.pagebox{
+
+.pagebox {
     color: #999;
     font-size: 16px;
     float: right;
-    span{
+    span {
         cursor: pointer;
     }
-    .triangle-left{
+    .triangle-left {
         border: 6px solid transparent;
-        border-right:10px #999 solid;
+        border-right: 10px #999 solid;
         width: 0;
-        height:0;
+        height: 0;
         display: inline-block;
         margin-right: 6px;
     }
-    .triangle-right{
+    .triangle-right {
         border: 6px solid transparent;
-        border-left:10px #999 solid;
+        border-left: 10px #999 solid;
         width: 0;
-        height:0;
+        height: 0;
         display: inline-block;
         margin-left: 6px;
     }
-    .page{
+    .page {
         display: inline-block;
-        li{
+        li {
             cursor: pointer;
             display: inline-block;
             padding: 0 8px;
         }
-        li.active{
+        li.active {
             color: #333;
         }
     }
 }
 
-
-.spot:before{
+.spot:before {
     content: '';
     background: url("../static/images/yw_zidian.png") no-repeat;
     width: 20px;
     height: 20px;
     background-size: 100%;
     position: absolute;
-    left:-11px;
+    left: -11px;
     top: -3px;
     opacity: 0.25;
-    filter:alpha(opacity=25);
+    filter: alpha(opacity=25);
     transition: opacity 1s;
 }
-.hover_on:hover{
-    .spot:before{
+
+.hover_on:hover {
+    .spot:before {
         opacity: 1;
-        filter:alpha(opacity=100);
+        filter: alpha(opacity=100);
         transition: opacity 1s;
     }
 }
-
 
 /*动画*/
 @-webkit-keyframes arrow {
@@ -1710,6 +1752,7 @@ html {
         transform: translate3d(0, -100%, 0)
     }
 }
+
 @keyframes arrow {
     0% {
         opacity: 1
@@ -1720,6 +1763,7 @@ html {
         transform: translate3d(0, -100%, 0)
     }
 }
+
 @-webkit-keyframes down {
     0% {
         opacity: 1;
@@ -1730,6 +1774,7 @@ html {
         transform: translate3d(0, 10%, 0)
     }
 }
+
 @keyframes down {
     0% {
         opacity: 1;
@@ -1766,6 +1811,7 @@ html {
         transform: translate3d(0, -4px, 0)
     }
 }
+
 @keyframes bounce {
     0%, 100%, 20%, 53%, 80% {
         -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
@@ -1802,7 +1848,7 @@ html {
         -webkit-transform: translate(-500px, 0);
         transform: translate(-500px, 0)
     }
-    90%{
+    90% {
         opacity: 0.8
     }
     100% {
@@ -1811,6 +1857,7 @@ html {
         transform: translate(0, 0)
     }
 }
+
 @keyframes fadeInLeftBig {
     0% {
         opacity: 0;
@@ -1818,7 +1865,7 @@ html {
         -ms-transform: translate(-500px, 0);
         transform: translate(-500px, 0)
     }
-    90%{
+    90% {
         opacity: 0.8
     }
     100% {
@@ -1827,171 +1874,175 @@ html {
         transform: translate(0, 0)
     }
 }
+
 @keyframes shangxi {
-    0%{
+    0% {
         height: 100%;
-        top:0;
+        top: 0;
     }
-    5%{
+    5% {
         height: 95%;
-        top:5%;
+        top: 5%;
     }
-    20%{
+    20% {
         height: 80%;
-        top:20%;
+        top: 20%;
     }
-    40%{
+    40% {
         height: 60%;
-        top:40%;
+        top: 40%;
     }
-    60%{
+    60% {
         height: 40%;
-        top:60%;
+        top: 60%;
     }
-    80%{
+    80% {
         height: 20%;
-        top:80%;
+        top: 80%;
     }
-    100%{
-        height:0;
-        top:100%;
+    100% {
+        height: 0;
+        top: 100%;
     }
 }
+
 @-webkit-keyframes shangxi {
-    0%{
+    0% {
         height: 100%;
-        top:0;
+        top: 0;
     }
-    5%{
+    5% {
         height: 95%;
-        top:5%;
+        top: 5%;
     }
-    20%{
+    20% {
         height: 80%;
-        top:20%;
+        top: 20%;
     }
-    40%{
+    40% {
         height: 60%;
-        top:40%;
+        top: 40%;
     }
-    60%{
+    60% {
         height: 40%;
-        top:60%;
+        top: 60%;
     }
-    80%{
+    80% {
         height: 20%;
-        top:80%;
+        top: 80%;
     }
-    100%{
-        height:0;
-        top:100%;
+    100% {
+        height: 0;
+        top: 100%;
     }
 }
 
 @keyframes zuoy {
-    0%{
+    0% {
         width: 100%;
-        left:0;
+        left: 0;
     }
-    5%{
+    5% {
         width: 95%;
         left: 5%;
     }
-    20%{
-        width:80%;
+    20% {
+        width: 80%;
         left: 20%;
     }
-    40%{
+    40% {
         width: 60%;
         left: 40%;
     }
-    60%{
+    60% {
         width: 40%;
         left: 60%;
     }
-    80%{
+    80% {
         width: 20%;
         left: 80%;
     }
-    100%{
+    100% {
         width: 0;
         left: 100%;
     }
 }
+
 @-webkit-keyframes zuoy {
-    0%{
+    0% {
         width: 100%;
-        left:0;
+        left: 0;
     }
-    5%{
+    5% {
         width: 95%;
         left: 5%;
     }
-    20%{
-        width:80%;
+    20% {
+        width: 80%;
         left: 20%;
     }
-    40%{
+    40% {
         width: 60%;
         left: 40%;
     }
-    60%{
+    60% {
         width: 40%;
         left: 60%;
     }
-    80%{
+    80% {
         width: 20%;
         left: 80%;
     }
-    100%{
+    100% {
         width: 0;
         left: 100%;
     }
 }
 
 @keyframes youz {
-    0%{
+    0% {
         width: 100%;
     }
-    5%{
+    5% {
         width: 95%;
     }
-    20%{
-        width:80%;
+    20% {
+        width: 80%;
     }
-    40%{
+    40% {
         width: 60%;
     }
-    60%{
+    60% {
         width: 40%;
     }
-    80%{
+    80% {
         width: 20%;
     }
-    100%{
+    100% {
         width: 0;
     }
 }
+
 @-webkit-keyframes youz {
-    0%{
+    0% {
         width: 100%;
     }
-    5%{
+    5% {
         width: 95%;
     }
-    20%{
-        width:80%;
+    20% {
+        width: 80%;
     }
-    40%{
+    40% {
         width: 60%;
     }
-    60%{
+    60% {
         width: 40%;
     }
-    80%{
+    80% {
         width: 20%;
     }
-    100%{
+    100% {
         width: 0;
     }
 }
