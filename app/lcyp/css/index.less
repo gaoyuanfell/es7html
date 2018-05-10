@@ -15,14 +15,14 @@
 .left{ float: left; }
 .right{ float: right;  }
 
-.contentener{ padding-bottom: 42px; }
+.contentener{ padding-bottom: 42px; display: none;}
 /* 顶部信息 */
-.top_msg{ height: 40px; background: @top_msg_bg; 
+.top_msg{ height: 40px; background: @top_msg_bg;
 	p{ line-height: 40px; }
 	a{ color:@top_msg_color; line-height: 40px; }
 
 	.cart:before{ content:'';width: 14px; height: 40px;background: url('../static/images/cart_icon.png') no-repeat center; display: inline-block; vertical-align: top; margin-right: 6px; }
-	
+
 	.service:before{ content: ''; width: 16px; height: 40px;background: url('../static/images/service_icon.png') no-repeat center; display: inline-block; vertical-align: top; margin-right:6px; }
 
 	.vertical_line{ margin:0 10px; }
@@ -36,7 +36,7 @@
 	.logo{width: 223px; height: 60px; background: url('../static/images/index_logo.png') no-repeat left center;}
 
 	.nav{
-		.item{	position: relative;		
+		.item{	position: relative;
 			a{ color:#e5e5e5; padding:0 24px; font-size: 16px; line-height: 60px;  display: block; }
 			.line{ position: absolute;left:0; bottom:0; right:0; margin:auto; width:0; height: 3px; background: @color_blue;  }
 		}
@@ -68,9 +68,9 @@
 
 		.txt2{ font-size: 14px; color:#e0dfde;letter-spacing:.5px;}
 	}
-	
+
 	.login_box{ width: 396px; height: 398px; background: #fff; border-radius: 2px; padding:0 55px; text-align: left; color:#999999;
-	
+
 		.login_logo{ height: 73px; background: url('../static/images/logo2.png') no-repeat center bottom; }
 
 		h6{ font-weight: normal; font-size: 16px; color:#999999; line-height: 48px;margin:0; margin-top: 20px;  }
@@ -97,7 +97,7 @@
 		h5{ font-size: 18px; line-height: 30px; margin:0; }
 		h6{ font-size: 14px; line-height: 26px; margin:0; text-align: left; font-weight: normal;}
 
-		p{ font-size: 14px; line-height: 24px; text-align: left; text-indent: 2em; }	
+		p{ font-size: 14px; line-height: 24px; text-align: left; text-indent: 2em; }
 
 		#close{ position: absolute;top:18px; right:10px; width: 40px; height: 40px; display: block; cursor: pointer;
 			i{ position: absolute; top:15px;left:0;width: 30px; height: 3px; display: block; transform: rotate(45deg);background: #aaa; }
@@ -110,16 +110,16 @@
 .home{ background: #fdfbfb;
 	.wrap{ height: 818px; margin-bottom: 254px; }
 
-	.top_cont{ position: absolute; top:116px;right:0; left:0; margin:auto; color:#e5e5e5; width: 100%; 
+	.top_cont{ position: absolute; top:116px;right:0; left:0; margin:auto; color:#e5e5e5; width: 100%;
 		.title{
-			h1{ font-size: 48px; line-height: 85px; } 
+			h1{ font-size: 48px; line-height: 85px; }
 
 			p{ font-size:24px; line-height: 42px;  }
 		}
 		.advantage{margin-top: 112px; background: #ffffff; padding: 30px 0 67px; color:#626262;
 			h2{  font-size: 28px; line-height: 69px;}
 			.resource{
-				
+
 				p{ font-size: 16px; line-height: 30px; }
 			}
 			.system{ margin-top: 44px; padding:0 176px;
@@ -133,20 +133,20 @@
 				.table{ border-top:1px solid #bfbfbf; border-left:1px solid #bfbfbf; margin-top:57px;
 
 					 li{ width: 50%; border:1px solid #bfbfbf; border-top:none; border-left:none; float: left; line-height: 30px; font-size: 16px;}
-					
+
 				}
 			}
 		}
 	}
-	.bottom_cont{ background: #fdfbfb;width: 1200px; margin:0 auto; padding:78px 74px 90px; 
+	.bottom_cont{ background: #fdfbfb;width: 1200px; margin:0 auto; padding:78px 74px 90px;
 		&>div{ justify-content: space-between; flex: 1 }
 
 		h3{ font-size: 28px; line-height: 52px; position: relative;}
 
 		.line{ position: absolute; bottom:0; width: 292px; height:2px; background:#80a3d3;}
-		
+
 		.left_msg{ text-align: left; width: 416px; position: relative;
-			.line{ left:0; 
+			.line{ left:0;
 				background: #7ca0d1 ;
 			    background: -webkit-linear-gradient(left, #7ca0d1, #d0e5f5) ;
 			    background: -moz-linear-gradient(left, #7ca0d1, #d0e5f5) ;
@@ -154,11 +154,11 @@
 			    background: -o-linear-gradient(left, #7ca0d1, #d0e5f5) ;
 			    background: linear-gradient(to right, #7ca0d1, #d0e5f5) ;
 			}
-			   
+
 		}
 		.right_msg{ width: 416px;text-align: left; position: relative;
 			h3{ text-align: right; }
-			.line{ right:0;  
+			.line{ right:0;
 				background: #7ca0d1 ;
 			    background: -webkit-linear-gradient(left, #d0e5f5, #7ca0d1) ;
 			    background: -moz-linear-gradient(left, #d0e5f5, #7ca0d1) ;
@@ -177,10 +177,12 @@
 		.middle_msg{ padding-top: 20px; }
 	}
 }
-
+.loading{ position: fixed; top:100px;left:0;width:100%; height: 500px; background: #fff; z-index: 8; display: none;
+    i{ background: url("../static/images/loading.gif") no-repeat bottom center;display: block; width: 100%; height: 50%; }
+}
 /* 商品中心 */
-.goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px;
-	
+.goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px; position:relative;
+
 	.level{  color:#aaaaaa; line-height: 24px;width: 94px; display: block;}
 
 	.classify ul li{ width:140px;overflow:hidden;text-overflow: ellipsis;
@@ -193,14 +195,14 @@
 
 	.first_level{ margin-bottom: 21px;  }
 
-	.second_level{ margin-bottom: 42px; 
+	.second_level{ margin-bottom: 42px;
 		ul{ flex-wrap:wrap;width: 560px;  }
 	}
 
 	.top_cont{ justify-content: space-between;}
 
 	.search{ position:relative;
-		input{ width: 363px;height: 35px; border:1px solid #bfbfbf; border-top-left-radius: 6px; border-bottom-left-radius: 6px;padding-left: 35px; padding-right: 100px; color:#c2beba;			
+		input{ width: 363px;height: 35px; border:1px solid #bfbfbf; border-top-left-radius: 6px; border-bottom-left-radius: 6px;padding-left: 35px; padding-right: 100px; color:#c2beba;
 		}
 		i{position: absolute;top:0;left:15px; width: 16px; height:35px; display: block; background: url('../static/images/search_icon.png') no-repeat center;  }
 
@@ -209,12 +211,13 @@
 	.search_history{  font-size: 12px; text-align: left; margin-top: 12px;
 		a{ line-height: 20px;  margin-right:10px; color:#aca9a9; cursor: pointer;}
 	}
-	
-	.lists{ width: 100%;
+
+	.lists{ width: 100%;position: relative;
+
 
 		.img{ text-align: center; height: 200px; }
 
-		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px; }
+		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px;}
 
 		.goods_lists li{ float: left; width: 21%; text-align: left; margin:20px 2% 0; padding-bottom: 15px;
 
@@ -222,7 +225,7 @@
 
 			.title{ color:#535353; font-size: 18px; line-height: 35px; white-space: nowrap; overflow:hidden; text-align: justify;text-overflow: ellipsis}
 
-			.msg span{ width: 50%; float: left; display: block; line-height: 20px; color:#6c6b6b ; font-size: 12px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}				
+			.msg span{ width: 50%; float: left; display: block; line-height: 20px; color:#6c6b6b ; font-size: 12px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}
 
 		}
 		.buy_btn{ width: 127px; height: 35px; background: #f7931e; border-radius: 5px; display: block; margin:0 auto;text-align: center; margin-top: 19px; cursor: pointer;
@@ -246,7 +249,7 @@
 		input{ width: 37px; padding-left: 5px; }
 
 		.active{ background: @color_blue; color:#fff; border:1px solid @color_blue; }
-		
+
 	}
 }
 /* 物流服务 */
@@ -263,10 +266,10 @@
 		.main_title{ margin-bottom: 70px;
 			h2{ line-height: 83px; font-size: 28px; color:#626262; }
 			p{ font-size: 16px; color:#535353; }
-		}		
+		}
 	}
-	.cont{ padding:0 34px; 
-		
+	.cont{ padding:0 34px;
+
 		li{ width:244px;flex:1; background: #fff; padding:50px 30px 60px; color:#616161;}
 
 		h3{ font-size: 28px; line-height: 83px; }
@@ -287,7 +290,7 @@
 	}
 
 	.main_cont{ padding-top: 84px; width: 1200px; margin:0 auto; justify-content: space-between;
-		
+
 		.right_cont{ width: 563px;text-align: left;
 			h2{  color:#626262; font-size: 28px; margin-bottom: 19px; margin-top: 40px;
 				&:first-child{ margin-top: 0 };
@@ -318,11 +321,11 @@
 	}
 
 	.main_cont{ padding-top: 73px; width: 1200px; margin:0 auto; justify-content: space-between;
-		
-		.left_cont{ padding:73px 0 0 92px; 
+
+		.left_cont{ padding:73px 0 0 92px;
 
 			.qrcode{ width: 135px; }
-			
+
 			.msg{ margin-left: 30px;text-align: left; padding-top: 10px;
 
 				p{ line-height: 26px; }
@@ -334,6 +337,6 @@
 			.tell{ height: 16px; background: url('../static/images/contact_us_icon2.png') no-repeat left center;  }
 			.addr{ height: 18px; background: url('../static/images/contact_us_icon3.png') no-repeat left center;  }
 		}
-		
+
 	}
  }

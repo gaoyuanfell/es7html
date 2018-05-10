@@ -5,10 +5,7 @@ import {getHash} from "../../common/js/util";
 import * as qs from "querystring";
 
 
-hashChange();
-window.addEventListener('hashchange', () => {
-    hashChange()
-});
+
 function hashChange() {
     let refs = Array.from(document.querySelectorAll('[data-contentener]'));
     refs.every(ref => {
@@ -42,6 +39,11 @@ function hashChange() {
         document.querySelector('.top_msg').style.display='block'
         document.querySelector('.top_nav').style.display='block'
         document.querySelector('.contentener').style.paddingBottom='42px'
+    }
+    if(hash == 'commodity'){
+        firstLevel();
+        showGoods();
+        searchGoods();
     }
 
 }
@@ -209,8 +211,12 @@ let firstId = 0
     ,productName = '';
 const limit = 12;
 // 获取商品列表数据
+let firstIn = true
 async function getGoodsLists(){
-
+    if(firstIn){
+        document.querySelector('.loading').style.display = 'block'
+    }
+    firstIn = false
     let data = await jsonp(doMainName + "/api/v1/get/product_list",{
         product_category_id_first: firstId,
         product_category_id: secondId,
@@ -269,7 +275,7 @@ function secondLevel(data){
                 if(id == +v.value){
                     let secondLevel = [
                         '<li data-id="0" title="全部"><a>全部</a></li>'
-                    ]                    
+                    ]
                     let cateHtml = `<li data-id="{{ $id }}" title="{{ label }}"><a>{{ label }}</a></li>`
                     v.children.forEach( (v2,i2)=>{
                         v2.$id = +v2.value
@@ -305,6 +311,7 @@ function secondLevel(data){
 // 显示商品列表
 function showGoods(){
     getGoodsLists().then( (data)=>{
+        document.querySelector('.loading').style.display = 'none'
         if(data.list.length ==0 ){
             document.getElementById('goodsLists').innerHTML = '暂无商品'
         }else{
@@ -483,7 +490,7 @@ function searchGoods(){
         currPageNum = 1;
         showGoods();
         let a = document.createElement('a')
-        a.innerHTML = searchInput   
+        a.innerHTML = searchInput
         a.onclick = function(){
             let val = this.innerHTML
             productName =  val
@@ -491,13 +498,13 @@ function searchGoods(){
             secondId = 0;
             currPageNum = 1;
             showGoods();
-        }    
+        }
         let searchHistory = historyDiv.getElementsByTagName('a')
         historyDiv.insertBefore(a,searchHistory[0])
         if(searchHistory.length > 5){
             historyDiv.removeChild(searchHistory[ searchHistory.length -1 ])
-        }  
-    }   
+        }
+    }
 
 }
 
@@ -517,9 +524,7 @@ function jumpToBuy(login){
 }
 
 window.onload = function(){
-    firstLevel();
-    showGoods();
-    searchGoods();
+
 
     document.getElementById('sendCode').onclick = function(){
         sendCode();
@@ -608,3 +613,7 @@ function nowYear(){
     let year = date.getFullYear();
     return year
 }
+hashChange();
+window.addEventListener('hashchange', () => {
+    hashChange()
+});
