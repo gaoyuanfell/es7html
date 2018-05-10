@@ -7,6 +7,7 @@ import * as qs from "querystring";
 hashChange();
 
 window.addEventListener('hashchange', () => {
+    console.info('ok')
     hashChange()
 });
 
@@ -21,12 +22,14 @@ function hashChange() {
     let ref = refs.find(ref => ref.dataset.type === hash);
     if (ref) {
         ref.style.display = 'block';
-        ref.animate([
-            {opacity: 0},
-            {opacity: 1}
-        ], {
-            duration: 250
-        })
+        if(ref.animate){
+            ref.animate([
+                {opacity: 0},
+                {opacity: 1}
+            ], {
+                duration: 250
+            })
+        }
     }
     Array.from(document.querySelector('#filters').children).every(ref => {
         ref.classList.remove('active');
