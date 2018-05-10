@@ -253,7 +253,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1701.jpg',
             title: '拍拍贷',
-            adds: '5000+',
+            adds: '',
             cost: '0.40 元',
             activation: '',
             rate: '2.50 %',
@@ -264,7 +264,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1702.jpg',
             title: '荒野行动',
-            adds: '5000+',
+            adds: '',
             cost: '0.68 元',
             activation: '4.00 元',
             rate: '3%',
@@ -275,7 +275,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1703.jpg',
             title: 'KEEP',
-            adds: '5000+',
+            adds: '1500+',
             cost: '0.25元',
             activation: '5-6元',
             rate: '',
@@ -309,7 +309,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1706.jpg',
             title: '网易考拉',
-            adds: '5000+',
+            adds: '1000+',
             cost: '0.30元',
             activation: '15元',
             rate: '',
@@ -320,7 +320,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1707.jpg',
             title: 'JJ斗地主',
-            adds: '5000+',
+            adds: '1000+',
             cost: '0.23元',
             activation: '3-6元',
             rate: '4.50%',
@@ -331,7 +331,7 @@ for(let i=0 ; i<oli.length ; i++){
         {
             img: './static/images/tu1708.jpg',
             title: '你我贷',
-            adds: '5000+',
+            adds: '',
             cost: '0.70',
             activation: '8.00',
             rate: '6.00%',
