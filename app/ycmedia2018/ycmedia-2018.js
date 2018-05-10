@@ -482,67 +482,67 @@ function jsonp(url, body = {}, config = {}, fn) {
 * page默认第一页
 * 改变page值获取对应页码的值
 * */
-// async function getData() {
-//     let bo = true;
-//     let page = 0;
-//
-//     let list;
-//     let contentList = [];
-//
-//     while (bo) {
-//         let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
-//             disclosureType: 5,
-//             page: page,
-//             companyCd: 830999,
-//             isNewThree: 1,
-//             startTime: '',
-//             endTime: '',
-//             keyword: '关键字',
-//             xxfcbj: '',
-//         })
-//         ++page
-//         if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
-//             list = data[0].list;
-//             bo = false;
-//             return contentList
-//         }
-//         contentList.push(...data[0].listInfo.content)
-//     }
-// }
-//
-// !function () {
-//     let investorLSref = document.querySelector('#investorLS');
-//     let investorDQref = document.querySelector('#investorDQ');
-//
-//     getData().then(contentList => {
-//         let investorLS = contentList.filter((ele) => {
-//             if (ele.disclosureType === '9504') return true;
-//         })
-//
-//         let investorDQ = contentList.filter((ele) => {
-//             if (ele.disclosureType === '9503') return true;
-//         })
-//
-//         let investorLSHtml = ''
-//         for (let i = 0; i < investorLS.length; i++) {
-//             let provi = investorLS[i];
-//             provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
-//             provi.disclosurePostTitle = provi.disclosurePostTitle;
-//             let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-//             investorLSHtml += add
-//         }
-//         investorLSref.innerHTML = investorLSHtml
-//         let investorDQHtml = ''
-//         for (let i = 0; i < investorDQ.length; i++) {
-//             let provi = investorDQ[i];
-//             provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
-//             provi.disclosurePostTitle = provi.disclosurePostTitle;
-//             let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-//             investorDQHtml += add
-//         }
-//         investorDQref.innerHTML = investorDQHtml
-//     });
-// }()
+async function getData() {
+    let bo = true;
+    let page = 0;
+
+    let list;
+    let contentList = [];
+
+    while (bo) {
+        let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
+            disclosureType: 5,
+            page: page,
+            companyCd: 830999,
+            isNewThree: 1,
+            startTime: '',
+            endTime: '',
+            keyword: '关键字',
+            xxfcbj: '',
+        })
+        ++page
+        if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
+            list = data[0].list;
+            bo = false;
+            return contentList
+        }
+        contentList.push(...data[0].listInfo.content)
+    }
+}
+
+!function () {
+    let investorLSref = document.querySelector('#investorLS');
+    let investorDQref = document.querySelector('#investorDQ');
+
+    getData().then(contentList => {
+        let investorLS = contentList.filter((ele) => {
+            if (ele.disclosureType === '9504') return true;
+        })
+
+        let investorDQ = contentList.filter((ele) => {
+            if (ele.disclosureType === '9503') return true;
+        })
+
+        let investorLSHtml = ''
+        for (let i = 0; i < investorLS.length; i++) {
+            let provi = investorLS[i];
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
+            provi.disclosurePostTitle = provi.disclosurePostTitle;
+            let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+            investorLSHtml += add
+        }
+        investorLSref.innerHTML = investorLSHtml
+        let investorDQHtml = ''
+        for (let i = 0; i < investorDQ.length; i++) {
+            let provi = investorDQ[i];
+            provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
+            provi.disclosurePostTitle = provi.disclosurePostTitle;
+            let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+            investorDQHtml += add
+        }
+        investorDQref.innerHTML = investorDQHtml
+    });
+}()
 
 ~function () {
     let list = [
@@ -790,11 +790,11 @@ function jsonp(url, body = {}, config = {}, fn) {
         <div class="yccm_client_case_group" data-index="{{$index}}">
             <p class="img"><img src="{{img}}"></p>
             <div class="yccm_client_case_text">{{title}}</div>
-            <p class="yccm_client_case_timetext">
+            <p class="yccm_client_case_timetext clear">
                 <span style="display: {{typeShow}}">客户类型：{{type}}</span>
                 <span style="display: {{costShow}}">CPC成本：{{cost}}</span>
             </p>
-            <p class="yccm_client_case_timetext">
+            <p class="yccm_client_case_timetext clear">
                 <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
                 <span style="display: {{rateShow}}">点击率：{{rate}}</span>
             </p>

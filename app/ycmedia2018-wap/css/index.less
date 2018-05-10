@@ -1,3 +1,6 @@
+html{
+    webkit-text-size-adjust:none !important;
+}
 .baibg{
     background: #fff;
 }
@@ -117,7 +120,7 @@
     .anbtn{
         width: 1.01rem;
         height:0.26rem;
-        background: url("../static/images/btn.png") no-repeat;
+        background: url("../static/images/btn1.png") no-repeat;
         background-size: 100% 100%;
         margin: auto;
         display: inline-block;
@@ -487,13 +490,100 @@
         }
     }
 }
-
-
+.title_top{
+    margin: 0.25rem 0;
+    img{
+        width: 2rem;
+    }
+}
+.yccm_popup_bodyText {
+    width:100%;
+    margin: auto;
+    padding-right: 0.15rem;
+    padding-left: 0.3rem;
+    .yccm_client_case_group {
+        width: 1.45rem;
+        margin: 0 0.22rem 0.14rem 0;
+        float: left;
+        cursor: pointer;
+        .img {
+            position: relative;
+            width:1.45rem;
+            //height: 0.894rem;
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            &:before {
+                content: '';
+                background: url("../static/images/alzx_dian.png") no-repeat;
+                width: 1.3rem;
+                height:0.74rem;
+                background-size: 100% 100%;
+                position: absolute;
+                left: -0.08rem;
+                top: -0.05rem;
+                //opacity: 0.25;
+                //filter: alpha(opacity=25);
+                //transition: opacity 1s;
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+        }
+        .yccm_client_case_text {
+            font-size:0.12rem;
+            color: #323232;
+            margin: 0.11rem 0;
+            text-align: left;
+        }
+        .yccm_client_case_timetext {
+            line-height: 1.5;
+            font-size: 0.08rem;
+            color: #999999;
+            text-align: left;
+            position: relative;
+            span {
+                float: left;
+            }
+            span:nth-child(1){
+                /*position: absolute;
+                left: 172px;*/
+                margin-right: 0.03rem;
+            }
+        }
+        &:nth-child(2n) {
+            margin-right: 0;
+        }
+        .link {
+            color: #ff9700;
+            font-size: 16px;
+            text-align: left;
+            display: block;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        &:hover {
+            .link {
+                opacity: 1;
+                transition: opacity 1s;
+            }
+        }
+    }
+}
 .footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
     color:rgba(255,255,255,0.3);
     font-size: 12px;
-    padding: 12px 0;
+    padding: 0.06rem 0;
     background: #040119;
+}
+[marg_botm]{
+    margin-bottom: 0.3rem;
 }
 
 @-webkit-keyframes down {

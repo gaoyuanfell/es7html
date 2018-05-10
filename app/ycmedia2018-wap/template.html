@@ -24,23 +24,26 @@
         })(window);
     </script>
     <script>
-        function IsPC()
-        {
+        function IsPC() {
             var userAgentInfo = navigator.userAgent;
             var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
             var flag = true;
             for (var v = 0; v < Agents.length; v++) {
-                if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
             }
             return flag;
         }
-        if(IsPC()){
-            location.href='/'
+
+        if (IsPC()) {
+            location.href = '/'
         }
     </script>
 </head>
 <body>
-<div class="content-modal">
+<div class="content-modal" data-type="home" data-contentener>
     <div class="top clear">
         <a href="" class="logo"><img src="static/images/logo1.png" alt=""></a>
         <!--<span class="navbar-toggle" id="navbar-toggle">
@@ -49,13 +52,13 @@
                 <i class="icon-bar"> </i>
             </span>-->
     </div>
-    <div class="content" id="home">
-        <div class="scroll-content">
+    <div class="content">
+        <div class="scroll-content" marg_botm>
             <div class="banner baibg">
                 <img src="./static/images/banner1.png" alt="" class="bg">
                 <p class="text">
                     <img src="./static/images/banner_text.png" alt="">
-                    <a href="#" class="anbtn"></a>
+                    <a href="#case" class="anbtn"></a>
                 </p>
                 <img src="./static/images/xiangxia.png" alt="" class="down">
             </div>
@@ -312,35 +315,44 @@
                         </div>
                     </div>
 
-                    </div>
+                </div>
 
-                    </div>
-                                    <div class="mobel contcact baibg">
-                                        <p class="title"><img src="./static/images/lxwmtit.png" alt=""></p>
-                                        <img src="./static/images/weiz.png" alt="" class="map">
-                                        <div class="link_style">
-                                            <p><img src="./static/images/dh1.png" alt=""><span><em>电话：</em>021-64851212</span></p>
-                                            <p><img src="./static/images/cz1.png" alt=""><span><em>传真：</em>021-33681336</span></p><br>
-                                            <p><img src="./static/images/diz1.png" alt=""><span><em>地址：</em>上海市徐汇区漕河泾开发区桂平路481号19栋6层</span></p>
-                                        </div>
-                                    </div>
+            </div>
+            <div class="mobel contcact baibg">
+                <p class="title"><img src="./static/images/lxwmtit.png" alt=""></p>
+                <img src="./static/images/weiz.png" alt="" class="map">
+                <div class="link_style">
+                    <p><img src="./static/images/dh1.png" alt=""><span><em>电话：</em>021-64851212</span></p>
+                    <p><img src="./static/images/cz1.png" alt=""><span><em>传真：</em>021-33681336</span></p><br>
+                    <p><img src="./static/images/diz1.png" alt=""><span><em>地址：</em>上海市徐汇区漕河泾开发区桂平路481号19栋6层</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="footer">
+        <small>Copyright(C)2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1</small>
+    </p>
+</div>
+<div class="content-modal" data-type="case" id="case" data-contentener>
+    <div class="content">
+        <div class="scroll-content">
+            <p class="title_top"><img src="./static/images/jinpinal_tit.png" alt=""></p>
+            <div class="yccm_popup_bodyText clear">
 
+            </div>
+        </div>
+    </div>
+    <p class="footer">
+        <small>Copyright(C)2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1</small>
+    </p>
+</div>
 
-
-
-                                    <p class="footer"><small>Copyright(C)2013-2014 YCmedia. All Rights Reserved. 沪ICP备14036633号-1</small></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="loadedImages"></div>
-
-                        <!--<div class="description_box" id="description_box"></div>
-                        <div class="bomb_box" id="bomb_box">
-                            <ul class="item_box">
-                                &lt;!&ndash;<li class="item"><a href="https://us.lcinc.cn/">公司首页 <i>&gt;</i></a></li>&ndash;&gt;
-                            </ul>
-                        </div>-->
+<!--<div class="description_box" id="description_box"></div>
+<div class="bomb_box" id="bomb_box">
+    <ul class="item_box">
+        &lt;!&ndash;<li class="item"><a href="https://us.lcinc.cn/">公司首页 <i>&gt;</i></a></li>&ndash;&gt;
+    </ul>
+</div>-->
 
 </body>
 </html>

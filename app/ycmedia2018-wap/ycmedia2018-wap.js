@@ -1,8 +1,31 @@
 import '../../common/css/base.less'
 import './css/index.less'
 import '../../common/js/vendor'
+import {getHash} from "../../common/js/util";
+hashChange();
 
-
+window.addEventListener('hashchange', () => {
+    hashChange()
+});
+function hashChange() {
+    let refs = Array.from(document.querySelectorAll('[data-contentener]'));
+    refs.every(ref => {
+        ref.style.display = 'none';
+        return true;
+    });
+    let hash = getHash();
+    if (!hash) hash = 'home';
+    let ref = refs.find(ref => ref.dataset.type === hash);
+    if (ref) {
+        ref.style.display = 'block';
+        ref.animate([
+            {opacity: 0},
+            {opacity: 1}
+        ], {
+            duration: 250
+        })
+    }
+}
 /*let navbar=document.getElementById("navbar-toggle");
 let description_box=document.getElementById("description_box");
 let item_box=document.getElementById("bomb_box")
@@ -25,6 +48,55 @@ description_box.addEventListener('click',(e)=>{
         description_box.classList.remove('blocks');
     }
 })*/
+
+/*
+* 模板编译
+* */
+class Template {
+    html
+    value
+    reg = /\{\{((?:.|\n)+?)\}\}/
+
+    constructor(html, value) {
+        this.html = html;
+        this.value = value;
+    }
+
+    compileFun(exg) {
+        let fun = new Function('vm', `
+            with(vm){try {return eval("${exg.replace(/'/g, '\\\'').replace(/"/g, '\\\"')}")}catch (e) {return ''}}
+        `);
+        return fun(this.value);
+    }
+
+    compile() {
+        this.html.match(new RegExp(this.reg, 'ig')).every(va => {
+            this.html.replace(va, value => {
+                let t = value.match(this.reg)
+                let a = t[1].replace(/\s/ig, '').replace(/\s*(\.)\s*/, '.')
+                let val = this.isBooleanValue(this.compileFun(a));
+                this.html = this.html.replace(t[0], val)
+            })
+            return true;
+        })
+        return this.html;
+    }
+
+    isBooleanValue(val) {
+        switch (val) {
+            case true:
+                return String(true);
+            case false:
+                return String(false);
+            case null:
+                return String();
+            case void 0:
+                return String();
+            default:
+                return String(val)
+        }
+    }
+}
 
 /*顶部菜单渐变*/
 let scrol = document.querySelector(".scroll-content");
@@ -176,6 +248,147 @@ for(let i=0 ; i<oli.length ; i++){
 }
 
 
+~function () {
+    let list = [
+        {
+            img: './static/images/tu1701.jpg',
+            title: '拍拍贷',
+            adds: '5000+',
+            cost: '0.40 元',
+            activation: '',
+            rate: '2.50 %',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1702.jpg',
+            title: '荒野行动',
+            adds: '5000+',
+            cost: '0.68 元',
+            activation: '4.00 元',
+            rate: '3%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1703.jpg',
+            title: 'KEEP',
+            adds: '5000+',
+            cost: '0.25元',
+            activation: '5-6元',
+            rate: '',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1704.jpg',
+            title: '网易严选',
+            adds: '5000+',
+            cost: '0.58 元',
+            activation: '',
+            rate: '',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1705.jpg',
+            title: '大众点评',
+            adds: '5000+',
+            cost: '0.55 元',
+            activation: '6.00 元',
+            rate: '10.00%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
 
+        {
+            img: './static/images/tu1706.jpg',
+            title: '网易考拉',
+            adds: '5000+',
+            cost: '0.30元',
+            activation: '15元',
+            rate: '',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1707.jpg',
+            title: 'JJ斗地主',
+            adds: '5000+',
+            cost: '0.23元',
+            activation: '3-6元',
+            rate: '4.50%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1708.jpg',
+            title: '你我贷',
+            adds: '5000+',
+            cost: '0.70',
+            activation: '8.00',
+            rate: '6.00%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1709.jpg',
+            title: '恒源祥',
+            adds: '5000+',
+            cost: '0.70',
+            activation: '8.00',
+            rate: '6.00%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/tu1707.jpg',
+            title: '大集金服',
+            adds: '5000+',
+            cost: '0.70',
+            activation: '8.00',
+            rate: '6.00%',
+            time: '2017年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        }
+    ]
+    let str = `
+        <div class="yccm_client_case_group" data-index="{{$index}}">
+            <p class="img"><img src="{{img}}"></p>
+            <div class="yccm_client_case_text">{{title}}</div>
+            <p class="yccm_client_case_timetext clear">
+                <span style="display: {{costShow}}">CPC成本：{{cost}}</span>                           
+                <span style="display: {{activationShow}}">激活成本：{{activation}}</span>
+            </p>
+            <p class="yccm_client_case_timetext clear">
+                 <span style="display: {{rateShow}}">点击率：{{rate}}</span>
+                 <span style="display: {{added}}">单日新增：{{adds}}</span> 
+            </p>                            
+            <a href="javascript:void(0);" class="link">查看详情&nbsp;&gt;</a>
+        </div>
+    `;
+
+    let caseList = '';
+    list.forEach((data, i) => {
+        data.$index = i;
+        if(!data.adds) data.added = 'none';
+        if(!data.cost) data.costShow = 'none';
+        if(!data.activation) data.activationShow = 'none';
+        if(!data.rate) data.rateShow = 'none';
+        caseList += new Template(str, data).compile();
+    })
+    document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+
+}()
 
 
