@@ -156,7 +156,7 @@ class ImgLoop {
 
     async start() {
         this.state = 1;
-        while (this.state > 1) {
+        while (this.state > 1 && document.body.contains(this.boxRef)) {
             this.state = 1;
             await this.sleep(this.params.time);
             this.state ===1 && this.next()
