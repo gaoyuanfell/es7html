@@ -1,94 +1,351 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link href="static/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="description" content="<%= htmlWebpackPlugin.options.title %>"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+	<meta charset="UTF-8">
+	<link href="./static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta name="description" content="<%= htmlWebpackPlugin.options.title %>
+	"/>
+	<title><%= htmlWebpackPlugin.options.title %></title>
 </head>
-<body>	
+<body>
 	<div class="content">
 		<div class="top_msg clear">
 			<div class="wrap">
-				<p class="left">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外) </p>
+				<p class="left">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外)</p>
 				<div class="top_right right">
-					<!-- <a href=""><span class="cart">我的购物车(0)</span></a>
-					<span class="vertical_line">|</span> -->
-					<a href=""><span class="service">我的客服</span></a>
-				</div>
+					<!-- <a href="">
+					<span class="cart">我的购物车(0)</span>
+				</a>
+				<span class="vertical_line">|</span>
+				-->
+				<a href="">
+					<span class="service">我的客服</span>
+				</a>
 			</div>
 		</div>
-		<div class="top_nav clear">
-			<div class="wrap">
-	            <div class="logo left"></div>
-	            <div class="flex left">
-	                <ul class="nav flex" id="filters">
-	                    <li class="item active"><a href="#home"><span>首页</span></a><span class="line"></span></li>
-	                    <li class="item"><a href="#commodity_center"><span>商品中心</span></a><span class="line"></span></li>
-	                    <li class="item"><a href="#Logistics_service"><span>物流服务</span></a><span class="line"></span></li>
-	                    <li class="item"><a href="#about_us"><span>关于我们</span></a><span class="line"></span></li>
-	                    <li class="item"><a href="#contact_us"><span>联系我们</span></a><span class="line"></span></li>                    
-	                </ul>               
-	            </div>
-	            <div class="right_btn right">
-	            	<a href="#login" class="btn reg_btn">注册</a>
-					<a href="#login" class="btn">登录</a>
-	            </div>
-            </div>
-        </div>
+	</div>
+	<div class="top_nav clear">
+		<div class="wrap">
+			<div class="logo left"></div>
+			<div class="flex left">
+				<ul class="nav flex" id="filters">
+					<li class="item active">
+						<a href="#home">
+							<span>首页</span>
+						</a>
+						<span class="line"></span>
+					</li>
+					<li class="item">
+						<a href="#commodity">
+							<span>商品中心</span>
+						</a>
+						<span class="line"></span>
+					</li>
+					<li class="item">
+						<a href="#Logistics">
+							<span>物流服务</span>
+						</a>
+						<span class="line"></span>
+					</li>
+					<li class="item">
+						<a href="#about_us">
+							<span>关于我们</span>
+						</a>
+						<span class="line"></span>
+					</li>
+					<li class="item">
+						<a href="#contact_us">
+							<span>联系我们</span>
+						</a>
+						<span class="line"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="right_btn right">
+				<a href="#login" class="btn reg_btn">注册</a>
+				<a href="#login" class="btn">登录</a>
+			</div>
+		</div>
+	</div>
 
-		<div id="page_list">
-			<!-- 登录 -->
-			<div class="contentener" data-contentener data-type="login"> 
-				<div class="login">
-					<div class="wrap">						
-						<div class="logo"><img src="./static/images/logo.png"></div>
-						<div class="cont flex">
-							<div class="left_cont">
-								<img src="./static/images/text_msg.png">
-								<p class="txt1">新零售行业供货平台，<span class="color_blue">提供全面智能的采购管理服务</span></p>
-								<p class="txt2">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外) </p>
-							</div>
-							<div class="login_box">
-								<div class="login_logo"></div>
-								<div class="form">
-									<h6>账号登录</h6>
-									<input class="phone_number" id="phoneNumber" placeholder="请输入您的手机号" type="text" name="">
-									<p class="declare">若手机号未注册则会自动注册</p>
-									<input class="code" id="code" type="text" placeholder="请输入您的验证码" name="">
-									<button id="sendCode">发送验证码</button>
-									<i class="checkbox"></i>已阅读并同意<a href="" class="agreement">《乐橙优品用户注册协议》</a>
-									<button class="login_btn" id="loginBtn">登录</button>
-								</div>
+	<div id="page_list">
+		<!-- 登录 -->
+		<div class="contentener" data-contentener data-type="login">
+			<div class="login">
+				<div class="wrap">
+					<div class="logo">
+						<img src="./static/images/logo.png"></div>
+					<div class="cont flex">
+						<div class="left_cont">
+							<img src="./static/images/text_msg.png">
+							<p class="txt1">
+								新零售行业供货平台，
+								<span class="color_blue">提供全面智能的采购管理服务</span>
+							</p>
+							<p class="txt2">欢迎登录乐橙优品！  服务热线：400-626-9606   工作时间：9:00-18:00 (节假日除外)</p>
+						</div>
+						<div class="login_box">
+							<div class="login_logo"></div>
+							<div class="form">
+								<h6>账号登录</h6>
+								<input class="phone_number" id="phoneNumber" placeholder="请输入您的手机号" type="text" name="">
+								<p class="declare">若手机号未注册则会自动注册</p>
+								<input class="code" id="code" type="text" placeholder="请输入您的验证码" name="">
+								<button id="sendCode">发送验证码</button> <i class="checkbox"></i>
+								已阅读并同意
+								<a class="agreement" id="agreementBtn">《乐橙优品用户注册协议》</a>
+								<button class="login_btn" id="loginBtn">登录</button>
 							</div>
 						</div>
-					</div>	
-					<div class="coryright">
-						Copyright (C) 2016~2018 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
-			        </div>
+					</div>
 				</div>
-            </div>		
+				<div id="agreement">
+					<span id="close"><i></i></span>
+					<h5>《乐橙优品用户注册协议》</h5>
+					<p>
+						在使用“乐橙优品”平台之前，您应当认真阅读并遵守《乐橙优品用户注册协议》（以下简称“本协议”），请您务必完整、充分理解本协议项下各条款内容，如您对本协议有任何疑问，请务必在注册前向乐橙优品的客服或通过电话、邮件咨询。
+						<p>
+							当您按照乐橙优品注册或激活账户页面的引导或要求填写您的注册信息、阅读并同意本协议且完成全部注册或激活账户后，或您以其他乐橙优品授权、许可等其他方式实际使用或登录乐橙优品，即表示您已充分阅读、理解并接受本协议的全部内容，并接受本协议项下的条款与条件的约束。您承诺接受并遵守本协议的约定。无论何时，您不得以不了解本协议的内容主张本协议无效，或要求撤销本协议。
+						</p>
+						<h6>一、 定义及接受条款</h6>
+						<p>
+							1、本协议由您与乐橙优品的运营者根据《中华人民共和国合同法》等法律、法规的规定签订，双方均受本协议条款的约束。本协议具有法律效力。乐橙优品的运营者是指法律认可的经营乐橙优品网站的责任主体【乐橙互联科技有限公司】和/或其关联公司，乐橙优品网站包括但不限于乐橙优品网。
+						</p>
 
-            <!--首页-->
-            <div class="contentener" data-contentener data-type="home" marginbotm margintop> 
+						<p>
+							2、除另行书面声明排除外，乐橙优品服务包括乐橙优品运营者及其关联公司提供的基于互联网以及移动网的服务，且均受本协议约束。如果您对本协议的条款有异议，应立即停止注册/激活账户或停止使用乐橙优品。
+						</p>
+
+						<p>
+							3、本协议内容包括协议正文、法律声明及所有乐橙优品已经发布或将来可能发布的各类规则、公告或通知（以下合称“乐橙优品规则”或“规则”）。所有规则为本协议不可分割的组成部分，与协议正文具有同等法律效力。如规则与本协议约定不一致的，以公布生效日期或签署日期在后的文件为标准生效文本。
+						</p>
+
+						<p>
+							4、乐橙优品有权根据实际情形制订、修改本协议和/或各类规则，并在本平台公布变更公告，且不再另行通知。变更后的协议和规则一经在网站公布后，立即或在公告指定的时间自动生效。若您在前述变更公告公布后仍继续使用乐橙优品服务的，即表示您已经完全理解并接受经修订的协议和规则。若您不同意前述变更或修改，应立即停止使用本平台，并至少应通过电子邮件通知本平台。
+						</p>
+
+						<h6>二、 注册与账户</h6>
+
+						<p>1、注册资格</p>
+
+						<p>
+							在完成注册程序或以其他乐橙优品授权或许可的方式使用本平台服务前，注册人应当是具备完全民事行为能力的自然人、依法设立的法人或其他组织。若注册人不具备前述注册资格，则注册人及其监护人或法定代表人、股东应承担因此而导致的一切法律后果；乐橙优品有权向注册人及其监护人或法定代表人、股东主张相应的赔偿。
+						</p>
+
+						<p>2、账户</p>
+						<p>
+							1) 当注册人按照本平台注册要求填写注册信息、点击或勾选【同意本协议】键且完成注册或激活账户后，或以其他乐橙优品许可的方式实际使用本平台服务时，注册人即受本协议约束，成为乐橙优品的注册用户/会员。注册用户/会员可以使用经乐橙优品确认的邮箱、手机号码或者其它方式作为账户进入乐橙优品平台。
+						</p>
+						<p>
+							2) 乐橙优品的用户/会员应知悉并同意，用户/会员的账户包括登录名及密码，该登录名及密码也可以直接登录乐橙优品以及后续可能开通的其他网站/服务（以下合称“乐橙优品关联网站”）。您在此明确授权，您的账户信息在您已成功注册乐橙优品时，亦同时授权乐橙优品披露给乐橙优品的关联网站使用。
+						</p>
+
+						<p>
+							3) 乐橙优品的用户/会员的账户及设置，不得侵犯或可能侵犯他人合法权益。如您设置的登录名与密码侵犯他人合法权益，乐橙优品有权终止向您提供服务，注销您的账户，并不对此承担任何法律责任。
+						</p>
+
+						<p>
+							4) 乐橙优品的用户/会员在乐橙优品的账户仅能在依据生效的判决或调解文书、裁定书，并经乐橙优品书面确认的情形下，在提供乐橙优品要求的书面文件后，根据乐橙优品制定的流程办理后转让；您的账户项下相应的权利义务必须无条件地一并转移。除此以外，您的账户不得以任何其他形式转让给其他第三方，否则您应承担因此导致的全部法律责任。
+						</p>
+
+						<p>3、信息资料</p>
+
+						<p>
+							1) 乐橙优品的用户/会员在乐橙优品注册或激活登录名与密码时，应当准确完整地提供真实资料信息（包括但不限于营业执照、税务登记证、授权委托书、商标注册证、质检报告、报关单、检验检疫证书、产品来源地证明、自然人姓名、电子邮件地址、联系电话、联系地址等）。乐橙优品的用户/会员应当保证提交的资料信息或其他相应证明的真实性、合法性、准确性、有效性，若因您提交虚假、过期文件或未及时更新或通知证明文件导致纠纷或被相关国家机关处罚的，由您自行独立承担全部法律责任；如因此导致乐橙优品（包括“乐橙优品”合作方、代理人或职员）遭受损失的，您还应向乐橙优品承担全部赔偿责任。乐橙优品还有权向您发出询问和/或要求更正的通知，并有权直接做出删除相应资料的处理，直至中止、终止对您提供部分或全部乐橙优品服务，乐橙优品对此不承担任何法律责任。
+						</p>
+
+						<p>
+							2) 乐橙优品的用户/会员应当及时更新您提供的电子邮件地址、电话、通信地址、邮政编码等联系方式，以便乐橙优品或其他用户/会员与您进行有效联系。因无法通过您提供的联系方式与您取得联系，致使您在使用本平台服务过程中遭受任何损失的，您应自行承担全部后果。您知悉并同意，您有义务保证您所提交的资料信息或其他相关证明发生任何变更或更新时，及时通知本平台，并按本平台的要求进行更新。若上述文件变更或更新导致您不符合本协议所规定的用户/会员资质的，乐橙优品有权单方全部或部分限制您的账户，直至终止本协议，乐橙优品并不因此承担任何法律责任。
+						</p>
+
+						<p>4、账户的保管与注销</p>
+
+						<p>
+							1) 用户/会员应对您的账户、登录名和密码妥善保管并保密，且须自行对您在该登录名和密码下的网络操作（包括但不限于发布信息、进行交易、披露信息、在线签署或续签协议等）承担全部责任。
+						</p>
+
+						<p>
+							2) 非因司法或行政调查原因，乐橙优品不会要求用户/会员提供您的账户与密码；您在登入或登出本平台时，应保管好您的账户、登录名与密码。非因乐橙优品的过错导致的用户/会员账户信息泄露（包括但不限于第三方的网络攻击、您的保管不善或主动泄露、遭受他人诈骗等行为导致的泄露），您应当通过司法、行政等救济途径向实际侵权行为人追偿，乐橙优品对此不承担任何责任。
+						</p>
+
+						<p>
+							3) 当用户/会员发现任何人未经授权使用您的账户，或发生其他可能导致您的账户被盗、遗忘等任何情况，您应立即通知并授权乐橙优品处理该问题。乐橙优品不会对因您未能遵守本款规定而发生的任何损失负责。您知悉并同意，乐橙优品对您的任何请求进行处理均需要合理时间，且乐橙优品进行的处理仍然可能无法避免或阻止您的损失（包括但不限于您的任何损失），除在乐橙优品对您损失的扩大存在法定过错的情形以外，乐橙优品对您的任何损失均不承担任何责任。
+						</p>
+
+						<p>
+							4) 当您连续12个月未使用您的账户或乐橙优品认可的登录名与密码登录过本平台，且您的账户下不存在未到期的有效交易，您的账户可能被乐橙优品注销，所有本平台提供的服务同时终止。
+						</p>
+
+						<p>
+							5) 您可以随时停止使用本平台服务或申请注销用户/会员账户。您知悉并同意，乐橙优品根据用户/会员申请注销其账户的，可在不发出事先通知的情况下实施。用户/会员账户注销后，乐橙优品不再为该用户/会员保留原账号及其有效性。您申请注销账户时，应无条件地保证：1）已全面、适当履行完毕所有已发生的交易或与第三人在该用户/会员账户注销前有可能确认的交易；2）已与乐橙优品结清所有款项。否则，乐橙优品仍享有配合第三方或直接向已注销账户的用户/会员行使索赔或追偿的权利。
+						</p>
+
+						<h6>三、 乐橙优品服务</h6>
+
+						<p>
+							1、乐橙优品的用户/会员可通过乐橙优品及其关联网站提供的平台发布、搜索与服务信息、进行交易磋商、达成交易意向、进行交易、对其他用户/会员进行评价、以及使用其它信息服务及技术服务。
+						</p>
+
+						<p>
+							2、乐橙优品按本协议项下为用户/会员提供的服务仅限于在现有的技术条件下可达到的范围内。本平台无法预见可能出现的技术问题、困难与障碍，例如数据的损失或服务的中断。您应知悉并同意，使用本平台服务的风险由您自行承担。本平台并不能明确地保证本平台提供的服务能完全满足您的要求，亦不能保证本平台的服务是持续性、准确性、可靠性、适用于某一特定用途的，也不能保证本平台的运营从不中断且不存在任何错误或疏漏。
+						</p>
+
+						<p>
+							3、您在使用乐橙优品服务过程中，所产生的应纳税赋，以及相应的硬件、软件等技术服务及其它方面的费用，均由您自行承担。乐橙优品并不为交易各方提供任何涉及金融、法律、税务（代扣代缴）、物流等方面的服务。
+						</p>
+
+						<p>
+							4、您知悉并同意，乐橙优品有权应司法或行政部门要求向其提供您的用户信息和交易记录等信息；当您涉嫌侵犯他人知识产权等合法权益时，乐橙优品有权在认为必要的情形下，向权利人提供您的身份信息。
+						</p>
+
+						<h6>四、乐橙优品平台会员规则</h6>
+
+						<p>1、本平台用户/会员应承诺遵守以下约定：</p>
+
+						<p>
+							1) 遵守国家法律、法规，不违背社会公序良俗或公共道德、不损害社会公共利益，不侵害他人合法权益，不偷税漏税，不违反本协议相关规则及乐橙优品平台各项规则和要求。
+						</p>
+
+						<p>
+							2) 遵守诚实信用的交易原则，不采取不正当竞争行为，不扰乱网上交易的正常秩序，不干扰或妨碍本平台正常运营，不以虚构或歪曲事实的方式评价会员，不诋毁其他会员的商誉或名誉。
+						</p>
+
+						<p>
+							3) 不提供或许诺销售国家禁止或限制销售的原料或服务，不发布违背社会公序良俗或公共道德、或损害社会公共利益、或侵犯他人知识产权或合法权益的、或乐橙优品明确不应在本平台销售的原料或服务信息，不发布其它违法或违反本协议及各类规则的信息。
+						</p>
+
+						<p>
+							4) 未经乐橙优品书面授权，不对从乐橙优品上获取的任何数据或信息进行商业利用，例如复制、拷贝、网络传播乐橙优品网页或服务器存储的任何信息（包括但不限于网页版式、图片、文字、背景、音乐、会员信息、交易信息、汇编、内容排列或显示方式等信息）。
+						</p>
+
+						<p>
+							5) 不使用任何装置、媒体、或计算机程序妨碍或干扰正在乐橙优品上进行的任何正常交易或获取乐橙优品的运营数据；也不得采取任何例如远程攻击、大规模数据加载的方式妨碍或干扰乐橙优品的正常运营。
+						</p>
+
+						<p>
+							2、如果违反前述承诺，您应自行独立承担因此导致的全部法律责任，并在当乐橙优品因此遭受任何损失或遭受任何第三方的索赔，或受到任何行政管理部门的处罚时，向乐橙优品承担全部赔偿责任。所述赔偿责任包括但不限于乐橙优品因此支出的罚款、各类诉讼费、调查费、差旅费以及律师费。此外，乐橙优品还有权：
+						</p>
+
+						<p>1) 在发生恶意交易的情形下，执行关闭相应交易订单等操作，并不对此导致的任何损失承担任何赔偿责任；</p>
+
+						<p>
+							2) 在生效法律文书或行政文书确认您存在违法或侵权行为，或者第三方合理投诉您有违反法律法规的规定或反本协议和/或规则的条款的情形，或在确认您发布或销售有欺诈、假冒伪劣、（可能）侵权原料，侵犯他人合法权益或其他违反法律法规、乐橙优品交易规则等行为时，将该等情形在网站上面向不特定公众披露；同时，您的账户会被冻结或注销，所有平台服务同时中止或终止，乐橙优品对您因此遭受的任何损失均不承担任何赔偿责任；
+						</p>
+
+						<p>3) 不经通知即删除您发布的各类违法或违约信息，乐橙优品对您因此遭受的任何损失均不承担任何赔偿责任；</p>
+
+						<p>
+							4) 单方确认您是否构成对本协议和/或规则的违反，并根据确认结果决定是否终止向您提供服务，且无须征得您的同意或提前通知予您，乐橙优品对您因此遭受的任何损失均不承担任何赔偿责任。
+						</p>
+
+						<h6>五、交易纠纷的解决及特殊授权</h6>
+
+						<p>
+							1、您在乐橙优品与其他会员发生交易纠纷时，应当由交易各方自行协商或通过司法、行政、仲裁等途径解决，该等纠纷均与本平台无关。仅当该等纠纷进入司法或行政程序时，乐橙优品负有配合司法或行政调查提供相应的交易数据或信息的义务。但当您与其它会员不可撤销地授权乐橙优品根据本协议及乐橙优品规则的规定，处理您在乐橙优品上（可能）产生的交易纠纷，则乐橙优品作为独立第三方，有权根据自己的独立判断做出调处决定。该调处决定将对您具有法律约束力，调处各方应知悉并同意无条件地接受乐橙优品的判断和调处决定。除乐橙优品存在故意或重大过失的情形外，本平台对做出的调处决定享有免于被任一调处方追究责任的权利。
+						</p>
+
+						<p>
+							2、当您违反本协议或与乐橙优品签订的其他协议的约定，乐橙优品有权以任何方式通知乐橙优品关联网站或公司，要求其中止、终止对您提供部分或全部服务，且在其运营或实际控制的任何网站面向不特定公众披露您的违约情形。
+						</p>
+
+						<p>
+							3、乐橙优品及其关联网站被许可对于您提供的资料及数据信息，享有排他的、永久的、免费的、在世界各国范围内的使用的权利，前述权利包括但不限于再次许可乐橙优品关联网站或关联公司使用的权利。为推广、宣传、促进交易的目的、且不损害您的隐私权时，乐橙优品及其关联网站有权对于您提供的资料及在本平台形成的各类数据信息（包括但不限于注册资料、交易行为数据及全部展示于乐橙优品的各类信息）进行收集、整理、复制、修订、翻译、汇编、以及在必要情形下进行网络传播。乐橙优品对前述数据享有的权利以及因此形成的衍生作品、汇编作品（包括但不限于多媒体、宣传页、网页等）均享有独立的、完整的知识产权。
+						</p>
+
+						<h6>六、责任范围和责任限制</h6>
+
+						<p>
+							1、 乐橙优品的用户/会员、原料及服务信息均由用户/会员自行发布，且可能存在各种法律风险和瑕疵。乐橙优品仅为您提供获取原料或服务信息、了解交易对方、进行交易磋商及开展交易的网络平台，但乐橙优品无法控制交易所涉及的原料的质量、安全或合法性，以及无法确认商业信息的真实性、准确性和/或交易各方的履约能力。您应自行谨慎判断确定并确认相关原料或信息的真实性、合法性和有效性，并自行承担因此导致的法律后果。
+						</p>
+
+						<p>
+							2、乐橙优品没有义务对所有用户的信息数据、原料和服务信息、交易行为以及与交易有关的其它事项进行逐一审查，除非乐橙优品有合理的理由认为某特定用户/会员或交易行为/订单可能存在重大违法或违约的情形。您应当知悉并同意，您通过本平台获取的任何信息或资料的有效性、准确性、可靠性、稳定性、完整性和及时性均不能获得任何保证或承诺，您应自行承担因获取该等信息或资料可能导致的硬件或软件、操作系统的损毁或数据灭失的风险。
+						</p>
+
+						<p>3、您应当知悉并同意，乐橙优品不对因</p>
+						<p>1) 使用或未能使用乐橙优品服务、</p>
+						<p>2) 非因乐橙优品的过错导致的您的账户被盗用或更改、</p>
+						<p>3) 通过乐橙优品获取信息或进行交易产生的费用或损失、</p>
+						<p>
+							4) 因您自己的重大过失或误解导致的任何损害赔偿承担责任；前述损害及其相应的法律责任应由您独立承担或由您自行向实际侵权人或违约方主张赔偿。
+						</p>
+
+						<p>
+							4、不论在何种情况下，乐橙优品均不对由于不可抗力（因自然灾害、罢工、爆炸，暴乱、战争、政府行为、司法行政命令等）、电力供应或通讯网络服务商、第三方的不作为以及常规或应急信息网络设备维护而造成的服务迟延、变更、瑕疵或障碍承担任何赔偿责任。
+						</p>
+
+						<h6>七、协议的终止</h6>
+
+						<p>
+							1、 用户/会员有权依据本协议项下的约定向本平台申请注销账户，当您的账户被注销后，本协议终止。当您不同意本平台新公布的规则并停止使用本平台，且至少以邮件通知本平台的，乐橙优品有权在收到您的通知三十个工作日内不经事先通知终止为您提供服务。
+						</p>
+
+						<p>
+							2、出现以下情况时，乐橙优品有权直接以注销账户的方式终止本协议，并有权永久冻结（注销）您的账户，且无须为此向您或任何第三方承担任何法律责任：
+						</p>
+
+						<p>1) 您违反本协议条款约定；</p>
+
+						<p>2) 您在本平台有违法、欺诈、盗窃或篡改他人账户信息、或被证明侵犯他人合法权利的；</p>
+
+						<p>3) 您提供的用户信息中的主要内容不真实、不准确、不及时、不完整，致使本平台或其他  交易方无法联系上您的；</p>
+
+						<p>4) 本协议（含规则）变更时，您明示并通知乐橙优品不愿接受新的服务协议的；</p>
+
+						<p>5) 其它乐橙优品认为应当终止服务的情况。</p>
+
+						<p>
+							3、本协议终止后，乐橙优品仍享有获取、保留、删除及全权处理您提供的全部信息的权利，以及当您在使用本平台期间有违法行为或违反本协议和/或规则的，乐橙优品仍享有依据本协议向您主张赔偿的权利。
+						</p>
+
+						<p>
+							4、乐橙优品中止或终止向您提供服务后，对于您在服务中止或终止之前已经发生的交易行为，您应独立自行处理并自行解决因此导致的交易纠纷或争议。如乐橙优品因此遭受损失的，您还应向乐橙优品承担相应的赔偿责任。
+						</p>
+
+						<h6>八、隐私信息的保护与法律声明</h6>
+
+						<p>
+							乐橙优品将在您使用本平台服务时，为您提供安全的个人隐私信息保护。乐橙优品将在本平台公布并定期修订隐私权政策，隐私权政策构成本协议的有效组成部分。乐橙优品将在本平台公布并定期修订相应的法律声明，法律声明构成本协议的有效组成部分。
+						</p>
+
+						<h6>九、法律适用、管辖与其他</h6>
+
+						<p>
+							1、本协议的效力、解释、变更、执行与争议解决均适用中华人民共和国大陆地区法律，如无相关法律规定的，则应参照通用国际商业惯例和/或行业惯例。
+						</p>
+
+						<p>
+							2、本协议包含了您使用乐橙优品需遵守的通行性规则，您在使用乐橙优品时还应遵守乐橙优品的特殊性规则（具体请参见您与乐橙优品签署的其他协议或本平台的交易规则等）。一般性规则如与特殊性规则不一致的，则特殊性规则的约定具有优先效力。
+						</p>
+
+						<p>3、您与本平台之间产生的争议，双方均同意以乐橙优品的运营者住所地人民法院为第一审管辖法院。</p>
+
+						<p>4、本协议以简体中文版本为最终生效版本。</p>
+					</div>
+					<!-- <div class="coryright">
+						Copyright (C) 2016~<span id="nowYear"></span> 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+					</div> -->
+				</div>
+			</div>
+
+			<!--首页-->
+			<div class="contentener" data-contentener data-type="home" marginbotm margintop>
 				<div class="home">
 					<div class="wrap">
 						<div class="wrap_cont">
-							<img src="./static/images/index_banner.jpg">						
-						</div>
+							<img src="./static/images/index_banner.jpg"></div>
 						<div class="top_cont">
 							<div class="title">
 								<h1>乐橙优品</h1>
-				            	<p>新零售，新批发，新商业，提供全面智能的采购管理服务</p>
-				            	<p>更低价.更便捷.更高效</p>
+								<p>新零售，新批发，新商业，提供全面智能的采购管理服务</p>
+								<p>更低价.更便捷.更高效</p>
 							</div>
 							<div class="advantage">
 								<div class="resource">
 									<h2>模式与资源优势</h2>
-									<p>打通供货商→终端门店/营业所零售的快速通路。为供应商、经销商、零售商赋能，抢占线上线下市场
-									</p>
+									<p>打通供货商→终端门店/营业所零售的快速通路。为供应商、经销商、零售商赋能，抢占线上线下市场</p>
 									<p>优质资源供给，快速响应线上采购需求。提升采购效率、降低采购成本、优化采购策略</p>
 								</div>
 								<div class="system">
@@ -108,7 +365,7 @@
 											<img src="static/images/check_icon.png">
 											<h6>财务对账</h6>
 											<p>轻松快捷</p>
-										</li>										
+										</li>
 									</ul>
 									<ul class="table clear">
 										<li>在线快捷订货</li>
@@ -117,86 +374,88 @@
 										<li>实时库存精准管控</li>
 										<li>线下销售订单管理</li>
 										<li>采购入库管理</li>
-									</ul>									
+									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="bottom_cont flex">
 						<div class="left_msg">
-							<h3>传统业务<span class="line"></span></h3>
+							<h3>
+								传统业务
+								<span class="line"></span>
+							</h3>
 							<p class="p1">不同渠道、地域采购，以及商品采购量级不同，导致价格体系不一致，价格存在较大差异，对于小型零售商来说盈利差异较大</p>
 							<p class="p2">人工抄写管理出入库单及账款，难以实现长期清晰对账需求</p>
 							<p class="p3">支付方式、合同、发票方式单一，不够灵活，拉长时间成本</p>
-						</div>		
-						<div class="middle_msg"><img src="./static/images/vs.png"></div>		
+						</div>
+						<div class="middle_msg">
+							<img src="./static/images/vs.png"></div>
 						<div class="right_msg">
-							<h3>乐橙优品<span class="line"></span></h3>
+							<h3>
+								乐橙优品
+								<span class="line"></span>
+							</h3>
 							<p class="p1">集中采购,综合供应链解决方案。不同量级供应</p>
 							<p class="p2">提供灵活的管理模块，避免错单、漏单等情况，且有强大的智能库存管理系统</p>
 							<p class="p3">支持预存款、支付宝、微信等主流支付方式，统计每笔订单，方便渠道上下级之间结算对账</p>
-						</div>		
+						</div>
 					</div>
 				</div>
-            </div>
-            <!--商品中心-->
-            <div class="contentener" data-contentener data-type="commodity_center" marginbotm margintop> 
+			</div>
+			<!--商品中心-->
+			<div class="contentener" data-contentener data-type="commodity" marginbotm margintop>
 				<div class="goods_center">
 					<div class="top_cont flex">
 						<div class="classify">
 							<div class="first_level flex">
 								<span class="level">一级分类</span>
-								<ul class="flex" id="firstLevel">
-									
-								</ul>
-							</div>					
+								<ul class="flex" id="firstLevel"></ul>
+							</div>
 							<div class="second_level flex">
 								<span class="level">二级分类</span>
-								<ul class="flex" id="secondLevel">
-																
-								</ul>
+								<ul class="flex" id="secondLevel"></ul>
 							</div>
 						</div>
 						<div class="search">
-							<div class="search_input">
-								<i></i>
+							<div class="search_input"> <i></i>
 								<input type="text" placeholder="请输入商品名称" id="searchInput" >
 								<button class="search_btn" id="searchBtn">搜索</button>
 							</div>
-							<div class="search_history" id="searchHistory">
-								<a>雪碧</a>
-								<a>可乐</a>
-								<a>冰红茶</a>
-							</div>
+							<div class="search_history" id="searchHistory"></div>
 						</div>
 					</div>
 					<div class="lists">
-						<ul class="clear goods_lists" id="goodsLists">
-							
-						</ul>
+						<ul class="clear goods_lists" id="goodsLists"></ul>
 						<div class="paging clear flex" id="paging">
 							<span class="prev_page border" id="prevPage">上一页</span>
-							<ul class="flex" id="currPage">
-								
-							</ul>
+							<ul class="flex" id="currPage"></ul>
 							<span class="next_page border" id="nextPage">下一页</span>
-							<span class="last_page border" id="lastPage"> >> </span>
-							<span>共<b id="count"></b>页 到第</span><input class="border page_num" type="number" name="" id="inputNum"><span>页</span>
+							<span class="last_page border" id="lastPage">>></span>
+							<span>
+								共 <b id="count"></b>
+								页 到第
+							</span>
+							<input class="border page_num" type="number" name="" id="inputNum">
+							<span>页</span>
 							<button id="pageJump">确定</button>
 						</div>
 					</div>
 				</div>
-            </div>
-            <!--物流服务-->
-            <div class="contentener" data-contentener data-type="Logistics_service" marginbotm margintop> 
+			</div>
+			<!--物流服务-->
+			<div class="contentener" data-contentener data-type="Logistics" marginbotm margintop>
 				<div class="logistics">
 					<div class="wrap">
 						<div class="wrap_cont">
 							<img src="./static/images/logistics_banner.jpg">
 							<div class="title">
-								<h1>借助科技影响力 <span>引领智能物流新时代</span></h1>
+								<h1>
+									借助科技影响力
+									<span>引领智能物流新时代</span>
+								</h1>
 								<p>全方位满足各企业多层次需要</p>
-							</div>						
+							</div>
 						</div>
 					</div>
 					<div class="main_cont">
@@ -228,9 +487,9 @@
 						</ul>
 					</div>
 				</div>
-            </div>
-            <!--关于我们-->
-            <div class="contentener" data-contentener data-type="about_us" marginbotm margintop> 
+			</div>
+			<!--关于我们-->
+			<div class="contentener" data-contentener data-type="about_us" marginbotm margintop>
 				<div class="about_us">
 					<div class="wrap">
 						<div class="wrap_cont">
@@ -238,25 +497,32 @@
 							<div class="title">
 								<h1>关于我们</h1>
 								<p>公司简介  ·  主要业务  ·  平台优势</p>
-							</div>						
+							</div>
 						</div>
 					</div>
 					<div class="main_cont flex">
-						<div class="left_cont"><img src="./static/images/about_us.png"></div>
+						<div class="left_cont">
+							<img src="./static/images/about_us.png"></div>
 						<div class="right_cont">
 							<h2>公司简介</h2>
-							<p>乐橙互联科技有限公司成立于2016年，借助母公司上海银橙文化传媒股份有限公司（证券简称：银橙传媒；证券代码：830999）多年互联网、大数据、新媒体经验和资本实力，通过自主开发的智能系统技术，在电子商务、本地生活服务、O2O、新媒体（新型场景化媒体+移动媒体）等领域积极拓展，致力于整合互联网行业、新零售行业资源，使个人消费者、合作伙伴都能从中获益。努力成长为中国领先的新零售、新媒体领军企业。</p>
+							<p>
+								乐橙互联科技有限公司成立于2016年，借助母公司上海银橙文化传媒股份有限公司（证券简称：银橙传媒；证券代码：830999）多年互联网、大数据、新媒体经验和资本实力，通过自主开发的智能系统技术，在电子商务、本地生活服务、O2O、新媒体（新型场景化媒体+移动媒体）等领域积极拓展，致力于整合互联网行业、新零售行业资源，使个人消费者、合作伙伴都能从中获益。努力成长为中国领先的新零售、新媒体领军企业。
+							</p>
 							<h2>主要业务</h2>
-							<p>"乐橙优品"是乐橙互联下的一个专门针对零售行业的商贸平台，主要提供各种饮料食品。旨在为买卖双方搭建电子商务平台, 促进双方高效、便捷交易。为卖家提供在线营销渠道,同时也帮助买家开拓了更多的采购渠道,方便买家在线筛选各种商品,省时省力且高效筛选出商品,从而完成交易。</p>
+							<p>
+								"乐橙优品"是乐橙互联下的一个专门针对零售行业的商贸平台，主要提供各种饮料食品。旨在为买卖双方搭建电子商务平台, 促进双方高效、便捷交易。为卖家提供在线营销渠道,同时也帮助买家开拓了更多的采购渠道,方便买家在线筛选各种商品,省时省力且高效筛选出商品,从而完成交易。
+							</p>
 							<h2>平台优势</h2>
-							<p>我们的团队大多数拥有资深的零售行业、供应链管理以及网络销售经验,通过整合、筛选分析实时供货方和采购方的数据信息,使卖方免受开发客户群体的困惑,同时也让买家省时、省力、高效筛选出货品 , 从而促进双方的贸易顺利完成。</p>
+							<p>
+								我们的团队大多数拥有资深的零售行业、供应链管理以及网络销售经验,通过整合、筛选分析实时供货方和采购方的数据信息,使卖方免受开发客户群体的困惑,同时也让买家省时、省力、高效筛选出货品 , 从而促进双方的贸易顺利完成。
+							</p>
 
 						</div>
 					</div>
 				</div>
-            </div>
-            <!--联系我们-->
-            <div class="contentener" data-contentener data-type="contact_us" marginbotm margintop> 
+			</div>
+			<!--联系我们-->
+			<div class="contentener" data-contentener data-type="contact_us" marginbotm margintop>
 				<div class="about_us">
 					<div class="wrap">
 						<div class="wrap_cont">
@@ -264,29 +530,40 @@
 							<div class="title">
 								<h1>联系我们</h1>
 								<p>公司位置  ·  联系方式</p>
-							</div>						
+							</div>
 						</div>
 					</div>
 					<div class="main_cont flex">
 						<div class="left_cont clear">
-							<div class="qrcode left"><img src="./static/images/wechat.jpg" width="100%"></div>
+							<div class="qrcode left">
+								<img src="./static/images/wechat.jpg" width="100%"></div>
 							<div class="msg left">
-								<p><i class="email"></i><span>200233</span></p>
-								<p><i class="tell"></i><span>400-626-9606</span></p>
-								<p><i class="addr"></i><span>上海市 徐汇区<br>&nbsp;&nbsp;桂平路481号桂中园18栋6层</span></p>
+								<p>
+									<i class="email"></i>
+									<span>200233</span>
+								</p>
+								<p>
+									<i class="tell"></i>
+									<span>400-626-9606</span>
+								</p>
+								<p>
+									<i class="addr"></i>
+									<span>
+										上海市 徐汇区
+										<br>&nbsp;&nbsp;桂平路481号桂中园18栋6层</span>
+								</p>
 							</div>
 						</div>
-						<div class="right_cont">							
-							<img src="./static/images/address.png">
-						</div>
+						<div class="right_cont">
+							<img src="./static/images/address.png"></div>
 					</div>
 				</div>
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <div class="bottom_coryright">
-			Copyright (C) 2016~2018 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
-        </div>
+		<div class="coryright">
+			Copyright (C) 2016~<span id="nowYear"></span> 乐橙互联科技有限公司 All Rights Reserved. 沪ICP备15032233号
+		</div>
 	</div>
 
 </body>

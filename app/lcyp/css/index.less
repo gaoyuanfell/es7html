@@ -7,13 +7,15 @@
 
 .wrap_cont{ width:1920px; height: 100%; position:absolute; top:0; left:50%; margin-left: -960px;  }
 
-.content{ background: #fff;  font-family: '微软雅黑', simsun, arial;  overflow-y: auto;}
+.content{ background: #fff;  overflow-y: auto;}
 
 .color_blue{ color:@color_blue; }
 
 
 .left{ float: left; }
 .right{ float: right;  }
+
+.contentener{ padding-bottom: 42px; }
 /* 顶部信息 */
 .top_msg{ height: 40px; background: @top_msg_bg; 
 	p{ line-height: 40px; }
@@ -26,7 +28,7 @@
 	.vertical_line{ margin:0 10px; }
 }
 /* 底部版权 */
-.bottom_coryright{ background: #1b1b1b; height: 42px; line-height: 42px; color:#faf8f6; }
+.coryright{ position: fixed;bottom:0;width: 100%; display: block; background: #1b1b1b; height: 42px; line-height: 42px; color:#faf8f6;}
 
 /* 导航 */
 .top_nav{ text-align: left; background: #313131; height: 60px;
@@ -57,7 +59,6 @@
 
 	.logo{ margin:0 0 139px 100px; text-align: left;   }
 
-	.coryright{ position: absolute;bottom:0;width: 100%; display: block; background: #1b1b1b; height: 42px; line-height: 42px; color:#faf8f6;}
 
 	.cont{ justify-content:space-between; }
 
@@ -88,9 +89,20 @@
 
 		.checkbox{ width:16px; height: 16px; background: url('../static/images/checkbox.png') no-repeat; background-position:0 -16px; display: inline-block; vertical-align: top; margin-right: 8px; }
 
-		.agreement{ color:#409eff; }
+		.agreement{ color:#409eff; cursor: pointer; }
 
 		.login_btn{ width: 240px; height: 40px; font-size: 15px; line-height: 40px;margin: 42px auto 0; display: block;  }
+	}
+	#agreement{ position: absolute;top:0;right:0;bottom:0;left:0; margin:auto; width: 1100px; height: 800px; overflow-y:auto;z-index: 9;background: #fff; padding:20px; border-radius: 5px; display: none;
+		h5{ font-size: 18px; line-height: 30px; margin:0; }
+		h6{ font-size: 14px; line-height: 26px; margin:0; text-align: left; font-weight: normal;}
+
+		p{ font-size: 14px; line-height: 24px; text-align: left; text-indent: 2em; }	
+
+		#close{ position: absolute;top:18px; right:10px; width: 40px; height: 40px; display: block; cursor: pointer;
+			i{ position: absolute; top:15px;left:0;width: 30px; height: 3px; display: block; transform: rotate(45deg);background: #aaa; }
+			i:after{ content: ''; position: absolute; top:-13px; right:13px; width: 3px; height: 30px; display: block;background: #aaa; };
+		}
 	}
 }
 
@@ -171,8 +183,8 @@
 	
 	.level{  color:#aaaaaa; line-height: 24px;width: 94px; display: block;}
 
-	.classify ul li{ width:120px;overflow:hidden;text-overflow: ellipsis;
-		a{ color:#535353; line-height: 24px; padding: 0 15px; height: 24px; display: inline-block; cursor: pointer; white-space:nowrap;}
+	.classify ul li{ width:140px;overflow:hidden;text-overflow: ellipsis;
+		a{ color:#535353; line-height: 24px; padding: 0 10px; height: 24px; display: inline-block; cursor: pointer; white-space:nowrap;}
 
 		&.active a{ background: @color_blue; border-radius: 6px;color:#fff;}
 	}
@@ -182,7 +194,7 @@
 	.first_level{ margin-bottom: 21px;  }
 
 	.second_level{ margin-bottom: 42px; 
-		ul{ flex-wrap:wrap;width: 480px;  }
+		ul{ flex-wrap:wrap;width: 560px;  }
 	}
 
 	.top_cont{ justify-content: space-between;}
@@ -198,11 +210,11 @@
 		a{ line-height: 20px;  margin-right:10px; color:#aca9a9; cursor: pointer;}
 	}
 	
-	.lists{ width: 100%; 
+	.lists{ width: 100%;
 
 		.img{ text-align: center; height: 200px; }
 
-		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; }
+		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px; }
 
 		.goods_lists li{ float: left; width: 21%; text-align: left; margin:20px 2% 0; padding-bottom: 15px;
 
@@ -210,7 +222,7 @@
 
 			.title{ color:#535353; font-size: 18px; line-height: 35px; white-space: nowrap; overflow:hidden; text-align: justify;text-overflow: ellipsis}
 
-			.msg span{ width: 50%; float: left; display: block; line-height: 20px; color:#6c6b6b ; font-size: 12px; white-space:nowrap; overflow:hidden;}				
+			.msg span{ width: 50%; float: left; display: block; line-height: 20px; color:#6c6b6b ; font-size: 12px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}				
 
 		}
 		.buy_btn{ width: 127px; height: 35px; background: #f7931e; border-radius: 5px; display: block; margin:0 auto;text-align: center; margin-top: 19px; cursor: pointer;

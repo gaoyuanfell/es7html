@@ -1,4 +1,4 @@
-﻿import '../../common/js/vendor'
+import '../../common/js/vendor'
 import '../../common/css/base.less'
 import './css/index.less'
 import {getHash} from "../../common/js/util";
@@ -23,7 +23,7 @@ function hashChange() {
         ref.animate([
             {opacity: 0},
             {opacity: 1}
-        ], { 
+        ], {
             duration: 250
         })
     }
@@ -34,14 +34,14 @@ function hashChange() {
     let aRef = document.querySelector(`[href="#${hash}"]`);
     if (aRef) aRef.parentNode.classList.add('active')
 
-    if(hash == 'login'){       
+    if(hash == 'login'){
         document.querySelector('.top_msg').style.display='none'
         document.querySelector('.top_nav').style.display='none'
-        document.querySelector('.bottom_coryright').style.display='none'
+        document.querySelector('.contentener').style.paddingBottom='0'
     }else{
         document.querySelector('.top_msg').style.display='block'
         document.querySelector('.top_nav').style.display='block'
-        document.querySelector('.bottom_coryright').style.display='block'
+        document.querySelector('.contentener').style.paddingBottom='42px'
     }
 
 }
@@ -108,7 +108,7 @@ function jsonp(url, body = {}, config = {}, fn) {
     let id = config.name || (prefix + (count++) + +new Date());
 
     body.callback = id;
-    body._ = +new Date();   
+    body._ = +new Date();
     url += url.indexOf('?') > -1 ? '&' : '?';
     url += qs.stringify(body);
 
@@ -148,12 +148,10 @@ async function sendCode(){
         let data = await jsonp(doMainName+"/api/v1/send_login_sms_code",{
             phone_number: phoneNumber
         })
-        console.log(data)
         if(data.status_code == 200){
-            alert("发送成功")
             let timer = null;
             let num = 60;
-            clearInterval(timer);
+            // clearInterval(timer);
             timer = setInterval(function(){
                 num--;
                 let text = `${num}秒后重新发送`;
@@ -166,7 +164,7 @@ async function sendCode(){
                 }else{
                     codeBtn.setAttribute('disabled','disabled');
                     codeBtn.style.color = '#ccc';
-                }                
+                }
                 codeBtn.innerHTML = text;
             },1000)
         }else{
@@ -175,10 +173,10 @@ async function sendCode(){
     }
 }
 // 验证手机号
-function checkPhone(number){ 
-    if(!(/^1[34578]\d{9}$/.test(number))){ 
-        alert("请输入有效的手机号码");  
-        return false; 
+function checkPhone(number){
+    if(!(/^1[34578]\d{9}$/.test(number))){
+        alert("请输入有效的手机号码");
+        return false;
     }else{
         return true
     }
@@ -194,7 +192,7 @@ async function login(){
             code : code
         })
         if(data.status_code == 200){
-            history.go(-1);
+            location.href='https://admin.lcyp.net/manage'
             document.querySelectorAll('.right_btn').style.display = 'none'
         }else{
             alert(data.error_message);
@@ -203,12 +201,7 @@ async function login(){
         alert("请输入正确的验证码")
     }
 }
-document.getElementById('sendCode').onclick = function(){
-    sendCode();
-}
-document.getElementById('loginBtn').onclick = function(){
-    login();
-}
+
 // 商品列表
 let firstId = 0
     ,secondId = 0
@@ -217,7 +210,7 @@ let firstId = 0
 const limit = 12;
 // 获取商品列表数据
 async function getGoodsLists(){
-     
+
     let data = await jsonp(doMainName + "/api/v1/get/product_list",{
         product_category_id_first: firstId,
         product_category_id: secondId,
@@ -228,12 +221,12 @@ async function getGoodsLists(){
     if(data.is_logined){
         document.querySelector('.right_btn').style.display = 'none'
     }
-    return data   
+    return data
 
 }
 // 一级分类
 function firstLevel(){
-    getGoodsLists(firstId,secondId,1).then( (data)=>{        
+    getGoodsLists().then( (data)=>{
         // 一级分类
         let cateHtml = `
             <li data-id="{{ $id }}"><a>{{ label }}</a></li>
@@ -244,10 +237,10 @@ function firstLevel(){
         })
         data.category_list.forEach( (v,i)=>{
             v.$id = +v.value
-            firstLevel += new Template(cateHtml, v).compile();       
+            firstLevel += new Template(cateHtml, v).compile();
         })
-        document.getElementById('firstLevel').innerHTML = firstLevel;   
-        document.getElementById('firstLevel').getElementsByTagName('li')[0].className = 'active' 
+        document.getElementById('firstLevel').innerHTML = firstLevel;
+        document.getElementById('firstLevel').getElementsByTagName('li')[0].className = 'active'
         secondLevel(data)
     })
 
@@ -256,7 +249,7 @@ function firstLevel(){
 function secondLevel(data){
     let oLis = document.getElementById('firstLevel').getElementsByTagName('li');
     // 默认
-    let cateHtml = `<li data-id="0" title="全部" class="active"><a>全部</a></li>`    
+    let cateHtml = `<li data-id="0" title="全部" class="active"><a>全部</a></li>`
     document.getElementById('secondLevel').innerHTML = cateHtml;
     // 点击
     for(let i = 0; i < oLis.length; i++){
@@ -265,32 +258,41 @@ function secondLevel(data){
                 oLis[j].className = ' ';
             }
             this.className = 'active'
-            let id = this.getAttribute('data-id')    
-            firstId = id  
-            secondId = 0                         
+            let id = this.getAttribute('data-id')
+            firstId = id
+            secondId = 0
+            currPageNum = 1;
+            productName = '';
             showGoods()
             paging(data)
             data.category_list.forEach( (v,i )=>{
                 if(id == +v.value){
-                    let secondLevel = []
+                    let secondLevel = [
+                        '<li data-id="0" title="全部"><a>全部</a></li>'
+                    ]                    
                     let cateHtml = `<li data-id="{{ $id }}" title="{{ label }}"><a>{{ label }}</a></li>`
                     v.children.forEach( (v2,i2)=>{
                         v2.$id = +v2.value
-                        secondLevel += new Template(cateHtml, v2).compile();
+                        if(v2.value == 0){
+                            return
+                        }else{
+                            secondLevel += new Template(cateHtml, v2).compile();
+                        }
                     })
                     document.getElementById('secondLevel').innerHTML = secondLevel;
                     let firstDom = document.getElementById('secondLevel').getElementsByTagName('li')[0]
                     firstDom.className = 'active'
-                    let oLis = document.getElementById('secondLevel').getElementsByTagName('li');      
+                    let oLis = document.getElementById('secondLevel').getElementsByTagName('li');
                     for(let i = 0; i < oLis.length; i++){
                         oLis[i].onclick = function(){
                             for(let j = 0 ; j < oLis.length; j++){
                                 oLis[j].className = ' ';
                             }
-                            this.className = 'active'  
+                            this.className = 'active'
                             let id2 =   this.getAttribute('data-id')
-                            secondId = id2  
-                            console.log(firstId,secondId,currPageNum)
+                            secondId = id2
+                            currPageNum = 1;
+                            productName = '';
                             showGoods()
                             paging(data)
                         }
@@ -303,59 +305,82 @@ function secondLevel(data){
 // 显示商品列表
 function showGoods(){
     getGoodsLists().then( (data)=>{
-        console.log(data)
-        let html = `
-            <li data-index={{$index}}>
-                <div class="img"><img src="{{ cover_url}}"></div>
-                <div class="msg clear">
-                    <p class="title" title="{{ name }}">{{ name }}</p>
-                    <span>一级分类：{{ first_category_name }}</span>
-                    <span>二级分类：{{ category_name }}</span>
-                    <span>零售规格：{{ unit }}</span>
-                    <span>生产厂商：{{ brand }}</span>
-                </div>
-                <a class="buy_btn">
-                    <i></i>
-                    <span>前往购买</span>
-                </a>
-            </li>
-        `
-        let goodsLists = [];
-        data.list.forEach( (v,i)=>{
-            v.$index = i;
-            goodsLists += new Template(html, v).compile();
-        })
-        document.getElementById('goodsLists').innerHTML = goodsLists;
-        let allBtn = document.querySelectorAll('.buy_btn')
-        for(let i = 0; i < allBtn.length; i++){
-            allBtn[i].onclick = function(){
-                jumpToBuy(data.is_logined);
-            }
-        } 
-        let pagingStatu = document.getElementById('paging')
-        if(data.total_count <= limit){
-            pagingStatu.style.display = 'none';
+        if(data.list.length ==0 ){
+            document.getElementById('goodsLists').innerHTML = '暂无商品'
         }else{
-            pagingStatu.style.display = 'flex';
+            let html = ``
+            let goodsLists = [];
+            data.list.forEach( (v,i)=>{
+                v.$index = i;
+                if(v.brand == ''){
+                    html = `
+                        <li data-index={{$index}}>
+                        <div class="img"><img src="{{ cover_url}}"></div>
+                        <div class="msg clear">
+                            <p class="title" title="{{ name }}">{{ name }}</p>
+                            <span>一级分类：{{ first_category_name }}</span>
+                            <span>二级分类：{{ category_name }}</span>
+                            <span>零售规格：{{ unit }}</span>
+                        </div>
+                        <a class="buy_btn">
+                            <i></i>
+                            <span>前往购买</span>
+                        </a>
+                    </li>
+                    `
+                }else{
+                    html = `
+                        <li data-index={{$index}}>
+                            <div class="img"><img src="{{ cover_url}}"></div>
+                            <div class="msg clear">
+                                <p class="title" title="{{ name }}">{{ name }}</p>
+                                <span>一级分类：{{ first_category_name }}</span>
+                                <span>二级分类：{{ category_name }}</span>
+                                <span>零售规格：{{ unit }}</span>
+                                <span title="{{ brand }}">生产厂商：{{ brand }}</span>                        
+                            </div>
+                            <a class="buy_btn">
+                                <i></i>
+                                <span>前往购买</span>
+                            </a>
+                        </li>
+                    `
+                }
+                goodsLists += new Template(html, v).compile();
+            })
+            document.getElementById('goodsLists').innerHTML = goodsLists;
+            let allBtn = document.querySelectorAll('.buy_btn')
+            for(let i = 0; i < allBtn.length; i++){
+                allBtn[i].onclick = function(){
+                    jumpToBuy(data.is_logined);
+                }
+            }
+            let pagingStatu = document.getElementById('paging')
+            if(data.total_count <= limit){
+                pagingStatu.style.display = 'none';
+            }else{
+                pagingStatu.style.display = 'flex';
+            }
+            paging(data)
+            document.getElementById('searchInput').value = ''
         }
-        paging(data)
     })
 }
 // 分页生成
-function paging(data){    
+function paging(data){
     let count = Math.ceil( data.total_count / limit )
     let page = getPageList(3,count,currPageNum)
     let pageHtml = null
     let pageArr = []
     page.forEach( (v,i)=>{
-        v.$val = getObjFirst(v)   
-        if(v.type == 0){               
+        v.$val = getObjFirst(v)
+        if(v.type == 0){
             pageHtml = `<li data-id="-1">{{ $val }}</li>`
         }else if(v.number == currPageNum){
             pageHtml = `<li data-id="{{ $val }}" class="active">{{ $val }}</li>`
-        }else{    
-            pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`   
-        }     
+        }else{
+            pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`
+        }
         pageArr += new Template(pageHtml,v).compile();
     })
     document.getElementById('currPage').innerHTML = pageArr;
@@ -384,7 +409,7 @@ function pagingChange(){
             showGoods();
         }
     }
-    nextPage.onclick = function(){  
+    nextPage.onclick = function(){
         if( currPageNum == count){
             nextPage.style.color="#dadada"
         }else if(currPageNum == count - 1){
@@ -401,15 +426,13 @@ function pagingChange(){
         if(currPageNum == count){
             return
         }else{
-            console.log(currPageNum,count)
             currPageNum = count
-            console.log(currPageNum)
             nextPage.style.color="#dadada"
             showGoods();
         }
     }
     pageJump.onclick = function(){
-        let num = inputNum.value;        
+        let num = inputNum.value;
         if(num<=1){
             num = 1
         }else if(num >= count){
@@ -418,13 +441,13 @@ function pagingChange(){
         if(currPageNum == num ){
             return
         }else{
-            currPageNum = num;        
+            currPageNum = num;
             showGoods();
             inputNum.value = '';
         }
     }
     for(let i = 0; i < pages.length; i++){
-        pages[i].onclick = function(){            
+        pages[i].onclick = function(){
             if(this.getAttribute('data-id') == '-1'){
                 return
             }else{
@@ -434,44 +457,48 @@ function pagingChange(){
                 currPageNum = this.getAttribute('data-id')
                 if(currPageNum == 1){
                     prevPage.style.color="#dadada"
+                    nextPage.style.color="#aaaaaa"
                 }else if( currPageNum == count){
+                    prevPage.style.color="#aaaaaa"
                     nextPage.style.color="#dadada"
                 }else{
                     prevPage.style.color="#aaaaaa"
                     nextPage.style.color="#aaaaaa"
-                }                
+                }
                 showGoods();
             }
         }
     }
 }
 // 搜索
-function searchGoods(){   
+function searchGoods(){
     let searchBtn = document.getElementById('searchBtn')
     let historyDiv = document.getElementById('searchHistory')
-    let id = 0
-    searchBtn.onclick = function(){        
+
+    searchBtn.onclick = function(){
         let searchInput = document.getElementById('searchInput').value
         productName = searchInput
+        firstId = 0;
+        secondId = 0;
+        currPageNum = 1;
         showGoods();
-        // let a = document.createElement('a')
-        // a.innerHTML = searchInput
-        // a.id=id
-        // id++
-        // let beforeNode = document.getElementById(id-1)
-        // historyDiv.insertBefore(a,beforeNode)
-
-
-
-    }
-    let searchHistory = historyDiv.getElementsByTagName('a')
-    for(let i = 0; i < searchHistory.length; i++){
-        searchHistory[i].onclick = function(){
+        let a = document.createElement('a')
+        a.innerHTML = searchInput   
+        a.onclick = function(){
             let val = this.innerHTML
             productName =  val
+            firstId = 0;
+            secondId = 0;
+            currPageNum = 1;
             showGoods();
-        }
-    }
+        }    
+        let searchHistory = historyDiv.getElementsByTagName('a')
+        historyDiv.insertBefore(a,searchHistory[0])
+        if(searchHistory.length > 5){
+            historyDiv.removeChild(searchHistory[ searchHistory.length -1 ])
+        }  
+    }   
+
 }
 
 // 获取对象第一个属性值
@@ -491,11 +518,35 @@ function jumpToBuy(login){
 
 window.onload = function(){
     firstLevel();
-    showGoods(); 
-    searchGoods(); 
+    showGoods();
+    searchGoods();
+
+    document.getElementById('sendCode').onclick = function(){
+        sendCode();
+    }
+    document.getElementById('loginBtn').onclick = function(){
+        login();
+    }
+    // 协议
+    document.getElementById('agreementBtn').onclick = function(ev){
+        document.getElementById('agreement').style.display= 'block'
+        var oEvent = ev || event;
+        oEvent.cancelBubble = true;
+    }
+    document.querySelector('.login').onclick = function(){
+        document.getElementById('agreement').style.display= 'none'
+    }
+    document.getElementById('close').onclick = function(){
+        document.getElementById('agreement').style.display= 'none'
+    }
+    document.getElementById('agreement').onclick = function(ev){
+        var oEvent = ev || event;
+        oEvent.cancelBubble = true;
+    }
+    document.getElementById('nowYear').innerHTML = nowYear()
 }
 
-// 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示... 
+// 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示...
 function getPageList(n, tp, p) {
         n = +n;
         tp = +tp;
@@ -551,3 +602,9 @@ function getPageList(n, tp, p) {
         return arr;
 }
 
+// 版权年份
+function nowYear(){
+    let date = new Date();
+    let year = date.getFullYear();
+    return year
+}
