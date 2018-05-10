@@ -61,3 +61,7 @@ pwd:www.ycmedia.cn
 ycmedia2018
 空间 www-ycmedia
 测试域名test.ycmedia.cn
+
+#乐橙优品
+空间 lcyoupin
+测试域名 res.lcyp.net https://www.lcyp.net
