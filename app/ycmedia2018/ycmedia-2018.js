@@ -893,3 +893,4 @@ async function getData() {
 
 }()
 
+document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
