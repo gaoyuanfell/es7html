@@ -32,7 +32,7 @@
 .left{ float: left; }
 .right{ float: right;  }
 
-.contentener{ padding-bottom: 42px; }
+.contentener{ padding-bottom: 42px; display: none;}
 /* 顶部信息 */
 .top_msg{ height: 40px; background: @top_msg_bg;
 	p{ line-height: 40px; }
@@ -194,7 +194,9 @@
 		.middle_msg{ padding-top: 20px; }
 	}
 }
-
+.loading{ position: fixed; top:100px;left:0;width:100%; height: 500px; background: #fff; z-index: 8; display: none;
+    i{ background: url("../static/images/loading.gif") no-repeat bottom center;display: block; width: 100%; height: 50%; }
+}
 /* 商品中心 */
 .goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px;
 
@@ -231,7 +233,7 @@
 
 		.img{ text-align: center; height: 200px; }
 
-		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px; }
+		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px;}
 
 		.goods_lists li{ float: left; width: 21%; text-align: left; margin:20px 2% 0; padding-bottom: 15px;
 
