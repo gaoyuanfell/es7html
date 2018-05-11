@@ -517,17 +517,16 @@ function jsonp(url, body = {}, config = {}, fn) {
 * page默认第一页
 * 改变page值获取对应页码的值
 * */
+let currPageNum = 1;
+let currPageNum2 = 1;
 async function getData() {
     let bo = true;
-    let page = 0;
-
     let list;
     let contentList = [];
-
     while (bo) {
         let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
             disclosureType: 5,
-            page: page,
+            page: currPageNum-1,
             companyCd: 830999,
             isNewThree: 1,
             startTime: '',
@@ -535,48 +534,319 @@ async function getData() {
             keyword: '关键字',
             xxfcbj: '',
         })
-        ++page
+        ++currPageNum
         if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
             list = data[0].list;
             bo = false;
             return contentList
         }
-        contentList.push(...data[0].listInfo.content)
+        contentList.push(...data[0].listInfo.content)      
     }
 }
-
+// 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示...
+function getPageList(n, tp, p) {
+        n = +n;
+        tp = +tp;
+        p = +p;
+        if (p > tp) {
+            p = 1;
+        }
+        let arr = [];
+        let s = n * 2 + 5;
+        if (tp >= s) {
+            let _n = n;
+            let _p = p;
+            if (p - n - 2 < 1) {
+                while (_p) {
+                    arr.unshift({number: _p, type: 1});
+                    --_p;
+                }
+                _p = p;
+                while (++_p <= n * 2 + 3) {
+                    arr.push({number: _p, type: 1});
+                }
+                arr.push({text: '...', type: 0}, {number: tp, type: 1});
+            } else if (p + n + 2 > tp) {
+                while (_p <= tp) {
+                    arr.push({number: _p, type: 1});
+                    ++_p;
+                }
+                _p = p;
+                while (--_p > tp - n * 2 - 3) {
+                    arr.unshift({number: _p, type: 1});
+                }
+                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
+            } else {
+                while (_n) {
+                    arr.push({number: p - _n, type: 1});
+                    --_n;
+                }
+                arr.push({number: p, type: 1});
+                _n = n;
+                let i = 1;
+                while (i <= _n) {
+                    arr.push({number: p + i, type: 1});
+                    ++i;
+                }
+                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
+                arr.push({text: '...', type: 0}, {number: tp, type: 1});
+            }
+        } else {
+            while (tp) {
+                arr.unshift({number: tp--, type: 1});
+            }
+        }
+        return arr;
+}
+// 获取对象第一个属性值
+function getObjFirst(obj){
+    for(let i in obj){
+        return obj[i]
+    }
+}
+// 首次将数据全部拿到，存缓存（数据+唯一标识），后面请求一次，拿第一条的唯一标识做比较，相等就说明数据没更新，反之重新请求数据
+// ----最后判断是只添加新数据存缓存还是再次全部请求？？？
+// 获取唯一标识,请求第一页数据（page = 0）的唯一标识disclosureCode
+async function getOnlyId(){
+    let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
+        disclosureType: 5,
+        page: 0,
+        companyCd: 830999,
+        isNewThree: 1,
+        startTime: '',
+        endTime: '',
+        keyword: '关键字',
+        xxfcbj: '',
+    })
+    let id = data[0].listInfo.content[0].disclosureCode
+    return id;
+}
 !function () {
     let investorLSref = document.querySelector('#investorLS');
     let investorDQref = document.querySelector('#investorDQ');
-
-    getData().then(contentList => {
-        let investorLS = contentList.filter((ele) => {
-            if (ele.disclosureType === '9504') return true;
+    let eachPageNum = 6;
+    noticeLists()
+    function noticeLists(){
+        getOnlyId().then( (id)=>{
+            renderDatas(id)
         })
-
-        let investorDQ = contentList.filter((ele) => {
-            if (ele.disclosureType === '9503') return true;
+    }
+    // 判断从哪获取数据
+    function renderDatas(onlyId){
+        let store = JSON.parse(getStore('noticeLists'))
+        if(store != undefined && store != null && store.onlyId == onlyId){
+            console.log('getStore')
+            let listsDatas = store.datas
+            renderList(listsDatas,'9504')
+            renderList(listsDatas,'9503')
+        }else{
+            getData().then( data=>{
+                renderList(data,'9504')
+                renderList(data,'9503')
+                let newLists = []
+                data.forEach( (v, i) => {
+                    let obj = {}
+                    obj['disclosureTitle'] = v.disclosureTitle
+                    obj['disclosurePostTitle'] = v.disclosurePostTitle
+                    obj['disclosureType'] = v.disclosureType
+                    obj['disclosureCode'] = v.disclosureCode
+                    obj['destFilePath'] = v.destFilePath
+                    obj['publishDate'] = v.publishDate
+                    newLists.push(obj)
+                });
+                let noticeLists = {
+                    onlyId: data[0].disclosureCode,
+                    datas: newLists                   
+                }
+                setStore('noticeLists',noticeLists)
+            })
+        }
+    }
+    // 渲染页面
+    function renderList(contentList,type){
+        let data = contentList.filter((ele) => {
+            if (ele.disclosureType === type) return true;
         })
+        if(type == '9504'){
+            let investorLS = data;
+            let investorLSHtml = ''
+            for (let i = eachPageNum * (currPageNum-1); i < eachPageNum * currPageNum && i < data.length; i++) {
+                let provi = investorLS[i];
+                provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
+                provi.disclosurePostTitle = provi.disclosurePostTitle;
+                let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+                investorLSHtml += add
+            }
+            investorLSref.innerHTML = ''
+            investorLSref.innerHTML = investorLSHtml
+            paging(investorLS)
+        }else if(type == '9503'){
+            let investorDQ = data;
+            let investorDQHtml = ''
+            for (let i = eachPageNum * (currPageNum2-1); i < eachPageNum * currPageNum2 && i < data.length; i++) {
+                let provi = investorDQ[i];
+                provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
+                provi.disclosurePostTitle = provi.disclosurePostTitle;
+                let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
+                investorDQHtml += add
+            }
+            investorDQref.innerHTML = ''
+            investorDQref.innerHTML = investorDQHtml
+            paging2(investorDQ)
+        }
+    }
+    // 分页 
+    function paging(data){
+        let maxPage = Math.ceil(data.length / eachPageNum)
+        let pages = getPageList(3,maxPage,currPageNum)
+        let pageHtml = null
+        let pageArr = []
+        pages.forEach( (v,i)=>{
+            v.$val = getObjFirst(v)
+            if(v.type == 0){
+                pageHtml = `<li data-id="-1">{{ $val }}</li>`
+            }else if(v.number == currPageNum){
+                pageHtml = `<li data-id="{{ $val }}" class="active">{{ $val }}</li>`
+            }else{
+                pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`
+            }
+            pageArr += new Template(pageHtml,v).compile();
+        })
+        document.getElementById('currPage').innerHTML = pageArr;
+        pagingChange()
+    }
+    function paging2(data){
+        let maxPage = Math.ceil(data.length / eachPageNum)
+        let pages = getPageList(3,maxPage,currPageNum2)
+        let pageHtml = null
+        let pageArr = []
+        pages.forEach( (v,i)=>{
+            v.$val = getObjFirst(v)
+            if(v.type == 0){
+                pageHtml = `<li data-id="-1">{{ $val }}</li>`
+            }else if(v.number == currPageNum2){
+                pageHtml = `<li data-id="{{ $val }}" class="active">{{ $val }}</li>`
+            }else{
+                pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`
+            }
+            pageArr += new Template(pageHtml,v).compile();
+        })
+        document.getElementById('currPage2').innerHTML = pageArr;
+        pagingChange2()
+    }
+    // 分页切换
+    function pagingChange(){
+        let prevPage = document.getElementById('prevPage')
+            ,nextPage = document.getElementById('nextPage')
+            ,pages = document.getElementById('currPage').getElementsByTagName('li')
+            ,count = pages[pages.length - 1].innerText;
 
-        let investorLSHtml = ''
-        for (let i = 0; i < investorLS.length; i++) {
-            let provi = investorLS[i];
-            provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
-            provi.disclosurePostTitle = provi.disclosurePostTitle;
-            let add = '<li><a target="_blank"  title="' + provi.disclosureTitle + provi.disclosurePostTitle + '" href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-            investorLSHtml += add
+        prevPage.onclick = function(){
+            if( currPageNum == 1){
+                prevPage.style.color="#dadada"
+            }else if(currPageNum == 2){
+                prevPage.style.color="#dadada"
+                currPageNum--
+                noticeLists();
+            }else{
+                prevPage.style.color="#aaaaaa"
+                currPageNum--
+                noticeLists();
+            }
         }
-        investorLSref.innerHTML = investorLSHtml
-        let investorDQHtml = ''
-        for (let i = 0; i < investorDQ.length; i++) {
-            let provi = investorDQ[i];
-            provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
-            provi.disclosurePostTitle = provi.disclosurePostTitle;
-            let add = '<li><a target="_blank" title="' + provi.disclosureTitle + provi.disclosurePostTitle + '"  href="http://www.neeq.com.cn' + provi.destFilePath + '">' + provi.disclosureTitle + provi.disclosurePostTitle + '</a><span>' + provi.publishDate + '</span>';
-            investorDQHtml += add
+        nextPage.onclick = function(){
+            if( currPageNum == count){
+                nextPage.style.color="#dadada"
+            }else if(currPageNum == count - 1){
+                nextPage.style.color="#dadada"
+                currPageNum++
+                noticeLists();
+            }else{
+                nextPage.style.color="#aaaaaa"
+                currPageNum++
+                noticeLists();
+            }
+        }    
+        for(let i = 0; i < pages.length; i++){
+            pages[i].onclick = function(){
+                if(this.getAttribute('data-id') == '-1'){
+                    return
+                }else{
+                    for(let j = 0 ; j < pages.length; j++){
+                        pages[j].className = ' ';
+                    }
+                    currPageNum= +this.getAttribute('data-id')
+                    if(currPageNum == 1){
+                        prevPage.style.color="#dadada"
+                        nextPage.style.color="#aaaaaa"
+                    }else if( currPageNum == count){
+                        prevPage.style.color="#aaaaaa"
+                        nextPage.style.color="#dadada"
+                    }else{
+                        prevPage.style.color="#aaaaaa"
+                        nextPage.style.color="#aaaaaa"
+                    }
+                    noticeLists();
+                }
+            }
         }
-        investorDQref.innerHTML = investorDQHtml
-    });
+    }
+    function pagingChange2(){
+        let prevPage = document.getElementById('prevPage2')
+            ,nextPage = document.getElementById('nextPage2')
+            ,pages = document.getElementById('currPage2').getElementsByTagName('li')
+            ,count = pages[pages.length - 1].innerText;
+
+        prevPage.onclick = function(){
+            if( currPageNum2 == 1){
+                prevPage.style.color="#dadada"
+            }else if(currPageNum2 == 2){
+                prevPage.style.color="#dadada"
+                currPageNum2--
+                noticeLists();
+            }else{
+                prevPage.style.color="#aaaaaa"
+                currPageNum2--
+                noticeLists();
+            }
+        }
+        nextPage.onclick = function(){
+            if( currPageNum2 == count){
+                nextPage.style.color="#dadada"
+            }else if(currPageNum2 == count - 1){
+                nextPage.style.color="#dadada"
+                currPageNum2++
+                noticeLists();
+            }else{
+                nextPage.style.color="#aaaaaa"
+                currPageNum2++
+                noticeLists();
+            }
+        }    
+        for(let i = 0; i < pages.length; i++){
+            pages[i].onclick = function(){
+                if(this.getAttribute('data-id') == '-1'){
+                    return
+                }else{
+                    for(let j = 0 ; j < pages.length; j++){
+                        pages[j].className = ' ';
+                    }
+                    currPageNum2= +this.getAttribute('data-id')
+                    if(currPageNum2 == 1){
+                        prevPage.style.color="#dadada"
+                        nextPage.style.color="#aaaaaa"
+                    }else if( currPageNum2 == count){
+                        prevPage.style.color="#aaaaaa"
+                        nextPage.style.color="#dadada"
+                    }else{
+                        prevPage.style.color="#aaaaaa"
+                        nextPage.style.color="#aaaaaa"
+                    }
+                    noticeLists();
+                }
+            }
+        }
+    }
 }()
 
 ~function () {
@@ -925,4 +1195,32 @@ async function getData() {
 
 }()
 
+
+/**
+ * 存储localStorage
+ */
+function setStore(name, content){
+    if (!name) return;
+    if (typeof content !== 'string') {
+        content = JSON.stringify(content);
+    }
+    window.localStorage.setItem(name, content);
+}
+/**
+ * 获取localStorage
+ */
+function getStore(name ){
+    if (!name) return;
+    return window.localStorage.getItem(name);
+}
+/**
+ * 删除localStorage
+ */
+function removeStore( name){
+    if (!name) return;
+    window.localStorage.removeItem(name);
+}
+ 
+
 document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
+
