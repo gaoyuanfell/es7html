@@ -392,3 +392,5 @@ for(let i=0 ; i<oli.length ; i++){
 }()
 
 
+document.querySelector('.nowyear').innerHTML = new Date().getFullYear()
+document.querySelector('.nowyear1').innerHTML = new Date().getFullYear()

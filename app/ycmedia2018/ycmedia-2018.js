@@ -1189,3 +1189,6 @@ function removeStore( name){
     window.localStorage.removeItem(name);
 }
  
+
+document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
+
