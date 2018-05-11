@@ -19,25 +19,26 @@
 </head>
 <body>
 <div class="content">
-    <div class="top_nav clear">
-        <div class="logo">
-            <img src="./static/images/logo.png" alt="">
-        </div>
-        <div class="right flex">
-            <ul class="nav flex" id="filters">
-                <li class="item"><a href="#home"><span>首页</span></a></li>
-                <li class="item"><a href="#business"><span>业务板块</span></a></li>
-                <li class="item"><a href="#solution"><span>解决方案</span></a></li>
-                <li class="item"><a href="#case"><span>案例中心</span></a></li>
-                <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
-                <li class="item"><a href="#about"><span>关于银橙</span></a></li>
-                <li class="item"><a href="#investor"><span>投资者关系</span></a></li>
-            </ul>
-            <div class="sns">
-                <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
+    <div class="scroll-content">
+        <div class="top_nav clear">
+            <div class="logo">
+                <img src="./static/images/logo.png" alt="">
+            </div>
+            <div class="right flex">
+                <ul class="nav flex" id="filters">
+                    <li class="item"><a href="#home"><span>首页</span></a></li>
+                    <li class="item"><a href="#business"><span>业务板块</span></a></li>
+                    <li class="item"><a href="#solution"><span>解决方案</span></a></li>
+                    <li class="item"><a href="#case"><span>案例中心</span></a></li>
+                    <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
+                    <li class="item"><a href="#about"><span>关于银橙</span></a></li>
+                    <li class="item"><a href="#investor"><span>投资者关系</span></a></li>
+                </ul>
+                <div class="sns">
+                    <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
+                </div>
             </div>
         </div>
-    </div>
 
     <div id="page_list">
         <!--首页-->
@@ -127,7 +128,7 @@
             </div>
         </div>
         <!--业务板块-->
-        <div class="contentener" id="contentener" data-contentener data-type="business" margintop marginbotm>
+        <div class="contentener" id="contentener" data-contentener data-type="business" marginbotm>
             <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
             <div class="sector_cont baibg">
                 <div class="main clear zhicheng">
@@ -159,7 +160,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sector_cont baibg">
+            <div class="sector_cont baibg" id="guangcheng">
                 <div class="main clear lingshou">
                     <div class="briefing_text fl hover_on">
                         <h4 class="title spot">新零售</h4>
@@ -168,7 +169,7 @@
                         </p>
                         <a href="javascript:void (0);" class="link">官网详情&nbsp;&gt;</a>
                     </div>
-                    <div class="imgright fr" id="guangcheng">
+                    <div class="imgright fr">
                         <img src="./static/images/ywytop3_01.png" alt="" class="one">
                         <img src="./static/images/ywytop3_02.png" alt="" class="two">
                     </div>
@@ -197,7 +198,7 @@
             </div>
         </div>
         <!--解决方案-->
-        <div class="contentener" data-contentener data-type="solution" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="solution" marginbotm>
             <div class="sectortit"><img src="./static/images/any_tit.png" alt=""></div>
             <div class="solution_box flex">
                 <div class="left">
@@ -229,7 +230,7 @@
             </div>
         </div>
         <!--案例中心-->
-        <div class="contentener" data-contentener data-type="case" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="case" marginbotm>
             <div class="sectortit case_tit">
                 <img src="./static/images/anzxy_tit.png" alt="">
             </div>
@@ -238,7 +239,7 @@
             </div>
         </div>
         <!--合作伙伴-->
-        <div class="contentener" data-contentener data-type="partners" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="partners" marginbotm>
             <div class="sectortit"><img src="./static/images/hzhb_tit.png" alt=""></div>
             <div class="partners">
                 <div class="baibg">
@@ -281,7 +282,7 @@
             </div>
         </div>
         <!--关于银橙-->
-        <div class="contentener" data-contentener data-type="about" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="about" marginbotm>
             <div class="sectortit about_tit clear">
                 <img src="./static/images/gyyc_tit.png" alt="">
                 <ul class="about_menu flex" id="about_menu">
@@ -1007,7 +1008,7 @@
             </div>
         </div>
         <!--投资者关系-->
-        <div class="contentener" data-contentener data-type="investor" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="investor" marginbotm>
             <div class="sectortit about_tit"><img src="./static/images/tzzgx_tit.png" alt=""></div>
             <div class="main huibg">
                 <div id="popup_7" class="notice_box">
@@ -1043,9 +1044,10 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <span>上海银橙文化传媒股份有限公司</span>银橙（上海）信息技术有限公司 Copyright（C）2008- <span id="nowyear"></span>  YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
-        </div>
+    </div>
+  </div>
+    <div class="footer">
+        <span class="ggname">上海银橙文化传媒股份有限公司</span>银橙（上海）信息技术有限公司 Copyright（C）2008- <span id="nowyear"></span> YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
     </div>
 </div>
 

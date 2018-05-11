@@ -21,7 +21,9 @@
     font-family: 微软雅黑, simsun, arial;
     overflow-x: auto;
 }
-
+.scroll-content{
+    min-width: 1200px;
+}
 .btn {
     width: 140px;
     height: 45px;
@@ -67,12 +69,12 @@
     height: 90px;
     line-height: 90px;
     padding: 0 120px;
-    //background: url("../static/images/nav_bg.jpg") no-repeat;
-    //background-size: 100% 100%;
-    position: absolute;
     z-index: 10;
-    width: 100%;
-    min-width: 1200px;
+    min-width: 960px;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    left: 0;
+    right: 0;
     .logo {
         float: left;
     }
@@ -155,18 +157,6 @@
 
 .contentener {
     display: none;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    width: 100%;
-    right: 0;
-    left: 0;
-    z-index: 2;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    will-change: scroll-position;
-    contain: size style layout;
     min-width: 1200px;
 }
 
@@ -402,10 +392,11 @@
     background: #070321;
     margin-top: 60px;
     position: absolute;
+    z-index: 3;
     width: 100%;
     bottom: 0;
     min-width: 1200px;
-    span {
+    .ggname {
         margin-right: 20px;
     }
 }
@@ -672,32 +663,32 @@
                 left: 44px;
             }
             .animat2 {
-                animation: fadeInLeftBig 2s ease-in 0.5s both;
-                -webkti-animation: fadeInLeftBig 2s ease-in 0.5s both;
+                animation: fadeInLeftBig 1.5s ease-in 0.5s both;
+                -webkti-animation: fadeInLeftBig 1.5s ease-in 0.5s both;
             }
             .img3 {
                 bottom: 10px;
                 left: 17px;
             }
             .animat3 {
-                animation: fadeInLeftBig 2s ease-in 1s both;
-                -webkti-animation: fadeInLeftBig 2s ease-in 1s both;
+                animation: fadeInLeftBig 1.5s ease-in 1s both;
+                -webkti-animation: fadeInLeftBig 1.5s ease-in 1s both;
             }
             .img4 {
                 bottom: -1px;
                 left: -12px;
             }
             .animat4 {
-                animation: fadeInLeftBig 2s ease-in 1.5s both;
-                -webkti-animation: fadeInLeftBig 2s ease-in 1.5s both;
+                animation: fadeInLeftBig 1.5s ease-in 1.5s both;
+                -webkti-animation: fadeInLeftBig 1.5s ease-in 1.5s both;
             }
             .img5 {
                 bottom: -12px;
                 left: -41px;
             }
             .animat5 {
-                animation: fadeInLeftBig 2s ease-in 2s both;
-                -webkti-animation: fadeInLeftBig 2s ease-in 2s both;
+                animation: fadeInLeftBig 1.5s ease-in 2s both;
+                -webkti-animation: fadeInLeftBig 1.5s ease-in 2s both;
             }
         }
     }
@@ -879,14 +870,6 @@ html {
 .yccm_popup_bodyText {
     width: 1160px;
     margin: auto;
-    &:after {
-        content: "";
-        display: inline-block;
-        height: 0;
-        overflow: hidden;
-        clear: both;
-        visibility: hidden;
-    }
     .yccm_client_case_group {
         width: 346px;
         margin: 0 60px 70px 0;

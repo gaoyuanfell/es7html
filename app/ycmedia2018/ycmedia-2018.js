@@ -7,10 +7,27 @@ import * as qs from "querystring";
 hashChange();
 
 window.addEventListener('hashchange', () => {
-    console.info('ok')
+    // console.info('ok')
     hashChange()
 });
-
+function startOP(obj,utarget){
+    let speed = 0;
+    clearInterval(obj.timer);//先关闭定时器
+    obj.timer = setInterval(function(){
+        if(obj.alpha>utarget){
+            speed = -10;
+        }else{
+            speed = 10;
+        }
+        obj.alpha = obj.alpha+speed;
+        // console.info(obj.alpha)
+        if(obj.alpha == utarget){
+            clearInterval(obj.timer);
+        }
+        obj.style.filter = 'alpha(opacity:'+obj.alpha+')';//基于IE的
+        obj.style.opacity = parseInt(obj.alpha)/100;
+    },30);
+}
 function hashChange() {
     let refs = Array.from(document.querySelectorAll('[data-contentener]'));
     refs.every(ref => {
@@ -20,16 +37,19 @@ function hashChange() {
     let hash = getHash();
     if (!hash) hash = 'home';
     let ref = refs.find(ref => ref.dataset.type === hash);
+    ref.timer = null;//事先定义
+    ref.alpha = 0;//事先定义
     if (ref) {
+        startOP(ref,100);
         ref.style.display = 'block';
-        if(ref.animate){
+        /*if(ref.animate){
             ref.animate([
                 {opacity: 0},
                 {opacity: 1}
             ], {
                 duration: 250
             })
-        }
+        }*/
     }
     Array.from(document.querySelector('#filters').children).every(ref => {
         ref.classList.remove('active');
@@ -37,25 +57,33 @@ function hashChange() {
     });
     let aRef = document.querySelector(`[href="#${hash}"]`);
     if (aRef) aRef.parentNode.classList.add('active')
-
     if(hash != 'home'){
+        let scrol =document.querySelector('.scroll-content');
         document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
         document.querySelector('.top_nav').style.backgroundSize='100% 100%';
-    }else {
-        document.querySelector('.top_nav').style.background='none';
-        let scrol = document.querySelector(".contentener");
-        let offSet = 100;
         scrol && scrol.addEventListener('scroll', function () {
-            let t = scrol.scrollTop;
-            if (t > offSet) {
+            if(scrol.scrollTop > 5){
+                document.querySelector('.top_nav').style.position='fixed';
+                ref.style.margin='90px 0 40px 0';
+            }else {
+                document.querySelector('.top_nav').style.position='';
                 document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
                 document.querySelector('.top_nav').style.backgroundSize='100% 100%';
-                document.querySelector('.top_nav').style.transition='all 1s ease';
-                document.querySelector('.top_nav').style.WebkitTransition='all 1s ease';
+                ref.style.margin='0 0 40px 0';
+            }
+        })
+    }else {
+        let scrol =document.querySelector('.scroll-content');
+        document.querySelector('.top_nav').style.position='absolute';
+        document.querySelector('.top_nav').style.background='none';
+        scrol && scrol.addEventListener('scroll', function () {
+            if (scrol.scrollTop > 5) {
+                document.querySelector('.top_nav').style.position = 'fixed';
+                document.querySelector('.top_nav').style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+                document.querySelector('.top_nav').style.backgroundSize = '100% 100%';
             }else {
+                document.querySelector('.top_nav').style.position='absolute';
                 document.querySelector('.top_nav').style.background='none';
-                document.querySelector('.top_nav').style.transition='all 1s ease';
-                document.querySelector('.top_nav').style.WebkitTransition='all 1s ease';
             }
         })
     }
@@ -345,16 +373,20 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 }()
 
 /*业务版块*/
-let scrol = document.querySelector("#contentener");
-let offSet = $('#guangcheng').offset().top;
-scrol && scrol.addEventListener('scroll', function () {
-    let t = scrol.scrollTop;
-    if (t > offSet) {
+let scrol1 = document.querySelector(".scroll-content");
+scrol1 && scrol1.addEventListener('scroll', function () {
+    if (scrol1.scrollTop >= $('#guangcheng').offset().top) {
         $('.img1').addClass('animat1')
         $('.img2').addClass('animat2')
         $('.img3').addClass('animat3')
         $('.img4').addClass('animat4')
         $('.img5').addClass('animat5')
+    }else {
+        $('.img1').removeClass('animat1')
+        $('.img2').removeClass('animat2')
+        $('.img3').removeClass('animat3')
+        $('.img4').removeClass('animat4')
+        $('.img5').removeClass('animat5')
     }
 })
 
