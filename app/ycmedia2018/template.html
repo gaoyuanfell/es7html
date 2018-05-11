@@ -12,7 +12,7 @@
     <script>
        var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
        if(isMobile){
-           location.href='/wap'
+           location.href='/wap/'
        }
     </script>
 
@@ -26,12 +26,12 @@
         <div class="right flex">
             <ul class="nav flex" id="filters">
                 <li class="item"><a href="#home"><span>首页</span></a></li>
-                <li class="item"><a href="#business_modules"><span>业务板块</span></a></li>
+                <li class="item"><a href="#business"><span>业务板块</span></a></li>
                 <li class="item"><a href="#solution"><span>解决方案</span></a></li>
-                <li class="item"><a href="#case_center"><span>案例中心</span></a></li>
+                <li class="item"><a href="#case"><span>案例中心</span></a></li>
                 <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
-                <li class="item"><a href="#about_us"><span>关于银橙</span></a></li>
-                <li class="item"><a href="#investor_relations"><span>投资者关系</span></a></li>
+                <li class="item"><a href="#about"><span>关于银橙</span></a></li>
+                <li class="item"><a href="#investor"><span>投资者关系</span></a></li>
             </ul>
             <div class="sns">
                 <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
@@ -46,7 +46,7 @@
                 <!--<img src="./static/images/banner.png" alt="" class="bg">-->
                 <p class="text">
                     <img src="./static/images/banner_text.png" alt="">
-                    <a href="#case_center" class="btn"></a>
+                    <a href="#case" class="btn"></a>
                 </p>
                 <img src="./static/images/xiajt.png" alt="" class="down">
             </div>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="text_main hover_on">
                             <h4 class="title spot">新零售</h4>
-                            <p class="text">乐橙互联科技有限公司旗下拥有新零售及星橙互联<br>两大业务板块，形成新零售、新媒体整合新格局。</p>
+                            <p class="text">乐橙互联科技有限公司旗下拥有新零售及星橙互动<br>两大业务板块，形成新零售、新媒体整合新格局。</p>
                             <a href="javascript:void(0);" class="link">官网详情&nbsp;&gt;</a>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="#business_modules" class="btn more">更多业务</a>
+                <a href="#business" class="btn more">更多业务</a>
             </div>
             <div class="mobel case_mobel huibg">
                 <div class="top"><img src="./static/images/anli_tit.png" alt=""></div>
@@ -94,7 +94,7 @@
                                 <li class="headimg" data-index="3"><img src="./static/images/anli_tu4.jpg" alt="" width="375" height="160"></li>
                                 <li class="headimg" data-index="4"><img src="./static/images/anli_tu5.jpg" alt="" width="375" height="160"></li>
                             </ul>
-                            <a href="#case_center" class="link">去看更多案例&nbsp;&gt;</a>
+                            <a href="#case" class="link">去看更多案例&nbsp;&gt;</a>
                         </div>
                         <div id="menu_content">
 
@@ -121,13 +121,13 @@
                         <p><span class="left"><img src="./static/images/diz.png" alt="">地址：</span><span class="right">上海市&nbsp;徐汇区&nbsp;漕河泾创意园区桂平路481号19栋6层</span></p>
                         <p><span class="left"><img src="./static/images/cz.png" alt="">传真：</span><span class="right">021-33681336</span></p>
                         <p><span class="left"><img src="./static/images/dh.png" alt="">电话：</span><span class="right">021-64851212</span></p>
-                        <a href="#about_us" class="kongbtn join">加入银橙</a>
+                        <a href="#about" class="kongbtn join">加入银橙</a>
                     </div>
                 </div>
             </div>
         </div>
         <!--业务板块-->
-        <div class="contentener" id="contentener" data-contentener data-type="business_modules" margintop marginbotm>
+        <div class="contentener" id="contentener" data-contentener data-type="business" margintop marginbotm>
             <div class="sectortit"><img src="./static/images/ywy_tit.png" alt=""></div>
             <div class="sector_cont baibg">
                 <div class="main clear zhicheng">
@@ -229,7 +229,7 @@
             </div>
         </div>
         <!--案例中心-->
-        <div class="contentener" data-contentener data-type="case_center" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="case" margintop marginbotm>
             <div class="sectortit case_tit">
                 <img src="./static/images/anzxy_tit.png" alt="">
             </div>
@@ -281,7 +281,7 @@
             </div>
         </div>
         <!--关于银橙-->
-        <div class="contentener" data-contentener data-type="about_us" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="about" margintop marginbotm>
             <div class="sectortit about_tit clear">
                 <img src="./static/images/gyyc_tit.png" alt="">
                 <ul class="about_menu flex" id="about_menu">
@@ -692,32 +692,6 @@
                             </li>
                             <li>
                                 <div class="recommend">
-                                    项目总监<i class="jiantou"></i>
-                                </div>
-                                <div class="list-item none">
-                                    <div class="cont flex">
-                                        <span class="left">岗位职责：</span>
-                                        <pre>
-1、负责公司广告项目管理
-2、负责领导广告项目计划的制定、跟踪和质量控制，及时发现并跟踪解决项目问题，有效控制项目风险，把控节点，确保项目按照计划并保证质量完成
-3、负责团队人员管理，负责项目资源的协调与组织，确保各项目参与人协同工作
-</pre>
-                                    </div>
-                                    <div class="cont flex">
-                                        <span class="left">任职资格：</span>
-                                        <pre>
-1、本科以上学历，3年以上工作经验，具有丰富的项目经验；
-2、具备很强的沟通协调能力、执行能力、项目管理能力
-3、具有较高水平的沟通技巧，能够快速理解业务需求；
-4、具备较好的团队合作精神, 分析解决问题的能力；
-5、工作责任心强, 独立工作能力强, 认真诚实、积极主动, 能适应紧张高强度的工作；
-6、熟悉互联网广告行业生态，熟悉adx，dsp，dmp优先考虑。
-</pre>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="recommend">
                                     运营专员<i class="jiantou"></i>
                                 </div>
                                 <div class="list-item none">
@@ -1033,7 +1007,7 @@
             </div>
         </div>
         <!--投资者关系-->
-        <div class="contentener" data-contentener data-type="investor_relations" margintop marginbotm>
+        <div class="contentener" data-contentener data-type="investor" margintop marginbotm>
             <div class="sectortit about_tit"><img src="./static/images/tzzgx_tit.png" alt=""></div>
             <div class="main huibg">
                 <div id="popup_7" class="notice_box">
@@ -1043,14 +1017,19 @@
                             <ul id="investorLS">
 
                             </ul>
-                            <!--<div class="pagebox">
+                            <div class="pagebox">
                                 <span class="triangle-left"></span>
                                 <ul class="page">
                                     <li>1</li>
-                                    <li class="active">2</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li class="active">7</li>
                                 </ul>
                                 <span class="triangle-right"></span>
-                            </div>-->
+                            </div>
                         </div>
                     </div>
                     <div class="yc_news_bottom">

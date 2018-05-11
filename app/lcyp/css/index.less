@@ -2,6 +2,23 @@
 @top_msg_color:#626262;
 @color_blue :#00b7ee;
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track {
+    background-color: #e2e2e2;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: rgba(0,0,0,.2);
+}
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-track {
+    background-color: #e2e2e2;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #F5F5F5;
+}
 
 .wrap{ width: 1200px; margin:0 auto; position:relative; }
 
@@ -181,7 +198,7 @@
     i{ background: url("../static/images/loading.gif") no-repeat bottom center;display: block; width: 100%; height: 50%; }
 }
 /* 商品中心 */
-.goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px; position:relative;
+.goods_center{ width: 1200px; margin:0 auto; padding-top: 63px;font-size: 16px;
 
 	.level{  color:#aaaaaa; line-height: 24px;width: 94px; display: block;}
 
@@ -212,8 +229,7 @@
 		a{ line-height: 20px;  margin-right:10px; color:#aca9a9; cursor: pointer;}
 	}
 
-	.lists{ width: 100%;position: relative;
-
+	.lists{ width: 100%;
 
 		.img{ text-align: center; height: 200px; }
 

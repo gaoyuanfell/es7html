@@ -7,6 +7,7 @@ import * as qs from "querystring";
 hashChange();
 
 window.addEventListener('hashchange', () => {
+    console.info('ok')
     hashChange()
 });
 
@@ -21,12 +22,14 @@ function hashChange() {
     let ref = refs.find(ref => ref.dataset.type === hash);
     if (ref) {
         ref.style.display = 'block';
-        ref.animate([
-            {opacity: 0},
-            {opacity: 1}
-        ], {
-            duration: 250
-        })
+        if(ref.animate){
+            ref.animate([
+                {opacity: 0},
+                {opacity: 1}
+            ], {
+                duration: 250
+            })
+        }
     }
     Array.from(document.querySelector('#filters').children).every(ref => {
         ref.classList.remove('active');
@@ -160,7 +163,7 @@ class ImgLoop {
 
     async start() {
         this.state = 1;
-        while (this.state > 1 && document.body.contains(this.boxRef)) {
+        while (this.state >= 1 && document.body.contains(this.boxRef)) {
             this.state = 1;
             await this.sleep(this.params.time);
             this.state ===1 && this.next()
@@ -744,7 +747,7 @@ async function getData() {
             cost: '0.55 元',
             activation: '6.00 元',
             rate: '10.00%',
-            imglist: ['./static/images/caseimg/tu1715.jpg'],
+            imglist: ['./static/images/caseimg/case15-01.png'],
             time: '2017年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
