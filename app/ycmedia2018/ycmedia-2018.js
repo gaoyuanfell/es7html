@@ -65,10 +65,8 @@ function hashChange() {
     if(hash != 'home'){
         top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
         top_nav_ref.style.backgroundSize = '100% 100%';
-        document.querySelector('.contentener').style.margin = '90px 0 40px 0';
     }else{
         top_nav_ref.style.background = 'none';
-        document.querySelector('.contentener').style.margin = '0 0 40px 0';
     }
     scrol && scrol.addEventListener('scroll', function () {
         top_nav_ref.style.top = scrol.scrollTop + 'px';
@@ -76,14 +74,12 @@ function hashChange() {
             let top_nav_ref = document.querySelector('.top_nav')
             top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
             top_nav_ref.style.backgroundSize = '100% 100%';
-            document.querySelector('.contentener').style.margin = '90px 0 40px 0';
         }else{
             if (scrol.scrollTop > 60) {
                 top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
                 top_nav_ref.style.backgroundSize = '100% 100%';
             }else{
                 top_nav_ref.style.background = 'none';
-                document.querySelector('.contentener').style.margin = '0 0 40px 0';
             }
         }
     })
