@@ -15,14 +15,17 @@
 ::-webkit-scrollbar-track-piece {
     background-color: #F5F5F5;
 }
-
 .content {
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
     overflow-x: auto;
 }
-.scroll-content{
-    min-width: 1200px;
+.content1 {
+    background: #fff;
+    font-family: 微软雅黑, simsun, arial;
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
 }
 .btn {
     width: 140px;
@@ -66,6 +69,7 @@
 }
 
 .top_nav {
+    position: absolute;
     height: 90px;
     line-height: 90px;
     padding: 0 120px;
@@ -391,7 +395,7 @@
     padding: 10px 0;
     background: #070321;
     margin-top: 60px;
-    position: absolute;
+    position: fixed;
     z-index: 3;
     width: 100%;
     bottom: 0;
@@ -1601,6 +1605,9 @@ html {
             }
         }
     }
+}
+#popup{
+    display: none;
 }
 
 /*合作伙伴*/

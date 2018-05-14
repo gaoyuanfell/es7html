@@ -10,35 +10,36 @@
     <script src="./static/js/jquery.min.js"></script>
     <script src="./static/js/layer.js"></script>
     <script>
-       var isMobile=(function(){if(navigator.userAgent.match(/mobile/i)&&window.screen.width<560) return true})();
-       if(isMobile){
-           location.href='/wap/'
-       }
+        var isMobile = (function () {
+            if (navigator.userAgent.match(/mobile/i) && window.screen.width < 560) return true
+        })();
+        if (isMobile) {
+            location.href = '/wap/'
+        }
     </script>
 
 </head>
 <body>
-<div class="content">
-    <div class="scroll-content">
-        <div class="top_nav clear">
-            <div class="logo">
-                <img src="./static/images/logo.png" alt="">
-            </div>
-            <div class="right flex">
-                <ul class="nav flex" id="filters">
-                    <li class="item"><a href="#home"><span>首页</span></a></li>
-                    <li class="item"><a href="#business"><span>业务板块</span></a></li>
-                    <li class="item"><a href="#solution"><span>解决方案</span></a></li>
-                    <li class="item"><a href="#case"><span>案例中心</span></a></li>
-                    <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
-                    <li class="item"><a href="#about"><span>关于银橙</span></a></li>
-                    <li class="item"><a href="#investor"><span>投资者关系</span></a></li>
-                </ul>
-                <div class="sns">
-                    <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
-                </div>
+<div class="scroll-content">
+    <div class="top_nav clear">
+        <div class="logo">
+            <img src="./static/images/logo.png" alt="">
+        </div>
+        <div class="right flex">
+            <ul class="nav flex" id="filters">
+                <li class="item"><a href="#home"><span>首页</span></a></li>
+                <li class="item"><a href="#business"><span>业务板块</span></a></li>
+                <li class="item"><a href="#solution"><span>解决方案</span></a></li>
+                <li class="item"><a href="#case"><span>案例中心</span></a></li>
+                <li class="item"><a href="#partners"><span>合作伙伴</span></a></li>
+                <li class="item"><a href="#about"><span>关于银橙</span></a></li>
+                <li class="item"><a href="#investor"><span>投资者关系</span></a></li>
+            </ul>
+            <div class="sns">
+                <a href="javascript:void(0);" class="sns-wx"><span>官方微信</span></a>
             </div>
         </div>
+    </div>
 
     <div id="page_list">
         <!--首页-->
@@ -1045,7 +1046,6 @@
             </div>
         </div>
     </div>
-  </div>
     <div class="footer">
         <span class="ggname">上海银橙文化传媒股份有限公司</span>银橙（上海）信息技术有限公司 Copyright（C）2008- <span id="nowyear"></span> YCmedia. All Rights Reserved. 沪ICP备14036633号-1 证券代码 : 830999 ｜ 隐私条例
     </div>

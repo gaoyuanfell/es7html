@@ -10,24 +10,26 @@ window.addEventListener('hashchange', () => {
     // console.info('ok')
     hashChange()
 });
-function startOP(obj,utarget){
+
+function startOP(obj, utarget) {
     let speed = 0;
     clearInterval(obj.timer);//先关闭定时器
-    obj.timer = setInterval(function(){
-        if(obj.alpha>utarget){
+    obj.timer = setInterval(function () {
+        if (obj.alpha > utarget) {
             speed = -10;
-        }else{
+        } else {
             speed = 10;
         }
-        obj.alpha = obj.alpha+speed;
+        obj.alpha = obj.alpha + speed;
         // console.info(obj.alpha)
-        if(obj.alpha == utarget){
+        if (obj.alpha == utarget) {
             clearInterval(obj.timer);
         }
-        obj.style.filter = 'alpha(opacity:'+obj.alpha+')';//基于IE的
-        obj.style.opacity = parseInt(obj.alpha)/100;
-    },30);
+        obj.style.filter = 'alpha(opacity:' + obj.alpha + ')';//基于IE的
+        obj.style.opacity = parseInt(obj.alpha) / 100;
+    }, 30);
 }
+
 function hashChange() {
     let refs = Array.from(document.querySelectorAll('[data-contentener]'));
     refs.every(ref => {
@@ -40,7 +42,7 @@ function hashChange() {
     ref.timer = null;//事先定义
     ref.alpha = 0;//事先定义
     if (ref) {
-        startOP(ref,100);
+        startOP(ref, 100);
         ref.style.display = 'block';
         /*if(ref.animate){
             ref.animate([
@@ -57,37 +59,34 @@ function hashChange() {
     });
     let aRef = document.querySelector(`[href="#${hash}"]`);
     if (aRef) aRef.parentNode.classList.add('active')
-    if(hash != 'home'){
-        let scrol =document.querySelector('.scroll-content');
-        document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
-        document.querySelector('.top_nav').style.backgroundSize='100% 100%';
-        scrol && scrol.addEventListener('scroll', function () {
-            if(scrol.scrollTop > 5){
-                document.querySelector('.top_nav').style.position='fixed';
-                ref.style.margin='90px 0 40px 0';
-            }else {
-                document.querySelector('.top_nav').style.position='';
-                document.querySelector('.top_nav').style.background='url("../static/images/nav_bg.jpg") no-repeat';
-                document.querySelector('.top_nav').style.backgroundSize='100% 100%';
-                ref.style.margin='0 0 40px 0';
-            }
-        })
-    }else {
-        let scrol =document.querySelector('.scroll-content');
-        document.querySelector('.top_nav').style.position='absolute';
-        document.querySelector('.top_nav').style.background='none';
-        scrol && scrol.addEventListener('scroll', function () {
-            if (scrol.scrollTop > 5) {
-                document.querySelector('.top_nav').style.position = 'fixed';
-                document.querySelector('.top_nav').style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
-                document.querySelector('.top_nav').style.backgroundSize = '100% 100%';
-            }else {
-                document.querySelector('.top_nav').style.position='absolute';
-                document.querySelector('.top_nav').style.background='none';
-            }
-        })
-    }
 
+    let scrol = document.querySelector('.scroll-content');
+    let top_nav_ref = document.querySelector('.top_nav')
+    if(hash != 'home'){
+        top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+        top_nav_ref.style.backgroundSize = '100% 100%';
+        document.querySelector('.contentener').style.margin = '90px 0 40px 0';
+    }else{
+        top_nav_ref.style.background = 'none';
+        document.querySelector('.contentener').style.margin = '0 0 40px 0';
+    }
+    scrol && scrol.addEventListener('scroll', function () {
+        top_nav_ref.style.top = scrol.scrollTop + 'px';
+        if (hash != 'home') {
+            let top_nav_ref = document.querySelector('.top_nav')
+            top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+            top_nav_ref.style.backgroundSize = '100% 100%';
+            document.querySelector('.contentener').style.margin = '90px 0 40px 0';
+        }else{
+            if (scrol.scrollTop > 60) {
+                top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+                top_nav_ref.style.backgroundSize = '100% 100%';
+            }else{
+                top_nav_ref.style.background = 'none';
+                document.querySelector('.contentener').style.margin = '0 0 40px 0';
+            }
+        }
+    })
 }
 
 /*
@@ -147,7 +146,7 @@ class ImgLoop {
     params
     boxWidth
     defaultParams = {
-        time:1500
+        time: 1500
     }
     state = 0;//0 初始状态 1开始轮播状态 2被操作状态
 
@@ -194,7 +193,7 @@ class ImgLoop {
         while (this.state >= 1 && document.body.contains(this.boxRef)) {
             this.state = 1;
             await this.sleep(this.params.time);
-            this.state ===1 && this.next()
+            this.state === 1 && this.next()
         }
     }
 
@@ -204,9 +203,9 @@ class ImgLoop {
 
     next() {
         this.state = 2;
-        let left = this.boxRef.style.left.replace(/px$/,'');
+        let left = this.boxRef.style.left.replace(/px$/, '');
         left = Math.abs(left) + this.params.imgWidth
-        if(Math.abs(left) > this.boxWidth - this.params.imgWidth){
+        if (Math.abs(left) > this.boxWidth - this.params.imgWidth) {
             left = 0
         }
         this.boxRef.style.left = `-${left}px`
@@ -214,9 +213,9 @@ class ImgLoop {
 
     prev() {
         this.state = 2;
-        let left = this.boxRef.style.left.replace(/px$/,'');
+        let left = this.boxRef.style.left.replace(/px$/, '');
         left = Math.abs(left) - this.params.imgWidth;
-        if(left < 0){
+        if (left < 0) {
             left = this.boxWidth - this.params.imgWidth;
         }
         this.boxRef.style.left = `-${left}px`
@@ -224,10 +223,10 @@ class ImgLoop {
 
     go(index) {
         let left = this.params.imgWidth * index;
-        if(left > this.boxWidth){
+        if (left > this.boxWidth) {
             left = this.boxWidth
         }
-        if(left < 0){
+        if (left < 0) {
             left = this.params.imgWidth
         }
         this.boxRef.style.left = `-${left - this.params.imgWidth}px`
@@ -334,13 +333,13 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
             imgli: ['./static/images/anli_tu_2_01.png']
         },
         {
-            imgli: ['./static/images/anli_tu_3_01.png','./static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
+            imgli: ['./static/images/anli_tu_3_01.png', './static/images/caseimg/case05-01.jpg', './static/images/caseimg/case05-02.jpg']
         },
         {
-            imgli: ['./static/images/anli_tu_4_01.png','./static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
+            imgli: ['./static/images/anli_tu_4_01.png', './static/images/caseimg/case08-01.jpg', './static/images/caseimg/case08-02.jpg']
         },
         {
-            imgli: ['./static/images/anli_tu_5_01.png','./static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
+            imgli: ['./static/images/anli_tu_5_01.png', './static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
         }
     ]
 
@@ -364,11 +363,12 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         let imgdata = anlituList[+index];
         imgdata.imghtm = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
         document.querySelector('#menu_content').innerHTML = new Template(html1, imgdata).compile();
-        new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'),document.querySelector('[data-js-active=img_prev1]'),{
+        new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'), document.querySelector('[data-js-active=img_prev1]'), {
             imgWidth: 224,
             imgHeight: 395,
         }).start().catch(e => console.error(e))
     }
+
     anlitu(0)
 }()
 
@@ -381,7 +381,7 @@ scrol1 && scrol1.addEventListener('scroll', function () {
         $('.img3').addClass('animat3')
         $('.img4').addClass('animat4')
         $('.img5').addClass('animat5')
-    }else {
+    } else {
         $('.img1').removeClass('animat1')
         $('.img2').removeClass('animat2')
         $('.img3').removeClass('animat3')
@@ -519,6 +519,7 @@ function jsonp(url, body = {}, config = {}, fn) {
 * */
 let currPageNum = 1;
 let currPageNum2 = 1;
+
 async function getData() {
     let bo = true;
     let list;
@@ -526,7 +527,7 @@ async function getData() {
     while (bo) {
         let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
             disclosureType: 5,
-            page: currPageNum-1,
+            page: currPageNum - 1,
             companyCd: 830999,
             isNewThree: 1,
             startTime: '',
@@ -540,74 +541,77 @@ async function getData() {
             bo = false;
             return contentList
         }
-        contentList.push(...data[0].listInfo.content)      
+        contentList.push(...data[0].listInfo.content)
     }
 }
+
 // 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示...
 function getPageList(n, tp, p) {
-        n = +n;
-        tp = +tp;
-        p = +p;
-        if (p > tp) {
-            p = 1;
-        }
-        let arr = [];
-        let s = n * 2 + 5;
-        if (tp >= s) {
-            let _n = n;
-            let _p = p;
-            if (p - n - 2 < 1) {
-                while (_p) {
-                    arr.unshift({number: _p, type: 1});
-                    --_p;
-                }
-                _p = p;
-                while (++_p <= n * 2 + 3) {
-                    arr.push({number: _p, type: 1});
-                }
-                arr.push({text: '...', type: 0}, {number: tp, type: 1});
-            } else if (p + n + 2 > tp) {
-                while (_p <= tp) {
-                    arr.push({number: _p, type: 1});
-                    ++_p;
-                }
-                _p = p;
-                while (--_p > tp - n * 2 - 3) {
-                    arr.unshift({number: _p, type: 1});
-                }
-                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
-            } else {
-                while (_n) {
-                    arr.push({number: p - _n, type: 1});
-                    --_n;
-                }
-                arr.push({number: p, type: 1});
-                _n = n;
-                let i = 1;
-                while (i <= _n) {
-                    arr.push({number: p + i, type: 1});
-                    ++i;
-                }
-                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
-                arr.push({text: '...', type: 0}, {number: tp, type: 1});
+    n = +n;
+    tp = +tp;
+    p = +p;
+    if (p > tp) {
+        p = 1;
+    }
+    let arr = [];
+    let s = n * 2 + 5;
+    if (tp >= s) {
+        let _n = n;
+        let _p = p;
+        if (p - n - 2 < 1) {
+            while (_p) {
+                arr.unshift({number: _p, type: 1});
+                --_p;
             }
+            _p = p;
+            while (++_p <= n * 2 + 3) {
+                arr.push({number: _p, type: 1});
+            }
+            arr.push({text: '...', type: 0}, {number: tp, type: 1});
+        } else if (p + n + 2 > tp) {
+            while (_p <= tp) {
+                arr.push({number: _p, type: 1});
+                ++_p;
+            }
+            _p = p;
+            while (--_p > tp - n * 2 - 3) {
+                arr.unshift({number: _p, type: 1});
+            }
+            arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
         } else {
-            while (tp) {
-                arr.unshift({number: tp--, type: 1});
+            while (_n) {
+                arr.push({number: p - _n, type: 1});
+                --_n;
             }
+            arr.push({number: p, type: 1});
+            _n = n;
+            let i = 1;
+            while (i <= _n) {
+                arr.push({number: p + i, type: 1});
+                ++i;
+            }
+            arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
+            arr.push({text: '...', type: 0}, {number: tp, type: 1});
         }
-        return arr;
+    } else {
+        while (tp) {
+            arr.unshift({number: tp--, type: 1});
+        }
+    }
+    return arr;
 }
+
 // 获取对象第一个属性值
-function getObjFirst(obj){
-    for(let i in obj){
+function getObjFirst(obj) {
+    for (let i in obj) {
         return obj[i]
     }
 }
+
 // 首次将数据全部拿到，存缓存（数据+唯一标识），后面请求一次，拿第一条的唯一标识做比较，相等就说明数据没更新，反之重新请求数据
 // ----最后判断是只添加新数据存缓存还是再次全部请求？？？
 // 获取唯一标识,请求第一页数据（page = 0）的唯一标识disclosureCode
-async function getOnlyId(){
+async function getOnlyId() {
     let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
         disclosureType: 5,
         page: 0,
@@ -621,30 +625,33 @@ async function getOnlyId(){
     let id = data[0].listInfo.content[0].disclosureCode
     return id;
 }
+
 !function () {
     let investorLSref = document.querySelector('#investorLS');
     let investorDQref = document.querySelector('#investorDQ');
     let eachPageNum = 6;
     noticeLists()
-    function noticeLists(){
-        getOnlyId().then( (id)=>{
+
+    function noticeLists() {
+        getOnlyId().then((id) => {
             renderDatas(id)
         })
     }
+
     // 判断从哪获取数据
-    function renderDatas(onlyId){
+    function renderDatas(onlyId) {
         let store = JSON.parse(getStore('noticeLists'))
-        if(store != undefined && store != null && store.onlyId == onlyId){
+        if (store != undefined && store != null && store.onlyId == onlyId) {
             console.log('getStore')
             let listsDatas = store.datas
-            renderList(listsDatas,'9504')
-            renderList(listsDatas,'9503')
-        }else{
-            getData().then( data=>{
-                renderList(data,'9504')
-                renderList(data,'9503')
+            renderList(listsDatas, '9504')
+            renderList(listsDatas, '9503')
+        } else {
+            getData().then(data => {
+                renderList(data, '9504')
+                renderList(data, '9503')
                 let newLists = []
-                data.forEach( (v, i) => {
+                data.forEach((v, i) => {
                     let obj = {}
                     obj['disclosureTitle'] = v.disclosureTitle
                     obj['disclosurePostTitle'] = v.disclosurePostTitle
@@ -656,21 +663,22 @@ async function getOnlyId(){
                 });
                 let noticeLists = {
                     onlyId: data[0].disclosureCode,
-                    datas: newLists                   
+                    datas: newLists
                 }
-                setStore('noticeLists',noticeLists)
+                setStore('noticeLists', noticeLists)
             })
         }
     }
+
     // 渲染页面
-    function renderList(contentList,type){
+    function renderList(contentList, type) {
         let data = contentList.filter((ele) => {
             if (ele.disclosureType === type) return true;
         })
-        if(type == '9504'){
+        if (type == '9504') {
             let investorLS = data;
             let investorLSHtml = ''
-            for (let i = eachPageNum * (currPageNum-1); i < eachPageNum * currPageNum && i < data.length; i++) {
+            for (let i = eachPageNum * (currPageNum - 1); i < eachPageNum * currPageNum && i < data.length; i++) {
                 let provi = investorLS[i];
                 provi.disclosureTitle = provi.disclosureTitle.replace(/\[临时公告\]/, '');
                 provi.disclosurePostTitle = provi.disclosurePostTitle;
@@ -680,10 +688,10 @@ async function getOnlyId(){
             investorLSref.innerHTML = ''
             investorLSref.innerHTML = investorLSHtml
             paging(investorLS)
-        }else if(type == '9503'){
+        } else if (type == '9503') {
             let investorDQ = data;
             let investorDQHtml = ''
-            for (let i = eachPageNum * (currPageNum2-1); i < eachPageNum * currPageNum2 && i < data.length; i++) {
+            for (let i = eachPageNum * (currPageNum2 - 1); i < eachPageNum * currPageNum2 && i < data.length; i++) {
                 let provi = investorDQ[i];
                 provi.disclosureTitle = provi.disclosureTitle.replace(/\[定期报告\]/, '');
                 provi.disclosurePostTitle = provi.disclosurePostTitle;
@@ -695,152 +703,156 @@ async function getOnlyId(){
             paging2(investorDQ)
         }
     }
-    // 分页 
-    function paging(data){
+
+    // 分页
+    function paging(data) {
         let maxPage = Math.ceil(data.length / eachPageNum)
-        let pages = getPageList(3,maxPage,currPageNum)
+        let pages = getPageList(3, maxPage, currPageNum)
         let pageHtml = null
         let pageArr = []
-        pages.forEach( (v,i)=>{
+        pages.forEach((v, i) => {
             v.$val = getObjFirst(v)
-            if(v.type == 0){
+            if (v.type == 0) {
                 pageHtml = `<li data-id="-1">{{ $val }}</li>`
-            }else if(v.number == currPageNum){
+            } else if (v.number == currPageNum) {
                 pageHtml = `<li data-id="{{ $val }}" class="active">{{ $val }}</li>`
-            }else{
+            } else {
                 pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`
             }
-            pageArr += new Template(pageHtml,v).compile();
+            pageArr += new Template(pageHtml, v).compile();
         })
         document.getElementById('currPage').innerHTML = pageArr;
         pagingChange()
     }
-    function paging2(data){
+
+    function paging2(data) {
         let maxPage = Math.ceil(data.length / eachPageNum)
-        let pages = getPageList(3,maxPage,currPageNum2)
+        let pages = getPageList(3, maxPage, currPageNum2)
         let pageHtml = null
         let pageArr = []
-        pages.forEach( (v,i)=>{
+        pages.forEach((v, i) => {
             v.$val = getObjFirst(v)
-            if(v.type == 0){
+            if (v.type == 0) {
                 pageHtml = `<li data-id="-1">{{ $val }}</li>`
-            }else if(v.number == currPageNum2){
+            } else if (v.number == currPageNum2) {
                 pageHtml = `<li data-id="{{ $val }}" class="active">{{ $val }}</li>`
-            }else{
+            } else {
                 pageHtml = `<li data-id="{{ $val }}">{{ $val }}</li>`
             }
-            pageArr += new Template(pageHtml,v).compile();
+            pageArr += new Template(pageHtml, v).compile();
         })
         document.getElementById('currPage2').innerHTML = pageArr;
         pagingChange2()
     }
-    // 分页切换
-    function pagingChange(){
-        let prevPage = document.getElementById('prevPage')
-            ,nextPage = document.getElementById('nextPage')
-            ,pages = document.getElementById('currPage').getElementsByTagName('li')
-            ,count = pages[pages.length - 1].innerText;
 
-        prevPage.onclick = function(){
-            if( currPageNum == 1){
-                prevPage.style.color="#dadada"
-            }else if(currPageNum == 2){
-                prevPage.style.color="#dadada"
+    // 分页切换
+    function pagingChange() {
+        let prevPage = document.getElementById('prevPage')
+            , nextPage = document.getElementById('nextPage')
+            , pages = document.getElementById('currPage').getElementsByTagName('li')
+            , count = pages[pages.length - 1].innerText;
+
+        prevPage.onclick = function () {
+            if (currPageNum == 1) {
+                prevPage.style.color = "#dadada"
+            } else if (currPageNum == 2) {
+                prevPage.style.color = "#dadada"
                 currPageNum--
                 noticeLists();
-            }else{
-                prevPage.style.color="#aaaaaa"
+            } else {
+                prevPage.style.color = "#aaaaaa"
                 currPageNum--
                 noticeLists();
             }
         }
-        nextPage.onclick = function(){
-            if( currPageNum == count){
-                nextPage.style.color="#dadada"
-            }else if(currPageNum == count - 1){
-                nextPage.style.color="#dadada"
+        nextPage.onclick = function () {
+            if (currPageNum == count) {
+                nextPage.style.color = "#dadada"
+            } else if (currPageNum == count - 1) {
+                nextPage.style.color = "#dadada"
                 currPageNum++
                 noticeLists();
-            }else{
-                nextPage.style.color="#aaaaaa"
+            } else {
+                nextPage.style.color = "#aaaaaa"
                 currPageNum++
                 noticeLists();
             }
-        }    
-        for(let i = 0; i < pages.length; i++){
-            pages[i].onclick = function(){
-                if(this.getAttribute('data-id') == '-1'){
+        }
+        for (let i = 0; i < pages.length; i++) {
+            pages[i].onclick = function () {
+                if (this.getAttribute('data-id') == '-1') {
                     return
-                }else{
-                    for(let j = 0 ; j < pages.length; j++){
+                } else {
+                    for (let j = 0; j < pages.length; j++) {
                         pages[j].className = ' ';
                     }
-                    currPageNum= +this.getAttribute('data-id')
-                    if(currPageNum == 1){
-                        prevPage.style.color="#dadada"
-                        nextPage.style.color="#aaaaaa"
-                    }else if( currPageNum == count){
-                        prevPage.style.color="#aaaaaa"
-                        nextPage.style.color="#dadada"
-                    }else{
-                        prevPage.style.color="#aaaaaa"
-                        nextPage.style.color="#aaaaaa"
+                    currPageNum = +this.getAttribute('data-id')
+                    if (currPageNum == 1) {
+                        prevPage.style.color = "#dadada"
+                        nextPage.style.color = "#aaaaaa"
+                    } else if (currPageNum == count) {
+                        prevPage.style.color = "#aaaaaa"
+                        nextPage.style.color = "#dadada"
+                    } else {
+                        prevPage.style.color = "#aaaaaa"
+                        nextPage.style.color = "#aaaaaa"
                     }
                     noticeLists();
                 }
             }
         }
     }
-    function pagingChange2(){
-        let prevPage = document.getElementById('prevPage2')
-            ,nextPage = document.getElementById('nextPage2')
-            ,pages = document.getElementById('currPage2').getElementsByTagName('li')
-            ,count = pages[pages.length - 1].innerText;
 
-        prevPage.onclick = function(){
-            if( currPageNum2 == 1){
-                prevPage.style.color="#dadada"
-            }else if(currPageNum2 == 2){
-                prevPage.style.color="#dadada"
+    function pagingChange2() {
+        let prevPage = document.getElementById('prevPage2')
+            , nextPage = document.getElementById('nextPage2')
+            , pages = document.getElementById('currPage2').getElementsByTagName('li')
+            , count = pages[pages.length - 1].innerText;
+
+        prevPage.onclick = function () {
+            if (currPageNum2 == 1) {
+                prevPage.style.color = "#dadada"
+            } else if (currPageNum2 == 2) {
+                prevPage.style.color = "#dadada"
                 currPageNum2--
                 noticeLists();
-            }else{
-                prevPage.style.color="#aaaaaa"
+            } else {
+                prevPage.style.color = "#aaaaaa"
                 currPageNum2--
                 noticeLists();
             }
         }
-        nextPage.onclick = function(){
-            if( currPageNum2 == count){
-                nextPage.style.color="#dadada"
-            }else if(currPageNum2 == count - 1){
-                nextPage.style.color="#dadada"
+        nextPage.onclick = function () {
+            if (currPageNum2 == count) {
+                nextPage.style.color = "#dadada"
+            } else if (currPageNum2 == count - 1) {
+                nextPage.style.color = "#dadada"
                 currPageNum2++
                 noticeLists();
-            }else{
-                nextPage.style.color="#aaaaaa"
+            } else {
+                nextPage.style.color = "#aaaaaa"
                 currPageNum2++
                 noticeLists();
             }
-        }    
-        for(let i = 0; i < pages.length; i++){
-            pages[i].onclick = function(){
-                if(this.getAttribute('data-id') == '-1'){
+        }
+        for (let i = 0; i < pages.length; i++) {
+            pages[i].onclick = function () {
+                if (this.getAttribute('data-id') == '-1') {
                     return
-                }else{
-                    for(let j = 0 ; j < pages.length; j++){
+                } else {
+                    for (let j = 0; j < pages.length; j++) {
                         pages[j].className = ' ';
                     }
-                    currPageNum2= +this.getAttribute('data-id')
-                    if(currPageNum2 == 1){
-                        prevPage.style.color="#dadada"
-                        nextPage.style.color="#aaaaaa"
-                    }else if( currPageNum2 == count){
-                        prevPage.style.color="#aaaaaa"
-                        nextPage.style.color="#dadada"
-                    }else{
-                        prevPage.style.color="#aaaaaa"
-                        nextPage.style.color="#aaaaaa"
+                    currPageNum2 = +this.getAttribute('data-id')
+                    if (currPageNum2 == 1) {
+                        prevPage.style.color = "#dadada"
+                        nextPage.style.color = "#aaaaaa"
+                    } else if (currPageNum2 == count) {
+                        prevPage.style.color = "#aaaaaa"
+                        nextPage.style.color = "#dadada"
+                    } else {
+                        prevPage.style.color = "#aaaaaa"
+                        nextPage.style.color = "#aaaaaa"
                     }
                     noticeLists();
                 }
@@ -1110,10 +1122,10 @@ async function getOnlyId(){
     let caseList = '';
     list.forEach((data, i) => {
         data.$index = i;
-        if(!data.type) data.typeShow = 'none';
-        if(!data.cost) data.costShow = 'none';
-        if(!data.activation) data.activationShow = 'none';
-        if(!data.rate) data.rateShow = 'none';
+        if (!data.type) data.typeShow = 'none';
+        if (!data.cost) data.costShow = 'none';
+        if (!data.activation) data.activationShow = 'none';
+        if (!data.rate) data.rateShow = 'none';
         caseList += new Template(str, data).compile();
     })
     document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
@@ -1158,11 +1170,11 @@ async function getOnlyId(){
         data.imghtml = data.imglist.map(l => `<img src="${l}"/>`).join('')
         document.querySelector('.yccm_popup_body').innerHTML = '';
 
-        if(!data.type) data.typeShow = 'none';
-        if(!data.platform) data.platformShow = 'none';
-        if(!data.cost) data.costShow = 'none';
-        if(!data.activation) data.activationShow = 'none';
-        if(!data.rate) data.rateShow = 'none';
+        if (!data.type) data.typeShow = 'none';
+        if (!data.platform) data.platformShow = 'none';
+        if (!data.cost) data.costShow = 'none';
+        if (!data.activation) data.activationShow = 'none';
+        if (!data.rate) data.rateShow = 'none';
 
         document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
         layer.open({
@@ -1187,7 +1199,7 @@ async function getOnlyId(){
             }
         }
 
-        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), document.querySelector('[data-js-case-active=img_next]'),document.querySelector('[data-js-case-active=img_prev]'),{
+        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), document.querySelector('[data-js-case-active=img_next]'), document.querySelector('[data-js-case-active=img_prev]'), {
             imgWidth: 254,
             imgHeight: 494,
         }).start().catch(e => console.error(e))
@@ -1199,28 +1211,30 @@ async function getOnlyId(){
 /**
  * 存储localStorage
  */
-function setStore(name, content){
+function setStore(name, content) {
     if (!name) return;
     if (typeof content !== 'string') {
         content = JSON.stringify(content);
     }
     window.localStorage.setItem(name, content);
 }
+
 /**
  * 获取localStorage
  */
-function getStore(name ){
+function getStore(name) {
     if (!name) return;
     return window.localStorage.getItem(name);
 }
+
 /**
  * 删除localStorage
  */
-function removeStore( name){
+function removeStore(name) {
     if (!name) return;
     window.localStorage.removeItem(name);
 }
- 
+
 
 document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
 
