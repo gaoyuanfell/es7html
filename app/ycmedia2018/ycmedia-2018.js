@@ -70,6 +70,7 @@ function hashChange() {
     }
     scrol && scrol.addEventListener('scroll', function () {
         top_nav_ref.style.top = scrol.scrollTop + 'px';
+        // top_nav_ref.style.transform = "translateY('+scrol.scrollTop+'px)";
         if (hash != 'home') {
             let top_nav_ref = document.querySelector('.top_nav')
             top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
