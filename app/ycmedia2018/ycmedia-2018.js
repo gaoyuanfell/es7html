@@ -88,7 +88,18 @@ function hashChange() {
         }
     })
 }
-
+if(document.documentElement.clientWidth <= 1200){
+    document.querySelector('.footer').style.marginBottom='10px'
+}else {
+    document.querySelector('.footer').style.marginBottom='0'
+}
+window.onresize = function(){
+    if(document.documentElement.clientWidth <= 1200){
+        document.querySelector('.footer').style.marginBottom='10px'
+    }else {
+        document.querySelector('.footer').style.marginBottom='0'
+    }
+}
 /*
 * 模板编译
 * */
