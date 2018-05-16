@@ -62,10 +62,10 @@ function hashChange() {
 
     let scrol = document.querySelector('.scroll-content');
     let top_nav_ref = document.querySelector('.top_nav')
-    if(hash != 'home'){
+    if (hash != 'home') {
         top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
         top_nav_ref.style.backgroundSize = '100% 100%';
-    }else{
+    } else {
         top_nav_ref.style.background = 'none';
     }
     scrol && scrol.addEventListener('scroll', function () {
@@ -75,28 +75,34 @@ function hashChange() {
             let top_nav_ref = document.querySelector('.top_nav')
             top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
             top_nav_ref.style.backgroundSize = '100% 100%';
-        }else{
+        } else {
             if (scrol.scrollTop > 60) {
                 top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
                 top_nav_ref.style.backgroundSize = '100% 100%';
-            }else{
+            } else {
                 top_nav_ref.style.background = 'none';
             }
         }
     })
 }
-if(document.documentElement.clientWidth <= 1200){
-    document.querySelector('.footer').style.marginBottom='10px'
-}else {
-    document.querySelector('.footer').style.marginBottom='0'
+
+if (document.documentElement.clientWidth <= 1200) {
+    document.querySelector('.scroll-content').style.overflowX = 'auto'
+    document.querySelector('.footer').style.marginBottom = '10px'
+} else {
+    document.querySelector('.footer').style.marginBottom = '0'
+    document.querySelector('.scroll-content').style.overflowX = 'hidden'
 }
-window.onresize = function(){
-    if(document.documentElement.clientWidth <= 1200){
-        document.querySelector('.footer').style.marginBottom='10px'
-    }else {
-        document.querySelector('.footer').style.marginBottom='0'
+window.onresize = function () {
+    if (document.documentElement.clientWidth <= 1200) {
+        document.querySelector('.scroll-content').style.overflowX = 'auto'
+        document.querySelector('.footer').style.marginBottom = '10px'
+    } else {
+        document.querySelector('.footer').style.marginBottom = '0'
+        document.querySelector('.scroll-content').style.overflowX = 'hidden'
     }
 }
+
 /*
 * 模板编译
 * */
@@ -154,14 +160,16 @@ class ImgLoop {
     params
     boxWidth
     defaultParams = {
-        time: 1500
+        time: 1500,
+        nextRef: null,
+        prevRef: null,
     }
     state = 0;//0 初始状态 1开始轮播状态 2被操作状态
 
-    constructor(boxRef, nextRef, prevRef, params = {}) {
+    constructor(boxRef, params = {}) {
         this.boxRef = boxRef;
-        this.nextRef = nextRef;
-        this.prevRef = prevRef;
+        this.nextRef = params.nextRef;
+        this.prevRef = params.prevRef;
         Object.assign(this.defaultParams, params)
         this.params = params;
         Object.assign(this.params, this.defaultParams)
@@ -179,12 +187,15 @@ class ImgLoop {
         this.boxRef.style.transition = `left 0.3s`;
         this.boxRef.style.MozTransform = `left 0.3s`;
         this.boxRef.style.webkitTransition = `left 0.3s`;
-
-        this.nextRef.onclick = () => {
-            this.next()
-        };
-        this.prevRef.onclick = () => {
-            this.prev()
+        if (this.nextRef) {
+            this.nextRef.onclick = () => {
+                this.next()
+            };
+        }
+        if (this.prevRef) {
+            this.prevRef.onclick = () => {
+                this.prev()
+            }
         }
     }
 
@@ -371,15 +382,16 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         let imgdata = anlituList[+index];
         imgdata.imghtm = imgdata.imgli.map(l => `<img src="${l}"/>`).join('');
         document.querySelector('#menu_content').innerHTML = new Template(html1, imgdata).compile();
-        new ImgLoop(document.querySelector('[data-js-active=img_box1]'), document.querySelector('[data-js-active=img_next1]'), document.querySelector('[data-js-active=img_prev1]'), {
+        new ImgLoop(document.querySelector('[data-js-active=img_box1]'), {
             imgWidth: 224,
             imgHeight: 395,
+            nextRef: document.querySelector('[data-js-active=img_next1]'),
+            prevRef: document.querySelector('[data-js-active=img_prev1]'),
         }).start().catch(e => console.error(e))
     }
 
     anlitu(0)
 }()
-
 /*业务版块*/
 let scrol1 = document.querySelector(".scroll-content");
 scrol1 && scrol1.addEventListener('scroll', function () {
@@ -389,13 +401,30 @@ scrol1 && scrol1.addEventListener('scroll', function () {
         $('.img3').addClass('animat3')
         $('.img4').addClass('animat4')
         $('.img5').addClass('animat5')
+        $('.gc_left').addClass('leftanim')
     } else {
         $('.img1').removeClass('animat1')
         $('.img2').removeClass('animat2')
         $('.img3').removeClass('animat3')
         $('.img4').removeClass('animat4')
         $('.img5').removeClass('animat5')
+        $('.gc_left').removeClass('leftanim')
     }
+    if (scrol1.scrollTop >= 90) {
+        $('.bc_left').addClass('leftanim')
+        $('.bc_right').addClass('rightanim')
+    }else {
+        $('.bc_left').removeClass('leftanim')
+        $('.bc_right').removeClass('rightanim')
+    }
+    if (scrol1.scrollTop >= $('#lingshou').offset().top) {
+        $('.lc_right').addClass('leftanim')
+        $('.lc_left').addClass('rightanim')
+    }else {
+        $('.lc_right').removeClass('leftanim')
+        $('.lc_left').removeClass('rightanim')
+    }
+
 })
 
 
@@ -1207,9 +1236,11 @@ async function getOnlyId() {
             }
         }
 
-        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), document.querySelector('[data-js-case-active=img_next]'), document.querySelector('[data-js-case-active=img_prev]'), {
+        new ImgLoop(document.querySelector('[data-js-case-active=img_box]'), {
             imgWidth: 254,
             imgHeight: 494,
+            nextRef: document.querySelector('[data-js-case-active=img_next]'),
+            prevRef: document.querySelector('[data-js-case-active=img_prev]'),
         }).start().catch(e => console.error(e))
     }
 
@@ -1249,92 +1280,42 @@ document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
 /*隐私条例*/
 
 $('#about').on('click', function () {
-    if($('#yccm_client').hasClass("yccm_client2")){
+    if ($('#yccm_client').hasClass("yccm_client2")) {
 
-    }else{
+    } else {
         $('#yccm_client').addClass("yccm_client2");
         layer.open({
             type: 1,
             title: false,
             shadeClose: true,
             shade: 0,
-            end:function(){
+            end: function () {
                 $('#yccm_client').removeClass("yccm_client2");
             },
             area: ['100%', '100%'],
-            content:$('#yccm_client')
+            content: $('#yccm_client')
         });
     }
 });
-$('#click_here').on('click', function(){
-    $.get("http://stat.adpush.cn/ClearCookie.ashx" ,{})
+$('#click_here').on('click', function () {
+    $.get("http://stat.adpush.cn/ClearCookie.ashx", {})
     $('#out').show();
     $('.yccm_body').hide();
-    let ch=document.documentElement.clientHeight||document.body.clientHeight;
-    $('#out').css('height',ch-289);
+    let ch = document.documentElement.clientHeight || document.body.clientHeight;
+    $('#out').css('height', ch - 289);
     //窗口改动的时候
-    window.onresize=function(){
+    window.onresize = function () {
         //获取窗口高度
-        let ch=document.documentElement.clientHeight||document.body.clientHeight;
-        $('#out').css('height',ch-289);
+        let ch = document.documentElement.clientHeight || document.body.clientHeight;
+        $('#out').css('height', ch - 289);
     }
 })
 
 
-
-var wrap=document.getElementById('wrap'),
-    pic=document.getElementById('pic'),
-    list=document.getElementById('list').getElementsByTagName('li'),
-    index=0,
-    timer=null;
-
-// 定义并调用自动播放函数
-if(timer){
-
-    clearInterval(timer);
-    timer=null;
+function yewu() {
+    new ImgLoop(document.querySelector('[data-js-active=pic]'), {
+        imgWidth: 360,
+        imgHeight: 240,
+    }).start().catch(e => console.error(e))
 }
-timer=setInterval(autoplay,2000);
-// 定义图片切换函数
-function autoplay(){
-    index++;
-    if(index>=list.length){
-        index=0;
-    }
-    changeoptions(index);
-
-
-}
-
-// 鼠标划过整个容器时停止自动播放
-wrap.onmouseover=function(){
-
-    clearInterval(timer);
-
-}
-// 鼠标离开整个容器时继续播放至下一张
-wrap.onmouseout=function(){
-
-    timer=setInterval(autoplay,2000);
-}
-// 遍历所有数字导航实现划过切换至对应的图片
-for(var i=0;i<list.length;i++){
-    list[i].id=i;
-    list[i].onmouseover=function(){
-        clearInterval(timer);
-        changeoptions(this.id);
-
-    }
-}
-function changeoptions(curindex){
-    for(var j=0;j<list.length;j++){
-        list[j].className='';
-        pic.style.top=0;
-
-    }
-    list[curindex].className='active';
-    pic.style.top=-curindex*240+'px';
-    index=curindex;
-}
-
-
+yewu()
