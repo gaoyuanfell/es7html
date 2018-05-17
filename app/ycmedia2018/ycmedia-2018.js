@@ -7,7 +7,6 @@ import * as qs from "querystring";
 hashChange();
 
 window.addEventListener('hashchange', () => {
-    // console.info('ok')
     hashChange()
 });
 
@@ -21,7 +20,6 @@ function startOP(obj, utarget) {
             speed = 10;
         }
         obj.alpha = obj.alpha + speed;
-        // console.info(obj.alpha)
         if (obj.alpha == utarget) {
             clearInterval(obj.timer);
         }
@@ -173,8 +171,6 @@ class ImgLoop {
         Object.assign(this.defaultParams, params)
         this.params = params;
         Object.assign(this.params, this.defaultParams)
-        console.info(this.params)
-
         this.init()
     }
 
@@ -392,8 +388,32 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 
     anlitu(0)
 }()
+// 首页业务
+!function () {
+    $('.picimg').on('mouseover', function () {
+        let data_index = $(this).attr("data-index");
+        yewu(data_index)
+    })
+
+    function yewu(index) {
+        let yewulit = ['./static/images/1.jpg', './static/images/2.jpg', './static/images/3.jpg', './static/images/4.jpg',]
+        document.querySelector('#pic').innerHTML = yewulit.map(l => `<img src="${l}"/>`).join('');
+        new ImgLoop(document.querySelector('[data-js-active=pic]'), {
+            imgWidth: 360,
+            imgHeight: 240,
+        }).start().catch(e => console.error(e))
+        let pici = document.querySelector('#pic').children;
+        for(let i=0;i<pici.length;i++){
+            pici[i].$index = index
+        }
+    }
+    yewu(0)
+}()
 /*业务版块*/
 let scrol1 = document.querySelector(".scroll-content");
+$('.zc_right').addClass('leftanim')
+$('.zc_left').addClass('rightanim')
+$('.zc_one').addClass('zcone')
 scrol1 && scrol1.addEventListener('scroll', function () {
     if (scrol1.scrollTop >= $('#guangcheng').offset().top) {
         $('.img1').addClass('animat1')
@@ -410,23 +430,31 @@ scrol1 && scrol1.addEventListener('scroll', function () {
         $('.img5').removeClass('animat5')
         $('.gc_left').removeClass('leftanim')
     }
-    if (scrol1.scrollTop >= 90) {
+    if (scrol1.scrollTop <= 100) {
+        $('.zc_right').addClass('leftanim')
+        $('.zc_left').addClass('rightanim')
+        $('.zc_one').addClass('zcone')
+    } else {
+        $('.zc_right').removeClass('leftanim')
+        $('.zc_left').removeClass('rightanim')
+        $('.zc_one').removeClass('zcone')
+    }
+    if (scrol1.scrollTop >= 310) {
         $('.bc_left').addClass('leftanim')
         $('.bc_right').addClass('rightanim')
-    }else {
+    } else {
         $('.bc_left').removeClass('leftanim')
         $('.bc_right').removeClass('rightanim')
     }
     if (scrol1.scrollTop >= $('#lingshou').offset().top) {
         $('.lc_right').addClass('leftanim')
         $('.lc_left').addClass('rightanim')
-    }else {
+    } else {
         $('.lc_right').removeClass('leftanim')
         $('.lc_left').removeClass('rightanim')
     }
 
 })
-
 
 /*关于银橙*/
 const aboutRef = document.querySelector("#about_menu");
@@ -459,7 +487,6 @@ aboutRef.addEventListener('click', (e) => {
         }
     }
 });
-
 
 /*关于银橙 招兵买马*/
 function navList(id) {
@@ -500,7 +527,6 @@ function navList(id) {
 }
 
 navList(1);
-
 let count = 0;
 
 function jsonp(url, body = {}, config = {}, fn) {
@@ -679,7 +705,6 @@ async function getOnlyId() {
     function renderDatas(onlyId) {
         let store = JSON.parse(getStore('noticeLists'))
         if (store != undefined && store != null && store.onlyId == onlyId) {
-            console.log('getStore')
             let listsDatas = store.datas
             renderList(listsDatas, '9504')
             renderList(listsDatas, '9503')
@@ -1246,7 +1271,6 @@ async function getOnlyId() {
 
 }()
 
-
 /**
  * 存储localStorage
  */
@@ -1273,7 +1297,6 @@ function removeStore(name) {
     if (!name) return;
     window.localStorage.removeItem(name);
 }
-
 
 document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
 
@@ -1311,11 +1334,3 @@ $('#click_here').on('click', function () {
     }
 })
 
-
-function yewu() {
-    new ImgLoop(document.querySelector('[data-js-active=pic]'), {
-        imgWidth: 360,
-        imgHeight: 240,
-    }).start().catch(e => console.error(e))
-}
-yewu()

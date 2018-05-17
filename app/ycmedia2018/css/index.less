@@ -19,12 +19,14 @@
 ::-webkit-scrollbar-track-piece {
     background-color: #F5F5F5;
 }
-body{
+
+body {
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
 }
+
 .content {
     background: #fff;
     font-family: 微软雅黑, simsun, arial;
@@ -261,16 +263,12 @@ body{
                 width: 360px;
                 overflow: hidden;
                 position: relative;
-                ul {
+                #pic {
                     position: absolute;
-                    li {
+                    img {
                         float: left;
                         width: 360px;
                         height: 240px;
-                        img{
-                            display: block;
-                            width: 100%;
-                        }
                     }
                 }
             }
@@ -414,7 +412,7 @@ body{
     background: #070321;
     margin-top: 60px;
     position: fixed;
-    z-index: 3;
+    z-index: 999;
     width: 100%;
     bottom: 0;
     min-width: 1200px;
@@ -438,33 +436,33 @@ body{
             img {
                 display: block;
             }
-            .ceng{
+            .ceng {
                 opacity: 0;
                 filter: alpha(opacity=0);
                 transition: opacity 1s;
                 position: absolute;
-                left:18px;
+                left: 18px;
                 right: 0;
-                top:12px;
+                top: 12px;
                 bottom: 0;
-                background: rgba(70,101,198,0.9);
+                background: rgba(70, 101, 198, 0.9);
                 padding-left: 0.08rem;
                 text-align: left;
                 color: #fff;
-                .tit{
+                .tit {
                     font-size: 0.13rem;
                     margin-bottom: 0.09rem;
                 }
-                pre{
+                pre {
                     margin: 0;
                     font-size: 0.08rem;
                     font-family: 微软雅黑, simsun, arial;
                     line-height: 1.8;
                 }
-                .con{
+                .con {
                     position: absolute;
-                    top:50%;
-                    transform: translate(0,-50%);
+                    top: 50%;
+                    transform: translate(0, -50%);
                 }
             }
             &:before {
@@ -486,7 +484,7 @@ body{
                     filter: alpha(opacity=100);
                     transition: opacity 1s;
                 }
-                .ceng{
+                .ceng {
                     opacity: 1;
                     filter: alpha(opacity=100);
                     transition: opacity 1s;
@@ -574,13 +572,17 @@ body{
 }
 
 .sector_cont {
-    .leftanim{
+    .leftanim {
         -webkit-animation: bounceInRight 1.5s ease both;
         animation: bounceInRight 1.5s ease both;
     }
-    .rightanim{
+    .rightanim {
         -webkit-animation: bounceInLeft 1.5s ease both;
         animation: bounceInLeft 1.5s ease both;
+    }
+    .zcone {
+        animation: fadeInDown 1.5s ease 0.3s both;
+        -webkti-animation: fadeInDown 1.5s ease 0.3s both;
     }
     &.hover_on:hover {
         .link {
@@ -627,12 +629,8 @@ body{
     padding-bottom: 58px;
     .briefing_text {
         margin-top: 90px;
-        -webkit-animation: bounceInLeft 1.5s ease both;
-        animation: bounceInLeft 1.5s ease both;
     }
     .imgright {
-        -webkit-animation: bounceInRight 1.5s ease both;
-        animation: bounceInRight 1.5s ease both;
         width: 600px;
         height: 450px;
         margin: auto;
@@ -641,8 +639,6 @@ body{
             position: relative;
             z-index: 3;
             left: -34px;
-            animation: bounceInDown 1.5s ease both;
-            -webkti-animation: bounceInDown 1.5s ease both;
         }
         .two {
             position: absolute;
@@ -761,12 +757,17 @@ body{
 
 /*解决方案*/
 .solution_box {
-    background: url("../static/images/jjan_bg.png") no-repeat top center;
-    background-size: 100%;
+    /*background: url("../static/images/jjan_bg.png") no-repeat top center;
+    background-size: 100%;*/
     width: 1160px;
     height: 836px;
     margin: auto;
     position: relative;
+    .solubg {
+        position: absolute;
+        animation: zoomIn 1.5s ease both;
+        -webkti-animation: zoomIn 1.5s ease both;
+    }
     .text_main {
         width: 313px;
         height: auto;
@@ -774,6 +775,8 @@ body{
     }
     .left {
         margin-top: 210px;
+        position: relative;
+        z-index: 5;
         .text_main:last-child {
             margin-bottom: 0;
         }
@@ -784,9 +787,27 @@ body{
     }
     .right {
         margin-top: 220px;
+        position: relative;
+        z-index: 5;
         .text_main:last-child {
             margin-bottom: 0;
         }
+    }
+    .left2, .right2 {
+        animation: fadeInDown 1.5s ease 0.3s both;
+        -webkti-animation: fadeInDown 1.5s ease 0.3s both;
+    }
+    .right1 {
+        animation: fadeInDown 1.5s ease 0.6s both;
+        -webkti-animation: fadeInDown 1.5s ease 0.6s both;
+    }
+    .left1 {
+        animation: fadeInDown 1.5s ease 0.8s both;
+        -webkti-animation: fadeInDown 1.5s ease 0.8s both;
+    }
+    .center1 {
+        animation: fadeInDown 1.5s ease 1s both;
+        -webkti-animation: fadeInDown 1.5s ease 1s both;
     }
 }
 
@@ -1586,17 +1607,6 @@ html {
     }
     li:hover {
         color: #ff9d00;
-        &:before {
-            content: '';
-            background: url("../static/images/nav_active.png") no-repeat;
-            width: 23px;
-            height: 16px;
-            background-size: 100% 100%;
-            display: inline-block;
-            position: absolute;
-            left: -2px;
-            top: 12px;
-        }
     }
 }
 
@@ -1976,6 +1986,7 @@ html {
         opacity: 1;
     }
 }
+
 @keyframes bounceInLeft {
     0%, 100%, 60%, 75%, 90% {
         transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
@@ -2005,8 +2016,6 @@ html {
     }
 }
 
-
-
 /**********从右往左***********/
 @-webkit-keyframes bounceInRight {
     0%, 100%, 60%, 75%, 90% {
@@ -2031,6 +2040,7 @@ html {
         opacity: 1;
     }
 }
+
 @keyframes bounceInRight {
     0%, 100%, 60%, 75%, 90% {
         transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
@@ -2059,51 +2069,29 @@ html {
         opacity: 1;
     }
 }
-@-webkit-keyframes bounceInDown {
-    0%, 100%, 60%, 75%, 90% {
-        -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
-        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
-    }
+
+@-webkit-keyframes fadeInDown {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(0, -1000px, 0);
-        transform: translate3d(0, -1000px, 0)
+        -webkit-transform: translate3d(0, -40%, 0);
+        transform: translate3d(0, -40%, 0)
     }
-    75% {
+    80% {
         opacity: 1;
-        -webkit-transform: translate3d(0, 25px, 0);
-        transform: translate3d(0, 25px, 0)
-    }
-    90% {
-        -webkit-transform: translate3d(0, -10px, 0);
-        transform: translate3d(0, -10px, 0)
-    }
-    100% {
         -webkit-transform: none;
         transform: none
     }
 }
-@keyframes bounceInDown {
-    0%, 100%, 60%, 75%, 90% {
-        -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
-        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
-    }
+
+@keyframes fadeInDown {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(0, -1000px, 0);
-        -ms-transform: translate3d(0, -1000px, 0);
-        transform: translate3d(0, -1000px, 0)
+        -webkit-transform: translate3d(0, -40%, 0);
+        -ms-transform: translate3d(0, -40%, 0);
+        transform: translate3d(0, -40%, 0)
     }
-    75% {
+    80% {
         opacity: 1;
-        -webkit-transform: translate3d(0, 25px, 0);
-        transform: translate3d(0, 25px, 0)
-    }
-    90% {
-        -webkit-transform: translate3d(0, -10px, 0);
-        transform: translate3d(0, -10px, 0)
-    }
-    100% {
         -webkit-transform: none;
         -ms-transform: none;
         transform: none
@@ -2140,6 +2128,29 @@ html {
         opacity: 1;
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0)
+    }
+}
+
+@-webkit-keyframes zoomIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3)
+    }
+    50% {
+        opacity: 1
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        -ms-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3)
+    }
+    50% {
+        opacity: 1
     }
 }
 
