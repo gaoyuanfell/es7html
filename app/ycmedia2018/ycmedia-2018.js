@@ -163,7 +163,7 @@ class ImgLoop {
         prevRef: null,
     }
     state = 0;//0 初始状态 1开始轮播状态 2被操作状态
-    setStop
+    num = 0
 
     constructor(boxRef, params = {}) {
         this.boxRef = boxRef;
@@ -205,22 +205,25 @@ class ImgLoop {
     }
 
     async start() {
-        this.setStop = true;
+        if(this.state === 1) return;
+        ++this.num
         this.state = 1;
-        while (this.state >= 1 && document.body.contains(this.boxRef) && this.setStop) {
+        while (this.state >= 1 && document.body.contains(this.boxRef)) {
             this.state = 1;
+            let num = this.num;
             await this.sleep(this.params.time);
-            this.state === 1 && this.next()
+            this.state === 1 && num === this.num && this.next()
         }
     }
 
     stop() {
+        ++this.num
         this.state = 0;
-        this.setStop = false;
     }
 
     next() {
         this.state = 2;
+        ++this.num
         let left = this.boxRef.style.left.replace(/px$/, '');
         left = Math.abs(left) + this.params.imgWidth
         if (Math.abs(left) > this.boxWidth - this.params.imgWidth) {
@@ -231,6 +234,7 @@ class ImgLoop {
 
     prev() {
         this.state = 2;
+        ++this.num
         let left = this.boxRef.style.left.replace(/px$/, '');
         left = Math.abs(left) - this.params.imgWidth;
         if (left < 0) {
@@ -240,7 +244,8 @@ class ImgLoop {
     }
 
     go(index) {
-        let left = this.params.imgWidth * index;
+        this.stop();
+        let left = this.params.imgWidth * (index + 1);
         if (left > this.boxWidth) {
             left = this.boxWidth
         }
@@ -393,27 +398,30 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 }()
 // 首页业务
 !function () {
-    let imgLoop
-    $('.picimg').on('mouseover', function () {
-        let data_index = $(this).attr("data-index");
-        imgLoop = yewu(data_index)
-    })
-
     function yewu(index) {
         let yewulit = ['./static/images/1.jpg', './static/images/2.jpg', './static/images/3.jpg', './static/images/4.jpg',]
         document.querySelector('#pic').innerHTML = yewulit.map(l => `<img src="${l}"/>`).join('');
 
         let pici = document.querySelector('#pic').children;
-        for(let i=0;i<pici.length;i++){
+        for (let i = 0; i < pici.length; i++) {
             pici[i].$index = index
         }
-        if(imgLoop) imgLoop.stop()
-        return new ImgLoop(document.querySelector('[data-js-active=pic]'), {
-            imgWidth: 360,
-            imgHeight: 240,
-        }).start().catch(e => console.error(e))
     }
-    imgLoop = yewu(0)
+
+    yewu(0)
+    let imgLoop = new ImgLoop(document.querySelector('[data-js-active=pic]'), {
+        imgWidth: 360,
+        imgHeight: 240,
+    })
+    imgLoop.start().catch(e => console.error(e))
+    $('.picimg').on('mouseover', function () {
+        let data_index = +$(this).attr("data-index");
+        imgLoop.go(data_index)
+    })
+    $('.picimg').on('mouseout', function () {
+        console.info('mouseout')
+        imgLoop.start().catch(e => console.error(e))
+    })
 }()
 /*业务版块*/
 let scrol1 = document.querySelector(".scroll-content");
