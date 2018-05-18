@@ -163,6 +163,7 @@ class ImgLoop {
         prevRef: null,
     }
     state = 0;//0 初始状态 1开始轮播状态 2被操作状态
+    setStop
 
     constructor(boxRef, params = {}) {
         this.boxRef = boxRef;
@@ -204,8 +205,9 @@ class ImgLoop {
     }
 
     async start() {
+        this.setStop = true;
         this.state = 1;
-        while (this.state >= 1 && document.body.contains(this.boxRef)) {
+        while (this.state >= 1 && document.body.contains(this.boxRef) && this.setStop) {
             this.state = 1;
             await this.sleep(this.params.time);
             this.state === 1 && this.next()
@@ -214,6 +216,7 @@ class ImgLoop {
 
     stop() {
         this.state = 0;
+        this.setStop = false;
     }
 
     next() {
@@ -390,24 +393,27 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 }()
 // 首页业务
 !function () {
+    let imgLoop
     $('.picimg').on('mouseover', function () {
         let data_index = $(this).attr("data-index");
-        yewu(data_index)
+        imgLoop = yewu(data_index)
     })
 
     function yewu(index) {
         let yewulit = ['./static/images/1.jpg', './static/images/2.jpg', './static/images/3.jpg', './static/images/4.jpg',]
         document.querySelector('#pic').innerHTML = yewulit.map(l => `<img src="${l}"/>`).join('');
-        new ImgLoop(document.querySelector('[data-js-active=pic]'), {
-            imgWidth: 360,
-            imgHeight: 240,
-        }).start().catch(e => console.error(e))
+
         let pici = document.querySelector('#pic').children;
         for(let i=0;i<pici.length;i++){
             pici[i].$index = index
         }
+        if(imgLoop) imgLoop.stop()
+        return new ImgLoop(document.querySelector('[data-js-active=pic]'), {
+            imgWidth: 360,
+            imgHeight: 240,
+        }).start().catch(e => console.error(e))
     }
-    yewu(0)
+    imgLoop = yewu(0)
 }()
 /*业务版块*/
 let scrol1 = document.querySelector(".scroll-content");
