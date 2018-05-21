@@ -55,7 +55,7 @@ let slidedirect = null;
 let page = 1;
 let channel_id = 1;
 
-//
+//获取推荐数据
 function getRecommendData(){
     return new Promise( (resolve,reject)=>{
         jsonp('https://feed.baidu.com/feed/api/wise/feedlist',{
@@ -246,7 +246,7 @@ function menuClick(){
             for(let j = 0; j < oDiv.length; j++){
                 oDiv[j].className = 'swiper-slide'
             }
-            document.documentElement.scrollTop = document.body.scrollTop = 252
+            document.documentElement.scrollTop = document.body.scrollTop = 222
             this.className = 'swiper-slide active'
             let id = this.getAttribute('data-id')
             channel_id = id
@@ -255,7 +255,7 @@ function menuClick(){
         }
     }
 }
-
+//
 function changeId(id){
     switch (+id){
         case 1:
@@ -420,7 +420,6 @@ function touchEnd(ev){
 
 }
 function dragRefreshData(){
-
     if(channel_id == 1){
         getRecommendData().then( (data)=>{
             upLoad.style.opacity = 0
