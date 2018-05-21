@@ -124,6 +124,7 @@ module.exports = [
     //     name:'ycmedia-index',
     //     title:'银橙传媒  基于大数据的精准营销专家'
     // },
+
     // {
     //     path:'ycmedia2018',
     //     output:'ycmedia2018',
