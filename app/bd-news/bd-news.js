@@ -231,7 +231,21 @@ function search(){
     }
 }
 window.onload = function(){
-
+    let swiper = new Swiper('.menu_cont',{
+        slidesPerView:6,
+        freeMode:true,
+    });
+    let swiper2 = new Swiper({
+        el: '.nav_cont',
+        slidesPerView: 6,
+        slidesPerGroup: 6,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        }
+    });
     menuClick();
     scroll();
     slideDirect();
@@ -280,17 +294,9 @@ function scroll(){
     window.onscroll = function(){
         let pageYOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
         if(pageYOffset >= menuTop){
-            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-                menu.classList.add('ios_menu');
-            }else{
-                menu.classList.add('fixed_top')
-            }
+            menu.classList.add('fixed_top');
         }else{
-            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-                menu.classList.remove('ios_menu');
-            }else{
-                menu.classList.remove('fixed_top')
-            }
+            menu.classList.remove('fixed_top');
         }
         if(pageYOffset > 1200 && slidedirect == 'up'){
             document.querySelector('.tab-tools').classList.add('show-tools')
