@@ -256,7 +256,7 @@ window.onload = function(){
 }
 //刷新时 返回顶部
 window.onbeforeunload = function(){
-    document.documentElement.scrollTop = document.body.scrollTop = 0
+    document.documentElement.scrollTop = window.pageYOffset = document.body.scrollTop = 0
 }
 //导航点击
 function menuClick(){
@@ -266,7 +266,7 @@ function menuClick(){
             for(let j = 0; j < oDiv.length; j++){
                 oDiv[j].className = 'swiper-slide'
             }
-            document.documentElement.scrollTop = document.body.scrollTop = 222
+            document.documentElement.scrollTop = window.pageYOffset = document.body.scrollTop = 222
             this.className = 'swiper-slide active'
             let id = this.getAttribute('data-id')
             channel_id = id
@@ -292,18 +292,18 @@ function scroll(){
     let menuTop = menu.offsetTop;
     let cont = document.querySelector('.main')
     window.onscroll = function(){
-        let pageYOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-        if(pageYOffset >= menuTop){
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        if( scrollTop >= menuTop ){
             menu.classList.add('fixed_top');
         }else{
             menu.classList.remove('fixed_top');
         }
-        if(pageYOffset > 1200 && slidedirect == 'up'){
+        if(scrollTop > 1200 && slidedirect == 'up'){
             document.querySelector('.tab-tools').classList.add('show-tools')
         }else{
             document.querySelector('.tab-tools').classList.remove('show-tools')
         }
-        if(pageYOffset == 0){
+        if(scrollTop == 0){
             dragRefresh();
         }
         if(getScrollTop() + getWindowHeight() == getScrollHeight()){
