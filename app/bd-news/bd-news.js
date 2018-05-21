@@ -1,6 +1,5 @@
 import '../../common/css/base.less'
 import './css/index.less'
-import {toBodyString} from '../../common/js/util'
 let count = 0;
 function jsonp(url, body = {}, config = {}, fn) {
     function noop() {
@@ -38,7 +37,29 @@ function jsonp(url, body = {}, config = {}, fn) {
         }
     })
 }
-
+function toBodyString(obj, bo = true) {
+    let ret = [];
+    for (let key in obj) {
+        let values = obj[key];
+        if (values && values.constructor === Array) { //数组
+            let queryValues = [];
+            for (let i = 0, len = values.length, value; i < len; i++) {
+                value = values[i];
+                queryValues.push(toQueryPair(key, value));
+            }
+            ret = ret.concat(queryValues);
+        } else { //字符串
+            ret.push(toQueryPair(key, values, bo));
+        }
+    }
+    return ret.join('&');
+}
+function toQueryPair(key, value, bo) {
+    if (typeof value === 'undefined') {
+        return key;
+    }
+    return key + '=' + (bo ? encodeURIComponent(value === null ? '' : String(value)) : value === null ? '' : String(value));
+}
 let slidedirect = null;
 
 //新闻
