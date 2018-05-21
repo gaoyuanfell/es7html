@@ -1,44 +1,34 @@
-import '../../common/js/vendor'
 import '../../common/css/base.less'
 import './css/index.less'
-import {getHash} from "../../common/js/util";
-import * as qs from "querystring";
-
+import {toBodyString} from '../../common/js/util'
 let count = 0;
 function jsonp(url, body = {}, config = {}, fn) {
     function noop() {
     }
 
     let target = document.getElementsByTagName('script')[0] || document.head;
-
     let prefix = config.prefix || 'jsonp';
     let timeout = config.timer || 30000;
     let timer = null;
-
     let id = config.name || (prefix + (count++) + +new Date());
-
     body.callback = id;
     body._ = +new Date();
     url += url.indexOf('?') > -1 ? '&' : '?';
-    url += qs.stringify(body);
-
+    url += toBodyString(body);
     let script = document.createElement('script');
     script.src = url;
     target.parentNode.insertBefore(script, target);
-
     function cleanup() {
         if (script.parentNode) script.parentNode.removeChild(script);
         window[id] = noop;
         if (timer) clearTimeout(timer);
     }
-
     return new Promise((resolve, reject) => {
         window[id] = function (data) {
             resolve(data)
             fn && fn(data);
             cleanup();
         };
-
         if (timeout) {
             timer = setTimeout(function () {
                 reject(new Error('Timeout'));
