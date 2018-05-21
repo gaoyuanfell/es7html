@@ -222,12 +222,7 @@ function search(){
 window.onload = function(){
 
     menuClick();
-    //判断安卓、ios 执行不同的scroll
-    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-        iosScroll()
-    } else{   // else if (/(Android)/i.test(navigator.userAgent))
-        andScroll()
-    }
+    scroll();
     slideDirect();
     search();
     toolClick();
@@ -266,24 +261,32 @@ function changeId(id){
             break;
     }
 }
-//ios
-function iosScroll(){
-    let stickyEl = document.querySelector('.menu');
-    let stickyT = stickyEl.offsetTop;
-    let cont =  document.querySelector('.main')
+
+function scroll(){
+    let menu = document.querySelector('.menu');
+    let menuTop = menu.offsetTop;
+    let cont = document.querySelector('.main')
     window.onscroll = function(){
-        let scrollY = window.scrollY
-        if(scrollY >= stickyT){
-            stickyEl.classList.add('ios_menu');
+        let pageYOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        if(pageYOffset >= menuTop){
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+                menu.classList.add('ios_menu');
+            }else{
+                menu.classList.add('fixed_top')
+            }
         }else{
-            stickyEl.classList.remove('ios_menu');
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+                menu.classList.remove('ios_menu');
+            }else{
+                menu.classList.remove('fixed_top')
+            }
         }
-        if(scrollY > 1200 && slidedirect == 'up'){
+        if(pageYOffset > 1200 && slidedirect == 'up'){
             document.querySelector('.tab-tools').classList.add('show-tools')
         }else{
             document.querySelector('.tab-tools').classList.remove('show-tools')
         }
-        if(scrollY == 0){
+        if(pageYOffset == 0){
             dragRefresh();
         }
         if(getScrollTop() + getWindowHeight() == getScrollHeight()){
@@ -293,47 +296,8 @@ function iosScroll(){
             },200)
         }
     }
+}
 
-}
-//android
-function andScroll(){
-    let stickyEl = document.querySelector('.menu');
-// 守家占位符
-    let stickyHolder = document.createElement('div');
-    let rect = stickyEl.getBoundingClientRect();
-    let cont = document.querySelector('.main')
-    let upLoad = document.getElementById('uploading')
-    let startY = 0;
-    // stickyEl.parentNode.replaceChild(stickyHolder, stickyEl);
-    // stickyHolder.appendChild(stickyEl);
-    // stickyHolder.style.height = rect.height + 'px';
-    let stickyT = stickyEl.offsetTop;
-    window.onscroll = function(e) {
-        let scrollT = (document.documentElement || document.body.parentNode || document.body).scrollTop;
-        if (scrollT >= stickyT) {
-            stickyEl.classList.add('fixed_top');
-        }
-        else {
-            stickyEl.classList.remove('fixed_top');
-        }
-        //显示返回顶部
-        if(scrollT > 1200 && slidedirect == 'up' ){
-            document.querySelector('.tab-tools').classList.add('show-tools')
-        }else{
-            document.querySelector('.tab-tools').classList.remove('show-tools')
-        }
-        if(getScrollTop() == 0){
-            dragRefresh();
-        }
-        //底部加载数据
-        if(getScrollTop() + getWindowHeight() == getScrollHeight()){
-            document.getElementById('loading').style.display = 'block'
-            setTimeout( ()=>{
-                changeId(channel_id)
-            },200)
-        }
-    };
-}
 //滑动方向
 function slideDirect(){
     let startY = 0;
