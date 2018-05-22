@@ -4,7 +4,6 @@ let count = 0;
 function jsonp(url, body = {}, config = {}, fn) {
     function noop() {
     }
-
     let target = document.getElementsByTagName('script')[0] || document.head;
     let prefix = config.prefix || 'jsonp';
     let timeout = config.timer || 30000;
@@ -60,12 +59,10 @@ function toQueryPair(key, value, bo) {
     }
     return key + '=' + (bo ? encodeURIComponent(value === null ? '' : String(value)) : value === null ? '' : String(value));
 }
-let slidedirect = null;
 
-//新闻
+let slidedirect = null;
 let page = 1;
 let channel_id = 1;
-
 //获取推荐数据
 function getRecommendData(){
     return new Promise( (resolve,reject)=>{
@@ -161,24 +158,6 @@ function getattentionlist(){
         let div = document.createElement('div')
         div.innerHTML = html
         document.querySelector('.main').appendChild(div)
-    })
-}
-//视频
-function getvideolist(){
-    jsonp('https://www.baidu.com/feed/data/tab/getvideolist',{
-        sid: '123407_117040_123291_122851_103342_120199_123018_119383_118895_118865_118839_118828_118790_120549_107311_117332_117429_122788_123572_122960_114820_123700_123500_122496_110085_123290'
-        ,ssid: 0
-        ,from: '844b'
-        ,pu: 'sz%401320_2001%2Cta%40iphone_1_11.0_3_604'
-        ,qid: '0918142091'
-        ,ms: 1
-        ,channel_id: channel_id
-        ,source: 'wise_feed_videotab'
-        ,direction: 'bottom'
-        ,async: 1
-        ,startlistnum: 1
-    }).then( (data)=>{
-        console.log(data)
     })
 }
 
