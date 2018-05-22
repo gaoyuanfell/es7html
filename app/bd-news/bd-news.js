@@ -63,6 +63,10 @@ function toQueryPair(key, value, bo) {
 let slidedirect = null;
 let page = 1;
 let channel_id = 1;
+let idArr = [];
+let startY = 0
+const cont = document.querySelector('.main')
+const upLoad = document.getElementById('uploading')
 //获取推荐数据
 function getRecommendData(){
     return new Promise( (resolve,reject)=>{
@@ -92,13 +96,20 @@ function jsonp5(){
     getRecommendData().then((data)=>{
         document.getElementById('loading').style.display = 'none'
         let html = data.result.tab.data
-        let div = document.createElement('div')
-        div.innerHTML = html
-        document.querySelector('.main').appendChild(div)
-        jsonp4()
+        let oDiv = cont.children
+        for(let i = 0; i < oDiv.length; i++){
+            let id = oDiv[i].getAttribute('data-id')
+            if( channel_id == id ){
+                oDiv[i].style.display = 'block'
+                let div = document.createElement('div')
+                div.innerHTML = html
+                oDiv[i].appendChild(div)
+            }else{
+                oDiv[i].style.display = 'none'
+            }
+        }
     })
 }
-jsonp5();
 //广告
 function jsonp4(){
     jsonp('https://feed.baidu.com/feed/api/wise/getwiseafdads',{
@@ -127,7 +138,7 @@ function jsonp4(){
         let html = data.ad_place_list["0"].ad_place_data
         let div = document.createElement('div')
         div.innerHTML = html
-        document.querySelector('.main').appendChild(div)
+        cont.appendChild(div)
     })
 }
 //除推荐外的其他数据
@@ -155,9 +166,18 @@ function getattentionlist(){
     getAttentionData().then( (data)=>{
         document.getElementById('loading').style.display = 'none'
         let html = data.result.tab.tabTpl
-        let div = document.createElement('div')
-        div.innerHTML = html
-        document.querySelector('.main').appendChild(div)
+        let oDiv = cont.children
+        for(let i = 0; i < oDiv.length; i++){
+            let id = oDiv[i].getAttribute('data-id')
+            if( channel_id == id ){
+                oDiv[i].style.display = 'block'
+                let div = document.createElement('div')
+                div.innerHTML = html
+                oDiv[i].appendChild(div)
+            }else{
+                oDiv[i].style.display = 'none'
+            }
+        }
     })
 }
 
@@ -225,6 +245,7 @@ window.onload = function(){
             clickable: true,
         }
     });
+    fristLoad();
     menuClick();
     scroll();
     slideDirect();
@@ -235,7 +256,15 @@ window.onload = function(){
 }
 //刷新时 返回顶部
 window.onbeforeunload = function(){
-    document.documentElement.scrollTop = window.pageYOffset = document.body.scrollTop = 0
+    document.documentElement.scrollTop  = document.body.scrollTop = 0
+}
+//首次加载
+function fristLoad(){
+    idArr.push(channel_id)
+    let newDiv = document.createElement('div')
+    newDiv.setAttribute('data-id',channel_id)
+    cont.appendChild(newDiv)
+    jsonp5();
 }
 //导航点击
 function menuClick(){
@@ -245,12 +274,27 @@ function menuClick(){
             for(let j = 0; j < oDiv.length; j++){
                 oDiv[j].className = 'swiper-slide'
             }
-            document.documentElement.scrollTop = window.pageYOffset = document.body.scrollTop = 222
+            document.documentElement.scrollTop  = document.body.scrollTop = 222
             this.className = 'swiper-slide active'
             let id = this.getAttribute('data-id')
             channel_id = id
-            document.querySelector('.main').innerHTML = ''
-            changeId(channel_id)
+            if( idArr.indexOf(+id) < 0 ){
+                idArr.push(+id)
+                let newDiv = document.createElement('div')
+                newDiv.setAttribute('data-id',id)
+                cont.appendChild(newDiv)
+                changeId(channel_id)
+            }else{
+                let oDiv = cont.children
+                for(let i = 0; i < oDiv.length; i++){
+                    let id = oDiv[i].getAttribute('data-id')
+                    if( channel_id == id ){
+                        oDiv[i].style.display = 'block'
+                    }else{
+                        oDiv[i].style.display = 'none'
+                    }
+                }
+            }
         }
     }
 }
@@ -269,9 +313,8 @@ function changeId(id){
 function scroll(){
     let menu = document.querySelector('.menu');
     let menuTop = menu.offsetTop;
-    let cont = document.querySelector('.main')
     window.onscroll = function(){
-        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        let scrollTop = document.documentElement.scrollTop  || document.body.scrollTop
         if( scrollTop >= menuTop ){
             menu.classList.add('fixed_top');
         }else{
@@ -314,7 +357,6 @@ function toolClick(){
     let refresh = document.querySelector('.tab-refresh')
     let backTop = document.querySelector('.tab-back')
     refresh.onclick = function(){
-        // document.documentElement.scrollTop = document.body.scrollTop = 200
         location.reload();
     }
     backTop.onclick = function(){
@@ -330,16 +372,13 @@ function toolClick(){
             }else{
                 let newTop = top - speed
                 top = newTop
-                console.log(top)
                 document.documentElement.scrollTop = document.body.scrollTop = newTop
             }
         },10)
     }
 }
 //滚动条在顶部时，下拉刷新
-let cont = document.querySelector('.main')
-let upLoad = document.getElementById('uploading')
-let startY = 0;
+
 function dragRefresh(){
     cont.addEventListener('touchstart',touchStart,false)
     cont.addEventListener('touchmove',touchMove,false)
