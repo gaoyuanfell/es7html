@@ -5,7 +5,6 @@ import {getHash} from "../../common/js/util";
 import * as qs from "querystring";
 
 hashChange();
-
 window.addEventListener('hashchange', () => {
     hashChange()
 });
@@ -413,7 +412,7 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         imgWidth: 360,
         imgHeight: 240,
     })
-    imgLoop.start().catch(e => console.error(e))
+    imgLoop.start().catch(e => console.error(e));
     $('.picimg').on('mouseover', function () {
         let data_index = +$(this).attr("data-index");
         imgLoop.go(data_index)
@@ -429,43 +428,48 @@ $('.zc_right').addClass('leftanim')
 $('.zc_left').addClass('rightanim')
 $('.zc_one').addClass('zcone')
 scrol1 && scrol1.addEventListener('scroll', function () {
-    if (scrol1.scrollTop >= $('#guangcheng').offset().top) {
-        $('.img1').addClass('animat1')
-        $('.img2').addClass('animat2')
-        $('.img3').addClass('animat3')
-        $('.img4').addClass('animat4')
-        $('.img5').addClass('animat5')
-        $('.gc_left').addClass('leftanim')
-    } else {
-        $('.img1').removeClass('animat1')
-        $('.img2').removeClass('animat2')
-        $('.img3').removeClass('animat3')
-        $('.img4').removeClass('animat4')
-        $('.img5').removeClass('animat5')
-        $('.gc_left').removeClass('leftanim')
-    }
-    if (scrol1.scrollTop <= 100) {
+    if (scrol1.scrollTop <= 420) {
         $('.zc_right').addClass('leftanim')
         $('.zc_left').addClass('rightanim')
         $('.zc_one').addClass('zcone')
-    } else {
+    }
+    if (scrol1.scrollTop >= 420) {
         $('.zc_right').removeClass('leftanim')
         $('.zc_left').removeClass('rightanim')
         $('.zc_one').removeClass('zcone')
-    }
-    if (scrol1.scrollTop >= 310) {
         $('.bc_left').addClass('leftanim')
         $('.bc_right').addClass('rightanim')
     } else {
         $('.bc_left').removeClass('leftanim')
         $('.bc_right').removeClass('rightanim')
     }
-    if (scrol1.scrollTop >= $('#lingshou').offset().top) {
+    if (scrol1.scrollTop >= 860) {
+        $('.bc_left').removeClass('leftanim')
+        $('.bc_right').removeClass('rightanim')
         $('.lc_right').addClass('leftanim')
         $('.lc_left').addClass('rightanim')
-    } else {
+    }else {
         $('.lc_right').removeClass('leftanim')
         $('.lc_left').removeClass('rightanim')
+    }
+    if(scrol1.scrollTop >= 1340){
+        $('.lc_right').removeClass('leftanim')
+        $('.lc_left').removeClass('rightanim')
+        $('.img1').addClass('animat1')
+        $('.img2').addClass('animat2')
+        $('.img3').addClass('animat3')
+        $('.img4').addClass('animat4')
+        $('.img5').addClass('animat5')
+        $('.gc_left').addClass('leftanim')
+        $('.gc_right').addClass('rightanim')
+    }else {
+        $('.img1').removeClass('animat1')
+        $('.img2').removeClass('animat2')
+        $('.img3').removeClass('animat3')
+        $('.img4').removeClass('animat4')
+        $('.img5').removeClass('animat5')
+        $('.gc_left').removeClass('leftanim')
+        $('.gc_right').removeClass('rightanim')
     }
 
 })
