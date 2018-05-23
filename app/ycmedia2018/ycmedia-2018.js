@@ -60,7 +60,6 @@ function hashChange() {
     }
     scrol && scrol.addEventListener('scroll', function () {
         top_nav_ref.style.top = scrol.scrollTop + 'px';
-        // top_nav_ref.style.transform = "translateY('+scrol.scrollTop+'px)";
         if (hash != 'home') {
             let top_nav_ref = document.querySelector('.top_nav')
             top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
@@ -75,7 +74,6 @@ function hashChange() {
         }
     })
 }
-
 if (document.documentElement.clientWidth <= 1200) {
     document.querySelector('.scroll-content').style.overflowX = 'auto'
     document.querySelector('.footer').style.marginBottom = '10px'
@@ -92,7 +90,6 @@ window.onresize = function () {
         document.querySelector('.scroll-content').style.overflowX = 'hidden'
     }
 }
-
 /*
 * 模板编译
 * */
@@ -393,11 +390,6 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     function yewu(index) {
         let yewulit = ['./static/images/1.jpg', './static/images/2.jpg', './static/images/3.jpg', './static/images/4.jpg',]
         document.querySelector('#pic').innerHTML = yewulit.map(l => `<img src="${l}"/>`).join('');
-
-        let pici = document.querySelector('#pic').children;
-        for (let i = 0; i < pici.length; i++) {
-            pici[i].$index = index
-        }
     }
 
     yewu(0)
@@ -599,7 +591,7 @@ async function getData() {
     let list;
     let contentList = [];
     while (bo) {
-        let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
+        let data = await jsonp("https://neeq.ycmedia.cn", {
             disclosureType: 5,
             page: currPageNum - 1,
             companyCd: 830999,
@@ -686,7 +678,7 @@ function getObjFirst(obj) {
 // ----最后判断是只添加新数据存缓存还是再次全部请求？？？
 // 获取唯一标识,请求第一页数据（page = 0）的唯一标识disclosureCode
 async function getOnlyId() {
-    let data = await jsonp("http://www.neeq.com.cn/disclosureInfoController/infoResult.do", {
+    let data = await jsonp("https://neeq.ycmedia.cn", {
         disclosureType: 5,
         page: 0,
         companyCd: 830999,
