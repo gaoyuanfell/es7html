@@ -41,14 +41,7 @@ function hashChange() {
     if (ref) {
         startOP(ref, 100);
         ref.style.display = 'block';
-        /*if(ref.animate){
-            ref.animate([
-                {opacity: 0},
-                {opacity: 1}
-            ], {
-                duration: 250
-            })
-        }*/
+        document.querySelector('.scroll-content').scrollTop = 0
     }
     Array.from(document.querySelector('#filters').children).every(ref => {
         ref.classList.remove('active');
