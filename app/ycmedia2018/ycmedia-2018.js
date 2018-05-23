@@ -219,6 +219,7 @@ class ImgLoop {
             left = 0
         }
         this.boxRef.style.left = `-${left}px`
+        this.params.callback && this.params.callback(left / this.params.imgWidth)
     }
 
     prev() {
@@ -396,14 +397,27 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     let imgLoop = new ImgLoop(document.querySelector('[data-js-active=pic]'), {
         imgWidth: 360,
         imgHeight: 240,
+        time:2000,
+        callback(index){
+            // console.info(index)
+            let myArray = document.querySelectorAll('.sector .text_main')
+           for(let i=0;i<myArray.length;i++){
+               myArray[i].classList.remove('active')
+               if (index == i) {
+                   myArray[i].classList.add('active')
+               }
+               $('.picimg').on('mouseover', function () {
+                   myArray[i].classList.remove('active')
+                   let data_index = +$(this).attr("data-index");
+                   imgLoop.go(data_index)
+               })
+           }
+
+        }
     })
     imgLoop.start().catch(e => console.error(e));
-    $('.picimg').on('mouseover', function () {
-        let data_index = +$(this).attr("data-index");
-        imgLoop.go(data_index)
-    })
     $('.picimg').on('mouseout', function () {
-        console.info('mouseout')
+        // console.info('mouseout')
         imgLoop.start().catch(e => console.error(e))
     })
 }()
