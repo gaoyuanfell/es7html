@@ -658,12 +658,14 @@ body {
     padding-bottom: 49px;
     .briefing_text {
         margin-top: 60px;
+        opacity: 0;
     }
     .imgright {
         width: 554px;
         height: 409px;
         margin: auto;
         position: relative;
+        opacity: 0;
         .one {
             position: absolute;
             z-index: 3;
@@ -682,12 +684,14 @@ body {
     padding-bottom: 28px;
     .briefing_text {
         margin-top: 75px;
+        opacity: 0;
     }
     .imgright {
         width: 554px;
         height: 409px;
         margin: auto;
         position: relative;
+        opacity: 0;
         .one {
             margin-top: 90px;
         }
@@ -703,6 +707,7 @@ body {
     padding-bottom: 48px;
     .briefing_text {
         margin-top: 75px;
+        opacity: 0;
     }
     .imgright {
         width: 554px;
@@ -1687,6 +1692,13 @@ html {
 
 #popup {
     display: none;
+    position: absolute;
+    z-index: 55;
+    background: rgba(0,0,0,0.9);
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /*合作伙伴*/
@@ -1838,6 +1850,7 @@ html {
     display: none;
     text-align: left;
     margin-top: -40px;
+    background: rgba(0,0,0,0.1);
     .body {
         width: 80%;
         height: 80%;
@@ -1858,7 +1871,7 @@ html {
         padding-bottom: 15px;
         border-bottom: 1px solid #D1D4DD;
     }
-    #yccm_client_return {
+    #yccm_return {
         float: right;
         cursor: pointer;
     }
@@ -1977,7 +1990,6 @@ html {
         transform: translate3d(-3000px, 0, 0);
     }
     60% {
-        opacity: 1;
         transform: translate3d(25px, 0, 0);
     }
     75% {
@@ -2002,7 +2014,6 @@ html {
         transform: translate3d(-3000px, 0, 0);
     }
     60% {
-        opacity: 1;
         -ms-transform: translate3d(25px, 0, 0);
         transform: translate3d(25px, 0, 0);
     }
@@ -2031,7 +2042,6 @@ html {
         transform: translate3d(3000px, 0, 0);
     }
     60% {
-        opacity: 1;
         transform: translate3d(-25px, 0, 0);
     }
     75% {
@@ -2056,7 +2066,6 @@ html {
         transform: translate3d(3000px, 0, 0);
     }
     60% {
-        opacity: 1;
         -ms-transform: translate3d(-25px, 0, 0);
         transform: translate3d(-25px, 0, 0)
     }

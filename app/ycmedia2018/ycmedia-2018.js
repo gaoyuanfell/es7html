@@ -1207,10 +1207,13 @@ async function getOnlyId() {
     document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
 
     $('.yccm_client_case_group').on('click', function () {
+        $('#popup').fadeToggle(500)
         let data_index = $(this).attr("data-index");
         Details(data_index)
     })
-
+    $('#yccm_client_return').on('click',function () {
+        $('#popup').fadeToggle(500)
+    })
     function Details(index) {
         let html = `
         <div class="yccm_client_details clear">
@@ -1253,13 +1256,6 @@ async function getOnlyId() {
         if (!data.rate) data.rateShow = 'none';
 
         document.querySelector('.yccm_popup_body').innerHTML = new Template(html, data).compile();
-        layer.open({
-            type: 1,
-            shade: 0,
-            area: ['100%', '100%'], //宽高
-            title: false,
-            content: $('#popup'),
-        });
         document.querySelector('[data-js-case-active=next]').onclick = () => {
             if (list.length <= data.$index + 1) {
                 Details(0)
@@ -1317,23 +1313,16 @@ document.querySelector('#nowyear').innerHTML = new Date().getFullYear()
 /*隐私条例*/
 
 $('#about').on('click', function () {
+    $('#yccm_client').fadeToggle(500)
     if ($('#yccm_client').hasClass("yccm_client2")) {
 
     } else {
         $('#yccm_client').addClass("yccm_client2");
-        layer.open({
-            type: 1,
-            title: false,
-            shadeClose: true,
-            shade: 0,
-            end: function () {
-                $('#yccm_client').removeClass("yccm_client2");
-            },
-            area: ['100%', '100%'],
-            content: $('#yccm_client')
-        });
     }
 });
+$('#yccm_return').on('click',function () {
+    $('#yccm_client').fadeToggle(500)
+})
 $('#click_here').on('click', function () {
     $.get("http://stat.adpush.cn/ClearCookie.ashx", {})
     $('#out').show();
