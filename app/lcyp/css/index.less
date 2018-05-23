@@ -66,6 +66,8 @@
 
 	.right_btn .reg_btn{ background: none; margin-right:9px; }
 
+	.right_btn .jump_manage{line-height: 60px; color:#fff; font-size: 14px;  }
+
 	@keyframes width {
 		0%{ width: 0 } 100%{ width: 100% }
 	}
@@ -76,6 +78,7 @@
 
 	.logo{ margin:0 0 139px 100px; text-align: left;   }
 
+	
 
 	.cont{ justify-content:space-between; }
 
@@ -231,13 +234,13 @@
 
 	.lists{ width: 100%;
 
-		.img{ text-align: center; height: 200px; }
+		.img{ text-align: center; height: 200px; position: relative; }
 
 		.goods_lists{  border:1px solid #b7b7b7; border-left:none; border-right:none; min-height: 100px;}
 
 		.goods_lists li{ float: left; width: 21%; text-align: left; margin:20px 2% 0; padding-bottom: 15px;
 
-			img{  max-height: 100%; max-width: 100%;}
+			img{  max-height: 100%; max-width: 100%; position: absolute;top:0;right:0;bottom:0;left:0;margin:auto;}
 
 			.title{ color:#535353; font-size: 18px; line-height: 35px; white-space: nowrap; overflow:hidden; text-align: justify;text-overflow: ellipsis}
 
@@ -356,3 +359,35 @@
 
 	}
  }
+/* 1024 ???我的内心是拒绝的 */
+@media screen and (max-height:800px) {
+	.login .logo{ margin:0 0 80px 20px; text-align: left;   }	
+}
+@media screen and (max-width:1199px){
+	.wrap{ width: 1024px; }
+
+	.top_nav .right_btn{ margin-right: 20px; }
+
+	.login{ padding-top: 45px; }
+
+	.login .left_cont{ margin-left: 20px;  }
+
+	.login .logo{ margin: 0 0 80px 20px; }
+
+	.login .login_box{ margin-right: 20px; }
+
+	.home .bottom_cont{ width: 1024px; }
+
+	.goods_center{ width: 1024px; }
+
+	.goods_center .paging{ font-size: 14px; }
+
+	.logistics .main_cont{ width: 1024px; }
+
+	.about_us .main_cont{ width: 1024px; }
+
+	.about_us .main_cont .left_cont{ padding:73px 20px 0 20px; }
+
+	.about_us .main_cont .right_cont{ padding-right: 20px; }
+
+}

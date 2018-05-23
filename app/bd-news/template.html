@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>新闻</title>
+	<link rel="shortcut icon" href="https://gss0.bdstatic.com/5bd1bjqh_Q23odCf/static/wiseindex/img/favicon64.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="<%= htmlWebpackPlugin.options.title %> "/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <script type="text/javascript">
+        (function (_window) {
+            let docEl = _window.document.documentElement,
+                resizeEvt = 'orientationchange' in _window ? 'orientationchange' : 'resize';
+            function s() {
+                let clientWidth = docEl.clientWidth > 800 ? 800 : docEl.clientWidth;
+                docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+            }
+            _window.addEventListener(resizeEvt, s, false);
+            s();
+        })(window);
+    </script>
+</head>
+<body>
+
+    <div id="page">
+        <div class="weather"></div>
+        <div class="header">
+            <div class="userinfo">
+                <a href="https://m.baidu.com/usrprofile" class="login"></a>
+            </div>
+            <div id="logo" class="noTapColor use-festival">
+                <a href="https://m.baidu.com/s">
+                    <img src="https://m.baidu.com/static/index/plus/plus_logo.png" alt="百度一下,你就知道">
+                </a>
+            </div>
+            <div class="search_input">
+                <input type="text" id="searchInput" ><span class="search_btn" id="searchBtn">百度一下</span>
+            </div>
+            <div class="navs">
+                <div class="swiper-container nav_cont">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="https://mbd.baidu.com/webpage?action=icard&type=subscribe&channel=wise_home">
+                                <i class="icon icon1"></i>
+                                <p>关注</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://news.baidu.com/news?fr=mohome&ssid=0&from=844b&uid=&pu=sz%401320_2001%2Cta%40iphone_1_11.0_3_604&bd_page_type=1#/">
+                                <i class="icon icon2"></i>
+                                <p>新闻</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://dushu.m.baidu.com/">
+                                <i class="icon icon3"></i>
+                                <p>小说</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://sv.baidu.com/">
+                                <i class="icon icon4"></i>
+                                <p>视频</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://m.nuomi.com/?cid=wise_shouye_nuomi">
+                                <i class="icon icon5"></i>
+                                <p>糯米</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://map.baidu.com/mobile/webapp/index/index">
+                                <i class="icon icon6"></i>
+                                <p>地图</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://tieba.baidu.com/?page=discovery">
+                                <i class="icon icon7"></i>
+                                <p>贴吧</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://image.baidu.com/wisehomepage/feeds">
+                                <i class="icon icon8"></i>
+                                <p>图片</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://m.hao123.com/?d=123">
+                                <i class="icon icon9"></i>
+                                <p>网址</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://e.m.baidu.com/?refer=205">
+                                <i class="icon icon10"></i>
+                                <p>推广</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="http://music.baidu.com/?fr=baiduwisehome">
+                                <i class="icon icon11"></i>
+                                <p>音乐</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://voice.baidu.com/ting#/?_=bx0pvvbmdjh">
+                                <i class="icon icon12"></i>
+                                <p>畅听</p>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="https://waimai.baidu.com/mobile/waimai?qt=confirmcity">
+                                <i class="icon icon13"></i>
+                                <p>外卖</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="swiper-container menu_cont">
+                <div class="swiper-wrapper" id="menu">
+                    <div class="swiper-slide active" data-id="1">推荐</div>
+                    <div class="swiper-slide" data-id="8">热点</div>
+                    <div class="swiper-slide" data-id="2">视频</div>
+                    <div class="swiper-slide" data-id="3">娱乐</div>
+                    <div class="swiper-slide" data-id="13">军事</div>
+                    <div class="swiper-slide" data-id="11">社会</div>
+                    <div class="swiper-slide" data-id="12">汽车</div>
+                    <div class="swiper-slide" data-id="4">体育</div>
+                    <div class="swiper-slide" data-id="5">时尚</div>
+                    <div class="swiper-slide" data-id="6">国际</div>
+                    <div class="swiper-slide" data-id="18">历史</div>
+                    <div class="swiper-slide" data-id="15">财经</div>
+                    <div class="swiper-slide" data-id="14">科技</div>
+                </div>
+            </div>
+        </div>
+        <div id="uploading"></div>
+        <div class="main" >
+
+        </div>
+        <div id="loading">加载中。。。</div>
+    </div>
+    <div class="tab-tools">
+        <div class="tab-refresh"></div>
+        <div class="tab-back"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+</body>
+</html>

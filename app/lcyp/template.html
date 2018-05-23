@@ -440,7 +440,7 @@
 								共 <b id="count"></b>
 								页 到第
 							</span>
-							<input class="border page_num" type="number" name="" id="inputNum">
+							<input class="border page_num" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " name="" id="inputNum">
 							<span>页</span>
 							<button id="pageJump">确定</button>
 						</div>

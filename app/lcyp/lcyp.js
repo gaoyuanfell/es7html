@@ -41,8 +41,7 @@ function hashChange() {
         document.querySelector('.contentener').style.paddingBottom='42px'
     }
     if(hash == 'commodity'){
-        firstLevel();
-        showGoods();
+        init();
         searchGoods();
     }
 
@@ -188,7 +187,9 @@ async function login(){
     let code = document.getElementById("code").value;
     let phoneNumber = document.getElementById('phoneNumber').value;
     let mobile = checkPhone(phoneNumber);
-    if(mobile && code != ''){
+    if(!mobile){
+        return 
+    }else if(mobile && code != ''){
         let data = await jsonp(doMainName+"/api/v1/sms_login",{
             phone_number : phoneNumber,
             code : code
@@ -225,14 +226,16 @@ async function getGoodsLists(){
         limit: limit
     })
     if(data.is_logined){
-        document.querySelector('.right_btn').style.display = 'none'
+        document.querySelector('.right_btn .btn').style.display = 'none'
+        let p =`<a class="jump_manage" href="https://admin.lcyp.net/manage">后台管理中心</a>`
+        document.querySelector('.right_btn').innerHTML = p
     }
     return data
 
 }
 // 一级分类
-function firstLevel(){
-    getGoodsLists().then( (data)=>{
+function firstLevel(data){
+   
         // 一级分类
         let cateHtml = `
             <li data-id="{{ $id }}"><a>{{ label }}</a></li>
@@ -248,8 +251,7 @@ function firstLevel(){
         document.getElementById('firstLevel').innerHTML = firstLevel;
         document.getElementById('firstLevel').getElementsByTagName('li')[0].className = 'active'
         secondLevel(data)
-    })
-
+    
 }
 // 二级分类
 function secondLevel(data){
@@ -308,10 +310,14 @@ function secondLevel(data){
         }
     }
 }
-// 显示商品列表
-function showGoods(){
-    getGoodsLists().then( (data)=>{
-        document.querySelector('.loading').style.display = 'none'
+function init(){
+    getGoodsLists().then((data)=>{
+        firstLevel(data);
+        firstShow(data)
+    })
+}
+function firstShow(data){
+    document.querySelector('.loading').style.display = 'none'
         if(data.list.length ==0 ){
             document.getElementById('goodsLists').innerHTML = '暂无商品'
         }else{
@@ -371,6 +377,11 @@ function showGoods(){
             paging(data)
             document.getElementById('searchInput').value = ''
         }
+}
+// 显示商品列表
+function showGoods(){
+    getGoodsLists().then( (data)=>{
+        firstShow(data)
     })
 }
 // 分页生成
@@ -533,18 +544,19 @@ window.onload = function(){
         login();
     }
     // 协议
+    let agreement = document.getElementById('agreement')
     document.getElementById('agreementBtn').onclick = function(ev){
-        document.getElementById('agreement').style.display= 'block'
+        agreement.style.display= 'block'
         var oEvent = ev || event;
         oEvent.cancelBubble = true;
     }
     document.querySelector('.login').onclick = function(){
-        document.getElementById('agreement').style.display= 'none'
+        agreement.style.display= 'none'
     }
     document.getElementById('close').onclick = function(){
-        document.getElementById('agreement').style.display= 'none'
+        agreement.style.display= 'none'
     }
-    document.getElementById('agreement').onclick = function(ev){
+    agreement.onclick = function(ev){
         var oEvent = ev || event;
         oEvent.cancelBubble = true;
     }
