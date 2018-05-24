@@ -594,16 +594,12 @@ body {
 
 .sector_cont {
     .leftanim {
-        -webkit-animation: bounceInRight 1.5s ease both;
-        animation: bounceInRight 1.5s ease both;
+        -webkit-animation: bounceInRight 1.2s ease both;
+        animation: bounceInRight 1.2s ease both;
     }
     .rightanim {
-        -webkit-animation: bounceInLeft 1.5s ease both;
-        animation: bounceInLeft 1.5s ease both;
-    }
-    .zcone {
-        animation: fadeInDown 1.2s ease 0.3s both;
-        -webkti-animation: fadeInDown 1.2s ease 0.3s both;
+        -webkit-animation: bounceInLeft 1.2s ease both;
+        animation: bounceInLeft 1.2s ease both;
     }
     &.hover_on:hover {
         .link {
@@ -651,6 +647,8 @@ body {
     .briefing_text {
         margin-top: 90px;
         opacity: 0;
+        -webkit-animation: bounceInLeft 1.2s ease both;
+        animation: bounceInLeft 1.2s ease both;
     }
     .imgright {
         width: 600px;
@@ -662,12 +660,16 @@ body {
             z-index: 3;
             left: -34px;
             opacity: 0;
+            animation: fadeInDown 1.2s ease 0.3s both;
+            -webkti-animation: fadeInDown 1.2s ease 0.3s both;
         }
         .two {
             position: absolute;
             left: 0;
             top: 87px;
             opacity: 0;
+            -webkit-animation: bounceInRight 1.2s ease both;
+            animation: bounceInRight 1.2s ease both;
         }
     }
 }

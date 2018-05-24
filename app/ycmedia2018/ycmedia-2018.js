@@ -423,37 +423,21 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
 }()
 /*业务版块*/
 let scrol1 = document.querySelector(".scroll-content");
-$('.zc_right').addClass('leftanim')
-$('.zc_left').addClass('rightanim')
-$('.zc_one').addClass('zcone')
 scrol1 && scrol1.addEventListener('scroll', function () {
-    if (scrol1.scrollTop <= 420) {
+    /*if (scrol1.scrollTop <= 420) {
         $('.zc_right').addClass('leftanim')
         $('.zc_left').addClass('rightanim')
         $('.zc_one').addClass('zcone')
-    }
-    if (scrol1.scrollTop >= 420) {
-        $('.zc_right').removeClass('leftanim')
-        $('.zc_left').removeClass('rightanim')
-        $('.zc_one').removeClass('zcone')
+    }*/
+    if (scrol1.scrollTop >= 400) {
         $('.bc_left').addClass('leftanim')
         $('.bc_right').addClass('rightanim')
-    } else {
-        $('.bc_left').removeClass('leftanim')
-        $('.bc_right').removeClass('rightanim')
     }
-    if (scrol1.scrollTop >= 860) {
-        $('.bc_left').removeClass('leftanim')
-        $('.bc_right').removeClass('rightanim')
+    if (scrol1.scrollTop >= 850) {
         $('.lc_right').addClass('leftanim')
         $('.lc_left').addClass('rightanim')
-    }else {
-        $('.lc_right').removeClass('leftanim')
-        $('.lc_left').removeClass('rightanim')
     }
-    if(scrol1.scrollTop >= 1340){
-        $('.lc_right').removeClass('leftanim')
-        $('.lc_left').removeClass('rightanim')
+    if(scrol1.scrollTop >= 1300){
         $('.img1').addClass('animat1')
         $('.img2').addClass('animat2')
         $('.img3').addClass('animat3')
@@ -461,14 +445,6 @@ scrol1 && scrol1.addEventListener('scroll', function () {
         $('.img5').addClass('animat5')
         $('.gc_left').addClass('leftanim')
         $('.gc_right').addClass('rightanim')
-    }else {
-        $('.img1').removeClass('animat1')
-        $('.img2').removeClass('animat2')
-        $('.img3').removeClass('animat3')
-        $('.img4').removeClass('animat4')
-        $('.img5').removeClass('animat5')
-        $('.gc_left').removeClass('leftanim')
-        $('.gc_right').removeClass('rightanim')
     }
 
 })
