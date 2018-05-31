@@ -278,7 +278,7 @@ class BackgroundSwitch {
         this.appoint.addEventListener('mouseout', () => {
             this.bo2 = false;
             if (!this.bo1 && !this.bo2) {
-                this.appoint.style.display = `none`;
+                this.appoint.style.display = `none`
                 this.bo1 = true;
                 this.bo2 = true;
             }
@@ -288,7 +288,7 @@ class BackgroundSwitch {
     refMouseout() {
         this.bo1 = false;
         if (!this.bo1 && !this.bo2) {
-            this.appoint.style.display = `none`;
+            this.appoint.style.display = `none`
             this.bo1 = true;
             this.bo2 = true;
         }
@@ -305,7 +305,7 @@ class BackgroundSwitch {
         let x = parseInt(String(layerX / average_w)) + (layerX % average_w ? 1 : 0);
         let y = parseInt(String(layerY / average_h)) + (layerY % average_h ? 1 : 0);
 
-        this.appoint.style.display = `block`;
+        this.appoint.style.display = `block`
         this.appoint.style.width = `${average_w}px`;
         this.appoint.style.height = `${average_h}px`;
         this.appoint.style.backgroundSize = `${w}px ${h}px`;
@@ -422,22 +422,29 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     })
 }()
 /*业务版块*/
+$('.zc_left').addClass('rightanim')
+$('.zc_right .two').addClass('leftanim')
+$('.zc_right .one').addClass('onanim')
+
 let scrol1 = document.querySelector(".scroll-content");
 scrol1 && scrol1.addEventListener('scroll', function () {
-    /*if (scrol1.scrollTop <= 420) {
-        $('.zc_right').addClass('leftanim')
-        $('.zc_left').addClass('rightanim')
-        $('.zc_one').addClass('zcone')
-    }*/
+    if(scrol1.scrollTop < 400){
+        $('.zc_right .one').addClass('onanim')
+    }
     if (scrol1.scrollTop >= 400) {
+        $('.zc_right .one').removeClass('onanim')
         $('.bc_left').addClass('leftanim')
         $('.bc_right').addClass('rightanim')
+        $('.bc_right .one').addClass('onanim')
     }
     if (scrol1.scrollTop >= 850) {
+        $('.bc_right .one').removeClass('onanim')
         $('.lc_right').addClass('leftanim')
         $('.lc_left').addClass('rightanim')
+        $('.lc_right .one').addClass('onanim')
     }
     if(scrol1.scrollTop >= 1300){
+        $('.lc_right .one').removeClass('onanim')
         $('.img1').addClass('animat1')
         $('.img2').addClass('animat2')
         $('.img3').addClass('animat3')
@@ -445,6 +452,12 @@ scrol1 && scrol1.addEventListener('scroll', function () {
         $('.img5').addClass('animat5')
         $('.gc_left').addClass('leftanim')
         $('.gc_right').addClass('rightanim')
+    }else {
+        $('.img1').removeClass('animat1')
+        $('.img2').removeClass('animat2')
+        $('.img3').removeClass('animat3')
+        $('.img4').removeClass('animat4')
+        $('.img5').removeClass('animat5')
     }
 
 })
@@ -918,161 +931,114 @@ async function getOnlyId() {
 
 ~function () {
     let list = [
-        /*{
-            img: './static/images/caseimg/tu1701.jpg',
-            title: '光荣使命',
-            type: '游戏类',
-            cost: '0.50 元',
-            activation: '6.00 元',
-            rate:'',
-            imglist: ['./static/images/caseimg/case01-01.png'],
-            time: '2017年',
+        {
+            img: './static/images/caseimg/tu1801.jpg',
+            title: '抖音',
+            type: '娱乐类',
+            cost: '0.20-0.30元',
+            activation: '8元',
+            rate:'4%-6%',
+            imglist: ['./static/images/caseimg/case01-01.jpg','./static/images/caseimg/case01-02.jpg','./static/images/caseimg/case01-03.jpg'],
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1703.jpg',
-            title: '最强NBA',
-            type: '游戏类',
-            cost: '0.40 元',
-            activation: '5.00 元',
-            rate: '',
-            imglist: ['./static/images/caseimg/case03-01.png'],
-            time: '2017年',
+            img: './static/images/caseimg/tu1802.jpg',
+            title: '天天快报',
+            type: '新闻类',
+            cost: '0.20-0.30元',
+            activation: '5元',
+            rate:'4%-6%',
+            imglist: ['./static/images/caseimg/case03-01.jpg','./static/images/caseimg/case03-02.jpg','./static/images/caseimg/case03-03.jpg'],
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1704.jpg',
+            img: './static/images/caseimg/tu1803.jpg',
+            title: '360借条',
+            type: '金融类',
+            cost: '0.30-0.40元',
+            activation: '',
+            rate: '3%-5%',
+            imglist: ['./static/images/caseimg/case04-01.jpg','./static/images/caseimg/case04-02.jpg'],
+            time: '2018年',
+            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
+            platform: '智橙移动端'
+        },
+        {
+            img: './static/images/caseimg/tu1804.jpg',
             title: '唯品会',
             type: '电商类',
-            cost: '0.70 元',
+            cost: '0.35元',
             activation: '',
-            rate: '2.20%',
-            imglist: ['./static/images/caseimg/case04-01.png'],
-            time: '2017年',
+            rate: '4.12%',
+            imglist: ['./static/images/caseimg/case06-01.jpg','./static/images/caseimg/case06-02.jpg','./static/images/caseimg/case06-03.jpg'],
+            time: '2016年-至今',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1706.jpg',
-            title: '闪电降价',
-            type: '电商类',
-            cost: '0.60 元',
-            activation: '',
-            rate: '3.00%',
-            imglist: ['./static/images/caseimg/case06-01.png'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1707.jpg',
-            title: '你我贷',
-            type: '金融类',
-            cost: '0.3 - 0.5元',
-            activation: '',
-            rate: '3% - 5%',
+            img: './static/images/caseimg/tu1805.jpg',
+            title: '趣头条',
+            type: '新闻类',
+            cost: '0.2-0.3元',
+            activation: '5元',
+            rate: '4%-6%',
             imglist: ['./static/images/caseimg/case07-01.jpg', './static/images/caseimg/case07-02.jpg', './static/images/caseimg/case07-03.jpg'],
-            time: '2017年',
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1709.jpg',
-            title: '交通银行',
-            type: '金融类',
-            cost: '0.70 元',
-            activation: '16.00 元',
-            rate: '3.00 %',
-            imglist: ['./static/images/caseimg/case09-01.png'],
-            time: '2017年',
+            img: './static/images/caseimg/tu1806.jpg',
+            title: '波波视频',
+            type: '视频类',
+            cost: '0.15元',
+            activation: '5元',
+            rate: '4.49%',
+            imglist: ['./static/images/caseimg/case09-01.jpg','./static/images/caseimg/case09-02.jpg'],
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1710.jpg',
-            title: '每日优鲜',
-            type: '网服类',
-            cost: '0.76元',
-            activation: '6.00 元',
-            rate: '1.33%',
+            img: './static/images/caseimg/tu1807.jpg',
+            title: '么么直播',
+            type: '交友直播类',
+            cost: '0.20元',
+            activation: '4元',
+            rate: '5.27%',
             imglist: ['./static/images/caseimg/case10-01.jpg', './static/images/caseimg/case10-02.jpg'],
-            time: '2017年',
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1711.jpg',
-            title: '搜狗搜索',
-            type: '网服类',
-            cost: '0.76元',
-            activation: '4.00 元',
-            rate: '',
-            imglist: ['./static/images/caseimg/case11-01.png'],
-            time: '2017年',
+            img: './static/images/caseimg/tu1808.jpg',
+            title: '拼多多',
+            type: '电商类',
+            cost: '0.28元',
+            activation: '5元',
+            rate: '3.52%',
+            imglist: ['./static/images/caseimg/case11-01.jpg','./static/images/caseimg/case11-02.jpg'],
+            time: '2018年',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
         {
-            img: './static/images/caseimg/tu1712.jpg',
-            title: 'UC浏览器',
-            type: '工具类',
-            cost: '0.56 元',
-            activation: '5.00 元',
-            rate: '8.00 %',
+            img: './static/images/caseimg/tu1809.jpg',
+            title: '快看漫画',
+            type: '娱乐类',
+            cost: '0.20元',
+            activation: '4元',
+            rate: '3.62%',
             imglist: ['./static/images/caseimg/case12-01.jpg', './static/images/caseimg/case12-02.jpg','./static/images/caseimg/case12-03.jpg'],
-            time: '2017年',
+            time: '2017年-至今',
             target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
             platform: '智橙移动端'
         },
-        {
-            img: './static/images/caseimg/tu1713.jpg',
-            title: '天天快报',
-            type: '工具类',
-            cost: '0.70 元',
-            activation: '8.00 元',
-            rate: '6.00 %',
-            imglist: ['./static/images/caseimg/case13-01.png'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1714.jpg',
-            title: '火山小视频',
-            type: '工具类',
-            cost: '0.55 元',
-            activation: '6.00 元',
-            rate: '10.00%',
-            imglist: ['./static/images/caseimg/case14-01.png'],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },
-        {
-            img: './static/images/caseimg/tu1717.jpg',
-            title: 'VIPKID',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },{
-            img: './static/images/caseimg/tu1718.jpg',
-            title: '交大成人教育',
-            type: '工具类',
-            cost: '0.70',
-            activation: '8.00',
-            rate: '6.00%',
-            imglist: ['', '', ''],
-            time: '2017年',
-            target: '营销目标：通过智橙平台精准广告推送，高效传递品牌信息， 有效提升精准度和转化效果，为品牌带来更多有效用户。',
-            platform: '智橙移动端'
-        },*/
         {
             img: './static/images/caseimg/tu1708.jpg',
             title: '拍拍贷',

@@ -97,7 +97,6 @@ body {
     min-width: 1200px;
     left: 0;
     right: 0;
-    transition: all ease;
     .logo {
         float: left;
     }
@@ -199,16 +198,15 @@ body {
     background-size: 100%;
     .text {
         width: 723px;
-        height: 98px;
         margin: auto;
         position: absolute;
-        top: 158px;
+        top: 220px;
         left: 0;
         right: 0;
         z-index: 2;
         .timg2 {
             margin-bottom: 56px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
         .btn {
             width: 140px;
@@ -436,7 +434,11 @@ body {
     z-index: 999;
     width: 100%;
     bottom: 0;
-    min-width: 1200px;
+    min-width: 900px;
+    .foot_copy{
+        width: 94%;
+        margin: auto;
+    }
     .ggname {
         margin-right: 20px;
     }
@@ -601,6 +603,10 @@ body {
         -webkit-animation: bounceInLeft 1.2s ease both;
         animation: bounceInLeft 1.2s ease both;
     }
+    .onanim{
+        animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1s infinite;
+        -webkti-animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1s infinite;
+    }
     &.hover_on:hover {
         .link {
             opacity: 1;
@@ -647,8 +653,6 @@ body {
     .briefing_text {
         margin-top: 90px;
         opacity: 0;
-        -webkit-animation: bounceInLeft 1.2s ease both;
-        animation: bounceInLeft 1.2s ease both;
     }
     .imgright {
         width: 600px;
@@ -660,16 +664,12 @@ body {
             z-index: 3;
             left: -34px;
             opacity: 0;
-            animation: fadeInDown 1.2s ease 0.3s both;
-            -webkti-animation: fadeInDown 1.2s ease 0.3s both;
         }
         .two {
             position: absolute;
             left: 0;
             top: 87px;
             opacity: 0;
-            -webkit-animation: bounceInRight 1.2s ease both;
-            animation: bounceInRight 1.2s ease both;
         }
     }
 }
@@ -1164,7 +1164,6 @@ html {
                 position: absolute;
                 right: 0;
                 top: 50%;
-                transform: translate(0, -50%);
             }
         }
         .list-item {
@@ -1196,6 +1195,7 @@ html {
         .jiantou {
             border: 5px solid transparent;
             border-bottom-color: #ff9700;
+            margin-top: -5px;
         }
     }
 }
@@ -1537,7 +1537,7 @@ html {
 .honor {
     padding: 112px 0;
     .contented {
-        width: 566px;
+        width: 610px;
         margin: auto;
         position: relative;
         padding-bottom: 4%;
@@ -1554,7 +1554,7 @@ html {
                 top: -7px;
             }
             .left {
-                width: 192px;
+                width: 210px;
                 padding-right: 72px;
                 font-size: 22px;
                 color: #333;
@@ -1563,16 +1563,22 @@ html {
             }
             .right {
                 text-align: left;
-                padding-left: 60px;
+                padding-left: 78px;
                 border-left: 1px #4564c6 solid;
                 padding-bottom: 86px;
                 position: relative;
-                color: #666;
                 font-size: 16px;
                 li {
+                    color: #666;
                     line-height: 2;
                     span {
                         margin-right: 7px;
+                    }
+                    &:hover{
+                        color: #1a1a1a;
+                        span{
+                            color: #ff9700 !important;
+                        }
                     }
                 }
                 .yuan {
@@ -1964,6 +1970,31 @@ html {
 }
 
 /*动画*/
+@-webkit-keyframes infit {
+    0% {
+        opacity: 1
+    }
+    50%{
+        transform: translate3d(0, -50%, 0)
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+@keyframes infit {
+    0% {
+        opacity: 1
+    }
+    50%{
+        transform: translate3d(0, -50%, 0)
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
 @-webkit-keyframes arrow {
     0% {
         opacity: 1
