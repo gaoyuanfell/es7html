@@ -74,6 +74,47 @@ function hashChange() {
         }
     })
 }
+    /*业务版块*/
+    $('.zc_left').addClass('rightanim')
+    $('.zc_right .two').addClass('leftanim')
+    $('.zc_right .one').addClass('onanim')
+
+    let scrol1 = document.querySelector(".scroll-content");
+    scrol1 && scrol1.addEventListener('scroll', function () {
+        if(scrol1.scrollTop < 400){
+            $('.zc_right .one').addClass('onanim')
+        }
+        if (scrol1.scrollTop >= 400) {
+            $('.zc_right .one').removeClass('onanim')
+            $('.bc_left').addClass('leftanim')
+            $('.bc_right').addClass('rightanim')
+            $('.bc_right .one').addClass('onanim')
+        }
+        if (scrol1.scrollTop >= 850) {
+            $('.bc_right .one').removeClass('onanim')
+            $('.lc_right').addClass('leftanim')
+            $('.lc_left').addClass('rightanim')
+            $('.lc_right .one').addClass('onanim')
+        }
+        if(scrol1.scrollTop >= 1300){
+            $('.lc_right .one').removeClass('onanim')
+            $('.img1').addClass('animat1')
+            $('.img2').addClass('animat2')
+            $('.img3').addClass('animat3')
+            $('.img4').addClass('animat4')
+            $('.img5').addClass('animat5')
+            $('.gc_left').addClass('leftanim')
+            $('.gc_right').addClass('rightanim')
+        }else {
+            $('.img1').removeClass('animat1')
+            $('.img2').removeClass('animat2')
+            $('.img3').removeClass('animat3')
+            $('.img4').removeClass('animat4')
+            $('.img5').removeClass('animat5')
+        }
+
+    })
+
 if (document.documentElement.clientWidth <= 1200) {
     document.querySelector('.scroll-content').style.overflowX = 'auto'
     document.querySelector('.footer').style.marginBottom = '10px'
@@ -421,46 +462,6 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         imgLoop.start().catch(e => console.error(e))
     })
 }()
-/*业务版块*/
-$('.zc_left').addClass('rightanim')
-$('.zc_right .two').addClass('leftanim')
-$('.zc_right .one').addClass('onanim')
-
-let scrol1 = document.querySelector(".scroll-content");
-scrol1 && scrol1.addEventListener('scroll', function () {
-    if(scrol1.scrollTop < 400){
-        $('.zc_right .one').addClass('onanim')
-    }
-    if (scrol1.scrollTop >= 400) {
-        $('.zc_right .one').removeClass('onanim')
-        $('.bc_left').addClass('leftanim')
-        $('.bc_right').addClass('rightanim')
-        $('.bc_right .one').addClass('onanim')
-    }
-    if (scrol1.scrollTop >= 850) {
-        $('.bc_right .one').removeClass('onanim')
-        $('.lc_right').addClass('leftanim')
-        $('.lc_left').addClass('rightanim')
-        $('.lc_right .one').addClass('onanim')
-    }
-    if(scrol1.scrollTop >= 1300){
-        $('.lc_right .one').removeClass('onanim')
-        $('.img1').addClass('animat1')
-        $('.img2').addClass('animat2')
-        $('.img3').addClass('animat3')
-        $('.img4').addClass('animat4')
-        $('.img5').addClass('animat5')
-        $('.gc_left').addClass('leftanim')
-        $('.gc_right').addClass('rightanim')
-    }else {
-        $('.img1').removeClass('animat1')
-        $('.img2').removeClass('animat2')
-        $('.img3').removeClass('animat3')
-        $('.img4').removeClass('animat4')
-        $('.img5').removeClass('animat5')
-    }
-
-})
 
 /*关于银橙*/
 const aboutRef = document.querySelector("#about_menu");
