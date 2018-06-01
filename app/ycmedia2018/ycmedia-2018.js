@@ -420,12 +420,14 @@ router.changeEvent.subscribe(data => {
     scrol1 && scrol1.addEventListener('scroll', function () {
         if(scrol1.scrollTop < 400){
             $('.zc_right .one').addClass('onanim')
+            $('.bc_right .one').removeClass('onanim')
         }
         if (scrol1.scrollTop >= 400) {
             $('.zc_right .one').removeClass('onanim')
             $('.bc_left').addClass('leftanim')
             $('.bc_right').addClass('rightanim')
             $('.bc_right .one').addClass('onanim')
+            $('.lc_right .one').removeClass('onanim')
         }
         if (scrol1.scrollTop >= 850) {
             $('.bc_right .one').removeClass('onanim')
