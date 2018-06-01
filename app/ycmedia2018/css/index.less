@@ -604,8 +604,8 @@ body {
         animation: bounceInLeft 1.2s ease both;
     }
     .onanim{
-        animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1s infinite;
-        -webkti-animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1s infinite;
+        animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1.2s infinite;
+        -webkti-animation: fadeInDown 1.2s ease 0.3s both,infit 1.2s ease 1.2s infinite;
     }
     &.hover_on:hover {
         .link {
@@ -1972,31 +1972,6 @@ html {
 }
 
 /*动画*/
-@-webkit-keyframes infit {
-    0% {
-        opacity: 1
-    }
-    50%{
-        transform: translate3d(0, -50%, 0)
-    }
-    100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0)
-    }
-}
-
-@keyframes infit {
-    0% {
-        opacity: 1
-    }
-    50%{
-        transform: translate3d(0, -50%, 0)
-    }
-    100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0)
-    }
-}
 @-webkit-keyframes arrow {
     0% {
         opacity: 1
@@ -2143,7 +2118,31 @@ html {
         opacity: 1;
     }
 }
+@-webkit-keyframes infit {
+    0% {
+        opacity: 1;
+    }
+    60%{
+        transform: translate3d(0, -30%, 0)
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
 
+@keyframes infit {
+    0% {
+        opacity: 1;
+    }
+    60%{
+        transform: translate3d(0, -30%, 0)
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
 @-webkit-keyframes fadeInDown {
     0% {
         opacity: 0;
