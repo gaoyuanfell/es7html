@@ -392,7 +392,7 @@ router.changeEvent.subscribe(data => {
             });
             break;
         case 'investor':
-
+            investor()
             break;
     }
 
@@ -640,6 +640,7 @@ function jsonp(url, body = {}, config = {}, fn) {
 * page默认第一页
 * 改变page值获取对应页码的值
 * */
+function investor() {
     let currPageNum = 1;
     let currPageNum2 = 1;
 
@@ -980,6 +981,8 @@ function jsonp(url, body = {}, config = {}, fn) {
             }
         }
     }
+}
+
 
 
 
@@ -1202,13 +1205,13 @@ function jsonp(url, body = {}, config = {}, fn) {
         if (!data.rate) data.rateShow = 'none';
         caseList += new Template(str, data).compile();
     })
-    document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+   /* document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
 
     $('.yccm_client_case_group').on('click', function () {
         $('#popup').fadeToggle(500)
         let data_index = $(this).attr("data-index");
         Details(data_index)
-    })
+    })*/
     $('#yccm_client_return').on('click',function () {
         $('#popup').fadeToggle(500)
     })
