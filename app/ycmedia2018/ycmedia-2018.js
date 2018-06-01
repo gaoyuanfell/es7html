@@ -1,14 +1,8 @@
 import '../../common/js/vendor'
 import '../../common/css/base.less'
 import './css/index.less'
-import {getHash} from "../../common/js/util";
+import {getHash, Router} from "../../common/js/util";
 import * as qs from "querystring";
-
-hashChange();
-window.addEventListener('hashchange', () => {
-    hashChange()
-});
-
 function startOP(obj, utarget) {
     let speed = 0;
     clearInterval(obj.timer);//先关闭定时器
@@ -26,111 +20,23 @@ function startOP(obj, utarget) {
         obj.style.opacity = parseInt(obj.alpha) / 100;
     }, 30);
 }
-
-function hashChange() {
-    let refs = Array.from(document.querySelectorAll('[data-contentener]'));
-    refs.every(ref => {
-        ref.style.display = 'none';
-        return true;
-    });
-    let hash = getHash();
-    if (!hash) hash = 'home';
-    let ref = refs.find(ref => ref.dataset.type === hash);
-    ref.timer = null;//事先定义
-    ref.alpha = 0;//事先定义
-    if (ref) {
-        startOP(ref, 100);
-        ref.style.display = 'block';
-        document.querySelector('.scroll-content').scrollTop = 0
-    }
-    Array.from(document.querySelector('#filters').children).every(ref => {
-        ref.classList.remove('active');
-        return true;
-    });
-    let aRef = document.querySelector(`[href="#${hash}"]`);
-    if (aRef) aRef.parentNode.classList.add('active')
-
-    let scrol = document.querySelector('.scroll-content');
-    let top_nav_ref = document.querySelector('.top_nav')
-    if (hash != 'home') {
+let scrol = document.querySelector('.scroll-content');
+let top_nav_ref = document.querySelector('.top_nav')
+scrol && scrol.addEventListener('scroll', function () {
+    top_nav_ref.style.top = scrol.scrollTop + 'px';
+    if (getHash() != 'home') {
+        let top_nav_ref = document.querySelector('.top_nav')
         top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
         top_nav_ref.style.backgroundSize = '100% 100%';
     } else {
-        top_nav_ref.style.background = 'none';
-    }
-    scrol && scrol.addEventListener('scroll', function () {
-        top_nav_ref.style.top = scrol.scrollTop + 'px';
-        if (hash != 'home') {
-            let top_nav_ref = document.querySelector('.top_nav')
+        if (scrol.scrollTop > 60) {
             top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
             top_nav_ref.style.backgroundSize = '100% 100%';
         } else {
-            if (scrol.scrollTop > 60) {
-                top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
-                top_nav_ref.style.backgroundSize = '100% 100%';
-            } else {
-                top_nav_ref.style.background = 'none';
-            }
+            top_nav_ref.style.background = 'none';
         }
-    })
-}
-    /*业务版块*/
-    $('.zc_left').addClass('rightanim')
-    $('.zc_right .two').addClass('leftanim')
-    $('.zc_right .one').addClass('onanim')
-
-    let scrol1 = document.querySelector(".scroll-content");
-    scrol1 && scrol1.addEventListener('scroll', function () {
-        if(scrol1.scrollTop < 400){
-            $('.zc_right .one').addClass('onanim')
-        }
-        if (scrol1.scrollTop >= 400) {
-            $('.zc_right .one').removeClass('onanim')
-            $('.bc_left').addClass('leftanim')
-            $('.bc_right').addClass('rightanim')
-            $('.bc_right .one').addClass('onanim')
-        }
-        if (scrol1.scrollTop >= 850) {
-            $('.bc_right .one').removeClass('onanim')
-            $('.lc_right').addClass('leftanim')
-            $('.lc_left').addClass('rightanim')
-            $('.lc_right .one').addClass('onanim')
-        }
-        if(scrol1.scrollTop >= 1300){
-            $('.lc_right .one').removeClass('onanim')
-            $('.img1').addClass('animat1')
-            $('.img2').addClass('animat2')
-            $('.img3').addClass('animat3')
-            $('.img4').addClass('animat4')
-            $('.img5').addClass('animat5')
-            $('.gc_left').addClass('leftanim')
-            $('.gc_right').addClass('rightanim')
-        }else {
-            $('.img1').removeClass('animat1')
-            $('.img2').removeClass('animat2')
-            $('.img3').removeClass('animat3')
-            $('.img4').removeClass('animat4')
-            $('.img5').removeClass('animat5')
-        }
-
-    })
-
-if (document.documentElement.clientWidth <= 1200) {
-    document.querySelector('.scroll-content').style.overflowX = 'auto'
-    document.querySelector('.footer').style.marginBottom = '10px'
-} else {
-    document.querySelector('.footer').style.marginBottom = '0'
-    document.querySelector('.scroll-content').style.overflowX = 'hidden'
-}
-window.onresize = function () {
-    if (document.documentElement.clientWidth <= 1200) {
-        document.querySelector('.scroll-content').style.overflowX = 'auto'
-        document.querySelector('.footer').style.marginBottom = '10px'
-    } else {
-        document.querySelector('.footer').style.marginBottom = '0'
-        document.querySelector('.scroll-content').style.overflowX = 'hidden'
     }
-}
+})
 /*
 * 模板编译
 * */
@@ -358,27 +264,211 @@ class BackgroundSwitch {
     }
 }
 
-new BackgroundSwitch(document.querySelector('#huoban1'), document.querySelector('#huoban2'), {
-    rate_x: 5,
-    rate_y: 2,
-});
 
-new BackgroundSwitch(document.querySelector('#adzhu1'), document.querySelector('#adzhu2'), {
-    rate_x: 5,
-    rate_y: 8,
-});
+const router = new Router([
+    {
+        path:'home',
+        component:'[data-type=home]',
+    },
+    {
+        path:'business',
+        component:'[data-type=business]',
+    },
+    {
+        path:'solution',
+        component:'[data-type=solution]',
+    },
+    {
+        path:'case',
+        component:'[data-type=case]',
+    },
+    {
+        path:'partners',
+        component:'[data-type=partners]',
+    },
+    {
+        path:'about',
+        component:'[data-type=about]',
+    },
+    {
+        path:'investor',
+        component:'[data-type=investor]',
+    },
+])
 
-new BackgroundSwitch(document.querySelector('#mediazhu1'), document.querySelector('#mediazhu2'), {
-    rate_x: 5,
-    rate_y: 11,
-});
+if(!getHash()) location.hash= 'home'
+router.changeEvent.subscribe(data => {
+    console.info(data);
+    let refs = Array.from(document.querySelectorAll('[data-contentener]'));
+    let ref = refs.find(ref => ref.dataset.type === data.path);
+    ref.timer = null;//事先定义
+    ref.alpha = 0;//事先定义
+    if (ref) {
+        startOP(ref, 100);
+        document.querySelector('.scroll-content').scrollTop = 0
+    }
+    Array.from(document.querySelector('#filters').children).every(ref => {
+        ref.classList.remove('active');
+        return true;
+    });
+    let aRef = document.querySelector(`[href="#${data.path}"]`);
+    if (aRef) aRef.parentNode.classList.add('active')
 
-new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector('#agentzy2'), {
-    rate_x: 5,
-    rate_y: 3,
-});
+    if (data.path != 'home') {
+        top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+        top_nav_ref.style.backgroundSize = '100% 100%';
+    } else {
+        top_nav_ref.style.background = 'none';
+    }
 
-!function () {
+    switch (data.path){
+        case 'home':
+            homes();
+            new BackgroundSwitch(document.querySelector('#huoban1'), document.querySelector('#huoban2'), {
+                rate_x: 5,
+                rate_y: 2,
+            });
+            break;
+        case 'business':
+            $('.zc_left').addClass('rightanim')
+            $('.zc_right .two').addClass('leftanim')
+            $('.zc_right .one').addClass('onanim')
+            break;
+        case 'case':
+            document.querySelector('.yccm_popup_bodyText').innerHTML = caseList;
+            $('.yccm_client_case_group').on('click', function () {
+                $('#popup').fadeToggle(500)
+                let data_index = $(this).attr("data-index");
+                Details(data_index)
+            })
+            break;
+        case 'about':
+            const aboutRef = document.querySelector("#about_menu");
+            const aboutListRef = document.querySelector("#aboutlist");
+
+            aboutRef.addEventListener('click', (e) => {
+                let fRef = null;
+                Array.from(aboutRef.children).forEach(f => {
+                    f.classList.remove('active')
+                    if (f.contains(e.target)) {
+                        f.classList.add('active')
+                        fRef = f
+                    }
+                })
+                if (fRef && aboutListRef) {
+                    let type = fRef.dataset.type;
+                    if (+type) {
+                        Array.from(aboutListRef.children).forEach(p => {
+                            p.style.display = 'none';
+                            if (p.dataset.type == type) {
+                                p.style.display = 'block';
+                                p.animate([
+                                    {opacity: 0},
+                                    {opacity: 1}
+                                ], {
+                                    duration: 500
+                                })
+                            }
+                        })
+                    }
+                }
+            });
+            navList(1);
+            break;
+        case 'partners':
+            new BackgroundSwitch(document.querySelector('#adzhu1'), document.querySelector('#adzhu2'), {
+                rate_x: 5,
+                rate_y: 8,
+            });
+
+            new BackgroundSwitch(document.querySelector('#mediazhu1'), document.querySelector('#mediazhu2'), {
+                rate_x: 5,
+                rate_y: 11,
+            });
+
+            new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector('#agentzy2'), {
+                rate_x: 5,
+                rate_y: 3,
+            });
+            break;
+        case 'investor':
+
+            break;
+    }
+
+    if (data.path != 'home') {
+        let top_nav_ref = document.querySelector('.top_nav')
+        top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+        top_nav_ref.style.backgroundSize = '100% 100%';
+    } else {
+        if (scrol.scrollTop > 60) {
+            top_nav_ref.style.background = 'url("../static/images/nav_bg.jpg") no-repeat';
+            top_nav_ref.style.backgroundSize = '100% 100%';
+        } else {
+            top_nav_ref.style.background = 'none';
+        }
+
+    }
+})
+
+    /*业务版块*/
+    $('.zc_left').addClass('rightanim')
+    $('.zc_right .two').addClass('leftanim')
+    $('.zc_right .one').addClass('onanim')
+
+    let scrol1 = document.querySelector(".scroll-content");
+    scrol1 && scrol1.addEventListener('scroll', function () {
+        if(scrol1.scrollTop < 400){
+            $('.zc_right .one').addClass('onanim')
+        }
+        if (scrol1.scrollTop >= 400) {
+            $('.zc_right .one').removeClass('onanim')
+            $('.bc_left').addClass('leftanim')
+            $('.bc_right').addClass('rightanim')
+            $('.bc_right .one').addClass('onanim')
+        }
+        if (scrol1.scrollTop >= 850) {
+            $('.bc_right .one').removeClass('onanim')
+            $('.lc_right').addClass('leftanim')
+            $('.lc_left').addClass('rightanim')
+            $('.lc_right .one').addClass('onanim')
+        }
+        if(scrol1.scrollTop >= 1300){
+            $('.lc_right .one').removeClass('onanim')
+            $('.img1').addClass('animat1')
+            $('.img2').addClass('animat2')
+            $('.img3').addClass('animat3')
+            $('.img4').addClass('animat4')
+            $('.img5').addClass('animat5')
+            $('.gc_left').addClass('leftanim')
+            $('.gc_right').addClass('rightanim')
+        }else {
+            $('.img1').removeClass('animat1')
+            $('.img2').removeClass('animat2')
+            $('.img3').removeClass('animat3')
+            $('.img4').removeClass('animat4')
+            $('.img5').removeClass('animat5')
+        }
+
+    })
+
+if (document.documentElement.clientWidth <= 1200) {
+    document.querySelector('.scroll-content').style.overflowX = 'auto'
+    document.querySelector('.footer').style.marginBottom = '10px'
+} else {
+    document.querySelector('.footer').style.marginBottom = '0'
+    document.querySelector('.scroll-content').style.overflowX = 'hidden'
+}
+window.onresize = function () {
+    if (document.documentElement.clientWidth <= 1200) {
+        document.querySelector('.scroll-content').style.overflowX = 'auto'
+        document.querySelector('.footer').style.marginBottom = '10px'
+    } else {
+        document.querySelector('.footer').style.marginBottom = '0'
+        document.querySelector('.scroll-content').style.overflowX = 'hidden'
+    }
+}
+function homes() {
     let anlituList = [
         {
             imgli: ['./static/images/anli_tu_1_01.png']
@@ -396,12 +486,10 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
             imgli: ['./static/images/anli_tu_5_01.png', './static/images/caseimg/case02-01.jpg', './static/images/caseimg/case02-02.jpg']
         }
     ]
-
     $('.headimg').on('mouseover', function () {
         let data_index = $(this).attr("data-index");
         anlitu(data_index)
     })
-
     function anlitu(index) {
         let html1 = `
         <div class="imgqh">
@@ -426,9 +514,7 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
     }
 
     anlitu(0)
-}()
 // 首页业务
-!function () {
     function yewu(index) {
         let yewulit = ['./static/images/1.jpg', './static/images/2.jpg', './static/images/3.jpg', './static/images/4.jpg',]
         document.querySelector('#pic').innerHTML = yewulit.map(l => `<img src="${l}"/>`).join('');
@@ -442,17 +528,17 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         callback(index){
             // console.info(index)
             let myArray = document.querySelectorAll('.sector .text_main')
-           for(let i=0;i<myArray.length;i++){
-               myArray[i].classList.remove('active')
-               if (index == i) {
-                   myArray[i].classList.add('active')
-               }
-               $('.picimg').on('mouseover', function () {
-                   myArray[i].classList.remove('active')
-                   let data_index = +$(this).attr("data-index");
-                   imgLoop.go(data_index)
-               })
-           }
+            for(let i=0;i<myArray.length;i++){
+                myArray[i].classList.remove('active')
+                if (index == i) {
+                    myArray[i].classList.add('active')
+                }
+                $('.picimg').on('mouseover', function () {
+                    myArray[i].classList.remove('active')
+                    let data_index = +$(this).attr("data-index");
+                    imgLoop.go(data_index)
+                })
+            }
 
         }
     })
@@ -461,39 +547,7 @@ new BackgroundSwitch(document.querySelector('#agentzy1'), document.querySelector
         // console.info('mouseout')
         imgLoop.start().catch(e => console.error(e))
     })
-}()
-
-/*关于银橙*/
-const aboutRef = document.querySelector("#about_menu");
-const aboutListRef = document.querySelector("#aboutlist");
-
-aboutRef.addEventListener('click', (e) => {
-    let fRef = null;
-    Array.from(aboutRef.children).forEach(f => {
-        f.classList.remove('active')
-        if (f.contains(e.target)) {
-            f.classList.add('active')
-            fRef = f
-        }
-    })
-    if (fRef && aboutListRef) {
-        let type = fRef.dataset.type;
-        if (+type) {
-            Array.from(aboutListRef.children).forEach(p => {
-                p.style.display = 'none';
-                if (p.dataset.type == type) {
-                    p.style.display = 'block';
-                    p.animate([
-                        {opacity: 0},
-                        {opacity: 1}
-                    ], {
-                        duration: 500
-                    })
-                }
-            })
-        }
-    }
-});
+}
 
 /*关于银橙 招兵买马*/
 function navList(id) {
@@ -533,7 +587,6 @@ function navList(id) {
     });
 }
 
-navList(1);
 let count = 0;
 
 function jsonp(url, body = {}, config = {}, fn) {
@@ -587,17 +640,104 @@ function jsonp(url, body = {}, config = {}, fn) {
 * page默认第一页
 * 改变page值获取对应页码的值
 * */
-let currPageNum = 1;
-let currPageNum2 = 1;
+    let currPageNum = 1;
+    let currPageNum2 = 1;
 
-async function getData() {
-    let bo = true;
-    let list;
-    let contentList = [];
-    while (bo) {
+    async function getData() {
+        let bo = true;
+        let list;
+        let contentList = [];
+        while (bo) {
+            let data = await jsonp("https://neeq.ycmedia.cn", {
+                disclosureType: 5,
+                page: currPageNum - 1,
+                companyCd: 830999,
+                isNewThree: 1,
+                startTime: '',
+                endTime: '',
+                keyword: '关键字',
+                xxfcbj: '',
+            })
+            ++currPageNum
+            if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
+                list = data[0].list;
+                bo = false;
+                return contentList
+            }
+            contentList.push(...data[0].listInfo.content)
+        }
+    }
+
+// 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示...
+    function getPageList(n, tp, p) {
+        n = +n;
+        tp = +tp;
+        p = +p;
+        if (p > tp) {
+            p = 1;
+        }
+        let arr = [];
+        let s = n * 2 + 5;
+        if (tp >= s) {
+            let _n = n;
+            let _p = p;
+            if (p - n - 2 < 1) {
+                while (_p) {
+                    arr.unshift({number: _p, type: 1});
+                    --_p;
+                }
+                _p = p;
+                while (++_p <= n * 2 + 3) {
+                    arr.push({number: _p, type: 1});
+                }
+                arr.push({text: '...', type: 0}, {number: tp, type: 1});
+            } else if (p + n + 2 > tp) {
+                while (_p <= tp) {
+                    arr.push({number: _p, type: 1});
+                    ++_p;
+                }
+                _p = p;
+                while (--_p > tp - n * 2 - 3) {
+                    arr.unshift({number: _p, type: 1});
+                }
+                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
+            } else {
+                while (_n) {
+                    arr.push({number: p - _n, type: 1});
+                    --_n;
+                }
+                arr.push({number: p, type: 1});
+                _n = n;
+                let i = 1;
+                while (i <= _n) {
+                    arr.push({number: p + i, type: 1});
+                    ++i;
+                }
+                arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
+                arr.push({text: '...', type: 0}, {number: tp, type: 1});
+            }
+        } else {
+            while (tp) {
+                arr.unshift({number: tp--, type: 1});
+            }
+        }
+        return arr;
+    }
+
+// 获取对象第一个属性值
+    function getObjFirst(obj) {
+        for (let i in obj) {
+            return obj[i]
+        }
+    }
+
+// 首次将数据全部拿到，存缓存（数据+唯一标识），后面请求一次，拿第一条的唯一标识做比较，相等就说明数据没更新，反之重新请求数据
+// ----最后判断是只添加新数据存缓存还是再次全部请求？？？
+// 获取唯一标识,请求第一页数据（page = 0）的唯一标识disclosureCode
+    async function getOnlyId() {
         let data = await jsonp("https://neeq.ycmedia.cn", {
             disclosureType: 5,
-            page: currPageNum - 1,
+            page: 0,
             companyCd: 830999,
             isNewThree: 1,
             startTime: '',
@@ -605,98 +745,10 @@ async function getData() {
             keyword: '关键字',
             xxfcbj: '',
         })
-        ++currPageNum
-        if (!data[0].listInfo.content || !data[0].listInfo.content.length) {
-            list = data[0].list;
-            bo = false;
-            return contentList
-        }
-        contentList.push(...data[0].listInfo.content)
+        let id = data[0].listInfo.content[0].disclosureCode
+        return id;
     }
-}
 
-// 分页（n=3,tp总页数,p当前页）三种状态：后面显示... 两边显示...n=3表示当前页前后挪3  前面显示...
-function getPageList(n, tp, p) {
-    n = +n;
-    tp = +tp;
-    p = +p;
-    if (p > tp) {
-        p = 1;
-    }
-    let arr = [];
-    let s = n * 2 + 5;
-    if (tp >= s) {
-        let _n = n;
-        let _p = p;
-        if (p - n - 2 < 1) {
-            while (_p) {
-                arr.unshift({number: _p, type: 1});
-                --_p;
-            }
-            _p = p;
-            while (++_p <= n * 2 + 3) {
-                arr.push({number: _p, type: 1});
-            }
-            arr.push({text: '...', type: 0}, {number: tp, type: 1});
-        } else if (p + n + 2 > tp) {
-            while (_p <= tp) {
-                arr.push({number: _p, type: 1});
-                ++_p;
-            }
-            _p = p;
-            while (--_p > tp - n * 2 - 3) {
-                arr.unshift({number: _p, type: 1});
-            }
-            arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
-        } else {
-            while (_n) {
-                arr.push({number: p - _n, type: 1});
-                --_n;
-            }
-            arr.push({number: p, type: 1});
-            _n = n;
-            let i = 1;
-            while (i <= _n) {
-                arr.push({number: p + i, type: 1});
-                ++i;
-            }
-            arr.unshift({number: 1, type: 1}, {text: '...', type: 0});
-            arr.push({text: '...', type: 0}, {number: tp, type: 1});
-        }
-    } else {
-        while (tp) {
-            arr.unshift({number: tp--, type: 1});
-        }
-    }
-    return arr;
-}
-
-// 获取对象第一个属性值
-function getObjFirst(obj) {
-    for (let i in obj) {
-        return obj[i]
-    }
-}
-
-// 首次将数据全部拿到，存缓存（数据+唯一标识），后面请求一次，拿第一条的唯一标识做比较，相等就说明数据没更新，反之重新请求数据
-// ----最后判断是只添加新数据存缓存还是再次全部请求？？？
-// 获取唯一标识,请求第一页数据（page = 0）的唯一标识disclosureCode
-async function getOnlyId() {
-    let data = await jsonp("https://neeq.ycmedia.cn", {
-        disclosureType: 5,
-        page: 0,
-        companyCd: 830999,
-        isNewThree: 1,
-        startTime: '',
-        endTime: '',
-        keyword: '关键字',
-        xxfcbj: '',
-    })
-    let id = data[0].listInfo.content[0].disclosureCode
-    return id;
-}
-
-!function () {
     let investorLSref = document.querySelector('#investorLS');
     let investorDQref = document.querySelector('#investorDQ');
     let eachPageNum = 6;
@@ -710,7 +762,7 @@ async function getOnlyId() {
 
     // 判断从哪获取数据
     function renderDatas(onlyId) {
-        let store = JSON.parse(getStore('noticeLists'))
+        let store = JSON.parse(getStore('noticeLists') || '{}')
         if (store != undefined && store != null && store.onlyId == onlyId) {
             let listsDatas = store.datas
             renderList(listsDatas, '9504')
@@ -928,9 +980,9 @@ async function getOnlyId() {
             }
         }
     }
-}()
 
-~function () {
+
+
     let list = [
         {
             img: './static/images/caseimg/tu1801.jpg',
@@ -1224,8 +1276,6 @@ async function getOnlyId() {
             prevRef: document.querySelector('[data-js-case-active=img_prev]'),
         }).start().catch(e => console.error(e))
     }
-
-}()
 
 /**
  * 存储localStorage

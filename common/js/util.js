@@ -129,7 +129,7 @@ export function Ajax(method, url, body = {}, config = {headers: new Headers()}) 
         beforeSend(xhr, body, config);
 
         for (let h of Ajax.config.headers.keys()) {
-            if(!config.headers.has(h)){
+            if (!config.headers.has(h)) {
                 config.headers.set(h, Ajax.config.headers.get(h))
             }
         }
@@ -234,9 +234,11 @@ export class Router {
         this.routes = routes.map(r => {
             if (!(r.component instanceof Element) && !r.redirectTo) {
                 let s = r.component;
-                r.component = window.document.querySelector(`#${s}`);
-                if (!r.component) throw `ID：${s}不存在`;
+                r.component = window.document.querySelector(`${s}`);
+                r.$component = r.component.cloneNode(true);
+                if (!r.component) throw `选择器：${s}不存在`;
                 r.component.style.display = 'none';
+                r.$component.style.display = 'none';
             }
             return r;
         });
@@ -252,7 +254,10 @@ export class Router {
     hashChange() {
         let hash = Router.getHash();
         if (this.route && this.route.component) {
-            this.route.component.style.display = 'none';
+            let p = this.route.$component.cloneNode(true)
+            this.route.component.parentNode.replaceChild(p, this.route.component)
+            this.route.component = p;
+            // this.route.component.style.display = 'none';
         }
         this.routes.every(r => {
             if (r.redirectTo && r.path === hash) {
@@ -266,6 +271,9 @@ export class Router {
             return true;
         });
         if (this.route && this.route.component) {
+            let p = this.route.$component.cloneNode(true)
+            this.route.component.parentNode.replaceChild(p, this.route.component)
+            this.route.component = p;
             this.route.component.style.display = 'block';
             this.changeEvent.next(this.route);
             this.destroyEvent.next(this.oldRoute)
@@ -423,13 +431,13 @@ export function Base64() {
 
     // private method for UTF-8 encoding
     _utf8_encode = function (string) {
-        string = string.replace(/\r\n/g,"\n");
+        string = string.replace(/\r\n/g, "\n");
         let utftext = "";
         for (let n = 0; n < string.length; n++) {
             let c = string.charCodeAt(n);
             if (c < 128) {
                 utftext += String.fromCharCode(c);
-            } else if((c > 127) && (c < 2048)) {
+            } else if ((c > 127) && (c < 2048)) {
                 utftext += String.fromCharCode((c >> 6) | 192);
                 utftext += String.fromCharCode((c & 63) | 128);
             } else {
@@ -447,18 +455,18 @@ export function Base64() {
         let string = "";
         let i = 0;
         let c = c1 = c2 = 0;
-        while ( i < utftext.length ) {
+        while (i < utftext.length) {
             c = utftext.charCodeAt(i);
             if (c < 128) {
                 string += String.fromCharCode(c);
                 i++;
-            } else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
+            } else if ((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i + 1);
                 string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
                 i += 2;
             } else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
+                c2 = utftext.charCodeAt(i + 1);
+                c3 = utftext.charCodeAt(i + 2);
                 string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
                 i += 3;
             }
