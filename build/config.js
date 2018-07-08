@@ -29,14 +29,14 @@ module.exports = [
     //     title:'乐橙互联科技有限公司',
     //     filename:'index2.html',
     // },
-    {
-        path:'lcinc-pc',
-        output:'lcinc-pc',
-        base:'/pc/',
-        publicPath:'',
-        name:'lcincpc-index',
-        title:'乐橙互联科技有限公司'
-    },
+    // {
+    //     path:'lcinc-pc',
+    //     output:'lcinc-pc',
+    //     base:'/pc/',
+    //     publicPath:'',
+    //     name:'lcincpc-index',
+    //     title:'乐橙互联科技有限公司'
+    // },
     // {
     //     path:'pwa',
     //     output:'pwa',
@@ -153,4 +153,12 @@ module.exports = [
     //     name:'bd-news',
     //     title:'新闻'
     // },
+    {
+        path:'canvas',
+        output:'canvas',
+        publicPath:'',
+        name:'canvas-index',
+        type:'.ts',
+        title:'canvas'
+    },
 ];
