@@ -1,5 +1,5 @@
-let tutorial = <HTMLCanvasElement>document.getElementById('tutorial')
-let ctx = tutorial.getContext('2d')
+let canvas = <HTMLCanvasElement>document.getElementById('tutorial')
+let ctx = canvas.getContext('2d')
 
 function demo1() {
     ctx.fillStyle = 'red';
@@ -124,18 +124,84 @@ function demo9() {
         let width = img.width;
         let height = img.height;
 
-        let w = ctx.canvas.width
-        let h = ctx.canvas.height
+        let w = ctx.canvas.width;
+        let h = ctx.canvas.height;
 
-        console.info(ctx.canvas.width)
-
-
+        console.info(ctx.canvas.width);
 
         ctx.drawImage(img, 0, 0, img.width / 8, img.height / 8);
         console.info(img)
     }
     img.src = 'static/img/1.jpg'
+}
+
+// demo9();
+// let raf;
+// let ball = {
+//     x: 100,
+//     y: 100,
+//     vx: 5,
+//     vy: 2,
+//     radius: 25,
+//     color: 'blue',
+//     draw: function() {
+//         ctx.beginPath();
+//         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+//         ctx.closePath();
+//         ctx.fillStyle = this.color;
+//         ctx.fill();
+//     }
+// };
+//
+// function draw() {
+//     ctx.clearRect(0,0, canvas.width, canvas.height);
+//     ball.draw();
+//     ball.vy *= .99;
+//     ball.vy += .25;
+//     ball.x += ball.vx;
+//     ball.y += ball.vy;
+//     if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0) {
+//         ball.vy = -ball.vy;
+//     }
+//     if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+//         ball.vx = -ball.vx;
+//     }
+//     raf = window.requestAnimationFrame(draw);
+// }
+//
+//
+// canvas.addEventListener('mouseover', function(e){
+//     raf = window.requestAnimationFrame(draw);
+// });
+//
+// canvas.addEventListener('mouseout', function(e){
+//     window.cancelAnimationFrame(raf);
+// });
+//
+// ball.draw();
+
+function demo10() {
+    let img = new Image();
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+        // img.style.display = 'none';
+    }
+    img.src = 'static/img/1.jpg'
+
+    var color = document.getElementById('color');
+    function pick(event) {
+        var x = event.layerX;
+        var y = event.layerY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        console.info(pixel)
+        var data = pixel.data;
+        var rgba = 'rgba(' + data[0] + ',' + data[1] +
+            ',' + data[2] + ',' + (data[3] / 255) + ')';
+        color.style.background =  rgba;
+        color.textContent = rgba;
+    }
+    canvas.addEventListener('mousemove', pick);
 
 }
 
-demo9();
+demo10();
