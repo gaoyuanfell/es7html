@@ -153,12 +153,20 @@ module.exports = [
     //     name:'bd-news',
     //     title:'新闻'
     // },
+    // {
+    //     path:'canvas',
+    //     output:'canvas',
+    //     publicPath:'',
+    //     name:'canvas-index',
+    //     type:'.ts',
+    //     title:'canvas'
+    // },
     {
-        path:'canvas',
-        output:'canvas',
+        path:'game-of-go',
+        output:'game-of-go',
         publicPath:'',
-        name:'canvas-index',
+        name:'game-of-go',
         type:'.ts',
-        title:'canvas'
+        title:'game-of-go'
     },
 ];
